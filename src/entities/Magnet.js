@@ -1,5 +1,6 @@
 import { TexRegion } from "@lib"
 class Magnet extends TexRegion {
+    noOverlay=true
     constructor(props) {
         super(props)
         this.tint = [ 0, 0, 0, 0 ]

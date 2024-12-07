@@ -2,8 +2,9 @@ import getTestFn from "@lib/components/Collision/helpers/getTestFn"
 import MovableEnt from "./MovableEnt"
 
 const ANG_VEL = Math.PI
+const overlay=[0.6,0.6,0.6]
 class SawBlade extends MovableEnt {
-    noOverlay = true
+    overlay=overlay
     constructor(x, y, frame, toX=x, toY=y, speed=100, player) {
         super(x, y, frame, toX, toY, speed)
         this.anchor = {

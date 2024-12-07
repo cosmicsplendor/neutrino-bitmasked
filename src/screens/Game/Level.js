@@ -2,11 +2,12 @@ import { Camera } from "@lib"
 import TiledLevel from "@utils/TiledLevel"
 
 class Level extends Camera {
-    constructor({ player, uiRoot, data, bg, fbg, factories, levelDataId, uiImages, onStateChange, gameState, ambience, ...cameraProps }) {
+    constructor({ player, uiRoot, data, overlayMap, bg, fbg, factories, levelDataId, uiImages, onStateChange, gameState, ambience, ...cameraProps }) {
         const arena = new TiledLevel({ 
             data,
             bg, fbg, player,
-            factories
+            factories,
+            overlayMap
         })
         super({ ...cameraProps, world: { width: arena.width, height: arena.height } })
         this.gameState = gameState
@@ -16,7 +17,6 @@ class Level extends Camera {
         this.resetRecursively = () => {
             arena.resetRecursively()
         }
-        this.setYTracking(arena.height - 192, 400)
         if (ambience) {
             ambience.init()
         }

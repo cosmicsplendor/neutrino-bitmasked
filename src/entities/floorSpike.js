@@ -1,8 +1,9 @@
 import TexRegion from "@lib/entities/TexRegion"
 import { clamp, easingFns } from "@utils/math"
 import getTestFn from "@lib/components/Collision/helpers/getTestFn"
-
+const overlay=[0.6,0.6,0.6]
 class FloorSpike extends TexRegion {
+    overlay=overlay
     constructor({ uSound, dSound, pos, player, delay=0, period=.4, ...rest }) {
         super({ frame: "spike", pos, ...rest })
         this.endY = pos.y + 40

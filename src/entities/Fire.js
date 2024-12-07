@@ -2,6 +2,7 @@ import getTestFn from "@components/Collision/helpers/getTestFn"
 import ParticleEmitter from "@lib/utils/ParticleEmitter"
 
 class Fire extends ParticleEmitter { // it's no ordinary fire, it's an end-marker fire
+    noOverlay = true
     _player = null
     testCol = null
     constructor(supProps, onTouch) {

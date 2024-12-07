@@ -9,6 +9,7 @@ const dmgToFrame = [
     "lcr3"
 ]
 class Crate extends TexRegion { // breakable crate class
+    noOverlay=true
     constructor(x, y, dmgFacs, orbPool, sounds, luck=75, dmg=0, temp=false, player) {
         super({ frame: initFrame, pos: { x, y }})
         this.dmgFacs = dmgFacs

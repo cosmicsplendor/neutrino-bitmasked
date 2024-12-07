@@ -86,6 +86,7 @@ export default ({ soundSprite, assetsCache, storage, player, state }) => { // us
         up: new Pool({
             factory: () => {
                 const particle = new ParticleEmitter(particles.crateUp)
+                particle.noOverlay=true
                 particle.onRemove = () => { // clear reference for garbage collector
                     particle.parent = null
                 }
@@ -96,6 +97,7 @@ export default ({ soundSprite, assetsCache, storage, player, state }) => { // us
         down: new Pool({
             factory: () => {
                 const particle = new ParticleEmitter(particles.crateDown)
+                particle.noOverlay=true
                 particle.onRemove = () => { // clear reference for garbage collector
                     particle.parent = null
                 }

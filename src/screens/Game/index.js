@@ -35,6 +35,7 @@ import ambience2Graph from "./Ambience/graphs/ambience2"
 import ambience3Graph from "./Ambience/graphs/ambience3"
 import ambience4Graph from "./Ambience/graphs/ambience4"
 import ambience5Graph from "./Ambience/graphs/ambience5"
+import overlayMap from "./overlayMap.json"
 
 class GameScreen extends Node { // can only have cameras as children
     // background = "rgb(181 24 24)"
@@ -71,6 +72,7 @@ class GameScreen extends Node { // can only have cameras as children
         const particles = assetsCache.get(particlesUrl)
         const shard = new ParticleEmitter(particles.shard)
         const cinder = new ParticleEmitter(particles.cinder)
+        cinder.noOverlay = true
         const playerSounds = Player.sounds.reduce((spritemap, frame) => {
             spritemap[frame] = soundSprite.create(frame)
             return spritemap
@@ -130,7 +132,7 @@ class GameScreen extends Node { // can only have cameras as children
         }
     }
     setLevel(data) {
-        const level = new Level({ player: this.player, data, viewport: config.viewport, subject: this.player, factories: this.factories, ambience: this.ambiences[data.ambience], gameState: this.state })
+        const level = new Level({ player: this.player, data, viewport: config.viewport, subject: this.player, factories: this.factories, ambience: this.ambiences[data.ambience], gameState: this.state, overlayMap })
         this.add(level)
         this.player.mxJmpVel = data.mxJmpVel
         this.player.speed = data.speed ?? 350
