@@ -6,6 +6,7 @@ import { objLayerId } from "@lib/constants"
 
 class Orb extends ParticleEmitter {
     chasing = false
+    noOverlay=true
     constructor({ player, sound, storage, temp = false, ...rest }) {
         super({ ...rest })
         this.player = player
