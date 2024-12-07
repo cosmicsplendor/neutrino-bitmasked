@@ -1,0 +1,303 @@
+const { pickOne, rand, CompositeBlock, Block } = require("../../utils")
+const lasers = require("./lasers")
+const groupMap = require("../../utils/groupMap.json")
+const { generateTileSpawnPoints } = require("../generateTiles")
+const saws = require("./saws")
+const endTiles = require("./endTiles.json")
+const sawBlades = require("./sawBlades")
+const stackables = require("./stackables")
+const TILE_SIZE = 48
+const STACK_TOP = ["top-start", "top-end", "top"]
+const em3Props = ["wt_1", "wt_1", "en4", "en6", "en5"]
+const factories = {
+    player: {
+        fields: [], // No specific props inferred from the original code
+        create: (params) => {
+            const { x, y, name } = params
+            return { x, y, name }
+        }
+    },
+    checkpoint: {
+        create: (params) => {
+            const { x, y, name } = params
+            return { x, y, name }
+        }
+    },
+    orb: {
+        dims: () => {
+            return { width: 64, height: 64 }
+        },
+        create: params => {
+            const { x, y, name } =params
+            return { x, y, name }
+        }
+    },
+    ball: {
+        fields: ['seq',], // Inferred from Ball constructor and props.seq
+        create: (params) => {
+            // Perform transformation
+            const { x, y, name, seq } = params
+            return { x, y, name, seq }
+        }
+    },
+    gearBlade: sawBlades({ small: "sb2", large: "sb6" }),
+    gearBladeS: sawBlades({ small: "sb2", large: "sb6" }, true),
+    spikeBlade: sawBlades({ small: "sb3", large: "sb5" }),
+    spikeBladeS: sawBlades({ small: "sb3", large: "sb5" }, true),
+    buttonBlade: sawBlades({ small: "sb1", large: "sb4" }),
+    buttonBladeS: sawBlades({ small: "sb1", large: "sb4" }, true),
+    lcr1: {
+        fields: ['luck', 'dmg'], // Based on Crate constructor
+        create: (params) => {
+            const { luck, dmg, name, x, y, alignment } = params
+            return { luck: +luck, dmg: +dmg, name, x: x, y: y + (alignment === "top-left" ? 32 : 0), groupId: "crates" }
+        }
+    },
+    floorSpike: {
+        fields: [ "delay" ],
+        dims: () => {
+            return { width: 80, height: 40 }
+        },
+        create: params => {
+            const { delay=0, x, y, name } = params
+            return { delay: +delay, x, y, name }
+        }
+    },
+    vlhd: lasers("vertical"),
+    hlhd: lasers("horizontal"),
+    crane: {
+        create: params => {
+            const { alignment, x, y, name } = params
+            return { x, y: y + (alignment.includes("top") ? 32 : 0), name }
+        }
+    },
+    bus: {
+        fieldsFilter: (name, prevParams) => {
+            if (name === "toY" && +prevParams.toX !== 0) {
+                return false
+            }
+            return true
+        },
+        fields: ['toX', 'toY', 'period'], // Based on Bus constructor
+        dims: () => ({ width: 88, height: 88 }),
+        create: (params) => {
+            const { toX, toY, x, y, name, period, alignment } = params
+            return { groupId: "col-rects", x, y: y + (alignment.startsWith("top") ? 32 : 0), name, toX: x + (toX ? Number(toX) * TILE_SIZE: 0), toY: y + (toY ? Number(toY) * TILE_SIZE: 0), period: +period }
+        }
+    },
+    default: {
+        fields: [],
+        create: params => {
+            const groupId = groupMap[params.name]
+            if (groupId) params.groupId = groupId
+            const { x, y, name } = params
+            return { x, y, name, groupId }
+        }
+    },
+    wind: {
+        randomize: true,
+        dims: () => {
+            return { width: 48, height: 32 }
+        },
+        possible(projection, alignment) {
+            if (alignment !== "bottom") return false // only possible alignments
+            if (projection.w < 3) return false // only possible for odd tile count greater than 1
+            return true
+        },
+        create: params => {
+            const { x, y } = params
+            const roundedX = x % 48 === 0 ? x: x + 24 * (Math.random() < 0.5 ? 1: -1)
+            return [
+                { x: roundedX - 16, y, name: "em1", collapsed: [{ y: y + 32, x: roundedX, tile: pickOne(em3Props) }]  },
+                { x: roundedX + 24, y, name: "wind" }
+            ]
+        }
+    },
+    fire: {
+        fields: [],
+        dims: () => {
+            return { width: 48, height: 32 }
+        },
+        possible(projection, alignment) {
+            if (alignment !== "bottom") return false // only possible alignments
+            if (projection.w < 3) return false // only possible for odd tile count greater than 1
+            return true
+        },
+        create: (params) => {
+            const { x, y } = params
+            const roundedX = x % 48 === 0 ? x: x + 24 * (Math.random() < 0.5 ? 1: -1)
+            const tilesX = (roundedX + 24) - endTiles.width * 48 / 2
+            const tilesY = (y + 32) - endTiles.height * 48
+            const wallTiles = endTiles.fg.tiles.map((row, i) => {
+                return row.map((cell, j) => {
+                    return { name: cell, x: tilesX + j * 48, y: tilesY + i * 48 }
+                }).filter(cell => cell.name !== "empty")
+            }).flat()
+            const backwallTiles = endTiles.mg.tiles.map((row, i) => {
+                return row.map((cell, j) => {
+                    return { name: cell, x: tilesX + j * 48, y: tilesY + (i + endTiles.mg.y ) * 48, layer: "mg" }
+                }).filter(cell => cell.name !== "empty")
+            }).flat()
+            const results = [
+                { x: roundedX - 16, y, name: "em1", collapsed: [{ y: y + 32, x: roundedX, tile: pickOne(em3Props) }] },
+                { x: roundedX + 24, y, name: "fire" },
+                ...wallTiles,
+                ...backwallTiles
+            ]
+            results.colRects = endTiles.colRects.map(({ x, y, width, height }) => {
+                return { x: tilesX + x * 48, y: tilesY + y * 48, w: width * 48, h: height * 48 }
+            })
+            return results
+        }
+    },
+    pillar: {
+        fields: ["height"],
+        dims({ height }) {
+            return {
+                width: 40, height: 128 * height
+            }
+        },
+        create(params) {
+            const { x, y, height } = params
+            return Array(+height).fill(0).map((_, i) => {
+                return { x: x, y: y + (i * 128), name: "pillar" }
+            })
+        }
+    },
+    topSaw: saws({ name: "saw1", field: "width" }),
+    bottomSaw: saws({ name: "saw2", field: "width" }),
+    spike: saws({ name: "spike", field: "width", dims: { width: 80, height: 40 }, xOffset: 8 }),
+    leftSaw: saws({ name: "saw4", field: "height" }),
+    rightSaw: saws({ name: "saw3", field: "height" }),
+    bridge: {
+        fields: ["width"],
+        dims({ width = 1 }) {
+            return {
+                width: (240 + 16) * width + 16, height: 104
+            }
+        },
+        create(params) {
+            const { x, y, width } = params
+            const results = Array(+width).fill(width).map((_, i) => {
+                const iX = x + i * 240
+                return [
+                    { name: "br1", x: iX + (i + 1) * 10, y: y + 10 },
+                    { name: "br2", x: iX + i * 10, y: y }
+                ]
+            }).flat()
+            results.push({
+                x: x + (240 + 10) * width,
+                y: y,
+                name: "br2"
+            })
+            results.colRects = [{
+                x: x, y: y + 10, h: 24, mat: "wood", w: 256 * width + 10
+            }]
+            return results
+        }
+    },
+    magnet: {
+        fields: [ "width" ],
+        dims: ({ width=1 }) => {
+            return {
+                width: 128 * width + 16 * 2, // magnet width + twice stud width
+                height: 32
+            }
+        },
+        create: (params) => {
+            const { x, y, width } = params
+            const magnets = Array.from({ length: width }, (_, i) => ({ name: "magnet", x: x + 16 + 128 * i, y, groupId: "magnets" }))
+            return [
+                ...magnets,
+                { name: "stud", x, y },
+                { name: "stud", x: x + 128 * width + 16, y }
+            ]
+        }
+    },
+    gate: {
+        fields: ["speed", "toY"],
+        create: params => {
+            const { name, x, y, speed, toY } = params
+            return { name, x, y, speed: +speed, endY: y + (toY * TILE_SIZE)}
+        }
+    },
+    gateArch: {
+        block: null,
+        extendedLeft: false,
+        randomize: true,
+        fields: ["speed"],
+        reset() {
+            this.extendedLeft = false
+            this.block = new CompositeBlock(new Block(5, 4))
+        },
+        extendLeft() {
+            const skip = rand(1, 0)
+            if (skip) return
+            this.extendedLeft = true
+            const num = rand(4, 2)
+            const block = new Block(1, num)
+            const position = "left-end"
+            this.block.addPart({ block, position })
+        },
+        extendRight() {
+            const skip = rand(1, 0)
+            if (skip) return
+            const num = rand(4, 2)
+            const block = new Block(1, num)
+            const position = "right-end"
+            this.block.addPart({ block, position })
+        },
+        extendTop() {
+            const skip = rand(1, 0)
+            if (skip) return
+            const num = rand(5, 2)
+            const block = new Block(num, 1)
+            const position = pickOne(num % 2 === 0 ? STACK_TOP.slice(-1) : STACK_TOP)
+            this.block.addPart({ block, position })
+        },
+        extend() {
+            this.extendLeft()
+            this.extendRight()
+            this.extendTop()
+        },
+        dims() {
+            this.reset()
+            this.extend()
+            const { block } = this
+            return { width: block.w * TILE_SIZE, height: (block.h + 3) * TILE_SIZE }
+        },
+        create(params) {
+            const { x: originX, y: originY, speed } = params
+            const { block } = this
+            const dx = this.extendedLeft ? 1 : 0
+            const dy = block.h - 4
+            const gateY = originY + (TILE_SIZE * block.h) - 56
+            const gate = { y: gateY, x: originX + (dx + 2.5) * TILE_SIZE - 56, name: "gate", endY: gateY - 128, speed: +speed }
+            const tileReplacer = (row, col, cell) => {
+                const archY = dy + 2
+                const archX = dx + 1
+                if (row == archY && col == archX) {
+                    return "garch"
+                }
+                if (row == archY && (col == archX + 1 || col == archX + 2)) {
+                    return "empty"
+                }
+                if (row === archY + 1 && col >= archX && col < archX + 3) {
+                    return "empty"
+                }
+                return cell
+            }
+            const tiles = generateTileSpawnPoints(block, TILE_SIZE, TILE_SIZE, originX, originY, tileReplacer)
+            const results = [ gate, ...tiles ]
+            results.colRects = block.collisionRects.map(({ x, y, w, h }) => {
+                return { x: (x + dx) * TILE_SIZE + originX, y: (y + dy) * TILE_SIZE + originY, w: w * TILE_SIZE, h: h * TILE_SIZE}
+            })
+            return results
+        }
+    },
+    crate: stackables({ name: "crate", dims: { width: 88, height: 88 }}),
+    tyre: stackables({ name: "tyre", dims: { width: 104, height: 32 } }),
+    sc: stackables({ name: () => pickOne([ "sc_blue", "sc_red", "sc_green" ]), dims: { width: 120, height: 120 }})
+}
+
+module.exports = factories

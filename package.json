@@ -1,0 +1,35 @@
+{
+  "name": "neutrino",
+  "version": "1.0.0",
+  "sideEffects": false,
+  "description": "2d game engine",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "SET NODE_OPTIONS=--openssl-legacy-provider && webpack serve --open --watch",
+    "build": "SET NODE_OPTIONS=--openssl-legacy-provider && webpack --config=webpack.config.js --mode=production",
+    "build-gpix": "SET NODE_OPTIONS=--openssl-legacy-provider && webpack --config=webpack.config.gpix.js",
+    "build-gm": "SET NODE_OPTIONS=--openssl-legacy-provider && webpack --config=webpack.config.gm.js",
+    "build-garter": "SET NODE_OPTIONS=--openssl-legacy-provider && webpack --config=webpack.config.garter.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.12.10",
+    "@babel/preset-env": "^7.12.11",
+    "babel-loader": "^8.2.2",
+    "file-loader": "^6.2.0",
+    "webpack": "^5.11.1",
+    "webpack-cli": "^4.3.1",
+    "webpack-dev-server": "^3.11.1"
+  },
+  "dependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.13.0",
+    "css-loader": "^5.2.6",
+    "gl-matrix": "^3.4.3",
+    "graphlib": "^2.1.8",
+    "style-loader": "^2.0.0",
+    "terminal-kit": "^3.1.1"
+  }
+}

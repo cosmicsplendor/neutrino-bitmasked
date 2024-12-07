@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+        <link rel="icon" type="image/png" href="/favicon.png"/>
+        <title>Brazen Ball</title>
+        <style>
+            body, html {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                overflow: hidden;
+                background: black;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                -ms-touch-action: none;
+                touch-action: none;
+            }
+         
+            #ui-layer, #ui-layer div {
+                position: absolute;
+                top: 0;
+                left: 0;
+            }
+            #arena {
+                background-repeat: no-repeat !important;
+                background-size: 100px !important;
+                transition: background-color 100ms linear;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="game-container">
+            <canvas id="arena"></canvas>
+            <div id="ui-layer"></div>
+        </div>
+        <script src="script.js"></script>
+    </body>
+</html>

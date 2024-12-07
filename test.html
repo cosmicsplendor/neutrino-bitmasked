@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rectangle Merging Visualization</title>
+    <style>
+        canvas {
+            border: 1px solid black;
+            margin: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="canvas1" width="800" height="400"></canvas>
+    <canvas id="canvas2" width="800" height="400"></canvas>
+
+    <script>
+        function drawRectangles(ctx, rects, strokeColor) {
+            ctx.strokeStyle = strokeColor;
+            ctx.lineWidth = 2;
+            rects.forEach(rect => {
+                ctx.strokeRect(rect.x, rect.y, rect.w, rect.h);
+            });
+        }
+
+        function mergeRectangles(rects) {
+            if (rects.length === 0) return [];
+
+            rects.sort((a, b) => a.y - b.y || a.x - b.x);
+
+            const mergedHorizontally = [];
+            let current = rects[0];
+
+            for (let i = 1; i < rects.length; i++) {
+                const next = rects[i];
+
+                if (current.y === next.y && current.h === next.h &&
+                    current.x + current.w === next.x) {
+                    current.w = current.w + next.w;
+                } else {
+                    mergedHorizontally.push({ ...current });
+                    current = next;
+                }
+            }
+
+            mergedHorizontally.push({ ...current });
+
+            const mergedVertically = [];
+            mergedHorizontally.sort((a, b) => a.x - b.x || a.y - b.y);
+
+            current = mergedHorizontally[0];
+
+            for (let i = 1; i < mergedHorizontally.length; i++) {
+                const next = mergedHorizontally[i];
+
+                if (current.x === next.x && current.w === next.w &&
+                    current.y + current.h >= next.y) {
+                    current.h = Math.max(current.y + current.h, next.y + next.h) - current.y;
+                } else {
+                    mergedVertically.push({ ...current });
+                    current = next;
+                }
+            }
+
+            mergedVertically.push({ ...current });
+
+            return mergedVertically;
+        }
+
+        function drawCanvas() {
+            const canvas1 = document.getElementById('canvas1');
+            const canvas2 = document.getElementById('canvas2');
+            const ctx1 = canvas1.getContext('2d');
+            const ctx2 = canvas2.getContext('2d');
+
+            // Define rectangles with larger dimensions for better visibility
+            const rectangles2 = [
+                { x: 20, y: 20, w: 100, h: 80 },  // Original rectangle 1
+                { x: 20, y: 100, w: 100, h: 80 }, // Original rectangle 2
+                { x: 120, y: 0, w: 80, h: 80 },  // Existing rectangle 3
+                { x: 180, y: 100, w: 80, h: 80 }, // Existing rectangle 4 (shifted closer)
+                { x: 260, y: 20, w: 60, h: 80 },  // Existing rectangle 5 (adjacent)
+                { x: 20, y: 180, w: 150, h: 80 }  // New vertically stacked below the second rectangle
+            ];
+
+            // Merge rectangles
+            const merged2 = mergeRectangles(rectangles2);
+
+            // Clear canvases
+            ctx1.clearRect(0, 0, canvas1.width, canvas1.height);
+            ctx2.clearRect(0, 0, canvas2.width, canvas2.height);
+
+            // Draw input rectangles (black) and merged rectangles (gray) with stroke
+            drawRectangles(ctx1, rectangles2, 'black');  // Original rectangles
+            drawRectangles(ctx2, merged2, 'gray');       // Merged rectangles
+        }
+
+        drawCanvas();
+    </script>
+</body>
+
+</html>
