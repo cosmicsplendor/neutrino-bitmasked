@@ -1,4 +1,4 @@
-const { pickOne, rand, CompositeBlock, Block } = require("../../utils")
+const { pickOne, rand, CompositeBlock, Block, decomposeBlocks } = require("../../utils")
 const lasers = require("./lasers")
 const groupMap = require("../../utils/groupMap.json")
 const { generateTileSpawnPoints } = require("../generateTiles")
@@ -261,32 +261,21 @@ const factories = {
             return { width: block.w * TILE_SIZE, height: (block.h + 3) * TILE_SIZE }
         },
         create(params) {
-            const { x: originX, y: originY, speed } = params
+            const { x: originX, y: originY } = params
             const { block } = this
             const dx = this.extendedLeft ? 1 : 0
             const dy = block.h - 4
             const gateY = originY + (TILE_SIZE * block.h) - 56
-            const gate = { y: gateY, x: originX + (dx + 2.5) * TILE_SIZE - 56, name: "gate", endY: gateY - 128, speed: +speed }
-            const tileReplacer = (row, col, cell) => {
-                const archY = dy + 2
-                const archX = dx + 1
-                if (row == archY && col == archX) {
-                    return "garch"
-                }
-                if (row == archY && (col == archX + 1 || col == archX + 2)) {
-                    return "empty"
-                }
-                if (row === archY + 1 && col >= archX && col < archX + 3) {
-                    return "empty"
-                }
-                return cell
-            }
-            const tiles = generateTileSpawnPoints(block, TILE_SIZE, TILE_SIZE, originX, originY, tileReplacer)
-            const results = [ gate, ...tiles ]
-            results.colRects = block.collisionRects.map(({ x, y, w, h }) => {
-                return { x: (x + dx) * TILE_SIZE + originX, y: (y + dy) * TILE_SIZE + originY, w: w * TILE_SIZE, h: h * TILE_SIZE}
+            const gate = { y: gateY, x: originX + (dx + 2.5) * TILE_SIZE - 56, name: "gate", endY: gateY - 128 }
+
+            const blocks = block.children.flatMap(decomposeBlocks).map(b => {
+                return { x: originX + (b.x + dx) * TILE_SIZE, y: originY + (b.y + dy) * TILE_SIZE, name: "wt_1" }
             })
-            return results
+            return [
+                gate,
+                ...blocks
+            ]
+
         }
     },
     crate: stackables({ name: "crate", dims: { width: 88, height: 88 }}),
