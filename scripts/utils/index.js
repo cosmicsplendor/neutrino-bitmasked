@@ -409,11 +409,13 @@ class Map extends Block {
     }
 
     addPlainBlock({ block, layer = "og", skipCollisionTest = false }) {
-        const x = Math.floor(block.x)
-        const y = Math.floor(block.y)
-        const w = Math.ceil(block.w)
-        const h = Math.ceil(block.h)
-
+       const x = Math.round(block.x)
+        const y = Math.round(block.y)
+        for (let i = 0; i < block.h; i++) {
+            for (let j = 0; j < block.w; j++) {
+                this.setTile(x + j, y + i, "wt_1", layer)
+            }
+        }
         this.collisionRects.push({ x: block.x, y: block.y, w: block.w, h: block.h })
     }
     setTile(x, y, name, layer = "fg", force=false) {

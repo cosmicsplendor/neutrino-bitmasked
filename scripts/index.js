@@ -31,29 +31,8 @@ const reconstructMap = (map, blocks) => {
     map.clear(); // Clear the existing map
     blocks.forEach(block => {
         block.addToMap()
-        if (block.tilesGrid) placeTiles(map, block, block.tilesGrid)
-        if (block.backTiles) {
-            block.backTiles.forEach(({ x, y, tile }) => {
-                map.setTile(x, y, tile ?? "bw1", "mg")
-            })
-        }
     });
 };
-
-const decorateBlock = async (map, block) => {
-    while (true) {
-        const tilesGrid = generateTiles(block)
-        const undoTiles = placeTiles(map, block, tilesGrid)
-        await map.exportMap()
-        const accepted = (await getChoice(["Randomize", "Proceed"], "Like this pattern?")) === "Proceed"
-        if (accepted) {
-            block.tilesGrid = tilesGrid
-            break
-        }
-        undoTiles()
-    }
-}
-
 
 const interactiveGenerateLevel = async () => {
     // const loadSaved = await promptAccept("Do you want to load saved data?")
@@ -78,7 +57,6 @@ const interactiveGenerateLevel = async () => {
         blocks.push(initialBlock)
         reconstructMap(map, blocks)
     
-        await decorateBlock(map, initialBlock)
         /**
          * take the map, scan every block within +-1 for edge tiles that are out of alignment
          */
@@ -109,9 +87,6 @@ const interactiveGenerateLevel = async () => {
 
         if (userAccepted) {
             map.clearPreviewColRects()
-            await decorateBlock(map, newBlock)
-            await fixBoundaries(map, newBlock)
-            newBlock.backTiles = await projectBackwalls(map, newBlock)
             map.centerCamera(newBlock)
             await placeObjects(newBlock, map)
             await map.exportMap("testlevel")
