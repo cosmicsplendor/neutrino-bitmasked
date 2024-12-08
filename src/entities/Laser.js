@@ -6,10 +6,10 @@ const offset = 2
 const hheight = 24 // laser head height
 const bLen = 48 // laser body length
 const bWidth = 12 // laser body width
-const overlay = [1, 0.125, 0]
 class Laser extends MovableEnt {
     startX
     startY
+    overlay=[0.0235, 0.0235, 0.0235]
     constructor(x, y, toX = x, toY = y, speed = 100, num = 2, vert, period, delay=0, on = true, player, sounds) {
         toX = typeof toX == "number" ? toX: x
         toY = typeof toY == "number" ? toY: y
@@ -26,7 +26,7 @@ class Laser extends MovableEnt {
         this.player = player
         for (let i = 0; i < num; i++) {
             const body = new TexRegion({ frame: bFrame })
-            body.overlay = overlay
+            body.overlay = [1, 0.125, 0]
             body.pos.x += xOffset + xStep * i
             body.pos.y += yOffset + yStep * i
             body.alpha = on ? 1 : 0

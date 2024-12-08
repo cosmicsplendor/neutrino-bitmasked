@@ -1,14 +1,11 @@
 const terminal = require('terminal-kit').terminal;
 const { getInitialBlock } = require('./helpers');
-const { getChoice, promptAccept } = require("./helpers/term")
+const { getChoice } = require("./helpers/term")
 const generateNewBlock = require("./helpers/generateNewBlock")
 const { Map } = require("./utils/index");
 const { Graph } = require('graphlib'); // Use a graph library
 const placeObjects = require('./helpers/placeObjects');
-const { generateTiles, placeTiles } = require('./helpers/generateTiles');
 const generateFloor = require('./helpers/generateFloor');
-const fixBoundaries = require('./helpers/fixBoundaries');
-const projectBackwalls = require('./helpers/projectBackwalls');
 const selectColors = require('./helpers/selectColors');
 const colors = selectColors()
 
@@ -60,7 +57,6 @@ const interactiveGenerateLevel = async () => {
         /**
          * take the map, scan every block within +-1 for edge tiles that are out of alignment
          */
-        await fixBoundaries(map, initialBlock)
         await map.exportMap("testlevel")
     }
 

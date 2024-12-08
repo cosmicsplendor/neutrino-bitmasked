@@ -8,7 +8,6 @@ const sawBlades = require("./sawBlades")
 const stackables = require("./stackables")
 const TILE_SIZE = 48
 const STACK_TOP = ["top-start", "top-end", "top"]
-const em3Props = ["wt_1", "wt_1", "en4", "en6", "en5"]
 const factories = {
     player: {
         fields: [], // No specific props inferred from the original code
@@ -108,7 +107,7 @@ const factories = {
             const { x, y } = params
             const roundedX = x % 48 === 0 ? x: x + 24 * (Math.random() < 0.5 ? 1: -1)
             return [
-                { x: roundedX - 16, y, name: "em1", collapsed: [{ y: y + 32, x: roundedX, tile: pickOne(em3Props) }]  },
+                { x: roundedX - 16, y, name: "em1", collapsed: [{ y: y + 32, x: roundedX, tile: "wt_1" }]  },
                 { x: roundedX + 24, y, name: "wind" }
             ]
         }
@@ -133,16 +132,11 @@ const factories = {
                     return { name: cell, x: tilesX + j * 48, y: tilesY + i * 48 }
                 }).filter(cell => cell.name !== "empty")
             }).flat()
-            const backwallTiles = endTiles.mg.tiles.map((row, i) => {
-                return row.map((cell, j) => {
-                    return { name: cell, x: tilesX + j * 48, y: tilesY + (i + endTiles.mg.y ) * 48, layer: "mg" }
-                }).filter(cell => cell.name !== "empty")
-            }).flat()
+         
             const results = [
-                { x: roundedX - 16, y, name: "em1", collapsed: [{ y: y + 32, x: roundedX, tile: pickOne(em3Props) }] },
+                { x: roundedX - 16, y, name: "em1", collapsed: [{ y: y + 32, x: roundedX, tile: wt_1 }] },
                 { x: roundedX + 24, y, name: "fire" },
-                ...wallTiles,
-                ...backwallTiles
+                ...wallTiles
             ]
             results.colRects = endTiles.colRects.map(({ x, y, width, height }) => {
                 return { x: tilesX + x * 48, y: tilesY + y * 48, w: width * 48, h: height * 48 }
@@ -297,7 +291,7 @@ const factories = {
     },
     crate: stackables({ name: "crate", dims: { width: 88, height: 88 }}),
     tyre: stackables({ name: "tyre", dims: { width: 104, height: 32 } }),
-    sc: stackables({ name: () => pickOne([ "sc_blue", "sc_red", "sc_green" ]), dims: { width: 120, height: 120 }})
+    sc: stackables({ name: "sc", dims: { width: 120, height: 120 }})
 }
 
 module.exports = factories
