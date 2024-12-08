@@ -48,7 +48,7 @@ const PlayerControlsClass = config.isMobile ? PlayerTouchControls: PlayerKeyCont
 const getControlsMapping = config.isMobile ? getTouchMappings: getKeyMappings
 
 class Player extends TexRegion {
-    overlay=[0.99,0.99, 0.99]
+    noOverlay=true
     static sounds = [ "player_din", "concrete", "wood", "metal", "jump", "player_exp" ]
     remDt = 0 // remnant dt
     smooth = true
