@@ -24,8 +24,8 @@ const pickVerticalAlignmentParams = (emptySpaces) => {
 
 const generateNewBlock = (prevBlock, map) => {
     const newBlock = CompositeBlock.create({
-        width: rand(5, 1) + skewedRand(5, 1) + 1, // Width between 2 and 6
-        height: skewedRand(3, 1) + rand(5, 1) // Height between 2 and 4
+        width: rand(2, 1) + skewedRand(4, 1) + 1, // Width between 2 and 5
+        height: skewedRand(4, 1) + rand(2, 1) // Height between 2 and 4
     });
 
     addProtrusions(newBlock);
