@@ -218,64 +218,60 @@ const factories = {
     gateArch: {
         block: null,
         extendedLeft: false,
-        randomize: true,
         fields: ["speed"],
-        reset() {
-            this.extendedLeft = false
-            this.block = new CompositeBlock(new Block(5, 4))
-        },
-        extendLeft() {
-            const skip = rand(1, 0)
-            if (skip) return
-            this.extendedLeft = true
-            const num = rand(4, 2)
-            const block = new Block(1, num)
-            const position = "left-end"
-            this.block.addPart({ block, position })
-        },
-        extendRight() {
-            const skip = rand(1, 0)
-            if (skip) return
-            const num = rand(4, 2)
-            const block = new Block(1, num)
-            const position = "right-end"
-            this.block.addPart({ block, position })
-        },
-        extendTop() {
-            const skip = rand(1, 0)
-            if (skip) return
-            const num = rand(5, 2)
-            const block = new Block(num, 1)
-            const position = pickOne(num % 2 === 0 ? STACK_TOP.slice(-1) : STACK_TOP)
-            this.block.addPart({ block, position })
-        },
-        extend() {
-            this.extendLeft()
-            this.extendRight()
-            this.extendTop()
-        },
         dims() {
-            this.reset()
-            this.extend()
-            const { block } = this
+            const block = new CompositeBlock(new Block(5, 4))
+            this.block = block
             return { width: block.w * TILE_SIZE, height: (block.h + 3) * TILE_SIZE }
         },
-        create(params) {
-            const { x: originX, y: originY } = params
+        create: function(params) {
+            const { x: originX, y: originY, speed } = params
             const { block } = this
             const dx = this.extendedLeft ? 1 : 0
             const dy = block.h - 4
             const gateY = originY + (TILE_SIZE * block.h) - 56
-            const gate = { y: gateY, x: originX + (dx + 2.5) * TILE_SIZE - 56, name: "gate", endY: gateY - 128 }
+            const gate = { y: gateY, x: originX + (dx + 2.5) * TILE_SIZE - 56, name: "gate", endY: gateY - 128, speed: +speed }
 
-            const blocks = block.children.flatMap(decomposeBlocks).map(b => {
-                return { x: originX + (b.x + dx) * TILE_SIZE, y: originY + (b.y + dy) * TILE_SIZE, name: "wt_1" }
+            const blocks = block.children.flatMap(decomposeBlocks)
+            const maxY = Math.max(...blocks.map(b => b.y)) + 1
+            const maxX = Math.max(...blocks.map(b => b.x)) + 1
+            const grid = Array(maxY).fill().map(() => Array(maxX).fill(null))
+            
+            blocks.forEach(b => {
+                if (b.y >= 0 && b.y < maxY && b.x >= 0 && b.x < maxX) {
+                    grid[b.y][b.x] = "wt_1"
+                }
             })
-            return [
-                gate,
-                ...blocks
-            ]
 
+            const archY = 2  // Relative to grid, not block offset
+            const archX = 1  // Relative to grid, not block offset
+            const resultBlocks = []
+
+            for (let row = 0; row < maxY; row++) {
+                for (let col = 0; col < maxX; col++) {
+                    if (!grid[row][col]) continue
+
+                    let tileName = "wt_1"
+                    if (row === archY && col === archX) {
+                        tileName = "garch"
+                    } else if ((row === archY && (col === archX + 1 || col === archX + 2)) || 
+                              (row === archY + 1 && col >= archX && col < archX + 3)) {
+                        continue // Skip these positions (empty)
+                    }
+
+                    resultBlocks.push({
+                        x: originX + (col + dx) * TILE_SIZE,
+                        y: originY + (row + dy) * TILE_SIZE,
+                        name: tileName
+                    })
+                }
+            }
+
+            const results = [ gate, ...resultBlocks ]
+            results.colRects = block.collisionRects.map(({ x, y, w, h }) => {
+                return { x: (x + dx) * TILE_SIZE + originX, y: (y + dy) * TILE_SIZE + originY, w: w * TILE_SIZE, h: h * TILE_SIZE}
+            })
+            return results
         }
     },
     crate: stackables({ name: "crate", dims: { width: 88, height: 88 }}),
