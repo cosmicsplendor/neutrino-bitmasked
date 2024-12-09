@@ -227,7 +227,7 @@ const factories = {
         create: function(params) {
             const { x: originX, y: originY, speed } = params
             const { block } = this
-            const dx = this.extendedLeft ? 1 : 0
+            const dx = 0
             const dy = block.h - 4
             const gateY = originY + (TILE_SIZE * block.h) - 56
             const gate = { y: gateY, x: originX + (dx + 2.5) * TILE_SIZE - 56, name: "gate", endY: gateY - 128, speed: +speed }

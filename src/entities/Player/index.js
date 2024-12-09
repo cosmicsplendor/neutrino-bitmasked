@@ -57,8 +57,8 @@ class Player extends TexRegion {
         super({ frame: "ball", ...rest })
         this.width = width
         this.height = height
-        this.radius = width / 2
-        this.hitCirc = { x: 0, y: 0, radius: this.radius }
+        this.radius = 31
+        this.hitCirc = { x: 1, y: 1, radius: 31 }
         this.rotation = 0
         this.anchor = {
             x: width / 2,
