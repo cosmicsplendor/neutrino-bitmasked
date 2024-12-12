@@ -1,26 +1,25 @@
 import { Node } from "@lib"
 import config from "@config"
-import atlasmetaId from "@assets/images/atlasmeta.cson"
 import TexRegion from "@lib/entities/TexRegion"
-import bgDataId from "@assets/levels/background.cson"
 
-export const placeBg = (screen, assetsCache, overlay=[0.03529411764705882, 0.03529411764705882, 0.03529411764705882], rendererAPI) => {
+export const placeBg = (screen, bgData, overlay=[0.03529411764705882, 0.03529411764705882, 0.03529411764705882], rendererAPI) => {
     if (rendererAPI !== "webgl") return
-    const bgData = assetsCache.get(bgDataId)
     screen.container = new Node()
     screen.add(screen.container)
     bgData.forEach(tile => {
-        screen.container.add(new TexRegion({ frame: tile.name, pos: { x: tile.x, y: tile.y }}))
+        const tex = new TexRegion({ frame: tile.t, pos: { x: tile.x, y: config.viewport.height  + tile.y }})
+        if (tile.flip) {
+            // tex.scale = { x: -1, y: 1 }
+        }
+        tex.y0 = tile.y
+        screen.container.add(tex)
     })
-    const atlasMeta = assetsCache.get(atlasmetaId)
-    const y1 = bgData.reduce((min, tile) => Math.min(min, tile.y), Infinity)
-    const y2 = bgData.reduce((max, tile) => Math.max(max, tile.y + atlasMeta[tile.name].height), 0)
-    const height = y2 - y1
     screen.container.overlay = overlay
     const realignBg = () => {
-        if (screen.container) screen.container.pos.y = -y1 + (config.viewport.height * config.devicePixelRatio - height)
+        screen.container.children.forEach(child => {
+            child.pos.y = config.viewport.height * config.devicePixelRatio - tile.y0
+        })
     }
-    realignBg()
     config.viewport.on("change", realignBg)
     
     return function teardownBg() {

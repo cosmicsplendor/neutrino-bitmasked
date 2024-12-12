@@ -16,7 +16,6 @@ import MainMenuScreen from "@screens/MainMenu"
 import GameScreen from "@screens/Game"
 import LevelScreen from "@screens/Level"
 
-import backgroundTiles from "@assets/levels/background.cson"
 import soundSprite from "@assets/audio/sprite.mp3"
 import soundMeta from "@assets/audio/sprite.cson"
 import texatlasId from "@assets/images/texatlas.png"
@@ -50,7 +49,6 @@ const assets = [
     soundOffImgId,
     rvaImgId,
     mainmenuData,
-    { url: backgroundTiles, msg: "loading background tiles" }, // pre-load the current level
     { url: arrowImgId, msg: "loading ui assets" },
     { url: soundSprite, msg: "loading audio sprite" },
     { url: soundMeta, msg: "loading audio sprite metadata"},
