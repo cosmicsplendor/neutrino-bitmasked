@@ -9,7 +9,7 @@ export const placeBg = (screen, bgData, overlay=[0.03529411764705882, 0.03529411
     bgData.forEach(tile => {
         const tex = new TexRegion({ frame: tile.t, pos: { x: tile.x, y: config.viewport.height  + tile.y }})
         if (tile.flip) {
-            // tex.scale = { x: -1, y: 1 }
+            tex.scale = { x: -1, y: 1 }
         }
         tex.y0 = tile.y
         screen.container.add(tex)
