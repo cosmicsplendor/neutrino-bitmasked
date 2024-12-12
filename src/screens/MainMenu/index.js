@@ -10,6 +10,8 @@ import TiledLevel from "@lib/utils/TiledLevel"
 import { TexRegion } from "@lib/index"
 import { clamp } from "@lib/utils/math"
 import moonImg from "@assets/images/background.png"
+import atlasMeta from "@assets/images/atlasmeta.cson"
+import BGen from "../../utils/BGen"
 
 
 class MainMenuScreen extends Node {
@@ -44,10 +46,12 @@ class MainMenuScreen extends Node {
             viewport.on("change", this.realign)
             this.realign(viewport)
 
-            this.teardownBg = placeBg(this, game.assetsCache, [0.033203125,0.06640625,0.107421875], game.renderer.api)
+            // // this.teardownBg = placeBg(this, game.assetsCache, [0.033203125,0.06640625,0.107421875], game.renderer.api)
             this.add(graphic)
             this.add(this.gameTitle)
-
+            this.bgen = new BGen(game.assetsCache.get(atlasMeta), 48, 80)
+            
+            console.log(this.bgen.generate())
             this.init()
 
         })
@@ -109,7 +113,7 @@ class MainMenuScreen extends Node {
     onExit() {
         this.teardownUI()
         config.viewport.off("change", this.realign)
-        if (typeof this.teardownBg === "function") this.teardownBg()
+        // // if (typeof this.teardownBg === "function") this.teardownBg()
         this.game.assetsCache.unload(mainmenuData)
         this.game.disposeScreen(this)
     }

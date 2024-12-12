@@ -6,7 +6,7 @@ class Egypt extends BiomeGen {
         super(stateMachine, dimsMap);
         // TODO add transitions
         this.addTransition("Egypt", 1)
-        const { objectGraph: graph } = this
+        const { objGraph: graph } = this
         graph.addNodes([
             "eg_art",
             "eg_banr",
@@ -24,7 +24,7 @@ class Egypt extends BiomeGen {
             "palm1"
         ])
         graph.setInitialNode("eg_cacti")
-        graph.setTerminalNode("eg_tomb_flipped")
+        // graph.setTerminalNode("eg_tomb_flipped")
 
         graph.addEdge("eg_cacti", "eg_pyramid", 48)
         graph.addEdge("eg_cacti", "eg_cacti", 24, 2)
