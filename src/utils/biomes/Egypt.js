@@ -21,11 +21,15 @@ class Egypt extends BiomeGen {
             "eg_tomb",
             "eg_tomb_flipped",
             "eg_vsl",
-            "palm1"
+            "palm1",
+            "eg_gate1",
+            "eg_gate2",
+            "eg_gate1_flipped",
+            "eg_gate2_flipped",
         ])
-        graph.setInitialNode("eg_cacti")
-        // graph.setTerminalNode("eg_tomb_flipped")
-
+        graph.setInitialNode("eg_gate2")
+        graph.chain(["eg_gate2", "eg_gate1", "eg_gate1_flipped", "eg_gate2_flipped"])
+        graph.addEdge("eg_gate2_flipped", "eg_cacti", 50)
         graph.addEdge("eg_cacti", "eg_pyramid", 48)
         graph.addEdge("eg_cacti", "eg_cacti", 24, 2)
         graph.addEdge("eg_cacti", "eg_vsl", 32)

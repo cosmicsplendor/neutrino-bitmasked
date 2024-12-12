@@ -17,7 +17,7 @@ export const placeBg = (screen, bgData, overlay=[0.03529411764705882, 0.03529411
     screen.container.overlay = overlay
     const realignBg = () => {
         screen.container.children.forEach(child => {
-            child.pos.y = config.viewport.height * config.devicePixelRatio - tile.y0
+            child.pos.y = config.viewport.height * config.devicePixelRatio - child.y0
         })
     }
     config.viewport.on("change", realignBg)
