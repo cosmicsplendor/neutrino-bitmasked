@@ -1,7 +1,7 @@
 import {  BiomeGen } from "@lib/utils/index.js"
 
 class Egypt extends BiomeGen {
-    height=3
+    height=2
     constructor(stateMachine, dimsMap) {
         super(stateMachine, dimsMap);
         // TODO add transitions
@@ -26,11 +26,15 @@ class Egypt extends BiomeGen {
             "eg_gate2",
             "eg_gate1_flipped",
             "eg_gate2_flipped",
+            "arch1",
+            "arch1_flipped"
         ])
-        graph.setInitialNode("eg_gate2")
+        graph.setInitialNode("arch1")
         graph.chain(["eg_gate2", "eg_gate1", "eg_gate1_flipped", "eg_gate2_flipped"])
         graph.addEdge("eg_pyramid", "eg_pyramid_flipped", 0)
         graph.addEdge("eg_shrub", "eg_shrub_flipped", 0)
+
+        graph.addEdge("arch1", "eg_gate2", [40, 60])
 
         graph.addEdge("eg_pyramid_flipped", "palm0", 24)
         graph.addEdge("eg_pyramid_flipped", "bush", 24, 1.5)

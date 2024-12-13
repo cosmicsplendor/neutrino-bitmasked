@@ -38,7 +38,9 @@ class Construction extends BiomeGen {
 
         graph.addEdge("tree1", "ct_lmark", 54)
 
+        graph.addEdge("ct_lmark_flipped", "fol4", 44)
         graph.addEdge("ct_lmark_flipped", "pole", 44)
+        graph.addEdge("pole", "pole", 48, 0.25)
         graph.addEdge("pole", "bush", 32)
     }
 }
