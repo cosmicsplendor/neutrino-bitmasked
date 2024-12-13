@@ -24,17 +24,17 @@ class Exotica extends BiomeGen {
         graph.addEdge("m_tmpl_flipped", "m_tmpl", 0)
 
 
-        graph.addEdge("ex_plr", "palm0", 8)
+        graph.addEdge("ex_plr", "palm0", 44)
         graph.addEdge("palm0", "palm1", [-24, 2], 0.5)
         graph.addEdge("palm1", "palm0", [-32, 4])
 
         graph.addEdge("palm0", "m_tmpl_flipped", [18, 24])
         graph.addEdge("palm1", "m_tmpl_flipped", [18, 24])
 
-        graph.addEdge("m_tmpl", "tree4", 48)
-        graph.addEdge("m_tmpl", "ex_plr_flipped", 40)
+        graph.addEdge("m_tmpl", "tree4", 18)
+        graph.addEdge("m_tmpl", "ex_plr_flipped", 56)
         graph.addEdge("tree4", "m_tmpl_flipped", 40, 0.15)
-        graph.addEdge("tree4", "ex_plr_flipped", 40)
+        graph.addEdge("tree4", "ex_plr_flipped", 56)
     }
 }
 
