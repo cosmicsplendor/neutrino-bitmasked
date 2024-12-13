@@ -1,10 +1,11 @@
 import { BGenMachine } from "@lib/utils";
 import Egypt from "./biomes/Egypt"
+import Construction from "./biomes/Construction"
 
 class BGen extends BGenMachine {
     constructor(atlasmeta, baseWidth=48, baseHeight=64) {
-        super([ Egypt ], atlasmeta, baseWidth, baseHeight)
-        this.setInitialBiome(Egypt)
+        super([ Egypt, Construction ], atlasmeta, baseWidth, baseHeight)
+        this.setInitialBiome(Construction)
     }
 }
 

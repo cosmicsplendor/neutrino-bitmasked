@@ -71,7 +71,7 @@ class Egypt extends BiomeGen {
         
         graph.addEdge("eg_gate2_flipped", "bush", [30, 50])
 
-        graph.addEdge("eg_puma", "eg_art", 30)
+        graph.addEdge("eg_puma", "eg_art", 75)
     }
 }
 
