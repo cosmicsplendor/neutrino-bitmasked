@@ -26,6 +26,7 @@ class Medieval extends BiomeGen {
             "bush"
         ])
         graph.addInitialNode("arch1_flipped")
+        graph.addInitialNode("half_base_flipped")
 
         graph.addEdge("arch1_flipped", "arch1", 0)
         graph.addEdge("arch1", "arch1_flipped", 16)
