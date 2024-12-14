@@ -28,7 +28,7 @@ class Medieval extends BiomeGen {
 
         graph.addEdge("arch1_flipped", "arch1", 0)
         graph.addEdge("arch1", "arch1_flipped", 16)
-        graph.addEdge("arch1_flipped", "btlmnt", -16, 0.5)
+        graph.addEdge("arch1_flipped", "btlmnt", -16, 0.3)
 
         graph.addEdge("btlmnt", "arch2", -15)
         graph.addEdge("arch2", "arch2", 0, 1, [2, 3])
@@ -46,8 +46,8 @@ class Medieval extends BiomeGen {
         graph.addEdge("arch3", "arch3", -20, 1, 1)
         graph.addEdge("arch3", "watch_twr_dupe3", -29)
 
-        graph.addEdge("watch_twr_dupe1", "bush", 16)
-        graph.addEdge("watch_twr_dupe3", "bush", 16)
+        graph.addEdge("watch_twr_dupe1", "bush", 24)
+        graph.addEdge("watch_twr_dupe3", "bush", 24)
         graph.addEdge("bush", "tree1", -8)
 
     }

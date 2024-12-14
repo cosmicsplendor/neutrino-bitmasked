@@ -15,6 +15,8 @@ class Construction extends BiomeGen {
             "ct_sca1",
             "ct_sca2",
             "tree1",
+            "tree1_dupe1",
+            "sb_haus2",
             "bush",
             "board",
             "pole",
@@ -30,14 +32,18 @@ class Construction extends BiomeGen {
         graph.addEdge("board", "ct_sca1_flipped", [38, 60])
         graph.addEdge("board", "ct_sca2", 45)
 
-        graph.addEdge("ct_sca1", "tree1", 32)
-        graph.addEdge("ct_sca2_flipped", "tree1", 32)
+        graph.addEdge("ct_sca1", "tree1", [52, 64])
+        graph.addEdge("ct_sca2_flipped", "tree1", [52, 64])
 
         graph.addEdge("ct_sca1", "ct_sca2", 32, 0.3)
         graph.addEdge("ct_sca2_flipped", "ct_sca1_flipped", 32, 0.3)
 
-        graph.addEdge("tree1", "ct_lmark", 54)
+        graph.addEdge("tree1", "tree1_dupe1", 12)
+        graph.addEdge("tree1_dupe1", "ct_lmark", 48)
 
+        graph.addEdge("tree1", "sb_haus2", 12)
+        graph.addEdge("sb_haus2", "ct_lmark", 58)
+        
         graph.addEdge("ct_lmark_flipped", "fol2", 44)
         graph.addEdge("ct_lmark_flipped", "pole", 44)
         graph.addEdge("pole", "pole", 48, 0.25)
