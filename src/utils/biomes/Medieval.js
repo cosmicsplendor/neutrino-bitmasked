@@ -20,7 +20,7 @@ class Medieval extends BiomeGen {
         ])
         graph.setInitialNode("btlmnt")
         graph.addEdge("btlmnt", "arch2", -15)
-        graph.addEdge("arch2", "arch2", 0, 5)
+        graph.addEdge("arch2", "arch2", 0, 1, [1, 3])
         graph.addEdge("arch2", "base", -15)
         graph.addEdge("base", "arch2")
         graph.addEdge("arch2", "arch2")
