@@ -1,7 +1,7 @@
 import {  BiomeGen } from "@lib/utils/index.js"
 
 class Exotica extends BiomeGen {
-    height=3
+    height=2
     constructor(stateMachine, dimsMap) {
         super(stateMachine, dimsMap);
         // TODO add transitions
@@ -27,11 +27,12 @@ class Exotica extends BiomeGen {
 
         graph.addEdge("ex_plr", "palm0", 44)
         graph.addEdge("palm0", "palm1", [-24, 2], 0.75)
-        graph.addEdge("palm1", "palm0_dupe1", [-32, 4], [-12, -18])
+        graph.addEdge("palm1", "palm0_dupe1", [-32, 4])
 
         graph.addEdge("palm0", "m_tmpl_flipped", [24, 32])
         graph.addEdge("palm0_dupe1", "m_tmpl_flipped", [24, 32])
         graph.addEdge("palm1", "m_tmpl_flipped", [24, 32])
+        console.log(graph.nodes.get("palm1"))
 
         graph.addEdge("m_tmpl", "tree4", 18)
         graph.addEdge("m_tmpl", "ex_plr_flipped", 56)

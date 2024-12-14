@@ -1,7 +1,7 @@
 import {  BiomeGen } from "@lib/utils/index.js"
 
 class Construction extends BiomeGen {
-    height=6
+    height=5
     constructor(stateMachine, dimsMap) {
         super(stateMachine, dimsMap);
         // TODO add transitions

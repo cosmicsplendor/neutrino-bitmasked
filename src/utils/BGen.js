@@ -14,7 +14,7 @@ class BGen extends BGenMachine {
     constructor(atlasmeta, baseWidth=48, baseHeight=64) {
         const constructors = [ Egypt, Construction, Exotica, Japan, Industrial, Suburb, Ruins, Medieval ]
         super(constructors, atlasmeta, { sb_mill: WindMill }, baseWidth, baseHeight)
-        this.setInitialBiome(pickOne(constructors))
+        this.setInitialBiome(Japan)
     }
 }
 

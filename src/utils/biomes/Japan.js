@@ -1,12 +1,11 @@
 import {  BiomeGen } from "@lib/utils/index.js"
 
 class Japan extends BiomeGen {
-    height=6
+    height=5
     constructor(stateMachine, dimsMap) {
         super(stateMachine, dimsMap);
         // TODO add transitions
         this.addTransition("Exotica", 1.5)
-        this.addTransition("Egypt", 1)
         const { objGraph: graph } = this
         graph.addNodes([
             "jp_tmpl_flipped",
