@@ -7,11 +7,14 @@ import Industrial from "./biomes/Industrial"
 import Medieval from "./biomes/Medieval"
 import Ruins from "./biomes/Ruins"
 import Suburb from "./biomes/Suburb"
+import WindMill from "../entities/WindMill";
+import { pickOne } from "@lib/utils/math";
 
 class BGen extends BGenMachine {
-    constructor(atlasmeta, entityMap, baseWidth=48, baseHeight=64) {
-        super([ Egypt, Construction, Exotica, Japan, Industrial, Suburb, Ruins, Medieval ], atlasmeta, entityMap, baseWidth, baseHeight)
-        this.setInitialBiome(Suburb)
+    constructor(atlasmeta, baseWidth=48, baseHeight=64) {
+        const constructors = [ Egypt, Construction, Exotica, Japan, Industrial, Suburb, Ruins, Medieval ]
+        super(constructors, atlasmeta, { sb_mill: WindMill }, baseWidth, baseHeight)
+        this.setInitialBiome(pickOne(constructors))
     }
 }
 

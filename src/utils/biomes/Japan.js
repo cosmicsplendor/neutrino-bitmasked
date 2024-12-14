@@ -1,11 +1,12 @@
 import {  BiomeGen } from "@lib/utils/index.js"
 
 class Japan extends BiomeGen {
-    height=5
+    height=6
     constructor(stateMachine, dimsMap) {
         super(stateMachine, dimsMap);
         // TODO add transitions
-        this.addTransition("Exotica", 1)
+        this.addTransition("Exotica", 1.5)
+        this.addTransition("Egypt", 1)
         const { objGraph: graph } = this
         graph.addNodes([
             "jp_tmpl_flipped",
@@ -16,6 +17,7 @@ class Japan extends BiomeGen {
             "jp_tree_flipped",
             "tree3",
             "tree3_flipped",
+            "m_plr"
         ])
 
         graph.addInitialNode("jp_tree_flipped")
@@ -24,7 +26,10 @@ class Japan extends BiomeGen {
         graph.addEdge("jp_gate", "jp_gate_flipped", 0)
 
         graph.addEdge("jp_tree_flipped", "jp_gate", 16)
+        graph.addEdge("jp_tree_flipped", "m_plr", 32)
 
+        graph.addEdge("m_plr", "tree3", [32, 47])
+        graph.addEdge("m_plr", "jp_tree", 32)
         graph.addEdge("jp_gate_flipped", "tree3", [24, 32])
         graph.addEdge("jp_gate_flipped", "jp_tree", 16)
 

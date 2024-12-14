@@ -5,7 +5,7 @@ class Exotica extends BiomeGen {
     constructor(stateMachine, dimsMap) {
         super(stateMachine, dimsMap);
         // TODO add transitions
-        this.addTransition("Construction", 1)
+        this.addTransition("Ruins", 1)
         const { objGraph: graph } = this
         graph.addNodes([
            "tree4",

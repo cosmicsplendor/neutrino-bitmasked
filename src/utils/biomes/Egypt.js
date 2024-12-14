@@ -1,11 +1,11 @@
 import {  BiomeGen } from "@lib/utils/index.js"
 
 class Egypt extends BiomeGen {
-    height=2
+    height=3
     constructor(stateMachine, dimsMap) {
         super(stateMachine, dimsMap);
         // TODO add transitions
-        this.addTransition("Egypt", 1)
+        this.addTransition("Ruins", 1)
         const { objGraph: graph } = this
         graph.addNodes([
             "eg_art",

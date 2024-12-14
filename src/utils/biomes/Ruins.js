@@ -5,7 +5,7 @@ class Ruins extends BiomeGen {
     constructor(stateMachine, dimsMap) {
         super(stateMachine, dimsMap);
         // TODO add transitions
-        this.addTransition("Medieval", 1)
+        this.addTransition("Industrial", 1)
         const { objGraph: graph } = this
         graph.addNodes([
             "ruin_1",

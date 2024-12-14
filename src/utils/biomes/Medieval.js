@@ -8,7 +8,6 @@ class Medieval extends BiomeGen {
         this.addTransition("Industrial", 1)
         const { objGraph: graph } = this
         graph.addNodes([
-            "arch1",
             "arch1_flipped",
             "arch2",
             "arch3",
@@ -26,9 +25,7 @@ class Medieval extends BiomeGen {
         ])
         graph.addInitialNode("arch1_flipped")
 
-        graph.addEdge("arch1_flipped", "arch1", 0)
-        graph.addEdge("arch1", "arch1_flipped", 16)
-        graph.addEdge("arch1_flipped", "btlmnt", -16, 0.3)
+        graph.addEdge("arch1_flipped", "btlmnt", -16)
 
         graph.addEdge("btlmnt", "arch2", -15)
         graph.addEdge("arch2", "arch2", 0, 1, [2, 3])

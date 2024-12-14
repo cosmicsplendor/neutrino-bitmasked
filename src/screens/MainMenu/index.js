@@ -46,7 +46,7 @@ class MainMenuScreen extends Node {
             viewport.on("change", this.realign)
             this.realign(viewport)
 
-            this.bgen = new BGen(game.assetsCache.get(atlasMeta), { }, 48, 80)
+            this.bgen = new BGen(game.assetsCache.get(atlasMeta), 48, 80)
             this.teardownBg = placeBg(this, this.bgen.generateMinWidth(1920), [0.033203125,0.06640625,0.107421875], game.renderer.api)
             this.add(graphic)
             this.add(this.gameTitle)
@@ -91,6 +91,11 @@ class MainMenuScreen extends Node {
         const phase = t * frequency
         gameTitle.pos.y = this.initPositions.gameTitle.y + clamp(yMin * parallaxFactor * amplitude, yMax/parallaxFactor, Math.cos(phase) * amplitude);
         graphic.pos.y = this.initPositions.graphic.y + clamp(yMin * amplitude, yMax * amplitude, Math.cos(phase) * amplitude * parallaxFactor);
+        this.container.children.forEach(child => {
+            if (child.update) {
+                child.update(dt)
+            }
+        })
     }
     onEnter() {
         const { uiRoot, game, sdk } = this
