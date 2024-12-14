@@ -21,16 +21,14 @@ class Medieval extends BiomeGen {
             "watch_twr_dupe2",
             "watch_twr_dupe3",
             "tree1",
-            "half_base",
-            "half_base_flipped",
-            "bush"
+            "tree3",
+            "bush",
         ])
         graph.addInitialNode("arch1_flipped")
-        graph.addInitialNode("half_base_flipped")
 
         graph.addEdge("arch1_flipped", "arch1", 0)
         graph.addEdge("arch1", "arch1_flipped", 16)
-        graph.addEdge("arch1_flipped", "btlmnt", -16, 0.75)
+        graph.addEdge("arch1_flipped", "btlmnt", -16, 0.5)
 
         graph.addEdge("btlmnt", "arch2", -15)
         graph.addEdge("arch2", "arch2", 0, 1, [2, 3])
@@ -42,9 +40,14 @@ class Medieval extends BiomeGen {
         graph.addEdge("watch_twr_dupe2", "arch_5", -15)
         graph.addEdge("arch_5", "arch_5", 0, 1, [5, 6])
         graph.addEdge("arch_5", "watch_twr_dupe1", -8)
-        graph.addEdge("arch_5", "watch_twr_dupe2", -16, 0.125)
+        graph.addEdge("arch_5", "watch_twr_dupe2", -16, 0.1)
+
+        graph.addEdge("watch_twr_dupe1", "arch3", -29)
+        graph.addEdge("arch3", "arch3", -20, 1, 1)
+        graph.addEdge("arch3", "watch_twr_dupe3", -29)
 
         graph.addEdge("watch_twr_dupe1", "bush", 16)
+        graph.addEdge("watch_twr_dupe3", "bush", 16)
         graph.addEdge("bush", "tree1", -8)
 
     }
