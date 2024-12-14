@@ -18,13 +18,13 @@ class Ruins extends BiomeGen {
         ])
 
         graph.addInitialNode("palm1")
+        graph.addInitialNode("ruin_1")
 
-        graph.addEdge("palm1", "ruin_1", 40, 1)
         graph.addEdge("palm1", "ruin_3_flipped", -12, 1)
-        graph.addEdge("ruin_3_flipped", "ruin_1", 40, 1)
+        graph.addEdge("ruin_3_flipped", "ruin_1", [48, 56], 1)
 
         graph.addEdge("ruin_1", "ruin_1", 8, 1, 2)
-        graph.addEdge("ruin_1", "ruin_2", 38, 1)
+        graph.addEdge("ruin_1", "ruin_2", [48, 56], 1)
 
         graph.addEdge("ruin_2", "tree4", 38, 0.25)
         graph.addEdge("ruin_2", "palm0", -16, 0.25)
