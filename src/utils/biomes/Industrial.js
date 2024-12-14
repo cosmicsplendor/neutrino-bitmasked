@@ -27,7 +27,7 @@ class Industrial extends BiomeGen {
         
         graph.addEdge("kiln", "pole", 36)
         graph.addEdge("kiln", "kiln_dupe1", [32, 48])
-        graph.addEdge("kiln_dupe1", "pole", 36)
+        graph.addEdge("kiln_dupe1", "fol2", 36)
         graph.addEdge("pole", "fol2", 24)
 
     }
