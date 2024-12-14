@@ -10,8 +10,8 @@ class Industrial extends BiomeGen {
         graph.addNodes([
            "ct_fac1", // big factory
            "ct_fac1_flipped", // big factory
-           "ct_fac1_dupe1", // big factory
            "kiln", // thin kiln
+           "kiln_dupe1", // thin kiln
            "pole", // electricity piole 
            "fol2", // "foliage4" ssmall like a bush
            "bush", // "foliage4" ssmall like a bush
@@ -24,10 +24,12 @@ class Industrial extends BiomeGen {
 
         graph.addEdge("ct_fac1_flipped", "ct_fac1")
         graph.addEdge("ct_fac1", "kiln", [32, 48])
+        
+        graph.addEdge("kiln", "pole", 36)
+        graph.addEdge("kiln", "kiln_dupe1", [32, 48])
+        graph.addEdge("kiln_dupe1", "pole", 36)
+        graph.addEdge("pole", "fol2", 24)
 
-        graph.addEdge("kiln", "fol2", 12)
-
-        graph.addEdge("fol2", "pole", 36)
     }
 }
 
