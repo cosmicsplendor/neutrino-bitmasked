@@ -27,7 +27,7 @@ class Egypt extends BiomeGen {
             "eg_gate1_flipped",
             "eg_gate2_flipped",
         ])
-        graph.setInitialNode("eg_gate2")
+        graph.addInitialNode("eg_gate2")
         graph.chain(["eg_gate2", "eg_gate1", "eg_gate1_flipped", "eg_gate2_flipped"])
         graph.addEdge("eg_pyramid", "eg_pyramid_flipped", 0)
         graph.addEdge("eg_shrub", "eg_shrub_flipped", 0)

@@ -21,7 +21,7 @@ class Construction extends BiomeGen {
             "fol2"
         ])
 
-        graph.setInitialNode("board")
+        graph.addInitialNode("board")
 
         graph.addEdge("ct_sca1_flipped", "ct_sca1", 0)
         graph.addEdge("ct_sca2", "ct_sca2_flipped", 0)

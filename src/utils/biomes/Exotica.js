@@ -20,7 +20,7 @@ class Exotica extends BiomeGen {
            "arch1_flipped"
         ])
 
-        graph.setInitialNode("ex_plr")
+        graph.addInitialNode("ex_plr")
 
         graph.addEdge("m_tmpl_flipped", "m_tmpl", 0)
 

@@ -18,7 +18,7 @@ class Japan extends BiomeGen {
             "tree3_flipped",
         ])
 
-        graph.setInitialNode("jp_tree_flipped")
+        graph.addInitialNode("jp_tree_flipped")
 
         graph.addEdge("jp_tmpl_flipped", "jp_tmpl", 0)
         graph.addEdge("jp_gate", "jp_gate_flipped", 0)

@@ -13,22 +13,22 @@ class Industrial extends BiomeGen {
            "kiln", // thin kiln
            "kiln_dupe1", // thin kiln
            "pole", // electricity piole 
-           "fol2", // "foliage4" ssmall like a bush
+           "sb_haus1", // "foliage4" ssmall like a bush
            "bush", // "foliage4" ssmall like a bush
+           "tree4"
         ])
 
-        graph.setInitialNode("bush")
+        graph.addInitialNode("bush")
 
 
         graph.addEdge("bush", "ct_fac1_flipped", 24)
 
         graph.addEdge("ct_fac1_flipped", "ct_fac1")
-        graph.addEdge("ct_fac1", "kiln", [32, 48])
+        graph.addEdge("ct_fac1", "kiln", 64)
         
-        graph.addEdge("kiln", "pole", 36)
-        graph.addEdge("kiln", "kiln_dupe1", [32, 48])
-        graph.addEdge("kiln_dupe1", "fol2", 36)
-        graph.addEdge("pole", "fol2", 24)
+        graph.addEdge("kiln", "kiln_dupe1", 28)
+        graph.addEdge("kiln_dupe1", "tree4", 42)
+        graph.addEdge("tree4", "sb_haus1", 32)
 
     }
 }
