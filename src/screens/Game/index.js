@@ -116,7 +116,7 @@ class GameScreen extends Node { // can only have cameras as children
         this.factories = makeFactories({ soundSprite, assetsCache, storage, player: this.player, state: this.state })
         if (game.renderer.api === rendApis.WEBGL) {
             const z = 2.5
-            const location = level.location || "Egypt"
+            const location = levelData.location || "Egypt"
             const bgen = new BGen(this.game.assetsCache.get(atlasMeta), 48, 80)
             bgen.reset(location)
             const tiles = bgen.generateMinWidth((levelData.width + 100) / z)
@@ -185,10 +185,11 @@ class GameScreen extends Node { // can only have cameras as children
         this.state.play()
     }
     onExit() {
+        console.log("HERE")
         this.unsetLevel()
         this.game.reset()
         this.teardownUI && this.teardownUI()
-        this.children.length = 0
+        this.children && (this.children.length = 0)
         this.game.disposeScreen(this)
     }
     update(dt, t) {
