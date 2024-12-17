@@ -8,7 +8,6 @@ import Medieval from "./biomes/Medieval"
 import Ruins from "./biomes/Ruins"
 import Suburb from "./biomes/Suburb"
 import WindMill from "../entities/WindMill";
-import { pickOne } from "@lib/utils/math";
 
 class BGen extends BGenMachine {
     constructor(atlasmeta, baseWidth=48, baseHeight=64) {

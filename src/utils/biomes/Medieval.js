@@ -30,7 +30,7 @@ class Medieval extends BiomeGen {
         graph.addEdge("btlmnt", "arch2", -15)
         graph.addEdge("arch2", "arch2", 0, 1, [2, 3])
 
-        graph.addEdge("arch2", "btlmnt_dupe1", -16)
+        graph.addEdge("arch2", "btlmnt_dupe1", -20)
         graph.addEdge("watch_twr", "arch_5", -8)
 
         graph.addEdge("btlmnt_dupe1", "arch_5", -15)

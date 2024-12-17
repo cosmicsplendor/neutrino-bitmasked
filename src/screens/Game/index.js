@@ -16,7 +16,7 @@ import Player from "@entities/Player"
 import soundSpriteId from "@assets/audio/sprite.mp3"
 import soundMetaId from "@assets/audio/sprite.cson"
 import particlesUrl from "@assets/particles/all.cson"
-import bgDataId from "@assets/levels/background.cson"
+import atlasMeta from "@assets/images/atlasmeta.cson"
 import testlevel from "@assets/levels/testlevel.cson"
 
 import resumeImgId from "@assets/images/ui/resume.png"
@@ -36,6 +36,7 @@ import ambience3Graph from "./Ambience/graphs/ambience3"
 import ambience4Graph from "./Ambience/graphs/ambience4"
 import ambience5Graph from "./Ambience/graphs/ambience5"
 import overlayMap from "./overlayMap.json"
+import BGen from "../../utils/BGen"
 
 class GameScreen extends Node { // can only have cameras as children
     // background = "rgb(181 24 24)"
@@ -47,9 +48,8 @@ class GameScreen extends Node { // can only have cameras as children
         this.sdk = sdk
         this.game = game
         this.uiRoot = uiRoot
-       
     }
-    setThingsUp() {
+    setThingsUp(levelData) {
         const { storage, game } = this
         const { assetsCache } = game
 
@@ -115,9 +115,12 @@ class GameScreen extends Node { // can only have cameras as children
         this.player = new Player({ width: 64, height: 64, fill: "brown", speed: 350, fricX: 3, pos: { x: 0, y: 0 }, shard, cinder, sounds: playerSounds, state: this.state })
         this.factories = makeFactories({ soundSprite, assetsCache, storage, player: this.player, state: this.state })
         if (game.renderer.api === rendApis.WEBGL) {
-            const bgData = assetsCache.get(bgDataId)
-            const dataToTile = tile => new TexRegion({ frame: tile.name, pos: { x: tile.x, y: tile.y } })
-            this.bg = new ParallaxCamera({ z: 2.5, zAtop: 1, viewport: config.viewport, subject: this.player, instF: false, entYOffset: 0, tiles: bgData.map(dataToTile) }) // parallax bg
+            const z = 2.5
+            const location = level.location || "Egypt"
+            const bgen = new BGen(this.game.assetsCache.get(atlasMeta), 48, 80)
+            bgen.reset(location)
+            const tiles = bgen.generateMinWidth((levelData.width + 100) / z)
+            this.bg = new ParallaxCamera({ z, zAtop: 1, viewport: config.viewport, subject: this.player, instF: false, entYOffset: 0, tiles }) // parallax bg
             this.add(this.bg)
         }
         this.uiImages = {
@@ -155,8 +158,8 @@ class GameScreen extends Node { // can only have cameras as children
         }
     }
     onEnter(l, levelDataId) {
-        this.setThingsUp()
         const data = this.game.assetsCache.get(config.testMode ? testlevel : levelDataId)
+        this.setThingsUp(data)
         const level = this.setLevel(data)
         const onClose = advance => this.game.switchScreen(LEVEL, false, advance)
         const checkpoint = new Checkpoint(data.checkpoints)

@@ -27,12 +27,13 @@ class MainMenuScreen extends Node {
                 const { devicePixelRatio } = config
                 this.ball.pos = { ...calcAligned({
                     x: 0, y:0, width: vp.width * devicePixelRatio, height: vp.height * devicePixelRatio
-                }, { width: this.ball.width, height: this.ball.height }, "center", "top", 0, 100) }
+                }, { width: this.ball.width, height: this.ball.height }, "center", "center", 0, -32) }
             }
             viewport.on("change", this.realign)
             this.realign(viewport)
 
             this.bgen = new BGen(game.assetsCache.get(atlasMeta), 48, 80)
+            this.bgen.reset("Suburb")
             this.teardownBg = placeBg(this, this.bgen.generateMinWidth(1920), [0.033203125,0.06640625,0.107421875], game.renderer.api)
             this.add(this.ball)
         })
