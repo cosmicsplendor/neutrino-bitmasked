@@ -32,7 +32,6 @@ class Exotica extends BiomeGen {
         graph.addEdge("palm0", "m_tmpl_flipped", [24, 32])
         graph.addEdge("palm0_dupe1", "m_tmpl_flipped", [24, 32])
         graph.addEdge("palm1", "m_tmpl_flipped", [24, 32])
-        console.log(graph.nodes.get("palm1"))
 
         graph.addEdge("m_tmpl", "tree4", 18)
         graph.addEdge("m_tmpl", "ex_plr_flipped", 56)

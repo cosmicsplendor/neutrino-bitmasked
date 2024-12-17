@@ -12,9 +12,10 @@ export const placeBg = (screen, bgEntities, overlay=[0.03529411764705882, 0.0352
     screen.container.overlay = overlay
     const realignBg = () => {
         screen.container.children.forEach(child => {
-            child.pos.y = config.viewport.height * config.devicePixelRatio - child.y0
+            child.pos.y = (config.viewport.height * config.devicePixelRatio + child.y0)
         })
     }
+    realignBg()
     config.viewport.on("change", realignBg)
     
     return function teardownBg() {
