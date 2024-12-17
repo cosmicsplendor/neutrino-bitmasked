@@ -11,7 +11,7 @@ const colors = selectColors()
 
 const mapData = {
     width: 70,
-    height: 30,
+    height: 200,
     speed:400,
     mxJmpVel: -400,
     mob_bg: "rgb(18 18 18)",
