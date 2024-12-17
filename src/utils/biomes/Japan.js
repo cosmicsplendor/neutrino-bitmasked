@@ -28,7 +28,6 @@ class Japan extends BiomeGen {
         graph.addEdge("jp_tree_flipped", "m_plr", 32)
 
         graph.addEdge("m_plr", "tree3", [32, 47])
-        graph.addEdge("m_plr", "jp_tree", 32)
         graph.addEdge("jp_gate_flipped", "tree3", [24, 32])
         graph.addEdge("jp_gate_flipped", "jp_tree", 16)
 
