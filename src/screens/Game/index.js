@@ -119,7 +119,7 @@ class GameScreen extends Node { // can only have cameras as children
             const location = levelData.location || "Egypt"
             const bgen = new BGen(this.game.assetsCache.get(atlasMeta), 48, 80)
             bgen.reset(location)
-            const tiles = bgen.generateMinWidth((levelData.width + 100) / z)
+            const tiles = bgen.generateMinWidth(1920 + ((Math.max(levelData.width - 1920, 0)) / z))
             this.bg = new ParallaxCamera({ z, zAtop: 1, viewport: config.viewport, subject: this.player, instF: false, entYOffset: 0, tiles }) // parallax bg
             this.add(this.bg)
         }
