@@ -90,7 +90,7 @@ class Player extends TexRegion {
         this.crateCollision = new Collision({ entity: this, blocks: "crates", rigid: true, movable: false, onHit: this.onCrateCol.bind(this) })
         // this.gateCollision = new Collision({ entity: this, blocks: "gates", rigid: false, movable: false, onHit: this.explode.bind(this) })
         
-        Movement.makeMovable(this, { accY: 30, roll: true, fricX })
+        Movement.makeMovable(this, { accY: config.gravity, roll: true, fricX })
     }
     set mxJmpVel(val) {
         this.controls.states.jumping.minJmpVel = val ?? -375
