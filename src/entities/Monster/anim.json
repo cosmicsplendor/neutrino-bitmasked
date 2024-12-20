@@ -1,1 +1,607 @@
-{"bones":[{"name":"vg_foot_d11","startingPoint":{"x":17.23125,"y":5.2125},"endPoint":{"x":15.031250000000002,"y":23.6125},"parentName":"vg_shin_d11","zIndex":"-1"},{"name":"vg_shin_d11","startingPoint":{"x":9.566249999999997,"y":4.575833333333334},"endPoint":{"x":7.539583333333336,"y":34.7225},"parentName":"vg_femur_d11","zIndex":"-1"},{"name":"vg_femur_d11","startingPoint":{"x":12.553125000000001,"y":6.82125},"endPoint":{"x":15.273124999999997,"y":48.30125},"parentName":"orb_sp","zIndex":"-1"},{"name":"vg_tail","startingPoint":{"x":57.19500000000001,"y":11.29},"endPoint":{"x":32.714999999999996,"y":28.570000000000007},"parentName":"vg_bod1","zIndex":0},{"name":"orb_sp","startingPoint":{"x":5.077083333333333,"y":5.804166666666667},"endPoint":{"x":5.143750000000001,"y":5.870833333333333},"zIndex":"-1"},{"name":"vg_head","startingPoint":{"x":18.98125,"y":30.379166666666666},"endPoint":{"x":26.954583333333332,"y":37.73916666666667},"parentName":"vg_bod3","zIndex":0},{"name":"vg_femur","startingPoint":{"x":12.553125000000001,"y":6.82125},"endPoint":{"x":15.273124999999997,"y":48.30125},"parentName":"orb_sp","zIndex":0},{"name":"vg_foot","startingPoint":{"x":17.23125,"y":5.2125},"endPoint":{"x":15.031250000000002,"y":23.6125},"parentName":"vg_shin","zIndex":0},{"name":"vg_shin","startingPoint":{"x":12.099583333333335,"y":1.5358333333333332},"endPoint":{"x":7.792916666666667,"y":30.9225},"parentName":"vg_femur","zIndex":0},{"name":"vg_bod1","startingPoint":{"x":49.599375,"y":24.34375},"endPoint":{"x":3.239375,"y":47.14375},"parentName":"orb_sp","zIndex":0},{"name":"vg_bod2","startingPoint":{"x":20.84979166666667,"y":46.481249999999996},"endPoint":{"x":60.15645833333333,"y":41.12125},"parentName":"orb_sp","zIndex":0},{"name":"vg_bod3","startingPoint":{"x":4.599375,"y":36.12375},"endPoint":{"x":38.799375,"y":38.78375},"parentName":"vg_bod2","zIndex":0}],"animStates":[{"id":"83e90372-2481-4d50-b12a-301e6b0a187a","parentId":null,"name":"root state","imports":{"vg_bod3":{"delAngularPos":0,"easingFn":"smoothstep","delay":0,"period":1,"angleMultiplier":1},"vg_bod2":{"delAngularPos":0,"easingFn":"smoothstep","delay":0,"period":1,"angleMultiplier":1},"vg_bod1":{"delAngularPos":0,"easingFn":"smoothstep","delay":0,"period":1,"angleMultiplier":1,"id":"83e90372-2481-4d50-b12a-301e6b0a187a","importName":"vg_bod1"},"vg_shin":{"delAngularPos":0.7155849933176751,"easingFn":"smoothstep","delay":0,"period":1,"angleMultiplier":1,"id":"83e90372-2481-4d50-b12a-301e6b0a187a","importName":"vg_shin"},"vg_foot":{"delAngularPos":0.017453292519943295,"easingFn":"smoothstep","delay":0,"period":1,"angleMultiplier":1,"id":"83e90372-2481-4d50-b12a-301e6b0a187a","importName":"vg_foot","isAnchor":true},"vg_femur":{"delAngularPos":0.7853981633974483,"easingFn":"smoothstep","delay":0,"period":1,"angleMultiplier":"-1","id":"83e90372-2481-4d50-b12a-301e6b0a187a","importName":"vg_femur"},"vg_head":{"delAngularPos":0,"easingFn":"smoothstep","delay":0,"period":1,"angleMultiplier":1,"id":"83e90372-2481-4d50-b12a-301e6b0a187a","importName":"vg_head"},"orb_sp":{"delAngularPos":0,"easingFn":"smoothstep","delay":0,"period":1,"angleMultiplier":1},"vg_tail":{"delAngularPos":0,"easingFn":"smoothstep","delay":0,"period":1,"angleMultiplier":1},"vg_femur_d11":{"delAngularPos":0.4014257279586958,"easingFn":"smoothstep","delay":0,"period":1,"angleMultiplier":1,"id":"83e90372-2481-4d50-b12a-301e6b0a187a","importName":"vg_femur_d11"},"vg_shin_d11":{"delAngularPos":0.4014257279586958,"easingFn":"smoothstep","delay":0,"period":1,"angleMultiplier":1,"id":"83e90372-2481-4d50-b12a-301e6b0a187a","importName":"vg_shin_d11"},"vg_foot_d11":{"delAngularPos":0.7853981633974483,"easingFn":"smoothstep","delay":0,"period":1,"angleMultiplier":"-1","id":"83e90372-2481-4d50-b12a-301e6b0a187a","importName":"vg_foot_d11"}}},{"id":"5f599751-c02a-4feb-9d9b-cc0248573a7b","parentId":"83e90372-2481-4d50-b12a-301e6b0a187a","name":"idle","imports":{"vg_bod3":{"delAngularPos":0.3665191429188092,"easingFn":"smoothstep","delay":0,"period":1,"angleMultiplier":"-1","id":"5f599751-c02a-4feb-9d9b-cc0248573a7b","importName":"vg_bod3"},"vg_bod2":{"delAngularPos":0,"easingFn":"smoothstep","delay":0,"period":1,"angleMultiplier":1},"vg_bod1":{"delAngularPos":0.12217304763960307,"easingFn":"smoothstep","delay":0,"period":1,"angleMultiplier":1,"id":"5f599751-c02a-4feb-9d9b-cc0248573a7b","importName":"vg_bod1"},"vg_shin":{"delAngularPos":0.7155849933176751,"easingFn":"smoothstep","delay":0,"period":1,"angleMultiplier":1,"id":"83e90372-2481-4d50-b12a-301e6b0a187a","importName":"vg_shin"},"vg_foot":{"delAngularPos":0.5061454830783556,"easingFn":"smoothstep","delay":0,"period":1,"angleMultiplier":"-1","id":"5f599751-c02a-4feb-9d9b-cc0248573a7b","importName":"vg_foot","isAnchor":true},"vg_femur":{"delAngularPos":0.19198621771937624,"easingFn":"smoothstep","delay":0,"period":1,"angleMultiplier":"-1","id":"5f599751-c02a-4feb-9d9b-cc0248573a7b","importName":"vg_femur"},"vg_head":{"delAngularPos":0.47123889803846897,"easingFn":"quadInOut","delay":0,"period":1,"angleMultiplier":1,"id":"5f599751-c02a-4feb-9d9b-cc0248573a7b","importName":"vg_head"},"orb_sp":{"delAngularPos":0,"easingFn":"smoothstep","delay":0,"period":1,"angleMultiplier":1},"vg_tail":{"delAngularPos":0.15707963267948966,"easingFn":"smoothstep","delay":0,"period":1,"angleMultiplier":1,"id":"5f599751-c02a-4feb-9d9b-cc0248573a7b","importName":"vg_tail"},"vg_femur_d11":{"delAngularPos":0.7853981633974483,"easingFn":"smoothstep","delay":0,"period":1,"angleMultiplier":"-1","id":"5f599751-c02a-4feb-9d9b-cc0248573a7b","importName":"vg_femur_d11"},"vg_shin_d11":{"delAngularPos":1.1868238913561442,"easingFn":"smoothstep","delay":0,"period":1,"angleMultiplier":1,"id":"5f599751-c02a-4feb-9d9b-cc0248573a7b","importName":"vg_shin_d11"},"vg_foot_d11":{"delAngularPos":0.5759586531581288,"easingFn":"smoothstep","delay":0,"period":1,"angleMultiplier":"1","id":"5f599751-c02a-4feb-9d9b-cc0248573a7b","importName":"vg_foot_d11"}}},{"id":"6432d057-07d1-4d01-8e98-5a0addb5c0a2","parentId":"5f599751-c02a-4feb-9d9b-cc0248573a7b","name":"run1","imports":{"vg_bod3":{"delAngularPos":0,"easingFn":"smoothstep","delay":0,"period":1,"angleMultiplier":"-1","id":"6432d057-07d1-4d01-8e98-5a0addb5c0a2","importName":"vg_bod3"},"vg_bod2":{"delAngularPos":0,"easingFn":"smoothstep","delay":0,"period":1,"angleMultiplier":1},"vg_bod1":{"delAngularPos":0.12217304763960307,"easingFn":"smoothstep","delay":0,"period":1,"angleMultiplier":1,"id":"5f599751-c02a-4feb-9d9b-cc0248573a7b","importName":"vg_bod1"},"vg_shin":{"delAngularPos":0.08726646259971647,"easingFn":"smoothstep","delay":0,"period":1,"angleMultiplier":1,"id":"6432d057-07d1-4d01-8e98-5a0addb5c0a2","importName":"vg_shin"},"vg_foot":{"delAngularPos":0.5061454830783556,"easingFn":"smoothstep","delay":0,"period":1,"angleMultiplier":"1","id":"6432d057-07d1-4d01-8e98-5a0addb5c0a2","importName":"vg_foot","isAnchor":false},"vg_femur":{"delAngularPos":0.7504915783575618,"easingFn":"smoothstep","delay":0,"period":1,"angleMultiplier":"1","id":"6432d057-07d1-4d01-8e98-5a0addb5c0a2","importName":"vg_femur"},"vg_head":{"delAngularPos":0.12217304763960307,"easingFn":"quadInOut","delay":0,"period":1,"angleMultiplier":"-1","id":"6432d057-07d1-4d01-8e98-5a0addb5c0a2","importName":"vg_head"},"orb_sp":{"delAngularPos":0,"easingFn":"smoothstep","delay":0,"period":1,"angleMultiplier":1},"vg_tail":{"delAngularPos":0.15707963267948966,"easingFn":"smoothstep","delay":0,"period":1,"angleMultiplier":1,"id":"5f599751-c02a-4feb-9d9b-cc0248573a7b","importName":"vg_tail"},"vg_femur_d11":{"delAngularPos":0.5934119456780721,"easingFn":"smoothstep","delay":0,"period":1,"angleMultiplier":"-1","id":"6432d057-07d1-4d01-8e98-5a0addb5c0a2","importName":"vg_femur_d11"},"vg_shin_d11":{"delAngularPos":0.24434609527920614,"easingFn":"smoothstep","delay":0,"period":1,"angleMultiplier":"-1","id":"6432d057-07d1-4d01-8e98-5a0addb5c0a2","importName":"vg_shin_d11"},"vg_foot_d11":{"delAngularPos":0.12217304763960307,"easingFn":"smoothstep","delay":0,"period":1,"angleMultiplier":"-1","id":"6432d057-07d1-4d01-8e98-5a0addb5c0a2","importName":"vg_foot_d11","isAnchor":true}}},{"id":"d4bf0ab6-4423-4714-83d5-f77ac8bdf4f1","parentId":"6432d057-07d1-4d01-8e98-5a0addb5c0a2","name":"run2","imports":{"vg_bod3":{"delAngularPos":0.12217304763960307,"easingFn":"smoothstep","delay":0,"period":1,"angleMultiplier":"1","id":"d4bf0ab6-4423-4714-83d5-f77ac8bdf4f1","importName":"vg_bod3"},"vg_bod2":{"delAngularPos":0,"easingFn":"smoothstep","delay":0,"period":1,"angleMultiplier":1},"vg_bod1":{"delAngularPos":0.12217304763960307,"easingFn":"smoothstep","delay":0,"period":1,"angleMultiplier":1,"id":"5f599751-c02a-4feb-9d9b-cc0248573a7b","importName":"vg_bod1"},"vg_shin":{"delAngularPos":0.24434609527920614,"easingFn":"smoothstep","delay":0,"period":1,"angleMultiplier":"-1","id":"d4bf0ab6-4423-4714-83d5-f77ac8bdf4f1","importName":"vg_shin"},"vg_foot":{"delAngularPos":0.24434609527920614,"easingFn":"smoothstep","delay":0,"period":1,"angleMultiplier":"-1","id":"d4bf0ab6-4423-4714-83d5-f77ac8bdf4f1","importName":"vg_foot","isAnchor":true},"vg_femur":{"delAngularPos":0.8552113334772214,"easingFn":"smoothstep","delay":0,"period":1,"angleMultiplier":"-1","id":"d4bf0ab6-4423-4714-83d5-f77ac8bdf4f1","importName":"vg_femur"},"vg_head":{"delAngularPos":0.2617993877991494,"easingFn":"quadInOut","delay":0,"period":1,"angleMultiplier":"-1","id":"d4bf0ab6-4423-4714-83d5-f77ac8bdf4f1","importName":"vg_head"},"orb_sp":{"delAngularPos":0,"easingFn":"smoothstep","delay":0,"period":1,"angleMultiplier":1},"vg_tail":{"delAngularPos":0.15707963267948966,"easingFn":"smoothstep","delay":0,"period":1,"angleMultiplier":1,"id":"5f599751-c02a-4feb-9d9b-cc0248573a7b","importName":"vg_tail"},"vg_femur_d11":{"delAngularPos":0.7504915783575618,"easingFn":"smoothstep","delay":0,"period":1,"angleMultiplier":"1","id":"d4bf0ab6-4423-4714-83d5-f77ac8bdf4f1","importName":"vg_femur_d11"},"vg_shin_d11":{"delAngularPos":0.19198621771937624,"easingFn":"smoothstep","delay":0,"period":1,"angleMultiplier":"1","id":"d4bf0ab6-4423-4714-83d5-f77ac8bdf4f1","importName":"vg_shin_d11"},"vg_foot_d11":{"delAngularPos":0.2792526803190927,"easingFn":"smoothstep","delay":0,"period":1,"angleMultiplier":"1","id":"d4bf0ab6-4423-4714-83d5-f77ac8bdf4f1","importName":"vg_foot_d11","isAnchor":false}}}]}
+{
+    "bones": [
+        {
+            "name": "vg_foot_d11",
+            "startingPoint": {
+                "x": 17.23125,
+                "y": 5.2125
+            },
+            "endPoint": {
+                "x": 15.031250000000002,
+                "y": 23.6125
+            },
+            "parentName": "vg_shin_d11",
+            "zIndex": "-1"
+        },
+        {
+            "name": "vg_shin_d11",
+            "startingPoint": {
+                "x": 9.566249999999997,
+                "y": 4.575833333333334
+            },
+            "endPoint": {
+                "x": 7.539583333333336,
+                "y": 34.7225
+            },
+            "parentName": "vg_femur_d11",
+            "zIndex": "-1"
+        },
+        {
+            "name": "vg_femur_d11",
+            "startingPoint": {
+                "x": 12.553125000000001,
+                "y": 6.82125
+            },
+            "endPoint": {
+                "x": 15.273124999999997,
+                "y": 48.30125
+            },
+            "parentName": "orb_sp",
+            "zIndex": "-1"
+        },
+        {
+            "name": "vg_tail",
+            "startingPoint": {
+                "x": 57.19500000000001,
+                "y": 11.29
+            },
+            "endPoint": {
+                "x": 32.714999999999996,
+                "y": 28.570000000000007
+            },
+            "parentName": "vg_bod1",
+            "zIndex": 0
+        },
+        {
+            "name": "orb_sp",
+            "startingPoint": {
+                "x": 5.077083333333333,
+                "y": 5.804166666666667
+            },
+            "endPoint": {
+                "x": 5.143750000000001,
+                "y": 5.870833333333333
+            },
+            "zIndex": "-1"
+        },
+        {
+            "name": "vg_head",
+            "startingPoint": {
+                "x": 18.98125,
+                "y": 30.379166666666666
+            },
+            "endPoint": {
+                "x": 26.954583333333332,
+                "y": 37.73916666666667
+            },
+            "parentName": "vg_bod3",
+            "zIndex": "1"
+        },
+        {
+            "name": "vg_femur",
+            "startingPoint": {
+                "x": 12.553125000000001,
+                "y": 6.82125
+            },
+            "endPoint": {
+                "x": 15.273124999999997,
+                "y": 48.30125
+            },
+            "parentName": "orb_sp",
+            "zIndex": "1"
+        },
+        {
+            "name": "vg_foot",
+            "startingPoint": {
+                "x": 17.23125,
+                "y": 5.2125
+            },
+            "endPoint": {
+                "x": 15.031250000000002,
+                "y": 23.6125
+            },
+            "parentName": "vg_shin",
+            "zIndex": "1"
+        },
+        {
+            "name": "vg_shin",
+            "startingPoint": {
+                "x": 12.099583333333335,
+                "y": 1.5358333333333332
+            },
+            "endPoint": {
+                "x": 7.792916666666667,
+                "y": 30.9225
+            },
+            "parentName": "vg_femur",
+            "zIndex": "1"
+        },
+        {
+            "name": "vg_bod1",
+            "startingPoint": {
+                "x": 49.599375,
+                "y": 24.34375
+            },
+            "endPoint": {
+                "x": 3.239375,
+                "y": 47.14375
+            },
+            "parentName": "orb_sp",
+            "zIndex": 0
+        },
+        {
+            "name": "vg_bod2",
+            "startingPoint": {
+                "x": 20.84979166666667,
+                "y": 46.481249999999996
+            },
+            "endPoint": {
+                "x": 60.15645833333333,
+                "y": 41.12125
+            },
+            "parentName": "orb_sp",
+            "zIndex": 0
+        },
+        {
+            "name": "vg_bod3",
+            "startingPoint": {
+                "x": 4.599375,
+                "y": 36.12375
+            },
+            "endPoint": {
+                "x": 38.799375,
+                "y": 38.78375
+            },
+            "parentName": "vg_bod2",
+            "zIndex": 0
+        }
+    ],
+    "animStates": [
+        {
+            "id": "83e90372-2481-4d50-b12a-301e6b0a187a",
+            "parentId": null,
+            "name": "root state",
+            "imports": {
+                "vg_bod3": {
+                    "delAngularPos": 0,
+                    "easingFn": "smoothstep",
+                    "delay": 0,
+                    "period": 1,
+                    "angleMultiplier": 1
+                },
+                "vg_bod2": {
+                    "delAngularPos": 0,
+                    "easingFn": "smoothstep",
+                    "delay": 0,
+                    "period": 1,
+                    "angleMultiplier": 1
+                },
+                "vg_bod1": {
+                    "delAngularPos": 0,
+                    "easingFn": "smoothstep",
+                    "delay": 0,
+                    "period": 1,
+                    "angleMultiplier": 1,
+                    "id": "83e90372-2481-4d50-b12a-301e6b0a187a",
+                    "importName": "vg_bod1"
+                },
+                "vg_shin": {
+                    "delAngularPos": 0.7155849933176751,
+                    "easingFn": "smoothstep",
+                    "delay": 0,
+                    "period": 1,
+                    "angleMultiplier": 1,
+                    "id": "83e90372-2481-4d50-b12a-301e6b0a187a",
+                    "importName": "vg_shin"
+                },
+                "vg_foot": {
+                    "delAngularPos": 0.017453292519943295,
+                    "easingFn": "smoothstep",
+                    "delay": 0,
+                    "period": 1,
+                    "angleMultiplier": 1,
+                    "id": "83e90372-2481-4d50-b12a-301e6b0a187a",
+                    "importName": "vg_foot",
+                    "isAnchor": true
+                },
+                "vg_femur": {
+                    "delAngularPos": 0.7853981633974483,
+                    "easingFn": "smoothstep",
+                    "delay": 0,
+                    "period": 1,
+                    "angleMultiplier": "-1",
+                    "id": "83e90372-2481-4d50-b12a-301e6b0a187a",
+                    "importName": "vg_femur"
+                },
+                "vg_head": {
+                    "delAngularPos": 0,
+                    "easingFn": "smoothstep",
+                    "delay": 0,
+                    "period": 1,
+                    "angleMultiplier": 1,
+                    "id": "83e90372-2481-4d50-b12a-301e6b0a187a",
+                    "importName": "vg_head"
+                },
+                "orb_sp": {
+                    "delAngularPos": 0,
+                    "easingFn": "smoothstep",
+                    "delay": 0,
+                    "period": 1,
+                    "angleMultiplier": 1
+                },
+                "vg_tail": {
+                    "delAngularPos": 0,
+                    "easingFn": "smoothstep",
+                    "delay": 0,
+                    "period": 1,
+                    "angleMultiplier": 1
+                },
+                "vg_femur_d11": {
+                    "delAngularPos": 0.44,
+                    "easingFn": "smoothstep",
+                    "delay": 0,
+                    "period": 1,
+                    "angleMultiplier": 1,
+                    "id": "83e90372-2481-4d50-b12a-301e6b0a187a",
+                    "importName": "vg_femur_d11"
+                },
+                "vg_shin_d11": {
+                    "delAngularPos": 0.4014257279586958,
+                    "easingFn": "smoothstep",
+                    "delay": 0,
+                    "period": 1,
+                    "angleMultiplier": 1,
+                    "id": "83e90372-2481-4d50-b12a-301e6b0a187a",
+                    "importName": "vg_shin_d11"
+                },
+                "vg_foot_d11": {
+                    "delAngularPos": 0.7853981633974483,
+                    "easingFn": "smoothstep",
+                    "delay": 0,
+                    "period": 1,
+                    "angleMultiplier": "-1",
+                    "id": "83e90372-2481-4d50-b12a-301e6b0a187a",
+                    "importName": "vg_foot_d11"
+                }
+            }
+        },
+        {
+            "id": "5f599751-c02a-4feb-9d9b-cc0248573a7b",
+            "parentId": "83e90372-2481-4d50-b12a-301e6b0a187a",
+            "name": "idle",
+            "imports": {
+                "vg_bod3": {
+                    "delAngularPos": 0.3665191429188092,
+                    "easingFn": "smoothstep",
+                    "delay": 0,
+                    "period": 1,
+                    "angleMultiplier": "-1",
+                    "id": "5f599751-c02a-4feb-9d9b-cc0248573a7b",
+                    "importName": "vg_bod3"
+                },
+                "vg_bod2": {
+                    "delAngularPos": 0,
+                    "easingFn": "smoothstep",
+                    "delay": 0,
+                    "period": 1,
+                    "angleMultiplier": 1
+                },
+                "vg_bod1": {
+                    "delAngularPos": 0.12217304763960307,
+                    "easingFn": "smoothstep",
+                    "delay": 0,
+                    "period": 1,
+                    "angleMultiplier": 1,
+                    "id": "5f599751-c02a-4feb-9d9b-cc0248573a7b",
+                    "importName": "vg_bod1"
+                },
+                "vg_shin": {
+                    "delAngularPos": 0.7155849933176751,
+                    "easingFn": "smoothstep",
+                    "delay": 0,
+                    "period": 1,
+                    "angleMultiplier": 1,
+                    "id": "83e90372-2481-4d50-b12a-301e6b0a187a",
+                    "importName": "vg_shin"
+                },
+                "vg_foot": {
+                    "delAngularPos": 0.5061454830783556,
+                    "easingFn": "smoothstep",
+                    "delay": 0,
+                    "period": 1,
+                    "angleMultiplier": "-1",
+                    "id": "5f599751-c02a-4feb-9d9b-cc0248573a7b",
+                    "importName": "vg_foot",
+                    "isAnchor": true
+                },
+                "vg_femur": {
+                    "delAngularPos": 0.19198621771937624,
+                    "easingFn": "smoothstep",
+                    "delay": 0,
+                    "period": 1,
+                    "angleMultiplier": "-1",
+                    "id": "5f599751-c02a-4feb-9d9b-cc0248573a7b",
+                    "importName": "vg_femur"
+                },
+                "vg_head": {
+                    "delAngularPos": 0.47123889803846897,
+                    "easingFn": "quadInOut",
+                    "delay": 0,
+                    "period": 1,
+                    "angleMultiplier": 1,
+                    "id": "5f599751-c02a-4feb-9d9b-cc0248573a7b",
+                    "importName": "vg_head"
+                },
+                "orb_sp": {
+                    "delAngularPos": 0,
+                    "easingFn": "smoothstep",
+                    "delay": 0,
+                    "period": 1,
+                    "angleMultiplier": 1
+                },
+                "vg_tail": {
+                    "delAngularPos": 0.15707963267948966,
+                    "easingFn": "smoothstep",
+                    "delay": 0,
+                    "period": 1,
+                    "angleMultiplier": 1,
+                    "id": "5f599751-c02a-4feb-9d9b-cc0248573a7b",
+                    "importName": "vg_tail"
+                },
+                "vg_femur_d11": {
+                    "delAngularPos": 1,
+                    "easingFn": "smoothstep",
+                    "delay": 0,
+                    "period": 1,
+                    "angleMultiplier": "-1",
+                    "id": "5f599751-c02a-4feb-9d9b-cc0248573a7b",
+                    "importName": "vg_femur_d11"
+                },
+                "vg_shin_d11": {
+                    "delAngularPos": 1.3,
+                    "easingFn": "smoothstep",
+                    "delay": 0,
+                    "period": 1,
+                    "angleMultiplier": 1,
+                    "id": "5f599751-c02a-4feb-9d9b-cc0248573a7b",
+                    "importName": "vg_shin_d11"
+                },
+                "vg_foot_d11": {
+                    "delAngularPos": 0.5759586531581288,
+                    "easingFn": "smoothstep",
+                    "delay": 0,
+                    "period": 1,
+                    "angleMultiplier": "1",
+                    "id": "5f599751-c02a-4feb-9d9b-cc0248573a7b",
+                    "importName": "vg_foot_d11"
+                }
+            }
+        },
+        {
+            "id": "6432d057-07d1-4d01-8e98-5a0addb5c0a2",
+            "parentId": "5f599751-c02a-4feb-9d9b-cc0248573a7b",
+            "name": "run1",
+            "imports": {
+                "vg_bod3": {
+                    "delAngularPos": 0,
+                    "easingFn": "smoothstep",
+                    "delay": 0,
+                    "period": 1,
+                    "angleMultiplier": "-1",
+                    "id": "6432d057-07d1-4d01-8e98-5a0addb5c0a2",
+                    "importName": "vg_bod3"
+                },
+                "vg_bod2": {
+                    "delAngularPos": 0,
+                    "easingFn": "smoothstep",
+                    "delay": 0,
+                    "period": 1,
+                    "angleMultiplier": 1
+                },
+                "vg_bod1": {
+                    "delAngularPos": 0.12217304763960307,
+                    "easingFn": "smoothstep",
+                    "delay": 0,
+                    "period": 1,
+                    "angleMultiplier": 1,
+                    "id": "5f599751-c02a-4feb-9d9b-cc0248573a7b",
+                    "importName": "vg_bod1"
+                },
+                "vg_shin": {
+                    "delAngularPos": 0.08726646259971647,
+                    "easingFn": "smoothstep",
+                    "delay": 0,
+                    "period": 1,
+                    "angleMultiplier": 1,
+                    "id": "6432d057-07d1-4d01-8e98-5a0addb5c0a2",
+                    "importName": "vg_shin"
+                },
+                "vg_foot": {
+                    "delAngularPos": 0.5061454830783556,
+                    "easingFn": "smoothstep",
+                    "delay": 0,
+                    "period": 1,
+                    "angleMultiplier": "1",
+                    "id": "6432d057-07d1-4d01-8e98-5a0addb5c0a2",
+                    "importName": "vg_foot",
+                    "isAnchor": false
+                },
+                "vg_femur": {
+                    "delAngularPos": 0.7504915783575618,
+                    "easingFn": "smoothstep",
+                    "delay": 0,
+                    "period": 1,
+                    "angleMultiplier": "1",
+                    "id": "6432d057-07d1-4d01-8e98-5a0addb5c0a2",
+                    "importName": "vg_femur"
+                },
+                "vg_head": {
+                    "delAngularPos": 0.12217304763960307,
+                    "easingFn": "quadInOut",
+                    "delay": 0,
+                    "period": 1,
+                    "angleMultiplier": "-1",
+                    "id": "6432d057-07d1-4d01-8e98-5a0addb5c0a2",
+                    "importName": "vg_head"
+                },
+                "orb_sp": {
+                    "delAngularPos": 0,
+                    "easingFn": "smoothstep",
+                    "delay": 0,
+                    "period": 1,
+                    "angleMultiplier": 1
+                },
+                "vg_tail": {
+                    "delAngularPos": 0.15707963267948966,
+                    "easingFn": "smoothstep",
+                    "delay": 0,
+                    "period": 1,
+                    "angleMultiplier": 1,
+                    "id": "5f599751-c02a-4feb-9d9b-cc0248573a7b",
+                    "importName": "vg_tail"
+                },
+                "vg_femur_d11": {
+                    "delAngularPos": 0.5934119456780721,
+                    "easingFn": "smoothstep",
+                    "delay": 0,
+                    "period": 1,
+                    "angleMultiplier": "-1",
+                    "id": "6432d057-07d1-4d01-8e98-5a0addb5c0a2",
+                    "importName": "vg_femur_d11"
+                },
+                "vg_shin_d11": {
+                    "delAngularPos": 0.24434609527920614,
+                    "easingFn": "smoothstep",
+                    "delay": 0,
+                    "period": 1,
+                    "angleMultiplier": "-1",
+                    "id": "6432d057-07d1-4d01-8e98-5a0addb5c0a2",
+                    "importName": "vg_shin_d11"
+                },
+                "vg_foot_d11": {
+                    "delAngularPos": 0.12217304763960307,
+                    "easingFn": "smoothstep",
+                    "delay": 0,
+                    "period": 1,
+                    "angleMultiplier": "-1",
+                    "id": "6432d057-07d1-4d01-8e98-5a0addb5c0a2",
+                    "importName": "vg_foot_d11",
+                    "isAnchor": true
+                }
+            }
+        },
+        {
+            "id": "d4bf0ab6-4423-4714-83d5-f77ac8bdf4f1",
+            "parentId": "6432d057-07d1-4d01-8e98-5a0addb5c0a2",
+            "name": "run2",
+            "imports": {
+                "vg_bod3": {
+                    "delAngularPos": 0.12217304763960307,
+                    "easingFn": "smoothstep",
+                    "delay": 0,
+                    "period": 1,
+                    "angleMultiplier": "1",
+                    "id": "d4bf0ab6-4423-4714-83d5-f77ac8bdf4f1",
+                    "importName": "vg_bod3"
+                },
+                "vg_bod2": {
+                    "delAngularPos": 0,
+                    "easingFn": "smoothstep",
+                    "delay": 0,
+                    "period": 1,
+                    "angleMultiplier": 1
+                },
+                "vg_bod1": {
+                    "delAngularPos": 0.12217304763960307,
+                    "easingFn": "smoothstep",
+                    "delay": 0,
+                    "period": 1,
+                    "angleMultiplier": 1,
+                    "id": "5f599751-c02a-4feb-9d9b-cc0248573a7b",
+                    "importName": "vg_bod1"
+                },
+                "vg_shin": {
+                    "delAngularPos": 0.24434609527920614,
+                    "easingFn": "smoothstep",
+                    "delay": 0,
+                    "period": 1,
+                    "angleMultiplier": "-1",
+                    "id": "d4bf0ab6-4423-4714-83d5-f77ac8bdf4f1",
+                    "importName": "vg_shin"
+                },
+                "vg_foot": {
+                    "delAngularPos": 0.24434609527920614,
+                    "easingFn": "smoothstep",
+                    "delay": 0,
+                    "period": 1,
+                    "angleMultiplier": "-1",
+                    "id": "d4bf0ab6-4423-4714-83d5-f77ac8bdf4f1",
+                    "importName": "vg_foot",
+                    "isAnchor": true
+                },
+                "vg_femur": {
+                    "delAngularPos": 0.8552113334772214,
+                    "easingFn": "smoothstep",
+                    "delay": 0,
+                    "period": 1,
+                    "angleMultiplier": "-1",
+                    "id": "d4bf0ab6-4423-4714-83d5-f77ac8bdf4f1",
+                    "importName": "vg_femur"
+                },
+                "vg_head": {
+                    "delAngularPos": 0.2617993877991494,
+                    "easingFn": "quadInOut",
+                    "delay": 0,
+                    "period": 1,
+                    "angleMultiplier": "-1",
+                    "id": "d4bf0ab6-4423-4714-83d5-f77ac8bdf4f1",
+                    "importName": "vg_head"
+                },
+                "orb_sp": {
+                    "delAngularPos": 0,
+                    "easingFn": "smoothstep",
+                    "delay": 0,
+                    "period": 1,
+                    "angleMultiplier": 1
+                },
+                "vg_tail": {
+                    "delAngularPos": 0.15707963267948966,
+                    "easingFn": "smoothstep",
+                    "delay": 0,
+                    "period": 1,
+                    "angleMultiplier": 1,
+                    "id": "5f599751-c02a-4feb-9d9b-cc0248573a7b",
+                    "importName": "vg_tail"
+                },
+                "vg_femur_d11": {
+                    "delAngularPos": 0.7504915783575618,
+                    "easingFn": "smoothstep",
+                    "delay": 0,
+                    "period": 1,
+                    "angleMultiplier": "1",
+                    "id": "d4bf0ab6-4423-4714-83d5-f77ac8bdf4f1",
+                    "importName": "vg_femur_d11"
+                },
+                "vg_shin_d11": {
+                    "delAngularPos": 0.19198621771937624,
+                    "easingFn": "smoothstep",
+                    "delay": 0,
+                    "period": 1,
+                    "angleMultiplier": "1",
+                    "id": "d4bf0ab6-4423-4714-83d5-f77ac8bdf4f1",
+                    "importName": "vg_shin_d11"
+                },
+                "vg_foot_d11": {
+                    "delAngularPos": 0.2792526803190927,
+                    "easingFn": "smoothstep",
+                    "delay": 0,
+                    "period": 1,
+                    "angleMultiplier": "1",
+                    "id": "d4bf0ab6-4423-4714-83d5-f77ac8bdf4f1",
+                    "importName": "vg_foot_d11",
+                    "isAnchor": false
+                }
+            }
+        }
+    ]
+}
