@@ -8,6 +8,7 @@ import Ball from "@entities/Ball"
 import SawBlade from "@entities/SawBlade"
 import Laser from "@entities/Laser"
 import Fire from "@entities/Fire"
+import Monster from "@entities/Monster"
 import Crate from "@entities/Crate"
 import Pool from "@utils/Pool"
 import Bus from "@entities/Bus"
@@ -133,6 +134,9 @@ export default ({ soundSprite, assetsCache, storage, player, state }) => { // us
                 player,
                 ...props
             })
+        },
+        monster: () => {
+            return new Monster(x, y, player)
         },
         floorSpike: (x, y, props, player) => {
             const fs = new FloorSpike({
