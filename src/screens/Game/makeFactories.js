@@ -135,7 +135,7 @@ export default ({ soundSprite, assetsCache, storage, player, state }) => { // us
                 ...props
             })
         },
-        monster: () => {
+        monster: (x, y, _, player) => {
             return new Monster(x, y, player)
         },
         floorSpike: (x, y, props, player) => {

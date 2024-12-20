@@ -41,7 +41,7 @@ const factories = {
         }
     },
     ball: {
-        fields: ['seq',], // Inferred from Ball constructor and props.seq
+        fields: ['seq'], // Inferred from Ball constructor and props.seq
         create: (params) => {
             // Perform transformation
             const { x, y, name, seq } = params

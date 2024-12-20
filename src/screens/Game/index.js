@@ -185,7 +185,6 @@ class GameScreen extends Node { // can only have cameras as children
         this.state.play()
     }
     onExit() {
-        console.log("HERE")
         this.unsetLevel()
         this.game.reset()
         this.teardownUI && this.teardownUI()
