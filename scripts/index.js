@@ -100,11 +100,11 @@ const interactiveGenerateLevel = async () => {
         }
     }
 
-    // for (const block of blocks) {
-    //     map.centerCamera(block)
-    //     await placeObjects(block, map)
-    //     await map.save()
-    // }
+    for (const block of blocks) {
+        map.centerCamera(block)
+        await placeObjects(block, map)
+        await map.save()
+    }
     terminal("\nFinal Level:\n");
     terminal("\nLevel design complete. Press any key to exit.\n");
     terminal.grabInput(true);

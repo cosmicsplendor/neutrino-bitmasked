@@ -9,7 +9,8 @@ const bWidth = 12 // laser body width
 class Laser extends MovableEnt {
     startX
     startY
-    overlay=[0.0235, 0.0235, 0.0235]
+    // overlay=[0.0235, 0.0235, 0.0235]
+    noOverlay=true
     constructor(x, y, toX = x, toY = y, speed = 100, num = 2, vert, period, delay=0, on = true, player, sounds) {
         toX = typeof toX == "number" ? toX: x
         toY = typeof toY == "number" ? toY: y
