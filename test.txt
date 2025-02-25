@@ -1,0 +1,28 @@
+"vg_femur_d11": {
+    "delAngularPos": 0.5934119456780721,
+    "easingFn": "smoothstep",
+    "delay": 0,
+    "period": 2,
+    "angleMultiplier": "-1",
+    "id": "6432d057-07d1-4d01-8e98-5a0addb5c0a2",
+    "importName": "vg_femur_d11"
+},
+"vg_shin_d11": {
+    "delAngularPos": 0.24434609527920614,
+    "easingFn": "smoothstep",
+    "delay": 0,
+    "period": 2,
+    "angleMultiplier": "-1",
+    "id": "6432d057-07d1-4d01-8e98-5a0addb5c0a2",
+    "importName": "vg_shin_d11"
+},
+"vg_foot_d11": {
+    "delAngularPos": 0.12217304763960307,
+    "easingFn": "smoothstep",
+    "delay": 0,
+    "period": 2,
+    "angleMultiplier": "-1",
+    "id": "6432d057-07d1-4d01-8e98-5a0addb5c0a2",
+    "importName": "vg_foot_d11",
+    "isAnchor": true
+}

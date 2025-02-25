@@ -166,21 +166,21 @@
                     "delAngularPos": 0,
                     "easingFn": "smoothstep",
                     "delay": 0,
-                    "period": 0.4,
+                    "period": 0.6,
                     "angleMultiplier": 1
                 },
                 "vg_bod2": {
                     "delAngularPos": 0,
                     "easingFn": "smoothstep",
                     "delay": 0,
-                    "period": 0.4,
+                    "period": 0.6,
                     "angleMultiplier": 1
                 },
                 "vg_bod1": {
                     "delAngularPos": 0,
                     "easingFn": "smoothstep",
                     "delay": 0,
-                    "period": 0.4,
+                    "period": 0.6,
                     "angleMultiplier": 1,
                     "id": "83e90372-2481-4d50-b12a-301e6b0a187a",
                     "importName": "vg_bod1"
@@ -189,7 +189,7 @@
                     "delAngularPos": 0.7155849933176751,
                     "easingFn": "smoothstep",
                     "delay": 0,
-                    "period": 0.4,
+                    "period": 0.6,
                     "angleMultiplier": 1,
                     "id": "83e90372-2481-4d50-b12a-301e6b0a187a",
                     "importName": "vg_shin"
@@ -198,7 +198,7 @@
                     "delAngularPos": 0.017453292519943295,
                     "easingFn": "smoothstep",
                     "delay": 0,
-                    "period": 0.4,
+                    "period": 0.6,
                     "angleMultiplier": 1,
                     "id": "83e90372-2481-4d50-b12a-301e6b0a187a",
                     "importName": "vg_foot",
@@ -208,7 +208,7 @@
                     "delAngularPos": 0.7853981633974483,
                     "easingFn": "smoothstep",
                     "delay": 0,
-                    "period": 0.4,
+                    "period": 0.6,
                     "angleMultiplier": "-1",
                     "id": "83e90372-2481-4d50-b12a-301e6b0a187a",
                     "importName": "vg_femur"
@@ -217,7 +217,7 @@
                     "delAngularPos": 0,
                     "easingFn": "smoothstep",
                     "delay": 0,
-                    "period": 0.4,
+                    "period": 0.6,
                     "angleMultiplier": 1,
                     "id": "83e90372-2481-4d50-b12a-301e6b0a187a",
                     "importName": "vg_head"
@@ -226,21 +226,21 @@
                     "delAngularPos": 0,
                     "easingFn": "smoothstep",
                     "delay": 0,
-                    "period": 0.4,
+                    "period": 0.6,
                     "angleMultiplier": 1
                 },
                 "vg_tail": {
                     "delAngularPos": 0,
                     "easingFn": "smoothstep",
                     "delay": 0,
-                    "period": 0.4,
+                    "period": 0.6,
                     "angleMultiplier": 1
                 },
                 "vg_femur_d11": {
                     "delAngularPos": 0.44,
                     "easingFn": "smoothstep",
                     "delay": 0,
-                    "period": 0.4,
+                    "period": 0.6,
                     "angleMultiplier": 1,
                     "id": "83e90372-2481-4d50-b12a-301e6b0a187a",
                     "importName": "vg_femur_d11"
@@ -249,7 +249,7 @@
                     "delAngularPos": 0.4014257279586958,
                     "easingFn": "smoothstep",
                     "delay": 0,
-                    "period": 0.4,
+                    "period": 0.6,
                     "angleMultiplier": 1,
                     "id": "83e90372-2481-4d50-b12a-301e6b0a187a",
                     "importName": "vg_shin_d11"
@@ -258,7 +258,7 @@
                     "delAngularPos": 0.7853981633974483,
                     "easingFn": "smoothstep",
                     "delay": 0,
-                    "period": 0.4,
+                    "period": 0.6,
                     "angleMultiplier": "-1",
                     "id": "83e90372-2481-4d50-b12a-301e6b0a187a",
                     "importName": "vg_foot_d11"
@@ -274,7 +274,7 @@
                     "delAngularPos": 0.3665191429188092,
                     "easingFn": "smoothstep",
                     "delay": 0,
-                    "period": 0.4,
+                    "period": 0.6,
                     "angleMultiplier": "-1",
                     "id": "5f599751-c02a-4feb-9d9b-cc0248573a7b",
                     "importName": "vg_bod3"
@@ -283,14 +283,14 @@
                     "delAngularPos": 0,
                     "easingFn": "smoothstep",
                     "delay": 0,
-                    "period": 0.4,
+                    "period": 0.6,
                     "angleMultiplier": 1
                 },
                 "vg_bod1": {
                     "delAngularPos": 0.12217304763960307,
                     "easingFn": "smoothstep",
                     "delay": 0,
-                    "period": 0.4,
+                    "period": 0.6,
                     "angleMultiplier": 1,
                     "id": "5f599751-c02a-4feb-9d9b-cc0248573a7b",
                     "importName": "vg_bod1"
@@ -299,7 +299,7 @@
                     "delAngularPos": 0.7155849933176751,
                     "easingFn": "smoothstep",
                     "delay": 0,
-                    "period": 0.4,
+                    "period": 0.6,
                     "angleMultiplier": 1,
                     "id": "83e90372-2481-4d50-b12a-301e6b0a187a",
                     "importName": "vg_shin"
@@ -308,7 +308,7 @@
                     "delAngularPos": 0.5061454830783556,
                     "easingFn": "smoothstep",
                     "delay": 0,
-                    "period": 0.4,
+                    "period": 0.6,
                     "angleMultiplier": "-1",
                     "id": "5f599751-c02a-4feb-9d9b-cc0248573a7b",
                     "importName": "vg_foot",
@@ -318,7 +318,7 @@
                     "delAngularPos": 0.2,
                     "easingFn": "smoothstep",
                     "delay": 0,
-                    "period": 0.4,
+                    "period": 0.6,
                     "angleMultiplier": "-1",
                     "id": "5f599751-c02a-4feb-9d9b-cc0248573a7b",
                     "importName": "vg_femur"
@@ -327,7 +327,7 @@
                     "delAngularPos": 0.47123889803846897,
                     "easingFn": "quadInOut",
                     "delay": 0,
-                    "period": 0.4,
+                    "period": 0.6,
                     "angleMultiplier": 1,
                     "id": "5f599751-c02a-4feb-9d9b-cc0248573a7b",
                     "importName": "vg_head"
@@ -336,14 +336,14 @@
                     "delAngularPos": 0,
                     "easingFn": "smoothstep",
                     "delay": 0,
-                    "period": 0.4,
+                    "period": 0.6,
                     "angleMultiplier": 1
                 },
                 "vg_tail": {
                     "delAngularPos": 0.15707963267948966,
                     "easingFn": "smoothstep",
                     "delay": 0,
-                    "period": 0.4,
+                    "period": 0.6,
                     "angleMultiplier": 1,
                     "id": "5f599751-c02a-4feb-9d9b-cc0248573a7b",
                     "importName": "vg_tail"
@@ -352,7 +352,7 @@
                     "delAngularPos": 1,
                     "easingFn": "smoothstep",
                     "delay": 0,
-                    "period": 0.4,
+                    "period": 0.6,
                     "angleMultiplier": "-1",
                     "id": "5f599751-c02a-4feb-9d9b-cc0248573a7b",
                     "importName": "vg_femur_d11"
@@ -361,7 +361,7 @@
                     "delAngularPos": 1.4,
                     "easingFn": "smoothstep",
                     "delay": 0,
-                    "period": 0.4,
+                    "period": 0.6,
                     "angleMultiplier": 1,
                     "id": "5f599751-c02a-4feb-9d9b-cc0248573a7b",
                     "importName": "vg_shin_d11"
@@ -370,7 +370,7 @@
                     "delAngularPos": 0.5759586531581288,
                     "easingFn": "smoothstep",
                     "delay": 0,
-                    "period": 0.4,
+                    "period": 0.6,
                     "angleMultiplier": "1",
                     "id": "5f599751-c02a-4feb-9d9b-cc0248573a7b",
                     "importName": "vg_foot_d11"
@@ -386,7 +386,7 @@
                     "delAngularPos": 0,
                     "easingFn": "smoothstep",
                     "delay": 0,
-                    "period": 0.4,
+                    "period": 0.6,
                     "angleMultiplier": "-1",
                     "id": "6432d057-07d1-4d01-8e98-5a0addb5c0a2",
                     "importName": "vg_bod3"
@@ -395,14 +395,14 @@
                     "delAngularPos": 0,
                     "easingFn": "smoothstep",
                     "delay": 0,
-                    "period": 0.4,
+                    "period": 0.6,
                     "angleMultiplier": 1
                 },
                 "vg_bod1": {
                     "delAngularPos": 0.12217304763960307,
                     "easingFn": "smoothstep",
                     "delay": 0,
-                    "period": 0.4,
+                    "period": 0.6,
                     "angleMultiplier": 1,
                     "id": "5f599751-c02a-4feb-9d9b-cc0248573a7b",
                     "importName": "vg_bod1"
@@ -411,7 +411,7 @@
                     "delAngularPos": 0.08726646259971647,
                     "easingFn": "smoothstep",
                     "delay": 0,
-                    "period": 0.4,
+                    "period": 0.6,
                     "angleMultiplier": 1,
                     "id": "6432d057-07d1-4d01-8e98-5a0addb5c0a2",
                     "importName": "vg_shin"
@@ -420,7 +420,7 @@
                     "delAngularPos": 0.5061454830783556,
                     "easingFn": "smoothstep",
                     "delay": 0,
-                    "period": 0.4,
+                    "period": 0.6,
                     "angleMultiplier": "1",
                     "id": "6432d057-07d1-4d01-8e98-5a0addb5c0a2",
                     "importName": "vg_foot",
@@ -430,7 +430,7 @@
                     "delAngularPos": 0.7504915783575618,
                     "easingFn": "smoothstep",
                     "delay": 0,
-                    "period": 0.4,
+                    "period": 0.6,
                     "angleMultiplier": "1",
                     "id": "6432d057-07d1-4d01-8e98-5a0addb5c0a2",
                     "importName": "vg_femur"
@@ -439,7 +439,7 @@
                     "delAngularPos": 0.12217304763960307,
                     "easingFn": "quadInOut",
                     "delay": 0,
-                    "period": 0.4,
+                    "period": 0.6,
                     "angleMultiplier": "-1",
                     "id": "6432d057-07d1-4d01-8e98-5a0addb5c0a2",
                     "importName": "vg_head"
@@ -448,14 +448,14 @@
                     "delAngularPos": 0,
                     "easingFn": "smoothstep",
                     "delay": 0,
-                    "period": 0.4,
+                    "period": 0.6,
                     "angleMultiplier": 1
                 },
                 "vg_tail": {
                     "delAngularPos": 0.15707963267948966,
                     "easingFn": "smoothstep",
                     "delay": 0,
-                    "period": 0.4,
+                    "period": 0.6,
                     "angleMultiplier": 1,
                     "id": "5f599751-c02a-4feb-9d9b-cc0248573a7b",
                     "importName": "vg_tail"
@@ -464,16 +464,16 @@
                     "delAngularPos": 0.5934119456780721,
                     "easingFn": "smoothstep",
                     "delay": 0,
-                    "period": 0.4,
+                    "period": 0.6,
                     "angleMultiplier": "-1",
                     "id": "6432d057-07d1-4d01-8e98-5a0addb5c0a2",
                     "importName": "vg_femur_d11"
                 },
                 "vg_shin_d11": {
-                    "delAngularPos": 0.24434609527920614,
+                    "delAngularPos": 0.4,
                     "easingFn": "smoothstep",
                     "delay": 0,
-                    "period": 0.4,
+                    "period": 0.6,
                     "angleMultiplier": "-1",
                     "id": "6432d057-07d1-4d01-8e98-5a0addb5c0a2",
                     "importName": "vg_shin_d11"
@@ -482,7 +482,7 @@
                     "delAngularPos": 0.12217304763960307,
                     "easingFn": "smoothstep",
                     "delay": 0,
-                    "period": 0.4,
+                    "period": 0.6,
                     "angleMultiplier": "-1",
                     "id": "6432d057-07d1-4d01-8e98-5a0addb5c0a2",
                     "importName": "vg_foot_d11",
@@ -499,7 +499,7 @@
                     "delAngularPos": 0.12217304763960307,
                     "easingFn": "smoothstep",
                     "delay": 0,
-                    "period": 0.4,
+                    "period": 0.6,
                     "angleMultiplier": "1",
                     "id": "d4bf0ab6-4423-4714-83d5-f77ac8bdf4f1",
                     "importName": "vg_bod3"
@@ -508,14 +508,14 @@
                     "delAngularPos": 0,
                     "easingFn": "smoothstep",
                     "delay": 0,
-                    "period": 0.4,
+                    "period": 0.6,
                     "angleMultiplier": 1
                 },
                 "vg_bod1": {
                     "delAngularPos": 0.12217304763960307,
                     "easingFn": "smoothstep",
                     "delay": 0,
-                    "period": 0.4,
+                    "period": 0.6,
                     "angleMultiplier": 1,
                     "id": "5f599751-c02a-4feb-9d9b-cc0248573a7b",
                     "importName": "vg_bod1"
@@ -524,7 +524,7 @@
                     "delAngularPos": 0.24434609527920614,
                     "easingFn": "smoothstep",
                     "delay": 0,
-                    "period": 0.4,
+                    "period": 0.6,
                     "angleMultiplier": "-1",
                     "id": "d4bf0ab6-4423-4714-83d5-f77ac8bdf4f1",
                     "importName": "vg_shin"
@@ -533,7 +533,7 @@
                     "delAngularPos": 0.24434609527920614,
                     "easingFn": "smoothstep",
                     "delay": 0,
-                    "period": 0.4,
+                    "period": 0.6,
                     "angleMultiplier": "-1",
                     "id": "d4bf0ab6-4423-4714-83d5-f77ac8bdf4f1",
                     "importName": "vg_foot",
@@ -543,7 +543,7 @@
                     "delAngularPos": 0.8552113334772214,
                     "easingFn": "smoothstep",
                     "delay": 0,
-                    "period": 0.4,
+                    "period": 0.6,
                     "angleMultiplier": "-1",
                     "id": "d4bf0ab6-4423-4714-83d5-f77ac8bdf4f1",
                     "importName": "vg_femur"
@@ -552,7 +552,7 @@
                     "delAngularPos": 0.2617993877991494,
                     "easingFn": "quadInOut",
                     "delay": 0,
-                    "period": 0.4,
+                    "period": 0.6,
                     "angleMultiplier": "-1",
                     "id": "d4bf0ab6-4423-4714-83d5-f77ac8bdf4f1",
                     "importName": "vg_head"
@@ -561,14 +561,14 @@
                     "delAngularPos": 0,
                     "easingFn": "smoothstep",
                     "delay": 0,
-                    "period": 0.4,
+                    "period": 0.6,
                     "angleMultiplier": 1
                 },
                 "vg_tail": {
                     "delAngularPos": 0.15707963267948966,
                     "easingFn": "smoothstep",
                     "delay": 0,
-                    "period": 0.4,
+                    "period": 0.6,
                     "angleMultiplier": 1,
                     "id": "5f599751-c02a-4feb-9d9b-cc0248573a7b",
                     "importName": "vg_tail"
@@ -577,7 +577,7 @@
                     "delAngularPos": 0.7504915783575618,
                     "easingFn": "smoothstep",
                     "delay": 0,
-                    "period": 0.4,
+                    "period": 0.6,
                     "angleMultiplier": "1",
                     "id": "d4bf0ab6-4423-4714-83d5-f77ac8bdf4f1",
                     "importName": "vg_femur_d11"
@@ -586,7 +586,7 @@
                     "delAngularPos": 0.19198621771937624,
                     "easingFn": "smoothstep",
                     "delay": 0,
-                    "period": 0.4,
+                    "period": 0.6,
                     "angleMultiplier": "1",
                     "id": "d4bf0ab6-4423-4714-83d5-f77ac8bdf4f1",
                     "importName": "vg_shin_d11"
@@ -595,7 +595,7 @@
                     "delAngularPos": 0.2792526803190927,
                     "easingFn": "smoothstep",
                     "delay": 0,
-                    "period": 0.4,
+                    "period": 0.6,
                     "angleMultiplier": "1",
                     "id": "d4bf0ab6-4423-4714-83d5-f77ac8bdf4f1",
                     "importName": "vg_foot_d11",

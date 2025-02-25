@@ -10,6 +10,7 @@ class Bus extends TexRegion {
         height: 88
     }
     forceUpdate = true
+    noOverlay=true
     smooth=true
     constructor(x, y, toX, toY, period, player) { // spawn points for movable collidable entities have to be on midground layer (on tiled layer should be set to mg)
         super({ pos: { x, y }, frame: "crane" })
@@ -41,7 +42,7 @@ class Bus extends TexRegion {
         this.updateX(dt)
     }
     updateY(dt) {
-        this.pos.y = this.meanY + easingFns.smoothStep(this.t / this.period) * this.dispY
+        this.pos.y = this.meanY + easingFns.smoothstep(this.t / this.period) * this.dispY
         if (this.t > this.period) {
             this.meanY = this.meanY + this.dispY
             this.pos.y = this.meanY

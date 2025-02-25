@@ -157,13 +157,13 @@ const factories = {
         fields: ["height"],
         dims({ height }) {
             return {
-                width: 40, height: 128 * height
+                width: 40, height: 122 * height
             }
         },
         create(params) {
             const { x, y, height } = params
             return Array(+height).fill(0).map((_, i) => {
-                return { x: x, y: y + (i * 128), name: "pillar" }
+                return { x: x, y: y + (i * 122), name: "pillar" }
             })
         }
     },

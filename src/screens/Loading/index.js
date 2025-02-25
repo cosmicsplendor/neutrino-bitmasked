@@ -3,7 +3,7 @@ import initUI from "./initUI"
 import { MAIN_MENU, GAME } from "@screens/names"
 import config from "@config"
 
-class LoadingScreen extends Node {
+class MainMenu extends Node {
     background = "#000000"
     constructor({ game, assets, uiRoot, sdk }) { 
         super()
@@ -17,7 +17,7 @@ class LoadingScreen extends Node {
 
         assetsCache.load(this.assets)
 
-        const { teardown, onProg, onError, onLoad } =  initUI(this.uiRoot)
+        const { teardown, onProg, onError } =  initUI(this.uiRoot)
         this.teardown = teardown
         this.onProg = onProg
         assetsCache.once("load", () => {
@@ -46,4 +46,4 @@ class LoadingScreen extends Node {
     }
 }
 
-export default LoadingScreen
+export default MainMenu
