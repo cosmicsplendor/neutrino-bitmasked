@@ -23,16 +23,34 @@ const pickVerticalAlignmentParams = (emptySpaces) => {
         dx: rand(12) + skewedRand(5, 1)* (Math.random < 0.5 ? -1: 1)
     };
 };
-
-const generateNewBlock = async (prevBlock, map) => {
+let validAlignments = [
+    "top-start", "top", "top-end",
+    "right-start", "right", "right-end",
+    "bottom-start", "bottom", "bottom-end",
+    "left-start", "left", "left-end"
+];
+const generateNewBlock = async prevBlock => {
+    message("Let's add a new Block", "brightGreen")
+  
     const {
-        Width: width, Height: height, Alignment: alignment, "delX": dx, "delY": dy
-    } = await promptFields([ "Width", "Height", "Alignment", "delX", "delY" ])
-    const newBlock = CompositeBlock.create({ width, height });
-    message("Let's add a new Block", "pink")
+        Width: width, Height: height
+    } = await promptFields([ "Width", "Height" ])
+
+    let alignment = (await promptFields(['Alignment']))['Alignment'];
+    
+    while (!validAlignments.includes(alignment)) {
+        terminal.red('Invalid alignment. Please choose from: ' + validAlignments.join(', ') + '\n');
+        alignment = (await promptFields(['Alignment']))['Alignment'];
+    }
+
+    const {
+        delX: dx, "delY": dy
+    } = await promptFields([ "delX", "delY"])
+
+    const newBlock = CompositeBlock.create({ width: Number(width) || 1, height: Number(height) || 1 });
     newBlock.stackOn(prevBlock, {
         position: alignment,
-        dx, dy
+        dx: Number(dx) || 1, dy: Number(dy) || 1
     })
     // const expandDir = prevBlock.y < 4 || Math.random() < 0.5  ? "horizontal" : "vertical";
     // if (expandDir === "horizontal") {
