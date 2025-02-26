@@ -48,9 +48,11 @@ const generateNewBlock = async prevBlock => {
     } = await promptFields([ "delX", "delY"])
 
     const newBlock = CompositeBlock.create({ width: Number(width) || 1, height: Number(height) || 1 });
+    console.log({ dx, dy, width, height, alignment })
     newBlock.stackOn(prevBlock, {
         position: alignment,
-        dx: Number(dx) || 1, dy: Number(dy) || 1
+        dx: isNaN(Number(dx)) ? 1 : Number(dx), 
+        dy: isNaN(Number(dy)) ? 1 : Number(dy)
     })
     // const expandDir = prevBlock.y < 4 || Math.random() < 0.5  ? "horizontal" : "vertical";
     // if (expandDir === "horizontal") {
