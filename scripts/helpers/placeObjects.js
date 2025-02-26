@@ -20,8 +20,8 @@ const placeObject = async (index, projections, map) => {
     const total = projections.length
     const indexInd = `[${index + 1} of ${total}] `
 
-    const skipResponse = await getChoice(["Proceed", "Pass"], `Projection ${indexInd}`)
-    if (skipResponse === "Pass") return
+    const skipResponse = await getChoice(["Proceed", "Pass", "Pass All"], `Projection ${indexInd}`)
+    if (skipResponse !== "Proceed") return skipResponse
 
     const projection = projections[index]
 
@@ -92,8 +92,9 @@ const placeObjects = async (newBlock, map) => {
         const projection = projections[index]
         map.projections.push(projection);
         await map.exportMap();
-        await placeObject(Number(index), projections, map)
+        const response = await placeObject(Number(index), projections, map)
         map.projections.length = 0
+        if (response === "Pass All") break
     }
     map.projections.length = 0
 }

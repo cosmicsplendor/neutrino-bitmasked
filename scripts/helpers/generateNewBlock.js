@@ -1,6 +1,8 @@
 const { addProtrusions, fixHorizontalGap, fixVerticalGap } = require('./index');
+const terminal = require('terminal-kit').terminal;
 const { detectProjectedEmptySpaces } = require("../utils/detectProjectedEmptySpaces");
 const { CompositeBlock, rand, skewedRand, pickOne } = require("../utils/index");
+const { promptFields, message } = require('./term');
 
 const pickVerticalAlignmentParams = (emptySpaces) => {
     const { bottom } = emptySpaces;
@@ -22,31 +24,33 @@ const pickVerticalAlignmentParams = (emptySpaces) => {
     };
 };
 
-const generateNewBlock = (prevBlock, map) => {
-    const newBlock = CompositeBlock.create({
-        width: rand(2, 1) + skewedRand(4, 1) + 1, // Width between 2 and 5
-        height: skewedRand(4, 1) + rand(2, 1) // Height between 2 and 4
-    });
+const generateNewBlock = async (prevBlock, map) => {
+    const {
+        Width: width, Height: height, Alignment: alignment, "delX": dx, "delY": dy
+    } = await promptFields([ "Width", "Height", "Alignment", "delX", "delY" ])
+    const newBlock = CompositeBlock.create({ width, height });
+    message("Let's add a new Block", "pink")
+    newBlock.stackOn(prevBlock, {
+        position: alignment,
+        dx, dy
+    })
+    // const expandDir = prevBlock.y < 4 || Math.random() < 0.5  ? "horizontal" : "vertical";
+    // if (expandDir === "horizontal") {
+    //     const params = {
+    //         position: pickOne(["right", "right-start", "right-end"]),
+    //         dx: rand(10, -1),
+    //         dy: 2 * (skewedRand(2, 1) + skewedRand(-2, -1)) + rand(rand(4, 1), - 4) + rand(5, -5)
+    //     };
+    //     newBlock.stackOn(prevBlock, params);
+    // } else {
+    //     const emptySpaces = detectProjectedEmptySpaces(prevBlock, map);
+    //     const params = pickVerticalAlignmentParams(emptySpaces);
+    //     newBlock.stackOn(prevBlock, params);
+    // }
 
-    addProtrusions(newBlock);
-
-    const expandDir = prevBlock.y < 4 || Math.random() < 0.5  ? "horizontal" : "vertical";
-    if (expandDir === "horizontal") {
-        const params = {
-            position: pickOne(["right", "right-start", "right-end"]),
-            dx: rand(10, -1),
-            dy: 2 * (skewedRand(2, 1) + skewedRand(-2, -1)) + rand(rand(4, 1), - 4) + rand(5, -5)
-        };
-        newBlock.stackOn(prevBlock, params);
-    } else {
-        const emptySpaces = detectProjectedEmptySpaces(prevBlock, map);
-        const params = pickVerticalAlignmentParams(emptySpaces);
-        newBlock.stackOn(prevBlock, params);
-    }
-
-    const newEmptySpaces = detectProjectedEmptySpaces(newBlock, map);
-    fixHorizontalGap(newBlock, newEmptySpaces);
-    fixVerticalGap(newBlock, newEmptySpaces);
+    // const newEmptySpaces = detectProjectedEmptySpaces(newBlock, map);
+    // fixHorizontalGap(newBlock, newEmptySpaces);
+    // fixVerticalGap(newBlock, newEmptySpaces);
 
     return newBlock;
 };
