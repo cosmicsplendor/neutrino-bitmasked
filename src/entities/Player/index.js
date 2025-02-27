@@ -112,13 +112,16 @@ class Player extends TexRegion {
     get offEdge() {
         return this._offEdge
     }
-    incWeight(val) {
-        this.weight += val
+    setWeight(val) {
+        this.weight = val
         this.invWeight = 1/this.weight
         if (this.weight > 6) {
             this.suspended=true
             this.susTimer=0
         }
+    }
+    incWeight(amt) {
+        this.setWeight(amt + this.weight)        
     }
     onFall() {
         this.controls.switchState("jumping", this, true)
@@ -211,6 +214,7 @@ class Player extends TexRegion {
             this.explode()
             this.susTimer=0
             this.suspended=false
+            this.setWeight(1)
         }
     }
     update(dt) {
