@@ -17,7 +17,10 @@ class Bat extends TexRegion {
         // Minimal sine wave properties
         this.noiseOffset = Math.random() * Math.PI * 2; // Random starting phase
         this.noiseSpeed = randf(3, 2);                  // How fast the sine wave cycles
-        this.noiseAmount = randf(1.5, 0.8);             // Very small amplitude
+        this.noiseAmount = randf(1.5, 0.75);          // Very small amplitude
+        
+        // New property to track if bat is attached
+        this.isAttached = false;
     }
 
     fadeIn(dt) {
@@ -35,19 +38,36 @@ class Bat extends TexRegion {
             this.frame = this.frame === "bat1" ? "bat2" : "bat1";
         }
 
-        // Update noise offset
-        this.noiseOffset += dt * this.noiseSpeed;
+        // If already attached, just maintain the fixed position relative to player
+        if (this.isAttached) {
+            this.pos.x = this.player.pos.x + this.targetDx;
+            this.pos.y = this.player.pos.y + this.targetDy;
+            return;
+        }
 
-        // Calculate small sine deviation
-        const sineNoise = Math.sin(this.noiseOffset) * this.noiseAmount;
-
+        // Calculate distance to target position
         const dx = this.player.pos.x + this.targetDx - this.pos.x;
         const dy = this.player.pos.y + this.targetDy - this.pos.y;
+        // console.log(Math.abs(dx) + Math.abs(dy))
 
-        // Apply movement with very subtle sine deviation
-        this.pos.x += dx * this.interp + sineNoise;
-        this.pos.y += dy * this.interp + sineNoise;
+        // Check if close enough to attach
+        if (Math.abs(dx) + Math.abs(dy) < 20) {
+            // Snap to exact position and mark as attached
+            this.pos.x = this.player.pos.x + this.targetDx;
+            this.pos.y = this.player.pos.y + this.targetDy;
+            this.isAttached = true;
+        } else {
+            // Update noise offset
+            this.noiseOffset += dt * this.noiseSpeed;
+
+            // Calculate small sine deviation
+            const sineNoise = Math.sin(this.noiseOffset) * this.noiseAmount;
+
+            // Apply movement with very subtle sine deviation
+            this.pos.x += dx * this.interp + sineNoise;
+            this.pos.y += dy * this.interp + sineNoise;
+        }
     }
 }
 
-export default Bat  
+export default Bat
