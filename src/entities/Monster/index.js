@@ -53,7 +53,7 @@ class Glitch {
       const bloodAnim = Monster.getBloodAnim()
       Node.get(objLayerId).add(bloodAnim)
       Node.get(objLayerId).add(deathAnim)
-      for (let i = 0; i < 10; i++) {
+      for (let i = 0; i < 8; i++) {
         const bat = new Bat(x, y-50, this.monster.player)
         Node.get(objLayerId).add(bat)
       }

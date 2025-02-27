@@ -8,8 +8,8 @@ class Bat extends TexRegion {
         super({ frame: "bat1", pos: { x, y }, scale: { x: scale, y: scale } });
         this.player = player;
         const offsetAngle = 2 * Math.PI * Math.random();
-        this.targetDx = 32 - 38 + 32 * Math.cos(offsetAngle);
-        this.targetDy = 32 - 44 + 32 * Math.sin(offsetAngle);
+        this.targetDx = -6 + 32 * Math.cos(offsetAngle);
+        this.targetDy = 4 + 24 * Math.sin(offsetAngle);
         this.interp = randf(0.025, 0.0025);
         this.alpha = 0.1;
         this.timer = 0;
@@ -51,8 +51,8 @@ class Bat extends TexRegion {
         if (this.isAttached) {
             // this.pos.x = this.player.pos.x + this.targetDx;
             // this.pos.y = this.player.pos.y + this.targetDy;
-            this.pos.x = this.player.pos.x + this.targetDx + sineNoise * 10;
-            this.pos.y = this.player.pos.y + this.targetDy + sineNoise * 10;
+            this.pos.x = this.player.pos.x + this.targetDx + sineNoise * 6;
+            this.pos.y = this.player.pos.y + this.targetDy + sineNoise * 6;
             return;
         }
         // Calculate distance to target position
