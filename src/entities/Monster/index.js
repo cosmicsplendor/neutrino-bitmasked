@@ -8,7 +8,7 @@ import getTestFn from "@lib/components/Collision/helpers/getTestFn";
 import ParticleEmitter from "@lib/utils/ParticleEmitter";
 import { Node } from "@lib/index";
 import { getGlobalPos } from "@lib/utils/entity";
-
+import Bat from "./Bat"
 
 
 // Define state classes
@@ -53,8 +53,12 @@ class Glitch {
       const bloodAnim = Monster.getBloodAnim()
       Node.get(objLayerId).add(bloodAnim)
       Node.get(objLayerId).add(deathAnim)
+      for (let i = 0; i < 8; i++) {
+        const bat = new Bat(x, y-50, this.monster.player)
+        Node.get(objLayerId).add(bat)
+      }
       bloodAnim.pos.x = x
-      bloodAnim.pos.y = y - 25
+      bloodAnim.pos.y = y - 60
       deathAnim.pos.x = x
       deathAnim.pos.y = y - 75
     }
@@ -120,13 +124,14 @@ class IdleLeft {
     }
   }
 }
-// Update Monster class to use external state classes
+
 class Monster extends BoneAnimNode {
   noOverlay = true
   static getDeathAnim() {
     if (this.deathAnim instanceof ParticleEmitter) return this.deathAnim
     this.deathAnim = new ParticleEmitter(deathAnimDat)
     this.deathAnim.noOverlay = true
+    // this.deathAnim.overlay = [1,0,0]
     return this.deathAnim
   }
   static getBloodAnim() {
