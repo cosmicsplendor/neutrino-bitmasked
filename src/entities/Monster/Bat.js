@@ -30,40 +30,41 @@ class Bat extends TexRegion {
         this.scale.y += dt;
         this.alpha += dt * 2;
     }
-
-    update(dt) {
-        this.fadeIn(dt);
+    updateAnim(dt) {
         this.timer += dt;
         if (this.timer >= this.duration) {
             this.timer = 0;
             this.frame = this.frame === "bat1" ? "bat2" : "bat1";
         }
+    }
+    update(dt) {
+        this.fadeIn(dt);
+        this.updateAnim(dt)
+       
+        // Update noise offset
+        this.noiseOffset += dt * this.noiseSpeed;
+
+        // Calculate small sine deviation
+        const sineNoise = Math.sin(this.noiseOffset) * this.noiseAmount;
 
         // If already attached, just maintain the fixed position relative to player
         if (this.isAttached) {
-            this.pos.x = this.player.pos.x + this.targetDx;
-            this.pos.y = this.player.pos.y + this.targetDy;
+            // this.pos.x = this.player.pos.x + this.targetDx;
+            // this.pos.y = this.player.pos.y + this.targetDy;
+            this.pos.x = this.player.pos.x + this.targetDx + sineNoise * 0.5;
+            this.pos.y = this.player.pos.y + this.targetDy + sineNoise * 0.5;
             return;
         }
 
         // Calculate distance to target position
         const dx = this.player.pos.x + this.targetDx - this.pos.x;
         const dy = this.player.pos.y + this.targetDy - this.pos.y;
-        // console.log(Math.abs(dx) + Math.abs(dy))
-
+     
         // Check if close enough to attach
         if (Math.abs(dx) + Math.abs(dy) < 20) {
             // Snap to exact position and mark as attached
-            this.pos.x = this.player.pos.x + this.targetDx;
-            this.pos.y = this.player.pos.y + this.targetDy;
             this.isAttached = true;
         } else {
-            // Update noise offset
-            this.noiseOffset += dt * this.noiseSpeed;
-
-            // Calculate small sine deviation
-            const sineNoise = Math.sin(this.noiseOffset) * this.noiseAmount;
-
             // Apply movement with very subtle sine deviation
             this.pos.x += dx * this.interp + sineNoise;
             this.pos.y += dy * this.interp + sineNoise;
