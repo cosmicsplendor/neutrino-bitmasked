@@ -21,6 +21,7 @@ class Bat extends TexRegion {
         
         // New property to track if bat is attached
         this.isAttached = false;
+        this.duration = randf(0.2, 0.1)
     }
 
     fadeIn(dt) {
@@ -33,7 +34,7 @@ class Bat extends TexRegion {
     update(dt) {
         this.fadeIn(dt);
         this.timer += dt;
-        if (this.timer >= 0.125) {
+        if (this.timer >= this.duration) {
             this.timer = 0;
             this.frame = this.frame === "bat1" ? "bat2" : "bat1";
         }
