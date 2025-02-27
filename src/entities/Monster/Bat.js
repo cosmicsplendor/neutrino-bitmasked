@@ -51,17 +51,16 @@ class Bat extends TexRegion {
         if (this.isAttached) {
             // this.pos.x = this.player.pos.x + this.targetDx;
             // this.pos.y = this.player.pos.y + this.targetDy;
-            this.pos.x = this.player.pos.x + this.targetDx + sineNoise * 0.5;
-            this.pos.y = this.player.pos.y + this.targetDy + sineNoise * 0.5;
+            this.pos.x = this.player.pos.x + this.targetDx + sineNoise * 10;
+            this.pos.y = this.player.pos.y + this.targetDy + sineNoise * 10;
             return;
         }
-
         // Calculate distance to target position
         const dx = this.player.pos.x + this.targetDx - this.pos.x;
         const dy = this.player.pos.y + this.targetDy - this.pos.y;
      
         // Check if close enough to attach
-        if (Math.abs(dx) + Math.abs(dy) < 20) {
+        if (Math.abs(dx) < 15 && Math.abs(dy) < 15) {
             // Snap to exact position and mark as attached
             this.isAttached = true;
         } else {
