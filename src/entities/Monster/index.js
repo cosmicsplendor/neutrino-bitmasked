@@ -1,9 +1,15 @@
 import BoneAnimNode from "@lib/entities/BoneAnimNode";
 import { stateMachineMixin } from "@lib/utils/FSM";
 import animData from "./anim.json"
-import { getGlobalPos } from "@lib/utils/entity";
-import { TexRegion } from "@lib/index";
+import { objLayerId } from "@lib/constants"
+import deathAnimDat from "./death.json"
+import bloodAnimDat from "./blood.json"
 import getTestFn from "@lib/components/Collision/helpers/getTestFn";
+import ParticleEmitter from "@lib/utils/ParticleEmitter";
+import { Node } from "@lib/index";
+import { getGlobalPos } from "@lib/utils/entity";
+
+
 
 // Define state classes
 class RunRight {
@@ -31,16 +37,26 @@ class Glitch {
   }
   
   onEnter() {
-    this.monster.play("idle", "root state");
+    this.monster.play("idle",  "root state");
     this.timer = 0;
   }
   
   update(dt) {
     this.monster.noOverlay = Math.random() < 0.5 ? true: false
     this.timer += dt;
-    if (this.timer >= 2) {
-      // this.monster.switchState('runLeft');
-      // die
+    // const delPosX = getGlobalPos( this.monster.syncroNode).x + 50 * this.monster.syncroNode.scale.x - this.monster.player.pos.x
+    // this.monster.player.pos.x += delPosX * 0.05
+    if (this.timer >= 1) {
+      this.monster.remove()
+      const { x, y } = getGlobalPos(this.monster.syncroNode)
+      const deathAnim = Monster.getDeathAnim()
+      const bloodAnim = Monster.getBloodAnim()
+      Node.get(objLayerId).add(bloodAnim)
+      Node.get(objLayerId).add(deathAnim)
+      bloodAnim.pos.x = x
+      bloodAnim.pos.y = y - 25
+      deathAnim.pos.x = x
+      deathAnim.pos.y = y - 75
     }
   }
 }
@@ -104,11 +120,21 @@ class IdleLeft {
     }
   }
 }
-
 // Update Monster class to use external state classes
 class Monster extends BoneAnimNode {
   noOverlay = true
-
+  static getDeathAnim() {
+    if (this.deathAnim instanceof ParticleEmitter) return this.deathAnim
+    this.deathAnim = new ParticleEmitter(deathAnimDat)
+    this.deathAnim.noOverlay = true
+    return this.deathAnim
+  }
+  static getBloodAnim() {
+    if (this.bloodAnim instanceof ParticleEmitter) return this.bloodAnim
+    this.bloodAnim = new ParticleEmitter(bloodAnimDat)
+    this.bloodAnim.noOverlay = true
+    return this.bloodAnim
+  }
   constructor({ x, y, player, span = 200 }) {
     super({ data: animData, pos: { x: x, y } });
     this.player = player
