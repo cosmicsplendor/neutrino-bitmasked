@@ -3,6 +3,7 @@ import { randf } from "@lib/utils/math";
 
 class Bat extends TexRegion {
     noOverlay = true;
+    forceUpdate=true
     constructor(x, y, player) {
         const scale = randf(0.5, 0.25);
         super({ frame: "bat1", pos: { x, y }, scale: { x: scale, y: scale } });
@@ -17,7 +18,7 @@ class Bat extends TexRegion {
         // Minimal sine wave properties
         this.noiseOffset = Math.random() * Math.PI * 2; // Random starting phase
         this.noiseSpeed = randf(3, 2);                  // How fast the sine wave cycles
-        this.noiseAmount = randf(1.5, 0.75);          // Very small amplitude
+        this.noiseAmount = randf(1.2, 0.6);          // Very small amplitude
         
         // New property to track if bat is attached
         this.isAttached = false;
@@ -51,8 +52,8 @@ class Bat extends TexRegion {
         if (this.isAttached) {
             // this.pos.x = this.player.pos.x + this.targetDx;
             // this.pos.y = this.player.pos.y + this.targetDy;
-            this.pos.x = this.player.pos.x + this.targetDx + sineNoise * 6;
-            this.pos.y = this.player.pos.y + this.targetDy + sineNoise * 6;
+            this.pos.x = this.player.pos.x + this.targetDx + sineNoise * 8;
+            this.pos.y = this.player.pos.y + this.targetDy + sineNoise * 8;
             return;
         }
         // Calculate distance to target position
@@ -60,9 +61,10 @@ class Bat extends TexRegion {
         const dy = this.player.pos.y + this.targetDy - this.pos.y;
      
         // Check if close enough to attach
-        if (Math.abs(dx) < 15 && Math.abs(dy) < 15) {
+        if (Math.abs(dx) < 20 && Math.abs(dy) < 20) {
             // Snap to exact position and mark as attached
             this.isAttached = true;
+            this.player.incWeight(1)
         } else {
             // Apply movement with very subtle sine deviation
             this.pos.x += dx * this.interp + sineNoise;

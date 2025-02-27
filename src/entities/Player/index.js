@@ -53,6 +53,10 @@ class Player extends TexRegion {
     remDt = 0 // remnant dt
     smooth = true
     onBus=false
+    weight=1
+    invWeight=1
+    suspended=false
+    susTimer=0
     constructor({ speed = 48, width = 64, height = 64, fricX=4, shard, cinder, controls, sounds, state, ...rest }) {
         super({ frame: "ball", ...rest })
         this.width = width
@@ -107,6 +111,14 @@ class Player extends TexRegion {
     }
     get offEdge() {
         return this._offEdge
+    }
+    incWeight(val) {
+        this.weight += val
+        this.invWeight = 1/this.weight
+        if (this.weight > 6) {
+            this.suspended=true
+            this.susTimer=0
+        }
     }
     onFall() {
         this.controls.switchState("jumping", this, true)
@@ -173,7 +185,7 @@ class Player extends TexRegion {
         }
     } 
     explode() {
-        if (config.testMode) return
+        // if (config.testMode) return
         if (this.state.is("completed")) return
         this.cinder.pos.x = this.shard.pos.x = this.pos.x + this.width / 2
         this.cinder.pos.y = this.shard.pos.y = this.pos.y + this.height / 2
@@ -192,8 +204,20 @@ class Player extends TexRegion {
     gotOnBus() {
         this.onBus = true
     }
+    updateSuspended(dt) {
+        this.susTimer+= dt
+        this.pos.y -= 100*dt
+        if (this.susTimer > 2) {
+            this.explode()
+            this.susTimer=0
+            this.suspended=false
+        }
+    }
     update(dt) {
         if (this.state.is("game-over") || this.state.is("paused")) return
+        if (this.suspended) {
+            return this.updateSuspended(dt)
+        }
         this.controls.update(this, dt)
         Boolean(this.offEdge) ? Movement.updateOffEdge(this, dt): Movement.update(this, dt)
         this.wallCollision.update()

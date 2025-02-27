@@ -44,9 +44,9 @@ class Rolling {
     }
     update(entity, dt) {
         if (this.controls.get("left")) {
-            entity.velX -= (entity.velX > 0 ? 3 : 1) * this.controls.speed * dt;
+            entity.velX -= (entity.velX > 0 ? 3 : 1) * this.controls.speed * dt * entity.invWeight;
         } else if (this.controls.get("right")) {
-            entity.velX += (entity.velX < 0 ? 3 : 1) * this.controls.speed * dt;
+            entity.velX += (entity.velX < 0 ? 3 : 1) * this.controls.speed * dt * entity.invWeight;
         } else {
             // If no left or right control is held, apply additional friction
             Math.abs(entity.velX) < 10 && (entity.velX =  0); // Adjust this factor as needed
@@ -77,7 +77,7 @@ class Jumping {
             return
         }
         this.limitReached = false
-        entity.velY += this.jmpVel
+        entity.velY += this.jmpVel * entity.invWeight
         this.first = true // indicating whether this is the first "Jump" state frame
     }
     onHalt() { // obstruct jump prematurely (mostly by collision with bottom edge of a rect)
@@ -89,15 +89,15 @@ class Jumping {
         }
         this.first = false
         if (this.controls.get("left")) {
-            entity.velX -= (entity.velX > 0 ? 3 : 1) * this.controls.speed * dt 
+            entity.velX -= (entity.velX > 0 ? 3 : 1) * this.controls.speed * dt * entity.invWeight
         }
         if (this.controls.get("right")) {
-            entity.velX += (entity.velX < 0 ? 3 : 1) * this.controls.speed * dt 
+            entity.velX += (entity.velX < 0 ? 3 : 1) * this.controls.speed * dt  * entity.invWeight
         }
         if (this.controls.get("axn")) {
-            if (entity.velY < this.minJmpVel || entity.velY > this.mxJmpVel) { this.limitReached = true }
+            if (entity.velY < this.minJmpVel || entity.velY > this.mxJmpVel * entity.invWeight) { this.limitReached = true }
             if (this.limitReached) { return }
-            entity.velY += this.jmpVel * ( Math.min(this.maxJvelInc, (entity.velY * entity.velY) / 100)) * dt 
+            entity.velY += this.jmpVel * entity.invWeight * ( Math.min(this.maxJvelInc, (entity.velY * entity.velY) / 100)) * dt 
         } else { this.limitReached = true } // if the player has stopped pressing "axn" key, player won't gain anymore velocity in this jump
     }
 }
