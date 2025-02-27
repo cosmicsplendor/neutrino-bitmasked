@@ -6,7 +6,7 @@ import { TexRegion } from "@lib/index";
 import getTestFn from "@lib/components/Collision/helpers/getTestFn";
 
 // Define state classes
-class RunRightState {
+class RunRight {
   constructor(monster) {
     this.monster = monster;
     this.name = 'runRight';
@@ -22,13 +22,30 @@ class RunRightState {
       this.monster.switchState('idleRight');
     }
   }
+}
+// Define state classes
+class Glitch {
+  constructor(monster) {
+    this.monster = monster;
+    this.name = 'glitch';
+  }
   
-  onExit() {
-    // Optional cleanup
+  onEnter() {
+    this.monster.play("idle", "root state");
+    this.timer = 0;
+  }
+  
+  update(dt) {
+    this.monster.noOverlay = Math.random() < 0.5 ? true: false
+    this.timer += dt;
+    if (this.timer >= 2) {
+      // this.monster.switchState('runLeft');
+      // die
+    }
   }
 }
 
-class IdleRightState {
+class IdleRight {
   constructor(monster) {
     this.monster = monster;
     this.name = 'idleRight';
@@ -45,13 +62,9 @@ class IdleRightState {
       this.monster.switchState('runLeft');
     }
   }
-  
-  onExit() {
-    // Optional cleanup
-  }
 }
 
-class RunLeftState {
+class RunLeft {
   constructor(monster) {
     this.monster = monster;
     this.name = 'runLeft';
@@ -73,7 +86,7 @@ class RunLeftState {
   }
 }
 
-class IdleLeftState {
+class IdleLeft {
   constructor(monster) {
     this.monster = monster;
     this.name = 'idleLeft';
@@ -90,10 +103,6 @@ class IdleLeftState {
       this.monster.switchState('runRight');
     }
   }
-  
-  onExit() {
-    // Optional cleanup
-  }
 }
 
 // Update Monster class to use external state classes
@@ -109,10 +118,11 @@ class Monster extends BoneAnimNode {
     
     // Create state instances
     const states = {
-      runRight: new RunRightState(this),
-      idleRight: new IdleRightState(this),
-      runLeft: new RunLeftState(this),
-      idleLeft: new IdleLeftState(this)
+      runRight: new RunRight(this),
+      idleRight: new IdleRight(this),
+      runLeft: new RunLeft(this),
+      idleLeft: new IdleLeft(this),
+      glitch: new Glitch(this)
     };
     
     // Apply the state machine mixin
@@ -126,14 +136,17 @@ class Monster extends BoneAnimNode {
   
   update(dt, t) {
     // Update the current state
-    this.getState()?.update(dt);
+    const state = this.getState()
+    if (state) state.update(dt);
     // Call the parent update method
     // this.player.pos.x = Math.round(getGlobalPos(this.syncroNode).x)
     // Object.assign(this.player.pos, getGlobalPos(this.syncroNode))
     if (this.testCol(this.syncroNode, this.player)) {
-      alert("HIT")
+      // glitch
+      // this.noOverlay = Math.random() < 0.5
+      this.switchState('glitch');
     }
-    // this.noOverlay = Math.random() < 0.5
+
     super.update(dt, t);
   }
 }
