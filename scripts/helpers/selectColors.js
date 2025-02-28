@@ -30,7 +30,7 @@ const balancedOriginalColors = [
 const balancedAiSuggested = [
     { "bg": "#3a3a70", "pxbg": "#2a2a55", "tint": "0.035, -0.02, -0.015, 0" }, // Deep blue
     { "bg": "#35356c", "pxbg": "#252550", "tint": "0.05, -0.03, -0.01, 0" },    // Midnight blue
-    { "bg": "#3d4550", "pxbg": "#2a3240", "tint": "0.03, -0.02, -0.01, 0" },    // Charcoal grey-blue
+    { "bg": "#414b5c", "pxbg": "#2a3240", "tint": "0.03, -0.02, -0.01, 0" },    // Charcoal grey-blue
     { "bg": "#304055", "pxbg": "#203040", "tint": "0.03, 0, -0.03, 0" },        // Smokey blue-grey
     { "bg": "#274a55", "pxbg": "#183540", "tint": "0.025, -0.02, -0.02, 0" },   // Cool cyan
     { "bg": "#3f3f65", "pxbg": "#2d2d50", "tint": "0.04, -0.03, -0.02, 0" },    // Shadowed navy
