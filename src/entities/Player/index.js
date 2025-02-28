@@ -10,7 +10,8 @@ import { colRectsId, objLayerId } from "@lib/constants"
 import arrowImgId from "@assets/images/ui/arrow.png"
 import resumeImgId from "@assets/images/ui/resume.png"
 import styles from "./style.css"
-import Bus from "@entities/Bus"
+import ParticleEmitter from "@lib/utils/ParticleEmitter"
+import deadAnimDat from "./dead.json"
 
 const getTouchMappings = () => {
     const data = [
@@ -57,7 +58,7 @@ class Player extends TexRegion {
     invWeight=1
     suspended=false
     susTimer=0
-    constructor({ speed = 48, width = 64, height = 64, fricX=4, shard, cinder, controls, sounds, state, ...rest }) {
+    constructor({ speed = 48, width = 64, height = 64, fricX=4,  controls, sounds, state, ...rest }) {
         super({ frame: "ball", ...rest })
         this.width = width
         this.height = height
@@ -69,12 +70,11 @@ class Player extends TexRegion {
             y: height / 2
         }
         this.pos.y = 100
-        this.shard = shard
-        this.cinder = cinder
         this.sounds = sounds
         this.fricX0 = fricX
         this.state = state
-
+        this.deadAnim = new ParticleEmitter(deadAnimDat)
+        this.deadAnim.noOverlay = true
         // this.shard.onDead = () => { // what should happen upon player explosion
         //     /**
         //      * implicit assumptions: 
@@ -115,7 +115,7 @@ class Player extends TexRegion {
     setWeight(val) {
         this.weight = val
         this.invWeight = 1/this.weight
-        if (this.weight > 6) {
+        if (this.weight > 5 && !this.state.is("completed")) {
             this.suspended=true
             this.susTimer=0
         }
@@ -190,15 +190,15 @@ class Player extends TexRegion {
     explode() {
         // if (config.testMode) return
         if (this.state.is("completed")) return
-        this.cinder.pos.x = this.shard.pos.x = this.pos.x + this.width / 2
-        this.cinder.pos.y = this.shard.pos.y = this.pos.y + this.height / 2
+        this.deadAnim.pos.x = this.pos.x + this.width / 2
+        this.deadAnim.pos.y = this.pos.y + this.height / 2
         
         this.alpha = 0  // forces off the visibility (ensuring no update or rendering)
-        Node.get(objLayerId).add(this.cinder) // particle emitters have to be manually inserted into the scene graph, since it doesn't implicitly know where it should be located
-        Node.get(objLayerId).add(this.shard)
+        Node.get(objLayerId).add(this.deadAnim) // particle emitters have to be manually inserted into the scene graph, since it doesn't implicitly know where it should be located
+        // Node.get(objLayerId).add(this.shard)
         this.state.over(this.pos.x)
-        this.sounds.player_exp.play()
-        this.sounds.player_din.play(0.8)
+        // this.sounds.player_exp.play()
+        // this.sounds.player_din.play()
         this.velX = this.velY = 0
     }
     focusX() {
@@ -211,10 +211,11 @@ class Player extends TexRegion {
         this.susTimer+= dt
         this.pos.y -= 100*dt
         if (this.susTimer > 2) {
-            this.explode()
             this.susTimer=0
             this.suspended=false
             this.setWeight(1)
+            this.state.over(this.pos.x)
+            this.velX = this.velY = 0
         }
     }
     update(dt) {
