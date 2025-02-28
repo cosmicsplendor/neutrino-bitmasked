@@ -31,6 +31,7 @@ class Blade extends TexRegion {
 }
 class LeverSaw extends TexRegion {
     noOverlay=true
+    forceUpdate=true
     constructor({ x, y, length=36, player }) {
         super({ frame: "plug", pos: { x, y } })
         const lever = new Lever(28, 16)

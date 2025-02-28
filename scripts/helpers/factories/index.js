@@ -174,7 +174,11 @@ const factories = {
         },
         create(params) {
             const { x, y, length } = params
-            return { x, y, length: +length, name: "leverSaw" }
+            const results = [{ x, y, length: +length, name: "leverSaw"}]
+            results.colRects = [ {
+                x: x, y: y, h: 58, mat: "metal", w: 79
+            }] 
+            return results
         }
     },
     topSaw: saws({ name: "saw1", field: "width" }),
