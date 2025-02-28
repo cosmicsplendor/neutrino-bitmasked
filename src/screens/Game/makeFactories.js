@@ -12,6 +12,7 @@ import Monster from "@entities/Monster"
 import Crate from "@entities/Crate"
 import Pool from "@utils/Pool"
 import Bus from "@entities/Bus"
+import LeverSaw from "../../entities/LeverSaw"
 import config from "@config"
 
 import particlesId from "@assets/particles/all.cson"
@@ -134,6 +135,9 @@ export default ({ soundSprite, assetsCache, storage, player, state }) => { // us
                 player,
                 ...props
             })
+        },
+        leverSaw: (x, y, props, player)  => {
+            return new LeverSaw({x, y, length: props.length, player})
         },
         monster: (x, y, props={}, player) => {
             return new Monster({x, y, player, ...props })

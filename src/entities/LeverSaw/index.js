@@ -11,10 +11,11 @@ class Lever extends TexRegion {
     }
 }
 class Blade extends TexRegion {
-    constructor(lever, length) {
+    constructor(lever, length, player) {
         super({ frame: "sb6"})
         this.lever = lever
         this.length = length
+        this.player = player
         this.syncPos()
     }
     syncPos() {
@@ -27,10 +28,10 @@ class Blade extends TexRegion {
     }
 }
 class LeverSaw extends TexRegion {
-    constructor({ x, y, length=36 }) {
+    constructor({ x, y, length=36, player }) {
         super({ frame: "plug", pos: { x, y } })
         const lever = new Lever(x + 16, y + 16)
-        const blade = new Blade(lever, length)
+        const blade = new Blade(lever, length, player)
         this.add(lever)
         this.add(blade)
     }
