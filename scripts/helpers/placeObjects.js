@@ -94,7 +94,10 @@ const placeObjects = async (newBlock, map) => {
         await map.exportMap();
         const response = await placeObject(Number(index), projections, map)
         map.projections.length = 0
-        if (response === "Pass All") break
+        if (response === "Pass All") {
+            await map.exportMap()
+            break
+        }
     }
     map.projections.length = 0
 }
