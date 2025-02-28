@@ -167,6 +167,16 @@ const factories = {
             })
         }
     },
+    leverSaw: {
+        fields: ["length"],
+        dims() {
+            return { width: 79, height: 58 }
+        },
+        create(params) {
+            const { x, y, length } = params
+            return { x, y, length: +length, name: "leverSaw" }
+        }
+    },
     topSaw: saws({ name: "saw1", field: "width" }),
     bottomSaw: saws({ name: "saw2", field: "width" }),
     spike: saws({ name: "spike", field: "width", dims: { width: 80, height: 40 }, xOffset: 8 }),
