@@ -160,7 +160,7 @@ class Monster extends BoneAnimNode {
     stateMachineMixin(this, states);
     this.switchState('runRight');
     this.syncroNode.hitCirc= {
-      x: -60, y: 0, radius: 80
+      x: -60, y: 0, radius: 100
     }
     this.testCol = getTestFn(this.syncroNode, this.player)
   }

@@ -38,6 +38,10 @@ class Bat extends TexRegion {
             this.frame = this.frame === "bat1" ? "bat2" : "bat1";
         }
     }
+    reset() {
+        this.remove()
+        this.parent = null
+    }
     update(dt) {
         this.fadeIn(dt);
         this.updateAnim(dt)
