@@ -11,7 +11,7 @@ class Bat extends TexRegion {
         const offsetAngle = 2 * Math.PI * Math.random();
         this.targetDx = -6 + 32 * Math.cos(offsetAngle);
         this.targetDy = 4 + 24 * Math.sin(offsetAngle);
-        this.interp = randf(0.025, 0.0025);
+        this.interp = randf(0.05, 0.0025);
         this.alpha = 0.1;
         this.timer = 0;
 
