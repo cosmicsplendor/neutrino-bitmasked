@@ -8,7 +8,7 @@ class Lever extends TexRegion {
         this.rotation = 0
     }
     update(dt) {
-        // this.rotation += dt * Math.PI
+        this.rotation += dt * Math.PI
     }
 }
 class Blade extends TexRegion {
