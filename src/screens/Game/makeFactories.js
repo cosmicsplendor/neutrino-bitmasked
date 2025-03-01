@@ -13,6 +13,7 @@ import Crate from "@entities/Crate"
 import Pool from "@utils/Pool"
 import Bus from "@entities/Bus"
 import LeverSaw from "../../entities/LeverSaw"
+import Vent from "../../entities/Vent"
 import config from "@config"
 
 import particlesId from "@assets/particles/all.cson"
@@ -138,6 +139,10 @@ export default ({ soundSprite, assetsCache, storage, player, state }) => { // us
         },
         leverSaw: (x, y, props, player)  => {
             return new LeverSaw({x, y, length: props.length, player})
+        },
+        vent: (x, y)  => {
+            console.log("Vent", { x, y })
+            return new Vent(x, y)
         },
         monster: (x, y, props={}, player) => {
             return new Monster({x, y, player, ...props })

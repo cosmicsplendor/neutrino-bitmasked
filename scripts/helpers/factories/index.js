@@ -109,10 +109,14 @@ const factories = {
         },
         create: params => {
             const { x, y } = params
-            return [
+            const result = [
                 { x: x, y: y, name: "vent"},
-                { x: x + 70, y, name: "wind" }
+                { x: x + 64, y: y - 4, name: "wind" }
             ]
+            result.colRects = [
+                { x, y, w: 141, h: 144}
+            ]
+            return result
         }
     },
     fire: {

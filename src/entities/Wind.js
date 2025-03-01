@@ -47,7 +47,7 @@ class Wind extends Node {
         this.pos.y = y - 9
         this.player = player
         // this.sound = sound
-        this.hitbox = { x: -25, y: -200, width: 50, height: 200}
+        this.hitbox = { x: -24, y: -240, width: 48, height: 200}
         this.testCol = getTestFn(this, player)
 
 
