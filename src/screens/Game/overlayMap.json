@@ -6,5 +6,6 @@
     "em3": "none",
     "stud": "none",
     "spike": [0.9, 0.9, 0.9],
-    "pillar": "none"
+    "pillar": "none",
+    "em1": "none"
 }

@@ -4,7 +4,7 @@ import getTestFn from "@lib/components/Collision/helpers/getTestFn"
 import { randf, rand, easingFns, sqLen } from "@utils/math"
 
 const PI = Math.PI
-const period = [ 1.5, 2 ]
+const period = [ 3, 4 ]
 const amp = [ 16, 36 ]
 const height = [ 180, 180 ] 
 const swirlOffset = [ 0, PI]
@@ -17,15 +17,21 @@ class WindParticle extends TexRegion {
         this.amp = rand(amp[0], amp[1])
         this.height = rand(height[0], height[1])
         this.swirlOffset = randf(swirlOffset[0], swirlOffset[1])
-
+        this.initAlpha = 0.5
         this.t = 0
+        if (Math.random() < 0.5) {
+            const scale = 1.125
+            this.scale = { x: scale, y: scale }
+        } else {
+            this.scale = { x: 0.75 + Math.random() * 0.5, y: 0.75 + Math.random() * 0.5 }
+        }
     }
     update(dt) {
         this.t += dt
         const norm = this.t / this.period
         this.pos.y = - this.height * easingFns.linear(norm)
         this.pos.x = this.amp * Math.sin(this.swirlOffset + 4 * PI * norm)
-        this.alpha = 1 - easingFns.quadOut(norm)
+        this.alpha = (1 - easingFns.quadOut(norm)) * 0.4
         if (norm > 1) {
             this.t = 0
         }
@@ -33,6 +39,7 @@ class WindParticle extends TexRegion {
 }
 
 class Wind extends Node {
+    overlay=[1, 1, 1]
     constructor(data, x, y, player) {
         super(data)
         // this.rotation = -Math.PI / 2
@@ -44,10 +51,10 @@ class Wind extends Node {
         this.testCol = getTestFn(this, player)
 
 
-        for (let i = 0; i < 60; i++) {
+        for (let i = 0; i < 140; i++) {
             this.add(new WindParticle())
         }
-        this.feed(240, 1 / 60)
+        this.feed(500, 1 / 60)
     }
     feed(iterations, dt) {
         for (let i = iterations - 1; i > -1; i--) {
