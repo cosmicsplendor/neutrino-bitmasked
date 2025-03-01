@@ -103,7 +103,6 @@ const factories = {
         }
     },
     wind: {
-        randomize: true,
         dims: () => {
             return { width: 141, height: 32 }
         },
