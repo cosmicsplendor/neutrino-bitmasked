@@ -89,8 +89,15 @@ const factories = {
         fields: ['toX', 'toY', 'period'], // Based on Bus constructor
         dims: () => ({ width: 88, height: 88 }),
         create: (params) => {
-            const { toX, toY, x, y, name, period, alignment } = params
-            return { groupId: "col-rects", x, y: y + (alignment.startsWith("top") ? 32 : 0), name, toX: x + (toX ? Number(toX) * TILE_SIZE: 0), toY: y + (toY ? Number(toY) * TILE_SIZE: 0), period: +period }
+            const { toX, toY, x, y, name, period, alignment, projection } = params
+            const results = []
+            console.log(alignment)
+            const trackX = projection.normal === "left" ? (projection.x + projection.w) * TILE_SIZE - 20: projection.x * TILE_SIZE
+            for (let y = 0; y < projection.h; y++) {
+                results.push({ x: trackX, y: (projection.y + y) * TILE_SIZE, name: "track" })
+            }
+            results.push({ groupId: "col-rects", x, y: y + (alignment.startsWith("top") ? 32 : 0), name, toX: x + (toX ? Number(toX) * TILE_SIZE: 0), toY: y + (toY ? Number(toY) * TILE_SIZE: 0), period: +period, flip: projection.normal === "right" })
+            return results
         }
     },
     default: {
@@ -104,7 +111,7 @@ const factories = {
     },
     wind: {
         dims: () => {
-            return { width: 141, height: 32 }
+            return { width: 141, height: 144 }
         },
         create: params => {
             const { x, y } = params
@@ -113,7 +120,7 @@ const factories = {
                 { x: x + 64, y: y - 4, name: "wind" }
             ]
             result.colRects = [
-                { x, y, w: 141, h: 144}
+                { x, y, w: 141, h: 144, mat: "metal" }
             ]
             return result
         }
