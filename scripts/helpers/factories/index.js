@@ -80,23 +80,28 @@ const factories = {
         }
     },
     bus: {
-        fieldsFilter: (name, prevParams) => {
-            if (name === "toY" && +prevParams.toX !== 0) {
-                return false
-            }
-            return true
-        },
-        fields: ['toX', 'toY', 'period'], // Based on Bus constructor
+        fieldsFilter: () => true,  // No filtering needed since toX is gone
+        fields: ['toY', 'period'], // Removed toX from fields
         dims: () => ({ width: 88, height: 88 }),
         create: (params) => {
-            const { toX, toY, x, y, name, period, alignment, projection } = params
+            const { x, y, name, toY, period, alignment, projection } = params
             const results = []
-            console.log(alignment)
-            const trackX = projection.normal === "left" ? (projection.x + projection.w) * TILE_SIZE - 20: projection.x * TILE_SIZE
+            
+            // Always create the track since we're only using vertical movement
+            const trackX = projection.normal === "left" ? 
+                (projection.x + projection.w) * TILE_SIZE : 
+                projection.x * TILE_SIZE - 20
+                
             for (let y = 0; y < projection.h; y++) {
-                results.push({ x: trackX, y: (projection.y + y) * TILE_SIZE, name: "track" })
+                results.push({  x: trackX,  y: (projection.y + y) * TILE_SIZE,  name: "track",  flipX: projection.normal === "right" 
+                })
             }
-            results.push({ groupId: "col-rects", x, y: y + (alignment.startsWith("top") ? 32 : 0), name, toX: x + (toX ? Number(toX) * TILE_SIZE: 0), toY: y + (toY ? Number(toY) * TILE_SIZE: 0), period: +period, flip: projection.normal === "right" })
+            
+            // Add the bus with only vertical movement
+            const delX = projection.normal === "right" ? -2 : 2
+            results.push({  groupId: "col-rects",  x: x + delX,  y: y + (alignment.startsWith("top") ? 32 : 0),  name,  toX: x, toY: y + (toY ? Number(toY) * TILE_SIZE : 0),  period: +period,  flip: projection.normal === "right" 
+            })
+            
             return results
         }
     },
