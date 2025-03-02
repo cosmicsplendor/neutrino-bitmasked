@@ -47,7 +47,7 @@ class Wind extends Node {
         this.pos.y = y - 9
         this.player = player
         // this.sound = sound
-        this.hitbox = { x: -24, y: -240, width: 48, height: 200}
+        this.hitbox = { x: -20, y: -224, width: 40, height: 200}
         this.testCol = getTestFn(this, player)
 
 
@@ -65,8 +65,8 @@ class Wind extends Node {
     }
     update(dt) {
         if (this.testCol(this, this.player) && this.player.visible) {
-            const dPosX = this.player.pos.x + this.player.width / 2 - this.pos.x
-            const dPosY = this.player.pos.y + this.player.width / 2 - this.pos.y
+            const dPosX = this.player.pos.x + 32 - this.pos.x
+            const dPosY = this.player.pos.y + 32 - this.pos.y
             const sqDist = sqLen(dPosX, dPosY)
             if (sqDist < 4096) { return }
             this.player.controls.switchState("jumping", this.player)

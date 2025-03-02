@@ -12,7 +12,7 @@ class Bus extends TexRegion {
     forceUpdate = true
     noOverlay=true
     smooth=true
-    constructor(x, y, toX, toY, period, player) { // spawn points for movable collidable entities have to be on midground layer (on tiled layer should be set to mg)
+    constructor({x, y, toX, toY, period, flip, player}) { // spawn points for movable collidable entities have to be on midground layer (on tiled layer should be set to mg)
         super({ pos: { x, y }, frame: "crane" })
         this.prevPosY = this.pos.y
         this.prevPosX = this.pos.x
@@ -32,6 +32,10 @@ class Bus extends TexRegion {
 
         this.player = player
         this.testCol = getTestFn(this, player)
+        if (flip) {
+            this.scale = { x: -1, y: 1 }
+            this.pos.x += 88
+        }
     }
     update(dt) {
         this.t += dt
