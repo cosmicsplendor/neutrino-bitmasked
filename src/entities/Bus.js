@@ -35,6 +35,7 @@ class Bus extends TexRegion {
         if (flip) {
             this.scale = { x: -1, y: 1 }
             this.pos.x += 88
+            this.hitbox.x -= 88
         }
     }
     update(dt) {
