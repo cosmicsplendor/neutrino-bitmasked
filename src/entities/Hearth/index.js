@@ -3,20 +3,26 @@ import Movement from "@lib/components/Movement"
 import { colRectsId, objLayerId } from "@lib/constants"
 import { TexRegion, Node } from "@lib/index"
 import config from "@config"
-import { pickOne, rand } from "@lib/utils/math"
 import sparkB from "./sparkB.json"
 import sparkL from "./sparkL.json"
 import sparkR from "./sparkR.json"
 import sparkT from "./sparkT.json"
+import ParticleEmitter from "@lib/utils/ParticleEmitter"
 
 class FireBall extends TexRegion {
     static getAnims() {
-        if (this.anims) return this.deathAnim
-        this.deathAnim = new ParticleEmitter(deathAnimDat)
+        if (this.anims) return this.anims
         this.anims = {
+            bottom: new ParticleEmitter(sparkB),
+            left: new ParticleEmitter(sparkL),
+            right: new ParticleEmitter(sparkR),
+            top: new ParticleEmitter(sparkT)
         }
-        this.deathAnim.noOverlay = true
-        return this.deathAnim
+        this.anims.bottom.noOverlay = true
+        this.anims.left.noOverlay = true
+        this.anims.right.noOverlay = true
+        this.anims.top.noOverlay = true
+        return this.anims
       }
     hitCirc={
         x: 2,
@@ -29,6 +35,10 @@ class FireBall extends TexRegion {
             colDir === "bottom" ? -500: velY
         this.velX = colDir === "left" ? 75:
             colDir === "right" ? -75: velX
+        const anim = FireBall.getAnims()[colDir]
+        anim.pos.x = this.pos.x + 32
+        anim.pos.y = this.pos.y + 64
+        Node.get(objLayerId).add(anim)
         // this.scale.x *= 0.9
         // this.scale.y = this.scale.x
     }
