@@ -10,6 +10,7 @@ import sparkT from "./sparkT.json"
 import ParticleEmitter from "@lib/utils/ParticleEmitter"
 
 class FireBall extends TexRegion {
+    forceUpdate = true
     static getAnims() {
         if (this.anims) return this.anims
         this.anims = {
@@ -25,9 +26,9 @@ class FireBall extends TexRegion {
         return this.anims
       }
     hitCirc={
-        x: 2,
-        y: 2,
-        radius: 30
+        x: 4,
+        y: 4,
+        radius: 26
     }
     onWallCol(block, velX, velY, _, reboundX, reboundY) {
         const colDir = this.colDir
@@ -45,10 +46,14 @@ class FireBall extends TexRegion {
     constructor(x, y) {
         super({ frame: "fireball", overlay: "none", pos: { x, y } })
         this.wallCollision = new Collision({ entity: this, blocks: colRectsId, rigid: true, movable: false, onHit: this.onWallCol.bind(this) })
-        Movement.makeMovable(this, { velX: 100, velY: 0, accX: 0, accY: config.gravity * 0.75})   
+        Movement.makeMovable(this, { velX: 50, velY: 0, accX: 0, accY: config.gravity * 0.75})   
         this.scale = { x: 1, y: 1 }
         this.timeout = 0.75
         this.decayF = 1
+        this.rotation = 0
+        this.anchor = {
+            x: 32, y: 32
+        }
     }
     update(dt) {
         Movement.update(this, dt)
@@ -57,18 +62,22 @@ class FireBall extends TexRegion {
             return
         }
         this.wallCollision.update(dt)
+        // console.log(this.rotation)
+        this.rotation += dt * this.velX * 0.01
     }
 }
 
 class Hearth extends Node {
     constructor({ x, y }) {
         super({ pos: { x, y }})
-        const hearth = new TexRegion({ frame: "hearth", overlay: "none" })
-        const hearthBg = new TexRegion({ frame: "hearthbg", overlay: "none", pos: { x: x + 36, y: y + 56 } })
-        // this.add(hearthBg)
-        this.add(hearth)
+        const hearth1 = new TexRegion({ frame: "hearth1", overlay: "none" })
+        const hearth2 = new TexRegion({ frame: "hearth2", overlay: "none", pos: { x: 66, y: 0 } })
+        const hearth3 = new TexRegion({ frame: "hearth3", overlay: "none", pos: { x: 134, y: 0 } })
+        const hearthBg = new TexRegion({ frame: "hearthbg", overlay: "none", pos: { x: x + 44, y: y + 55 } })
+        this.add(hearth1)
+        this.add(hearth2)
+        this.add(hearth3)
         const fireBall = new FireBall(x + 32, y)
-        // fireNode.add(fireBall)
         Node.get(objLayerId).add(hearthBg)
         Node.get(objLayerId).add(fireBall)
     }

@@ -140,7 +140,7 @@ const factories = {
                 { x: x, y: y, name: "hearth" },
             ]
             result.colRects = [
-                { x, y, w: 128, h: 118 }
+                { x, y, w: 204, h: 98 }
             ]
             return result
         }
