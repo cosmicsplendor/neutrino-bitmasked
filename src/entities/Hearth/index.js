@@ -4,14 +4,19 @@ import { colRectsId, objLayerId } from "@lib/constants"
 import { TexRegion, Node } from "@lib/index"
 import config from "@config"
 import { pickOne, rand } from "@lib/utils/math"
+import sparkB from "./sparkB.json"
+import sparkL from "./sparkL.json"
+import sparkR from "./sparkR.json"
+import sparkT from "./sparkT.json"
 
 class FireBall extends TexRegion {
-    static getFireAnim() {
-        // if (this.deathAnim instanceof ParticleEmitter) return this.deathAnim
-        // this.deathAnim = new ParticleEmitter(deathAnimDat)
-        // this.deathAnim.noOverlay = true
-        // // this.deathAnim.overlay = [1,0,0]
-        // return this.deathAnim
+    static getAnims() {
+        if (this.anims) return this.deathAnim
+        this.deathAnim = new ParticleEmitter(deathAnimDat)
+        this.anims = {
+        }
+        this.deathAnim.noOverlay = true
+        return this.deathAnim
       }
     hitCirc={
         x: 2,
