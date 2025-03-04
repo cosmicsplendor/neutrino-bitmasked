@@ -6,6 +6,13 @@ import config from "@config"
 import { pickOne, rand } from "@lib/utils/math"
 
 class FireBall extends TexRegion {
+    static getFireAnim() {
+        // if (this.deathAnim instanceof ParticleEmitter) return this.deathAnim
+        // this.deathAnim = new ParticleEmitter(deathAnimDat)
+        // this.deathAnim.noOverlay = true
+        // // this.deathAnim.overlay = [1,0,0]
+        // return this.deathAnim
+      }
     hitCirc={
         x: 2,
         y: 2,
