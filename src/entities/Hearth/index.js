@@ -45,8 +45,8 @@ class FireBall extends TexRegion {
     }
     constructor(x, y) {
         super({ frame: "fireball", overlay: "none", pos: { x, y } })
-        this.wallCollision = new Collision({ entity: this, blocks: colRectsId, rigid: true, movable: false, onHit: this.onWallCol.bind(this) })
-        Movement.makeMovable(this, { velX: 50, velY: 0, accX: 0, accY: config.gravity * 0.75})   
+        this.wallCollision = new Collision({ entity: this, blocks: colRectsId, rigid: true, movable: false, onHit: this.onWallCol.bind(this), roll: false })
+        Movement.makeMovable(this, { velX: -50, velY: 0, accX: 0, accY: config.gravity * 0.75})   
         this.scale = { x: 1, y: 1 }
         this.timeout = 0.75
         this.decayF = 1
@@ -62,7 +62,6 @@ class FireBall extends TexRegion {
             return
         }
         this.wallCollision.update(dt)
-        // console.log(this.rotation)
         this.rotation += dt * this.velX * 0.01
     }
 }
