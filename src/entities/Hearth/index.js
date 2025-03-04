@@ -37,11 +37,21 @@ class FireBall extends TexRegion {
         this.velX = colDir === "left" ? 75:
             colDir === "right" ? -75: velX
         const anim = FireBall.getAnims()[colDir]
-        anim.pos.x = this.pos.x + 32
-        anim.pos.y = this.pos.y + 64
+        
         Node.get(objLayerId).add(anim)
-        // this.scale.x *= 0.9
-        // this.scale.y = this.scale.x
+        if (colDir === "bottom") {
+            anim.pos.x = this.pos.x + 32
+            anim.pos.y = this.pos.y + 64
+        } else if (colDir === "top") {
+            anim.pos.x = this.pos.x + 32
+            anim.pos.y = this.pos.y
+        } else if (colDir === "left") {
+            anim.pos.x = this.pos.x
+            anim.pos.y = this.pos.y + 32
+        } else if (colDir === "right") {    
+            anim.pos.x = this.pos.x + 64
+            anim.pos.y = this.pos.y + 32
+        }
     }
     constructor(x, y) {
         super({ frame: "fireball", overlay: "none", pos: { x, y } })
