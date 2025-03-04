@@ -130,6 +130,21 @@ const factories = {
             return result
         }
     },
+    hearth: {
+        dims: () => {
+            return { width: 128, height: 118 }
+        },
+        create: params => {
+            const { x, y } = params
+            const result = [
+                { x: x, y: y, name: "hearth" },
+            ]
+            result.colRects = [
+                { x, y, w: 128, h: 118 }
+            ]
+            return result
+        }
+    },
     fire: {
         fields: [],
         dims: () => {
