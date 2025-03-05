@@ -12,6 +12,7 @@ import ParticleEmitter from "@lib/utils/ParticleEmitter"
 class FireBall extends TexRegion {
     forceUpdate = true
     hits=0
+    deadIn=2
     reset() {
         this.remove()
         this.parent = null
@@ -61,7 +62,7 @@ class FireBall extends TexRegion {
         this.hits++
         if (this.hits > 9) {
             this.hearth.emit()
-            return this.dead = true
+            return this.dormant = true
         }
         TexRegion.syncFrame(this, "fireball" + this.hits)
         this.hitCirc = {
@@ -82,7 +83,12 @@ class FireBall extends TexRegion {
         }
     }
     update(dt) {
-        if (this.dead) {
+        if (this.dormant) {
+            this.deadIn -= dt
+            this.alpha = this.deadIn * 0.5
+            if (this.deadIn < 0) {
+                this.remove()
+            }
             return
         }
         Movement.update(this, dt)
@@ -106,6 +112,9 @@ class Hearth extends Node {
         this.add(hearth2)
         this.add(hearth3)
         Node.get(mgLayerId).add(hearthBg)
+        this.emit()
+    }
+    reset() {
         this.emit()
     }
     emit() {
