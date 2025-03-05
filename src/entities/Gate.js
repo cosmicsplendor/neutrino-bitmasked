@@ -4,7 +4,7 @@ import getTestFn from "@lib/components/Collision/helpers/getTestFn"
 const hitbox = Object.freeze({ x: 9, y: 0, width: 93, height: 200 })
 class Gate extends TexRegion {
     overlay = [0.65,0.65,0.65]
-    forceUpdate = true
+    forceUpd = true
     constructor({ endY, uSound, dSound, speed=150, pos, player, ...rest }) {
         super({ frame: "gate", pos, ...rest })
         this.endY = endY

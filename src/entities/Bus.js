@@ -9,7 +9,7 @@ class Bus extends TexRegion {
         width: 86,
         height: 88
     }
-    forceUpdate = true
+    forceUpd = true
     noOverlay=true
     smooth=true
     constructor({x, y, toX, toY, period, flip, player}) { // spawn points for movable collidable entities have to be on midground layer (on tiled layer should be set to mg)

@@ -3,7 +3,7 @@ import { randf } from "@lib/utils/math";
 
 class Bat extends TexRegion {
     noOverlay = true;
-    forceUpdate=true
+    forceUpd=true
     constructor(x, y, player) {
         const scale = randf(0.5, 0.25);
         super({ frame: "bat1", pos: { x, y }, scale: { x: scale, y: scale } });

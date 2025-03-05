@@ -6,7 +6,7 @@ class Magnet extends TexRegion {
         this.tint = [ 0, 0, 0, 0 ]
         this.vel = 1
         this.tintVal = 0
-        this.forceUpdate = true
+        this.forceUpd = true
     }
     update(dt) {
         this.tintVal += dt * 0.2 * this.vel

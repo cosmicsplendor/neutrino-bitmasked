@@ -3,7 +3,7 @@ import getTestFn from "@lib/components/Collision/helpers/getTestFn";
 const { TexRegion } = require("@lib/index");
 
 class Lever extends TexRegion {
-    forceUpdate = true
+    forceUpd = true
     constructor(x, y, path="pend", period=1) {
       super({ frame: "lever", pos: { x, y } })
       this.anchor = { x: 12, y: 14 }
@@ -45,7 +45,7 @@ class Lever extends TexRegion {
   }
   
 class Blade extends TexRegion {
-    forceUpdate = true
+    forceUpd = true
     hitCirc = {
         x: 2, y: 2, radius: 46
     }
@@ -71,7 +71,7 @@ class Blade extends TexRegion {
 }
 class LeverSaw extends TexRegion {
     noOverlay = true
-    forceUpdate = true
+    forceRen = true
     constructor({ x, y, length = 36, player, path, period }) {
         super({ frame: "plug", pos: { x, y } })
         const lever = new Lever(28, 16, path, period)
