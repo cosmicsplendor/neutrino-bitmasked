@@ -88,6 +88,7 @@ class FireBall extends TexRegion {
     update(dt) {
         if (this.testCol(this, this.player)) {
             this.remove()
+            this.player.explode()
             return
         }
         if (this.dormant) {
