@@ -168,7 +168,7 @@ const factories = {
             }).flat()
          
             const results = [
-                { x: roundedX - 16, y, name: "em1", collapsed: [{ y: y + 32, x: roundedX, tile: wt_1 }] },
+                { x: roundedX - 16, y, name: "em1", collapsed: [{ y: y + 32, x: roundedX, tile: "wt_1" }] },
                 { x: roundedX + 24, y, name: "fire" },
                 ...wallTiles
             ]
@@ -199,7 +199,7 @@ const factories = {
         },
         create(params) {
             const { x, y, length, period, path } = params
-            const results = [{ x, y, length: +length, name: "leverSaw", period: +period, path }]
+            const results = [{ x, y, length: 200, name: "leverSaw", period: +period, path }]
             results.colRects = [ {
                 x: x, y: y, h: 58, mat: "metal", w: 79
             }] 

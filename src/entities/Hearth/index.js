@@ -64,7 +64,11 @@ class FireBall extends TexRegion {
         this.hits++
         if (this.hits > 9) {
             this.hearth.emit()
-            return this.dormant = true
+            if (colDir !== "bottom") {
+                return this.remove()
+            }
+            this.dormant = true
+            return
         }
         TexRegion.syncFrame(this, "fireball" + this.hits)
         this.hitCirc = {

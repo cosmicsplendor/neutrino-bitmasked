@@ -12,7 +12,7 @@ class Lever extends TexRegion {
       this.period = period
       this.elapsedTime = 0
   
-      if (this.path === "circular") {
+      if (this.path === "circ") {
         // Circular path: complete one full revolution in the given period.
         this.update = dt => {
           this.rotation = (this.rotation + dt * (2 * Math.PI / this.period)) % (2 * Math.PI)
@@ -58,7 +58,8 @@ class Blade extends TexRegion {
         this.testCol = getTestFn(this, player)
     }
     syncPos() {
-        const { lever, length } = this
+        const { lever } = this
+        const length = this.length || 220
         this.pos.x = lever.pos.x + lever.anchor.x + length * Math.cos(lever.rotation) - 48,
             this.pos.y = lever.pos.y + lever.anchor.y + length * Math.sin(lever.rotation) - 48
     }
