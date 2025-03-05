@@ -11,6 +11,10 @@ import ParticleEmitter from "@lib/utils/ParticleEmitter"
 
 class FireBall extends TexRegion {
     forceUpdate = true
+    reset() {
+        this.remove(this)
+        this.parent = null
+    }
     static getAnims() {
         if (this.anims) return this.anims
         this.anims = {
