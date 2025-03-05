@@ -1,6 +1,6 @@
 import Collision from "@lib/components/Collision"
 import Movement from "@lib/components/Movement"
-import { colRectsId, objLayerId } from "@lib/constants"
+import { colRectsId, mgLayerId, objLayerId } from "@lib/constants"
 import { TexRegion, Node } from "@lib/index"
 import config from "@config"
 import sparkB from "./sparkB.json"
@@ -105,12 +105,12 @@ class Hearth extends Node {
         this.add(hearth1)
         this.add(hearth2)
         this.add(hearth3)
-        Node.get(objLayerId).add(hearthBg)
+        Node.get(mgLayerId).add(hearthBg)
         this.emit()
     }
     emit() {
         const fireBall = new FireBall(this.pos.x + 32, this.pos.y, this)
-        Node.get(objLayerId).add(fireBall)
+        Node.get(mgLayerId).add(fireBall)
     }
 }
 
