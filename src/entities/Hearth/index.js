@@ -11,8 +11,9 @@ import ParticleEmitter from "@lib/utils/ParticleEmitter"
 
 class FireBall extends TexRegion {
     forceUpdate = true
+    hits=0
     reset() {
-        this.remove(this)
+        this.remove()
         this.parent = null
     }
     static getAnims() {
@@ -56,6 +57,15 @@ class FireBall extends TexRegion {
             anim.pos.x = this.pos.x + 64
             anim.pos.y = this.pos.y + 32
         }
+
+        this.hits++
+        if (this.hits > 9) {
+            return this.dead = true
+        }
+        TexRegion.syncFrame(this, "fireball" + this.hits)
+        this.hitCirc = {
+            x: 4, y: 4, radius: 26 - this.hits
+        }
     }
     constructor(x, y) {
         super({ frame: "fireball", overlay: "none", pos: { x, y } })
@@ -70,13 +80,16 @@ class FireBall extends TexRegion {
         }
     }
     update(dt) {
+        if (this.dead) {
+            return
+        }
         Movement.update(this, dt)
         if (this.timeout > 0){
             this.timeout -= dt
             return
         }
         this.wallCollision.update(dt)
-        this.rotation += dt * this.velX * 0.01
+        this.rotation += dt * this.velX * 0.015
     }
 }
 
