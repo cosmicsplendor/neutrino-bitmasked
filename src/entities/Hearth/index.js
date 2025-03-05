@@ -8,6 +8,7 @@ import sparkL from "./sparkL.json"
 import sparkR from "./sparkR.json"
 import sparkT from "./sparkT.json"
 import ParticleEmitter from "@lib/utils/ParticleEmitter"
+import getTestFn from "@lib/components/Collision/helpers/getTestFn"
 
 class FireBall extends TexRegion {
     forceUpdate = true
@@ -36,7 +37,7 @@ class FireBall extends TexRegion {
         y: 4,
         radius: 26
     }
-    onWallCol(block, velX, velY, _, reboundX, reboundY) {
+    onWallCol(_, velX, velY,) {
         const colDir = this.colDir
         this.velY = colDir === "top" ? 50:
             colDir === "bottom" ? -500: velY
@@ -69,7 +70,7 @@ class FireBall extends TexRegion {
             x: 4, y: 4, radius: 26 - this.hits
         }
     }
-    constructor(x, y, hearth) {
+    constructor(x, y, hearth, player) {
         super({ frame: "fireball", overlay: "none", pos: { x, y } })
         this.hearth = hearth
         this.wallCollision = new Collision({ entity: this, blocks: colRectsId, rigid: true, movable: false, onHit: this.onWallCol.bind(this), roll: false })
@@ -81,8 +82,14 @@ class FireBall extends TexRegion {
         this.anchor = {
             x: 32, y: 32
         }
+        this.player = player
+        this.testCol = getTestFn(this, player)
     }
     update(dt) {
+        if (this.testCol(this, this.player)) {
+            this.remove()
+            return
+        }
         if (this.dormant) {
             this.deadIn -= dt
             this.alpha = this.deadIn * 0.5
@@ -102,7 +109,7 @@ class FireBall extends TexRegion {
 }
 
 class Hearth extends Node {
-    constructor({ x, y }) {
+    constructor({ x, y, player }) {
         super({ pos: { x, y }})
         const hearth1 = new TexRegion({ frame: "hearth1", overlay: "none" })
         const hearth2 = new TexRegion({ frame: "hearth2", overlay: "none", pos: { x: 66, y: 0 } })
@@ -112,13 +119,14 @@ class Hearth extends Node {
         this.add(hearth2)
         this.add(hearth3)
         Node.get(mgLayerId).add(hearthBg)
+        this.player = player
         this.emit()
     }
     reset() {
         this.emit()
     }
     emit() {
-        const fireBall = new FireBall(this.pos.x + 32, this.pos.y, this)
+        const fireBall = new FireBall(this.pos.x + 32, this.pos.y, this, this.player)
         Node.get(mgLayerId).add(fireBall)
     }
 }
