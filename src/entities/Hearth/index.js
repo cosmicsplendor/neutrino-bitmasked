@@ -9,9 +9,10 @@ import sparkR from "./sparkR.json"
 import sparkT from "./sparkT.json"
 import ParticleEmitter from "@lib/utils/ParticleEmitter"
 import getTestFn from "@lib/components/Collision/helpers/getTestFn"
+import { rand } from "@lib/utils/math"
 
 class FireBall extends TexRegion {
-    forceUpdate = true
+    forceUpd = true
     hits=0
     deadIn=2
     reset() {
@@ -74,7 +75,7 @@ class FireBall extends TexRegion {
         super({ frame: "fireball", overlay: "none", pos: { x, y } })
         this.hearth = hearth
         this.wallCollision = new Collision({ entity: this, blocks: colRectsId, rigid: true, movable: false, onHit: this.onWallCol.bind(this), roll: false })
-        Movement.makeMovable(this, { velX: -50, velY: 0, accX: 0, accY: config.gravity * 0.75})   
+        Movement.makeMovable(this, { velX: 75 * hearth.dir, velY: 0, accX: 0, accY: config.gravity * 0.75})   
         this.scale = { x: 1, y: 1 }
         this.timeout = 0.75
         this.decayF = 1
@@ -110,7 +111,7 @@ class FireBall extends TexRegion {
 }
 
 class Hearth extends Node {
-    constructor({ x, y, player }) {
+    constructor({ x, y, player, dir=1 }) {
         super({ pos: { x, y }})
         const hearth1 = new TexRegion({ frame: "hearth1", overlay: "none" })
         const hearth2 = new TexRegion({ frame: "hearth2", overlay: "none", pos: { x: 66, y: 0 } })
@@ -121,13 +122,14 @@ class Hearth extends Node {
         this.add(hearth3)
         Node.get(mgLayerId).add(hearthBg)
         this.player = player
+        this.dir=dir
         this.emit()
     }
     reset() {
         this.emit()
     }
     emit() {
-        const fireBall = new FireBall(this.pos.x + 32, this.pos.y, this, this.player)
+        const fireBall = new FireBall(this.pos.x + 80 + rand(-32, 32), this.pos.y, this, this.player)
         Node.get(mgLayerId).add(fireBall)
     }
 }

@@ -145,7 +145,7 @@ export default ({ soundSprite, assetsCache, storage, player, state }) => { // us
             return new Vent(x, y)
         },
         hearth: (x, y, props, player) => {
-            return new Hearth({ x, y, player})
+            return new Hearth({ x, y, dir: props.dir, player})
         },
         monster: (x, y, props={}, player) => {
             return new Monster({x, y, player, ...props })

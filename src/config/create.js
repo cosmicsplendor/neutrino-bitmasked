@@ -9,7 +9,7 @@ import levels from "../screens/Level/levels"
  */
 
 const resolutions = {
-    standard: { max: 1024, min: 720 },
+    standard: { max: 1600, min: 900 },
     r1080p: { max: 1920, min: 1080 },
     full: { max: 1360, min: 1080 },
     hd: { max: 1440, min: 986 },
@@ -17,7 +17,7 @@ const resolutions = {
     custom: { max: 1280, min: 1080 }
 }
 
-const desktopRes = resolutions.r1080p
+const desktopRes = resolutions.standard
 
 const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
 const scale = false
