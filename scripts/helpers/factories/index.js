@@ -192,13 +192,13 @@ const factories = {
         }
     },
     leverSaw: {
-        fields: ["length"],
+        fields: ["length", "path", "period"],
         dims() {
             return { width: 79, height: 58 }
         },
         create(params) {
-            const { x, y, length } = params
-            const results = [{ x, y, length: +length, name: "leverSaw"}]
+            const { x, y, length, period, path } = params
+            const results = [{ x, y, length: +length, name: "leverSaw", period: +period, path }]
             results.colRects = [ {
                 x: x, y: y, h: 58, mat: "metal", w: 79
             }] 

@@ -139,7 +139,7 @@ export default ({ soundSprite, assetsCache, storage, player, state }) => { // us
             })
         },
         leverSaw: (x, y, props, player)  => {
-            return new LeverSaw({x, y, length: props.length, player})
+            return new LeverSaw({x, y, length: props.length, period: props.period, path: props.path, player})
         },
         vent: (x, y)  => {
             return new Vent(x, y)

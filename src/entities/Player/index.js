@@ -152,9 +152,9 @@ class Player extends TexRegion {
             if (this.colDir === BOTTOM) {
                 this.fricX = this.fricX0
                 return this.controls.switchState("rolling")
-            }
-            // collision with the bottom edge
-            if (this.controls.state && this.controls.state.name === "jumping") {
+            } else if (this.colDir !== "top") {
+                this.velY = velY
+            } else if (this.controls.state && this.controls.state.name === "jumping") {
                 this.controls.state.onHalt()
             }
         }
