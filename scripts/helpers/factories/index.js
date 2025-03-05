@@ -192,7 +192,7 @@ const factories = {
         }
     },
     leverSaw: {
-        fields: ["length", "path", "period"],
+        fields: ["path", "period"],
         dims() {
             return { width: 79, height: 58 }
         },
