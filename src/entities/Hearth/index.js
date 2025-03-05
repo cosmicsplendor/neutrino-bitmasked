@@ -60,6 +60,7 @@ class FireBall extends TexRegion {
 
         this.hits++
         if (this.hits > 9) {
+            this.hearth.emit()
             return this.dead = true
         }
         TexRegion.syncFrame(this, "fireball" + this.hits)
@@ -67,8 +68,9 @@ class FireBall extends TexRegion {
             x: 4, y: 4, radius: 26 - this.hits
         }
     }
-    constructor(x, y) {
+    constructor(x, y, hearth) {
         super({ frame: "fireball", overlay: "none", pos: { x, y } })
+        this.hearth = hearth
         this.wallCollision = new Collision({ entity: this, blocks: colRectsId, rigid: true, movable: false, onHit: this.onWallCol.bind(this), roll: false })
         Movement.makeMovable(this, { velX: -50, velY: 0, accX: 0, accY: config.gravity * 0.75})   
         this.scale = { x: 1, y: 1 }
@@ -103,8 +105,11 @@ class Hearth extends Node {
         this.add(hearth1)
         this.add(hearth2)
         this.add(hearth3)
-        const fireBall = new FireBall(x + 32, y)
         Node.get(objLayerId).add(hearthBg)
+        this.emit()
+    }
+    emit() {
+        const fireBall = new FireBall(this.pos.x + 32, this.pos.y, this)
         Node.get(objLayerId).add(fireBall)
     }
 }
