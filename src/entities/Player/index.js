@@ -47,7 +47,7 @@ const getKeyMappings = () => Object.freeze({
 
 const PlayerControlsClass = config.isMobile ? PlayerTouchControls: PlayerKeyControls
 const getControlsMapping = config.isMobile ? getTouchMappings: getKeyMappings
-
+const BOTTOM = "bottom"
 class Player extends TexRegion {
     noOverlay=true
     static sounds = [ "player_din", "concrete", "wood", "metal", "jump", "player_exp" ]
@@ -149,7 +149,7 @@ class Player extends TexRegion {
         //     }
         // }
         if (velY) {
-            if (velY > 0) {
+            if (this.colDir === BOTTOM) {
                 this.fricX = this.fricX0
                 return this.controls.switchState("rolling")
             }
@@ -188,7 +188,7 @@ class Player extends TexRegion {
         }
     } 
     explode() {
-        // if (config.testMode) return
+        if (config.testMode) return
         if (this.state.is("completed")) return
         this.deadAnim.pos.x = this.pos.x + this.width / 2
         this.deadAnim.pos.y = this.pos.y + this.height / 2
