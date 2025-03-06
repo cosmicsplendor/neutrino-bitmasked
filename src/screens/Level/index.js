@@ -33,16 +33,19 @@ class LevelScreen extends Node {
         return { contSound, chSound, errSound }
 
     }
-    onEnter(fromMenu, advance) { // second level tells whether to advance to the next level (relative to the current one)
+    onEnter(bgEntities, advance) { // second level tells whether to advance to the next level (relative to the current one)
+        const fromMenu = !!bgEntities
         const { contSound, chSound, errSound } = this.setupSounds()
         const { game, storage, uiRoot } = this
         if (fromMenu) {
             contSound.play()
             this.curLevel = storage.getCurLevel()
+            placeBg(this, bgEntities, [0.033203125,0.06640625,0.107421875], game.renderer.api)
         } else if (advance) {
             this.curLevel = Math.min(this.curLevel + 1, config.levels)
         }
-        this.teardownBg = placeBg(this, game.assetsCache, null, game.renderer.api)
+        
+        // this.teardownBg = placeBg(this, game.assetsCache, null, game.renderer.api)
         this.teardownUI = initUI({
             onStart: (level, id) => {
                 game.switchScreen(GAME, level, id)

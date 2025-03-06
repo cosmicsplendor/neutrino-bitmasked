@@ -6,6 +6,7 @@ export const placeBg = (screen, bgEntities, overlay=[0.03529411764705882, 0.0352
     if (rendererAPI !== "webgl") return
     screen.container = new Node()
     screen.add(screen.container)
+    console.log(bgEntities)
     bgEntities.forEach(entity => {
         screen.container.add(entity)
     })

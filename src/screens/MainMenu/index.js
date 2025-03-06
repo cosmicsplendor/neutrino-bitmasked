@@ -33,25 +33,21 @@ class MainMenuScreen extends Node {
             this.realign(viewport)
 
             this.bgen = new BGen(game.assetsCache.get(atlasMeta), 48, 80)
-            this.bgen.reset("Suburb")
-            this.teardownBg = placeBg(this, this.bgen.generateMinWidth(1920), [0.033203125,0.06640625,0.107421875], game.renderer.api)
+            this.bgen.reset("Japan")
+            this.bgEntities = this.bgen.generateMinWidth(1920)
+            this.teardownBg = placeBg(this, this.bgEntities, [0.033203125,0.06640625,0.107421875], game.renderer.api)
             this.add(this.ball)
         })
     }
     update(dt, t) {
         if (!this.ball) return
         this.ball.update(dt, t)
-        this.container.children.forEach(child => {
-            if (child.update) {
-                child.update(dt)
-            }
-        })
     }
     onEnter() {
         const { uiRoot, game, sdk } = this
         this.teardownUI = initUI({ uiRoot, onPlay: () => {
             // on play button click
-            const proceed = () => game.switchScreen(LEVEL, true)
+            const proceed = () => game.switchScreen(LEVEL, this.bgEntities)
             uiRoot.clear()
             if (!config.prerollAd) {
                 return proceed()

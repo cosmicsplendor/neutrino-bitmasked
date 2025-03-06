@@ -61,7 +61,7 @@ export default overrides => {
     const defaultConfig = {
         levels: levels.length,
         viewport: new Viewport(computeViewport),
-        storageId: "jshdf190",
+        storageId: "lasdhf0qw",
         worldWidth: 1000,
         worldHeight: window.innerHeight,
         gravity: 1700,
