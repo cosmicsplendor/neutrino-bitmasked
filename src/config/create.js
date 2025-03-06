@@ -21,8 +21,7 @@ const desktopRes = resolutions.standard
 
 const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
 const scale = false
-const maxDpr = 1
-const maxMobileDpr = 1.5
+const maxMobileDpr = 2
 
 
 export default overrides => {

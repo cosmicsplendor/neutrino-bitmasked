@@ -68,6 +68,7 @@ class Blade extends TexRegion {
         if (this.testCol(this, this.player)) {
             this.player.explode()
         }
+        
     }
 }
 class LeverSaw extends TexRegion {
