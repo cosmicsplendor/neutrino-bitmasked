@@ -79,6 +79,7 @@ class IdleRight {
   update(dt) {
     this.timer += dt;
     if (this.timer >= 3) {
+      this.monster.xOffset -= 72
       this.monster.switchState('runLeft');
     }
   }
@@ -120,6 +121,7 @@ class IdleLeft {
   update(dt) {
     this.timer += dt;
     if (this.timer >= 3) {
+      this.monster.xOffset += 72
       this.monster.switchState('runRight');
     }
   }
