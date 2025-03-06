@@ -125,6 +125,10 @@ const factories = {
                 { x: x, y: y, name: "vent"},
                 { x: x + 64, y: y - 4, name: "wind" }
             ]
+            for (let i = 0; i < 2; i++) {
+                result.push({ x: x + 30, y: y - 340 - 40 * i, name: "orb" })
+                result.push({ x: x + 70, y: y - 340 - 40 * i, name: "orb" })
+            }
             result.colRects = [
                 { x, y, w: 141, h: 144, mat: "metal" }
             ]

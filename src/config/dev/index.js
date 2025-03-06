@@ -7,6 +7,6 @@ export default createConfig({
     showAdOnRestart: 0,
     showAdOnResume: 0,
     prerollAd: false,
-    testMode: true,
+    testMode: false,
     debug: true
 })
