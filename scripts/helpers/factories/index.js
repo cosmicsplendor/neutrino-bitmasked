@@ -180,16 +180,16 @@ const factories = {
         }
     },
     pillar: {
-        fields: ["height"],
+        fields: ["height", "dx"],
         dims({ height }) {
             return {
                 width: 40, height: 122 * height
             }
         },
         create(params) {
-            const { x, y, height } = params
+            const { x, y, height, dx } = params
             return Array(+height).fill(0).map((_, i) => {
-                return { x: x, y: y + (i * 122), name: "pillar" }
+                return { x: x + +dx * TILE_SIZE, y: y + (i * 122), name: "pillar" }
             })
         }
     },
