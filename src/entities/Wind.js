@@ -17,7 +17,7 @@ class WindParticle extends TexRegion {
         this.amp = rand(amp[0], amp[1])
         this.height = rand(height[0], height[1])
         this.swirlOffset = randf(swirlOffset[0], swirlOffset[1])
-        this.initAlpha = 0.5
+        this.initAlpha = 0.75
         this.t = 0
         if (Math.random() < 0.5) {
             const scale = 1.125
