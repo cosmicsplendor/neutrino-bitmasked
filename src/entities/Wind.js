@@ -48,7 +48,7 @@ class Wind extends Node {
         // Define wind tunnel boundaries
         this.hitbox = { x: -20, y: -224, width: 40, height: 200}
         this.testCol = getTestFn(this, player)
-        this.windStrength = 0.625 // Multiplier for wind force - adjust as needed
+        this.windStrength = 0.8 // Multiplier for wind force - adjust as needed
 
         // Create wind particles for visual effect
         for (let i = 0; i < 140; i++) {
@@ -67,17 +67,17 @@ class Wind extends Node {
     
     update(dt) {
         // Check if player is within the wind hitbox and visible
+        const windStrength = this.windStrength * (this.player.velY > 0 ? 0.6: 1)
         if (this.testCol(this, this.player) && this.player.visible) {
             // Get player's center position relative to wind origin
             const dPosX = this.player.pos.x + 32 - this.pos.x
-            const dPosY = this.player.pos.y + 32 - this.pos.y
             
             // Switch player to jumping state
-            // this.player.controls.switchState("jumping", this.player)
+            this.player.controls.switchState("jumping", this.player, true, false)
             
             // Apply constant upward force while in the wind tunnel
             // This creates a reliable liftidng effect similar to Ballance game
-            this.player.velY -= config.gravity * this.windStrength * dt
+            this.player.velY -= config.gravity * windStrength * dt
             
             // Optional: add a small horizontal push based on position relative to center
             // This creates a more natural "centering" effect in the wind tunnel

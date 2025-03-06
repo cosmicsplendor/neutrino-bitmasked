@@ -68,7 +68,7 @@ class Jumping {
         this.controls = controls
         this.onJump = onJump
     }
-    onEnter(entity, limReached=false) {
+    onEnter(entity, limReached=false, playJumpSound=true) {
         if (limReached || entity.velY > this.mxJmpVel) { 
             // if jump state begins from peak height (like when falling off the edge of a wall)
             // or if the player is not fast enough to press jump after floor underneath has collapsed
@@ -78,16 +78,14 @@ class Jumping {
         }
         this.limitReached = false
         entity.velY += this.jmpVel * entity.invWeight
-        this.first = true // indicating whether this is the first "Jump" state frame
+        if (entity.velY < 0 && playJumpSound) { // if the jump is actually possible (there's nothing above blocking the player) and the player isn't falling down
+            this.onJump()
+        }
     }
     onHalt() { // obstruct jump prematurely (mostly by collision with bottom edge of a rect)
         this.limitReached = true
     }
     update(entity, dt) {
-        if (this.first && entity.velY < 0) { // if the jump is actually possible (there's nothing above blocking the player) and the player isn't falling down
-            this.onJump()
-        }
-        this.first = false
         if (this.controls.get("left")) {
             entity.velX -= (entity.velX > 0 ? 3 : 1) * this.controls.speed * dt * entity.invWeight
         }

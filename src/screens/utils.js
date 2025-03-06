@@ -1,12 +1,10 @@
 import { Node } from "@lib"
 import config from "@config"
-import TexRegion from "@lib/entities/TexRegion"
 
 export const placeBg = (screen, bgEntities, overlay=[0.03529411764705882, 0.03529411764705882, 0.03529411764705882], rendererAPI) => {
     if (rendererAPI !== "webgl") return
     screen.container = new Node()
     screen.add(screen.container)
-    console.log(bgEntities)
     bgEntities.forEach(entity => {
         screen.container.add(entity)
     })
