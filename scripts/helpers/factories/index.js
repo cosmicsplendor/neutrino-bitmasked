@@ -32,12 +32,13 @@ const factories = {
         }
     },
     monster: {
+        fields: [ "span" ],
         dims: () => {
             return { width: 0, height: 0 }
         },
         create: params => {
-            const { x, y, name } = params
-            return { x, y, name }
+            const { x, y, name, span } = params
+            return { x, y, name, span: +span }
         }
     },
     ball: {
