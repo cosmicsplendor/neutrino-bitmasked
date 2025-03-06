@@ -42,20 +42,21 @@ class Wind extends Node {
     overlay=[1, 1, 1]
     constructor(data, x, y, player) {
         super(data)
-        // this.rotation = -Math.PI / 2
         this.pos.x = x - 6
         this.pos.y = y - 9
         this.player = player
-        // this.sound = sound
+        // Define wind tunnel boundaries
         this.hitbox = { x: -20, y: -224, width: 40, height: 200}
         this.testCol = getTestFn(this, player)
+        this.windStrength = 0.625 // Multiplier for wind force - adjust as needed
 
-
+        // Create wind particles for visual effect
         for (let i = 0; i < 140; i++) {
             this.add(new WindParticle())
         }
         this.feed(500, 1 / 60)
     }
+    
     feed(iterations, dt) {
         for (let i = iterations - 1; i > -1; i--) {
             for (let j = this.children.length - 1; j > -1; j--) {
@@ -63,17 +64,32 @@ class Wind extends Node {
             }
         }
     }
+    
     update(dt) {
+        // Check if player is within the wind hitbox and visible
         if (this.testCol(this, this.player) && this.player.visible) {
+            // Get player's center position relative to wind origin
             const dPosX = this.player.pos.x + 32 - this.pos.x
             const dPosY = this.player.pos.y + 32 - this.pos.y
-            const sqDist = sqLen(dPosX, dPosY)
-            if (sqDist < 4096) { return }
-            this.player.controls.switchState("jumping", this.player)
-            this.player.velY -= config.gravity * (sqDist / 32400) * dt
+            
+            // Switch player to jumping state
+            // this.player.controls.switchState("jumping", this.player)
+            
+            // Apply constant upward force while in the wind tunnel
+            // This creates a reliable liftidng effect similar to Ballance game
+            this.player.velY -= config.gravity * this.windStrength * dt
+            
+            // Optional: add a small horizontal push based on position relative to center
+            // This creates a more natural "centering" effect in the wind tunnel
+            const hInf = 0.1 // Strength of horizontal centering (very subtle)
+            if (Math.abs(dPosX) > 5) { // Only apply if player is off-center
+                this.player.velX -= (dPosX / Math.abs(dPosX)) * hInf * dt
+            }
         }
     }
+    
     reset() { }
+    
     onRemove() {
         this.parent = null
     }
