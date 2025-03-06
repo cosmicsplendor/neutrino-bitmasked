@@ -12,7 +12,9 @@ class SawBlade extends MovableEnt {
         }
         this.player = player
         this.radius = this.width / 2
-        this.hitCirc = this.hitCirc ?? { x: 0, y: 0, radius: this.radius - 2 }
+        const shrinkBy = 10 * this.radius / 48
+        this.hitCirc = { x: shrinkBy, y: shrinkBy, radius: this.radius - shrinkBy }
+        console.log(this.hitCirc)
         this.rotation = 0
         this.testCol = getTestFn(this, player)
         if (this.velX || this.velY) { this.forceUpd = true }
