@@ -1,12 +1,14 @@
 import { Node, TexRegion } from "@lib/index";
 import config from "@config"
+import { pickOne } from "@lib/utils/math";
 const { viewport } = config
 
+const frames = ["rain1", "rain"]
 class RainTex extends TexRegion {
     noOverlay=true
     forceUpdate=true
     constructor() {
-        super({ frame: "rain" })
+        super({ frame: pickOne(frames) })
         this.velY = 300 // falling speed
     }
 }
@@ -21,10 +23,10 @@ class Rain extends Node {
         this.lastcameraPos = { x: camera.pos.x, y: camera.pos.y }
         this.pos.x = 0
         this.pos.y = 0
-        this.spacing = 120
+        this.spacing = config.isMobile ? 120: 80
         this.rowSpacing = 100
         this.bufferCells = 2 // Extra buffer cells beyond viewport
-        this.rainHeight = new RainTex().height
+        this.rainHeight = 38
         
         this.worldOriginX = 0
         this.worldOriginY = 0
