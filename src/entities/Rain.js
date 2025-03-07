@@ -17,8 +17,9 @@ class Rain extends Node {
     children = []
     gridCells = new Map() // Track particles by grid position
     
-    constructor(camera) {
+    constructor(camera, renderer) {
         super()
+        this.renderer = renderer
         this.camera = camera
         this.lastcameraPos = { x: camera.pos.x, y: camera.pos.y }
         this.pos.x = 0
