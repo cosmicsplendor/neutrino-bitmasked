@@ -20,7 +20,6 @@ import soundSprite from "@assets/audio/sprite.mp3"
 import soundMeta from "@assets/audio/sprite.cson"
 import texatlasId from "@assets/images/texatlas.png"
 import atlasmetaId from "@assets/images/atlasmeta.cson"
-import bgDataId from "@assets/levels/background.cson"
 import particlesId from "@assets/particles/all.cson"
 import arrowImgId from "@assets/images/ui/arrow.png"
 import crossImgId from "@assets/images/ui/cross.png"
@@ -64,7 +63,6 @@ try {
     assets.push({ url: levels[curLevel - 1], msg: "loading level data" }) // pre-load the current level
 } catch(e) { console.log(e.message)}
 
-assets.push(bgDataId)
 
 const sdkStrat = !!config.SDKStrat ? new config.SDKStrat(): false
 const sdk = new SDK(sdkStrat)

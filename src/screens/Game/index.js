@@ -7,7 +7,6 @@ import State from "./State"
 import initUI from "./initUI"
 import { LEVEL } from "../names"
 import * as rendApis from "@lib/renderer/apis"
-import moonImg from "@assets/images/background.png"
 import config from "@config"
 import Level from "./Level"
 import makeFactories from "./makeFactories"
@@ -37,6 +36,7 @@ import ambience5Graph from "./Ambience/graphs/ambience5"
 import overlayMap from "./overlayMap.json"
 import BGen from "../../utils/BGen"
 import Rain from "../../entities/Rain"
+import backgrounds from "./backgrounds"
 
 class GameScreen extends Node { // can only have cameras as children
     // background = "rgb(181 24 24)"
@@ -122,7 +122,7 @@ class GameScreen extends Node { // can only have cameras as children
             const tiles = bgen.generateMinWidth(1920 + ((Math.max(levelData.width - 1920, 0)) / z))
             this.bg = new ParallaxCamera({ z, zAtop: 1, viewport: config.viewport, worldBaseline: levelData.height, subject: this.player, instF: false, entYOffset: 0, tiles }) // parallax bg
             this.add(this.bg)
-           
+
         }
         this.uiImages = {
             cross: assetsCache.get(crossImgId),
@@ -143,7 +143,7 @@ class GameScreen extends Node { // can only have cameras as children
         this.add(level)
         this.player.mxJmpVel = data.mxJmpVel
         this.player.speed = data.speed ?? 350
-        this.game.renderer.changeBackground(config.isMobile || this.game.renderer.api === rendApis.CNV_2D ? data.mob_bg : data.bg, moonImg)
+        this.game.renderer.changeBackground(data.bg, backgrounds[data.bgImg]?.url, backgrounds[data.bgImg]?.size, data.bgPos)
         // this.game.renderer.canvas.style.backgroundPosition = data.bgPos ?? "-50%"
         this.game.renderer.tint = data.tint && data.tint.split(",").slice(0, 3)
 
