@@ -9,7 +9,7 @@ import levels from "../screens/Level/levels"
  */
 
 const resolutions = {
-    standard: { max: 1600, min: 900 },
+    standard: { max: 1280, min: 720 },
     r1080p: { max: 1920, min: 1080 },
     full: { max: 1360, min: 1080 },
     hd: { max: 1440, min: 986 },

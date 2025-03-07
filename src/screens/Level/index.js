@@ -40,7 +40,7 @@ class LevelScreen extends Node {
         if (fromMenu) {
             contSound.play()
             this.curLevel = storage.getCurLevel()
-            placeBg(this, bgEntities, [0.033203125,0.06640625,0.107421875], game.renderer.api)
+            placeBg(this, bgEntities, [0, 0, 0], game.renderer.api)
         } else if (advance) {
             this.curLevel = Math.min(this.curLevel + 1, config.levels)
         }
@@ -65,9 +65,6 @@ class LevelScreen extends Node {
             errSound,
             syncColor: () => {
                 game.renderer.changeBackground("rgb(17, 34, 55)")
-                if (this.container) {
-                    this.container.overlay = [0.033203125,0.06640625,0.107421875]
-                }
             }
         })
     }

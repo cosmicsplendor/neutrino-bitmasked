@@ -1,7 +1,7 @@
 const TILE_SIZE = 48
 const sawBlades = (nameMap, static=false) => {
     return {
-        fields: static ? ["size"]: ['toX', 'toY', 'speed', "size"], // Based on SawBlade constructor
+        fields: static ? ["size"]: ['toX', 'toY', 'speed', "size", "dx", "dy"], // Based on SawBlade constructor
         dims: (params, atlas) => {
             const { width, height } = atlas[nameMap[params.size ?? "large" ] ?? nameMap.large]
             return { width, height }

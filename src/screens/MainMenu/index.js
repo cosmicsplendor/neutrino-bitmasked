@@ -35,7 +35,7 @@ class MainMenuScreen extends Node {
             this.bgen = new BGen(game.assetsCache.get(atlasMeta), 48, 80)
             this.bgen.reset("Japan")
             this.bgEntities = this.bgen.generateMinWidth(1920)
-            this.teardownBg = placeBg(this, this.bgEntities, [0.033203125,0.06640625,0.107421875], game.renderer.api)
+            this.teardownBg = placeBg(this, this.bgEntities, [0, 0, 0], game.renderer.api)
             this.add(this.ball)
         })
     }
