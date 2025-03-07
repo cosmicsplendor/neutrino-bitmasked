@@ -36,10 +36,11 @@ class Rain extends Node {
         }
         this.onVpChange()
         viewport.on("change", this.onVpChange)
+        this.currentCells = new Set()
     }
 
     update(dt) {
-        const { rainHeight, width, height } = this
+        const { rainHeight, width, height, currentCells } = this
         
         // Calculate camera movement delta
         const deltaX = -(this.camera.pos.x - this.lastcameraPos.x) || 0
@@ -53,9 +54,6 @@ class Rain extends Node {
         const endCol = Math.ceil((this.worldOriginX + width + this.bufferCells * this.spacing) / this.spacing)
         const startRow = Math.floor((this.worldOriginY - this.bufferCells * this.rowSpacing - rainHeight) / this.rowSpacing)
         const endRow = Math.ceil((this.worldOriginY + height + this.bufferCells * this.rowSpacing) / this.rowSpacing)
-        
-        // Track which grid cells we've seen this frame
-        const currentCells = new Set()
         
         // Update existing particles and create new ones as needed
         for (let col = startCol; col <= endCol; col++) {
@@ -96,17 +94,22 @@ class Rain extends Node {
         }
         
         // Remove particles that are no longer in visible grid cells
+        this.children = []
         for (const [cellKey, rain] of this.gridCells.entries()) {
             if (!currentCells.has(cellKey)) {
                 console.log("removing")
-                Node.removeChild(this, rain, false)
+                // Node.removeChild(this, rain, false)
+                rain.parent = null
                 this.gridCells.delete(cellKey)
+            } else {
+                this.children.push(rain)
             }
         }
         
         // Store current camera position for next frame
         this.lastcameraPos.x = this.camera.pos.x
         this.lastcameraPos.y = this.camera.pos.y
+        currentCells.clear()
     }
     
     onRemove() {
