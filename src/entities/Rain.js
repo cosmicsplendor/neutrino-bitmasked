@@ -12,20 +12,61 @@ class RainTex extends TexRegion {
 }
 
 class Rain extends Node {
-    constructor() {
+    constructor(camera) {
         super()
+        this.camera = camera
+        this.lastcameraPos = { x: camera.pos.x, y: camera.pos.y }
         this.pos.x = 0
         this.pos.y = 0
-        this.spacing = 120 // horizontal spacing
-        this.rowSpacing = 100 // vertical spacing
+        this.spacing = 120
+        this.rowSpacing = 100
         this.rainHeight = new RainTex().height
         this.initRainParticles()
+        
         this.onVpChange = () => {
             this.updateParticlesForViewport()
         }
         viewport.on("change", this.onVpChange)
     }
 
+    update(dt) {
+        const { rainHeight } = this
+        // Calculate camera movement delta
+        const deltaX = -(this.camera.pos.x - this.lastcameraPos.x) || 0
+        const deltaY = -(this.camera.pos.y - this.lastcameraPos.y) || 0
+
+        this.children.forEach(rain => {
+            // Offset by camera movement
+            rain.pos.x -= deltaX
+            rain.pos.y -= deltaY
+            
+            // Normal rain fall
+            rain.pos.y += rain.velY * dt
+            
+            // Wrap around logic
+            if (rain.pos.y > viewport.height + rainHeight) {
+                rain.pos.y = -rainHeight
+                rain.pos.x += Math.random() * 20 - 10
+            }
+            if (rain.pos.y < -rainHeight) {
+                rain.pos.y = viewport.height + rainHeight
+            }
+            if (rain.pos.x > viewport.width + this.spacing) {
+                rain.pos.x = -this.spacing
+            }
+            if (rain.pos.x < -this.spacing) {
+                rain.pos.x = viewport.width + this.spacing
+            }
+        })
+
+        // Store current camera position for next frame
+        this.lastcameraPos.x = this.camera.pos.x
+        this.lastcameraPos.y = this.camera.pos.y
+    }
+    onRemove() {
+        console.log("Rain cleanup called")
+        viewport.off("change", this.onVpChange)
+    }
     initRainParticles() {
         const columns = Math.ceil((viewport.width + 24) / this.spacing)
         const rows = Math.ceil((viewport.height + this.rainHeight) / this.rowSpacing)
@@ -45,25 +86,5 @@ class Rain extends Node {
         // Reinitialize with new viewport dimensions
         this.initRainParticles()
     }
-
-    update(dt) {
-        const { rainHeight } = this.rainHeight
-        this.children.forEach(rain => {
-            // Update position based on velocity
-            rain.pos.y += rain.velY * dt
-            
-            // Reset position if below viewport
-            if (rain.pos.y > viewport.height + rainHeight) {
-                rain.pos.y = -rainHeight // Reset to above viewport
-                rain.pos.x += Math.random() * 20 - 10 // Add some randomness to x position
-            }
-        })
-    }
-
-    onRemove() {
-        console.log("Rain cleanup called")
-        viewport.off("change", this.onVpChange)
-    }
 }
-
 export default Rain

@@ -122,9 +122,7 @@ class GameScreen extends Node { // can only have cameras as children
             const tiles = bgen.generateMinWidth(1920 + ((Math.max(levelData.width - 1920, 0)) / z))
             this.bg = new ParallaxCamera({ z, zAtop: 1, viewport: config.viewport, worldBaseline: levelData.height, subject: this.player, instF: false, entYOffset: 0, tiles }) // parallax bg
             this.add(this.bg)
-            if (levelData.rain) {
-                this.add(new Rain())
-            }
+           
         }
         this.uiImages = {
             cross: assetsCache.get(crossImgId),
@@ -167,6 +165,9 @@ class GameScreen extends Node { // can only have cameras as children
         const data = this.game.assetsCache.get(config.testMode ? testlevel : levelDataId)
         this.setThingsUp(data)
         const level = this.setLevel(data)
+        if (data.rain) {
+            this.add(new Rain(level))
+        }
         const onClose = advance => this.game.switchScreen(LEVEL, false, advance)
         const checkpoint = new Checkpoint(data.checkpoints)
         this.checkpoint = checkpoint
