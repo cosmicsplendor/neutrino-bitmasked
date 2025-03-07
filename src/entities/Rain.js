@@ -74,6 +74,7 @@ class Rain extends Node {
                 if (this.gridCells.has(cellKey)) {
                     rain = this.gridCells.get(cellKey)
                 } else {
+                    console.log("Creating new raintex")
                     rain = new RainTex()
                     this.add(rain)
                     this.gridCells.set(cellKey, rain)
@@ -97,7 +98,6 @@ class Rain extends Node {
         this.children = []
         for (const [cellKey, rain] of this.gridCells.entries()) {
             if (!currentCells.has(cellKey)) {
-                console.log("removing")
                 // Node.removeChild(this, rain, false)
                 rain.parent = null
                 this.gridCells.delete(cellKey)
@@ -113,7 +113,6 @@ class Rain extends Node {
     }
     
     onRemove() {
-        debugger;
         viewport.off("change", this.onVpChange)
     }
     

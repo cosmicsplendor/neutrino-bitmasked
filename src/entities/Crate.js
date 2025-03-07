@@ -1,5 +1,5 @@
 import { TexRegion, Node } from "@lib"
-import { objLayerId } from "@lib/constants"
+import { objLayerId, fgLayerId } from "@lib/constants"
 import { clamp } from "@utils/math"
 import Timer from "@utils/Timer"
 
@@ -59,7 +59,7 @@ class Crate extends TexRegion { // breakable crate class
             orb.add(new Timer(0.6, null, () => {
                 orb.active = true
             }))
-            Node.get(objLayerId).add(orb)
+            Node.get(fgLayerId).add(orb)
         }
         Node.get(objLayerId).add(particle)
     }
