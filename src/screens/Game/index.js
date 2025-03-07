@@ -137,6 +137,9 @@ class GameScreen extends Node { // can only have cameras as children
     }
     setLevel(data) {
         const level = new Level({ player: this.player, data, viewport: config.viewport, subject: this.player, factories: this.factories, ambience: this.ambiences[data.ambience], gameState: this.state, overlayMap })
+        if (data.rain) {
+            this.add(new Rain(level))
+        }
         this.add(level)
         this.player.mxJmpVel = data.mxJmpVel
         this.player.speed = data.speed ?? 350
@@ -165,9 +168,6 @@ class GameScreen extends Node { // can only have cameras as children
         const data = this.game.assetsCache.get(config.testMode ? testlevel : levelDataId)
         this.setThingsUp(data)
         const level = this.setLevel(data)
-        if (data.rain) {
-            this.add(new Rain(level))
-        }
         const onClose = advance => this.game.switchScreen(LEVEL, false, advance)
         const checkpoint = new Checkpoint(data.checkpoints)
         this.checkpoint = checkpoint
