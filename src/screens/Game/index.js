@@ -3,7 +3,6 @@ import { webAudioSupported } from "@utils/Sound"
 import ParallaxCamera from "@lib/entities/ParallaxCamera"
 import SoundSprite from "@utils/Sound/SoundSprite"
 import ParticleEmitter from "@lib/utils/ParticleEmitter"
-import TexRegion from "@lib/entities/TexRegion"
 import State from "./State"
 import initUI from "./initUI"
 import { LEVEL } from "../names"
@@ -37,6 +36,7 @@ import ambience4Graph from "./Ambience/graphs/ambience4"
 import ambience5Graph from "./Ambience/graphs/ambience5"
 import overlayMap from "./overlayMap.json"
 import BGen from "../../utils/BGen"
+import Rain from "../../entities/Rain"
 
 class GameScreen extends Node { // can only have cameras as children
     // background = "rgb(181 24 24)"
@@ -122,6 +122,9 @@ class GameScreen extends Node { // can only have cameras as children
             const tiles = bgen.generateMinWidth(1920 + ((Math.max(levelData.width - 1920, 0)) / z))
             this.bg = new ParallaxCamera({ z, zAtop: 1, viewport: config.viewport, worldBaseline: levelData.height, subject: this.player, instF: false, entYOffset: 0, tiles }) // parallax bg
             this.add(this.bg)
+            if (levelData.rain) {
+                this.add(new Rain())
+            }
         }
         this.uiImages = {
             cross: assetsCache.get(crossImgId),

@@ -1,8 +1,10 @@
 import { Node, TexRegion } from "@lib/index";
-import config from "config"
+import config from "@config"
 const { viewport } = config
 
 class RainTex extends TexRegion {
+    noOverlay=true
+    forceUpdate=true
     constructor() {
         super({ frame: "rain" })
         this.velY = 300 // falling speed
@@ -14,11 +16,10 @@ class Rain extends Node {
         super()
         this.pos.x = 0
         this.pos.y = 0
-        this.particleSpacing = 120 // horizontal spacing
+        this.spacing = 120 // horizontal spacing
         this.rowSpacing = 100 // vertical spacing
-        this.initRainParticles()
-        
         this.rainHeight = new RainTex().height
+        this.initRainParticles()
         this.onVpChange = () => {
             this.updateParticlesForViewport()
         }
@@ -26,13 +27,12 @@ class Rain extends Node {
     }
 
     initRainParticles() {
-        const columns = Math.ceil((viewport.width + 24) / this.particleSpacing)
-        const rows = Math.ceil((viewport.height + 24) / this.rowSpacing)
-        
+        const columns = Math.ceil((viewport.width + 24) / this.spacing)
+        const rows = Math.ceil((viewport.height + this.rainHeight) / this.rowSpacing)
         for (let i = 0; i < columns; i++) {
             for (let j = 0; j < rows; j++) {
                 const rain = new RainTex()
-                rain.pos.x = i * this.particleSpacing + Math.random() * 20 // slight random offset
+                rain.pos.x = i * this.spacing + Math.random() * 20 // slight random offset
                 rain.pos.y = j * this.rowSpacing + Math.random() * 20
                 this.add(rain)
             }
@@ -61,6 +61,7 @@ class Rain extends Node {
     }
 
     onRemove() {
+        console.log("Rain cleanup called")
         viewport.off("change", this.onVpChange)
     }
 }
