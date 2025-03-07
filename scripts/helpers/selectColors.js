@@ -40,24 +40,13 @@ const balancedAiSuggested = [
     { "bg": "#474747", "pxbg": "#353535", "tint": "0.03, -0.01, -0.01, 0" }
 ]
 
-const getMoon = () => {
-    const placeMoon = Math.random() < 0.75
-    if (!placeMoon) return {}
-    const x = rand(10, 90)
-    const y = rand(10, 65)
-    return {
-        bgPos: `${x}% ${y}%`
-    }
-}
-
 const selectColors = () => {
     const handcrafted = Math.random() < 0.65
     if (handcrafted) {
         return pickOne(balancedOriginalColors)
     }
     const colors = pickOne(balancedAiSuggested)
-    const moon = getMoon()
-    return { ...colors, ...moon }
+    return { ...colors }
 }
 
 module.exports = selectColors
