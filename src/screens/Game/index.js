@@ -1,4 +1,4 @@
-import { Node } from "@lib"
+import Node from "@lib/entities/Node"
 import { webAudioSupported } from "@utils/Sound"
 import ParallaxCamera from "@lib/entities/ParallaxCamera"
 import SoundSprite from "@utils/Sound/SoundSprite"
@@ -155,8 +155,11 @@ class GameScreen extends Node { // can only have cameras as children
     }
     unsetLevel() {
         if (this.children) {
-            const lastIdx = this.children.length - 1
-            lastIdx > -1 && Node.removeChild(this, this.children[lastIdx])
+            // const lastIdx = this.children.length - 1
+            // lastIdx > -1 && Node.removeChild(this, this.children[lastIdx])
+            this.children.forEach(child => {
+                Node.removeChild(this, child, true)
+            })
             this.children.length = 0
         }
     }
