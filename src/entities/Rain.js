@@ -12,6 +12,9 @@ class RainTex extends TexRegion {
 }
 
 class Rain extends Node {
+    children = []
+    gridCells = new Map() // Track particles by grid position
+    
     constructor(camera) {
         super()
         this.camera = camera
@@ -20,71 +23,107 @@ class Rain extends Node {
         this.pos.y = 0
         this.spacing = 120
         this.rowSpacing = 100
+        this.bufferCells = 2 // Extra buffer cells beyond viewport
         this.rainHeight = new RainTex().height
-        this.initRainParticles()
+        
+        this.worldOriginX = 0
+        this.worldOriginY = 0
         
         this.onVpChange = () => {
+            this.width = config.devicePixelRatio * viewport.width
+            this.height = config.devicePixelRatio * viewport.height
             this.updateParticlesForViewport()
         }
+        this.onVpChange()
         viewport.on("change", this.onVpChange)
     }
 
     update(dt) {
-        const { rainHeight } = this
+        const { rainHeight, width, height } = this
+        
         // Calculate camera movement delta
         const deltaX = -(this.camera.pos.x - this.lastcameraPos.x) || 0
         const deltaY = -(this.camera.pos.y - this.lastcameraPos.y) || 0
-
-        this.children.forEach(rain => {
-            // Offset by camera movement
-            rain.pos.x -= deltaX
-            rain.pos.y -= deltaY
-            
-            // Normal rain fall
-            rain.pos.y += rain.velY * dt
-            
-            // Wrap around logic
-            if (rain.pos.y > viewport.height + rainHeight) {
-                rain.pos.y = -rainHeight
-                rain.pos.x += Math.random() * 20 - 10
+        // Update world origin based on camera movement
+        this.worldOriginX += deltaX
+        this.worldOriginY += deltaY
+        
+        // Determine the visible grid bounds
+        const startCol = Math.floor((this.worldOriginX - this.bufferCells * this.spacing) / this.spacing)
+        const endCol = Math.ceil((this.worldOriginX + width + this.bufferCells * this.spacing) / this.spacing)
+        const startRow = Math.floor((this.worldOriginY - this.bufferCells * this.rowSpacing - rainHeight) / this.rowSpacing)
+        const endRow = Math.ceil((this.worldOriginY + height + this.bufferCells * this.rowSpacing) / this.rowSpacing)
+        
+        // Track which grid cells we've seen this frame
+        const currentCells = new Set()
+        
+        // Update existing particles and create new ones as needed
+        for (let col = startCol; col <= endCol; col++) {
+            for (let row = startRow; row <= endRow; row++) {
+                const cellKey = `${col},${row}`
+                currentCells.add(cellKey)
+                
+                // Calculate world position for this grid cell
+                const worldX = col * this.spacing
+                const worldY = row * this.rowSpacing
+                
+                // Calculate screen position
+                const screenX = worldX - this.worldOriginX
+                const screenY = worldY - this.worldOriginY
+                
+                // Use existing particle or create new one
+                let rain
+                if (this.gridCells.has(cellKey)) {
+                    rain = this.gridCells.get(cellKey)
+                } else {
+                    rain = new RainTex()
+                    this.add(rain)
+                    this.gridCells.set(cellKey, rain)
+                }
+                
+                // Set position
+                rain.pos.x = screenX
+                rain.pos.y = screenY + (rain.fallOffset || 0)
+                
+                // Update fall animation
+                rain.fallOffset = (rain.fallOffset || 0) + rain.velY * dt
+                
+                // Reset fall if needed
+                if (rain.fallOffset > this.rowSpacing) {
+                    rain.fallOffset = 0
+                }
             }
-            if (rain.pos.y < -rainHeight) {
-                rain.pos.y = viewport.height + rainHeight
+        }
+        
+        // Remove particles that are no longer in visible grid cells
+        for (const [cellKey, rain] of this.gridCells.entries()) {
+            if (!currentCells.has(cellKey)) {
+                console.log("removing")
+                Node.removeChild(this, rain, false)
+                this.gridCells.delete(cellKey)
             }
-            if (rain.pos.x > viewport.width + this.spacing) {
-                rain.pos.x = -this.spacing
-            }
-            if (rain.pos.x < -this.spacing) {
-                rain.pos.x = viewport.width + this.spacing
-            }
-        })
-
+        }
+        
         // Store current camera position for next frame
         this.lastcameraPos.x = this.camera.pos.x
         this.lastcameraPos.y = this.camera.pos.y
     }
+    
     onRemove() {
-        console.log("Rain cleanup called")
+        debugger;
         viewport.off("change", this.onVpChange)
     }
-    initRainParticles() {
-        const columns = Math.ceil((viewport.width + 24) / this.spacing)
-        const rows = Math.ceil((viewport.height + this.rainHeight) / this.rowSpacing)
-        for (let i = 0; i < columns; i++) {
-            for (let j = 0; j < rows; j++) {
-                const rain = new RainTex()
-                rain.pos.x = i * this.spacing + Math.random() * 20 // slight random offset
-                rain.pos.y = j * this.rowSpacing + Math.random() * 20
-                this.add(rain)
-            }
-        }
-    }
-
-    updateParticlesForViewport() {
-        // Clear existing particles
+    
+    reset() {
         this.children.length = 0
-        // Reinitialize with new viewport dimensions
-        this.initRainParticles()
+        this.gridCells.clear()
+        this.worldOriginX = 0
+        this.worldOriginY = 0
+    }
+    
+    updateParticlesForViewport() {
+        // Reset the system
+        this.reset()
     }
 }
 export default Rain
