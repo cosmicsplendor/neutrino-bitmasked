@@ -16,6 +16,7 @@ import LeverSaw from "../../entities/LeverSaw"
 import Vent from "../../entities/Vent"
 import Cobweb from "../../entities/Cobweb"
 import Hearth from "../../entities/Hearth"
+import Lantern from "../../entities/Lantern"
 import config from "@config"
 
 import particlesId from "@assets/particles/all.cson"
@@ -147,6 +148,9 @@ export default ({ soundSprite, assetsCache, storage, player, state }) => { // us
         },
         cobweb: (x, y) => {
             return new Cobweb(x, y)
+        },
+        lantern: (x, y) => {
+            return new Lantern(x, y)
         },
         hearth: (x, y, props, player) => {
             return new Hearth({ x, y, dir: props.dir, player})

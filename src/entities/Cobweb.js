@@ -1,4 +1,4 @@
-const { TexRegion } = require("@lib/index");
+import TexRegion from "@lib/entities/TexRegion";
 
 class Cobweb extends TexRegion {
     overlay = [0.7, 0.7, 0.7]
