@@ -138,7 +138,7 @@ const factories = {
     hearth: {
         fields: ["dir"],
         dims: () => {
-            return { width: 128, height: 118 }
+            return { width: 204, height: 98 }
         },
         create: params => {
             const { x, y, dir } = params
