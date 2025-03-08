@@ -14,6 +14,7 @@ import Pool from "@utils/Pool"
 import Bus from "@entities/Bus"
 import LeverSaw from "../../entities/LeverSaw"
 import Vent from "../../entities/Vent"
+import Cobweb from "../../entities/Cobweb"
 import Hearth from "../../entities/Hearth"
 import config from "@config"
 
@@ -143,6 +144,9 @@ export default ({ soundSprite, assetsCache, storage, player, state }) => { // us
         },
         vent: (x, y)  => {
             return new Vent(x, y)
+        },
+        cobweb: (x, y) => {
+            return new Cobweb(x, y)
         },
         hearth: (x, y, props, player) => {
             return new Hearth({ x, y, dir: props.dir, player})
