@@ -23,7 +23,6 @@ class Fly extends TexRegion {
         
         // Last time we changed direction
         this.lastChangeTime = 0
-        this.scale= {x: 0.5, y: 0.5}
     }
     
     update(dt, time) {
