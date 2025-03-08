@@ -2,7 +2,7 @@ import { TexRegion } from "@lib/entities"
 import getTestFn from "@lib/components/Collision/helpers/getTestFn"
 import MovableEnt from "./MovableEnt"
 
-const offset = 2
+const offset = 8
 const hheight = 24 // laser head height
 const bLen = 48 // laser body length
 const bWidth = 12 // laser body width
@@ -37,10 +37,12 @@ class Laser extends MovableEnt {
             x: vert ? offset : 0,
             y: vert ? 0 : offset,
             width: vert ? bWidth : hheight + bLen * num,
-            height: vert ? hheight + bLen * num : hheight
+            height: vert ? hheight + bLen * num : bWidth
         }
+
         this.testCol = getTestFn(this, this.player)
         this.on = on
+        this.on0 = on
         if (!!period) {
             this.period = period
             this.t = 0
@@ -83,6 +85,10 @@ class Laser extends MovableEnt {
         this.pos.x = this.startX
         this.pos.y = this.startY
         this.t = 0
+        this.on = this.on0
+        for (let child of this.children) {
+            child.alpha = this.on ? 1 : 0
+        }
     }
 }
 

@@ -1,6 +1,6 @@
 import { Node, TexRegion } from "@lib/index";
 import config from "@config"
-import { pickOne } from "@lib/utils/math";
+import { pickOne, randf } from "@lib/utils/math";
 const { viewport } = config
 
 const frames = ["rain1", "rain"]
@@ -10,6 +10,7 @@ class RainTex extends TexRegion {
     constructor() {
         super({ frame: pickOne(frames) })
         this.velY = 300 // falling speed
+        this.scale = { x: 1, y: randf(1.5, 1) }
     }
 }
 
@@ -27,7 +28,7 @@ class Rain extends Node {
         this.spacing = config.isMobile ? 120: 80
         this.rowSpacing = 100
         this.bufferCells = 2 // Extra buffer cells beyond viewport
-        this.rainHeight = 38
+        this.rainHeight = 38 * 2
         
         this.worldOriginX = 0
         this.worldOriginY = 0
@@ -77,7 +78,6 @@ class Rain extends Node {
                 if (this.gridCells.has(cellKey)) {
                     rain = this.gridCells.get(cellKey)
                 } else {
-                    console.log("Creating new raintex")
                     rain = new RainTex()
                     this.add(rain)
                     this.gridCells.set(cellKey, rain)

@@ -3,7 +3,7 @@ import MovableEnt from "./MovableEnt"
 
 const ANG_VEL = Math.PI
 class SawBlade extends MovableEnt {
-    overlay=[0.65,0.65,0.65]
+    overlay=[0.7,0.7,0.7]
     constructor(x, y, frame, toX=x, toY=y, speed=100, player) {
         super(x, y, frame, toX, toY, speed)
         this.anchor = {

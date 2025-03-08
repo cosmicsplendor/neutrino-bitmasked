@@ -9,7 +9,7 @@ import sparkR from "./sparkR.json"
 import sparkT from "./sparkT.json"
 import ParticleEmitter from "@lib/utils/ParticleEmitter"
 import getTestFn from "@lib/components/Collision/helpers/getTestFn"
-import { rand } from "@lib/utils/math"
+import { rand, sqDist } from "@lib/utils/math"
 
 class FireBall extends TexRegion {
     forceUpd = true
@@ -115,6 +115,7 @@ class FireBall extends TexRegion {
 }
 
 class Hearth extends Node {
+    active=false
     constructor({ x, y, player, dir=1 }) {
         super({ pos: { x, y }})
         const hearth1 = new TexRegion({ frame: "hearth1", overlay: "none" })
@@ -130,11 +131,21 @@ class Hearth extends Node {
         this.emit()
     }
     reset() {
-        this.emit()
+        this.active = false
     }
     emit() {
         const fireBall = new FireBall(this.pos.x + 80 + rand(-32, 32), this.pos.y, this, this.player)
         Node.get(mgLayerId).add(fireBall)
+    }
+    update() {
+        if (this.active) {
+            return
+        }
+        if (sqDist(this, this.player.pos) < 90000) {
+            alert("activated")
+            this.active = true
+            this.emit()
+        }
     }
 }
 
