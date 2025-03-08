@@ -128,7 +128,6 @@ class Hearth extends Node {
         Node.get(mgLayerId).add(hearthBg)
         this.player = player
         this.dir=dir
-        this.emit()
     }
     reset() {
         this.active = false
@@ -141,8 +140,7 @@ class Hearth extends Node {
         if (this.active) {
             return
         }
-        if (sqDist(this, this.player.pos) < 90000) {
-            alert("activated")
+        if (sqDist(this.pos, this.player.pos) < 90000) {
             this.active = true
             this.emit()
         }
