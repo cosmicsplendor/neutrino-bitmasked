@@ -4,9 +4,9 @@
     "fg": {
         "x": 0, "y": 0,
         "tiles": [
-            ["wt_1", "wt_1", "empty", "empty"],
-            ["wt_1", "wt_1", "empty", "empty"],
-            ["wt_1", "wt_1", "wt_1", "empty"],
+            ["wt_1", "wt_1", "wt_1", "wt_1"],
+            ["wt_1", "cobweb", "empty", "wt_1"],
+            ["wt_1", "wt_1", "empty", "wt_1"],
             ["wt_1", "wt_1", "wt_1", "wt_1"],
             ["em3", "empty", "em3", "empty"]
         ]
