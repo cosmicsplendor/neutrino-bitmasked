@@ -17,9 +17,10 @@ const factories = {
         }
     },
     checkpoint: {
+        fields: ["dy"],
         create: (params) => {
-            const { x, y, name } = params
-            return { x, y, name }
+            const { x, y, dy, name } = params
+            return { x, y: y + +dy * TILE_SIZE, name }
         }
     },
     orb: {
