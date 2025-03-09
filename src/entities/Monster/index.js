@@ -65,6 +65,11 @@ class Glitch {
       bloodAnim.pos.y = y - 60
       deathAnim.pos.x = x
       deathAnim.pos.y = y - 75
+
+      if (this.monster.syncroNode.scale.x === -1) {
+        bloodAnim.scale = { x: -1, y: 1 }
+        deathAnim.scale = { x: -1, y: 1 }
+      }
     }
   }
 }
@@ -211,8 +216,7 @@ class Monster extends BoneAnimNode {
     // Object.assign(this.player.pos, getGlobalPos(this.syncroNode))
     if (this.testCol(this.syncroNode, this.player)) {
       // glitch
-      // this.noOverlay = Math.random() < 0.5
-      // this.switchState('glitch');
+      this.switchState('glitch');
     }
 
     super.update(dt, t);
