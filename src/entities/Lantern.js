@@ -1,4 +1,5 @@
 import { TexRegion } from "@lib/index";
+import { rand, randf } from "@lib/utils/math";
 class Fly extends TexRegion {
     constructor() {
         super({ frame: "fly", pos: { x: 0, y: 0 } })
@@ -74,14 +75,39 @@ class Fly extends TexRegion {
         }
     }
 }
+const LIT = "lantern"
+const DIM = "lantdim"
 class Lantern extends TexRegion {
     noOverlay=true
+    _on=true
+    // Flicker timing variables
+    nextFlickerTime = 0
+    flickerDuration = 0
+    isFlickering = false
+    
+    set on(val) {
+        if (this._on == val) return
+        this._on = val
+        if (val) {
+            TexRegion.syncFrame(this, LIT)
+            this.pos.x -= 35
+            this.centerX += 35
+
+        } else {
+            TexRegion.syncFrame(this, DIM)
+            this.pos.x  += 35
+            this.centerX -= 35
+        }
+        this.anchor.x = this.width * 0.5
+    }
+    get on() {
+        return this._on
+    }
     constructor(x, y) {
         super({ frame: "lantern", pos: { x, y: y-4 } })
         this.anchor = {
             x: this.width / 2, y: 0
         }
-        
         // Initial rotation
         this.rotation = 0
         
@@ -104,36 +130,70 @@ class Lantern extends TexRegion {
         }
         this.centerX = this.width * 0.5
         this.centerY = this.height * 0.6
+        
+        // Set light on initially (stays on most of the time)
+        this.on = true
+        
+        // Initialize flicker timing
+        this.nextFlickerTime = rand(8, 5);
     }
     
     update(dt, time) {
+        // Handle flickering logic
+        if (!this.isFlickering) {
+            // We're in the normal "on" period
+            this.on = true; // Ensure light is on between flicker periods
+            
+            this.nextFlickerTime -= dt;
+            
+            // Time to start a new flicker
+            if (this.nextFlickerTime <= 0) {
+                this.isFlickering = true;
+                this.flickerDuration = randf(1.5, 0.75);
+            }
+        } else {
+            // Currently in flickering state
+            this.flickerDuration -= dt;
+            
+            // Randomly flicker while in this state
+            if (Math.random() < 0.4) { // Adjust this probability to control flicker frequency
+                this.on = !this.on;
+            }
+            
+            // End of flicker duration
+            if (this.flickerDuration <= 0) {
+                this.isFlickering = false;
+                this.on = true; // Ensure light is on when flicker ends
+                this.nextFlickerTime = rand(12, 7); // Set next flicker time
+            }
+        }
+
         // Calculate gravity effect (pulling toward natural hanging position)
         // Add increasing resistance as it approaches max angles
-        const angleRatio = this.rotation / this.maxRot
-        const gravity = this.gravityStrength * Math.sin(this.rotation) * (1 + 0.5 * Math.pow(Math.abs(angleRatio), 2))
+        const angleRatio = this.rotation / this.maxRot;
+        const gravity = this.gravityStrength * Math.sin(this.rotation) * (1 + 0.5 * Math.pow(Math.abs(angleRatio), 2));
         
         // Calculate wind effect (using noise-like sinusoidal patterns)
         const windForce = this.windStrength * 
             (Math.sin(time * this.windFrequency + this.windPhase) + 
-             Math.sin(time * this.windFrequency * 2.7 + this.windPhase * 3.4) * 0.4)
+             Math.sin(time * this.windFrequency * 2.7 + this.windPhase * 3.4) * 0.4);
         
         // Apply forces to angular velocity with increased responsiveness
-        this.angVel += (-gravity + windForce) * dt * 5
+        this.angVel += (-gravity + windForce) * dt * 5;
         
         // Apply damping (less damping for more movement)
-        this.angVel *= Math.pow(this.damping, dt)
+        this.angVel *= Math.pow(this.damping, dt);
         
         // Update rotation
-        this.rotation += this.angVel * dt * 3
+        this.rotation += this.angVel * dt * 3;
         
         // Very soft limits - allow exceeding but with increasing resistance
         if (Math.abs(this.rotation) > this.maxRot) {
             // Apply a soft resistance that increases with angle overshoot
-            const overshoot = Math.abs(this.rotation) - this.maxRot
-            const correction = overshoot * 0.03 * Math.sign(this.rotation)
-            this.angVel -= correction
+            const overshoot = Math.abs(this.rotation) - this.maxRot;
+            const correction = overshoot * 0.03 * Math.sign(this.rotation);
+            this.angVel -= correction;
         }
-        
     }
 }
 

@@ -6,7 +6,7 @@ class Bat extends TexRegion {
     forceUpd=true
     constructor(x, y, player) {
         const scale = randf(0.5, 0.25);
-        super({ frame: "bat1", pos: { x, y }, scale: { x: scale, y: scale } });
+        super({ frame: "bat1", pos: { x, y }, scale: { x: scale * (Math.random < 0.5 ? -1: 1), y: scale } });
         this.player = player;
         const offsetAngle = 2 * Math.PI * Math.random();
         this.targetDx = -6 + 32 * Math.cos(offsetAngle);

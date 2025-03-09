@@ -99,10 +99,10 @@ class IdleRight {
       }
       return
     }
-    if (this.timer >= 3) {
-      // this.monster.xOffset -= 56
-      this.monster.switchState('runRight');
-    }
+    // if (this.timer >= 3) {
+    //   // this.monster.xOffset -= 56
+    //   this.monster.switchState('runRight');
+    // }
   }
 }
 
@@ -158,10 +158,10 @@ class IdleLeft {
       }
       return
     }
-    if (this.timer >= 3) {
-      // this.monster.xOffset += 72
-      this.monster.switchState('runLeft');
-    }
+    // if (this.timer >= 3) {
+    //   // this.monster.xOffset += 72
+    //   this.monster.switchState('runLeft');
+    // }
   }
 }
 
@@ -198,8 +198,7 @@ class Monster extends BoneAnimNode {
 
     // Apply the state machine mixin
     stateMachineMixin(this, states);
-    // this.switchState(this.ogDir === 1 ? 'idleRight': "idleLeft");
-    this.switchState("runLeft")
+    this.switchState(this.ogDir === 1 ? 'idleRight': "idleLeft");
 
     this.syncroNode.hitCirc = {
       x: -60, y: 0, radius: 100
