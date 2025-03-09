@@ -10,22 +10,21 @@ import { Node } from "@lib/index";
 import { getGlobalPos } from "@lib/utils/entity";
 import Bat from "./Bat"
 
-const IDLE_RIGHT = "idleRight"
-const IDLE_LEFT = "idleLeft"
 // Define state classes
 class RunRight {
   constructor(monster) {
     this.monster = monster;
     this.name = 'runRight';
   }
-  
+
   onEnter() {
     this.monster.play("run2", "run1");
     this.monster.syncroNode.scale.x = 1;
   }
-  
+
   update(dt) {
-    if (this.monster.syncroNode.pos.x > this.monster.span) {
+    const sw = this.monster.ogDir === 1 ? this.monster.syncroNode.pos.x > this.monster.span : this.monster.syncroNode.pos.x >75
+    if (sw) {
       if (this.monster.ogDir === 1) {
         this.monster.switchState('idleRight', "runLeft");
       } else {
@@ -40,14 +39,14 @@ class Glitch {
     this.monster = monster;
     this.name = 'glitch';
   }
-  
+
   onEnter() {
-    this.monster.play("idle",  "root state");
+    this.monster.play("idle", "root state");
     this.timer = 0;
   }
-  
+
   update(dt) {
-    this.monster.noOverlay = Math.random() < 0.5 ? true: false
+    this.monster.noOverlay = Math.random() < 0.5 ? true : false
     this.timer += dt;
     // const delPosX = getGlobalPos( this.monster.syncroNode).x + 50 * this.monster.syncroNode.scale.x - this.monster.player.pos.x
     // this.monster.player.pos.x += delPosX * 0.05
@@ -59,7 +58,7 @@ class Glitch {
       Node.get(objLayerId).add(bloodAnim)
       Node.get(objLayerId).add(deathAnim)
       for (let i = 0; i < 8; i++) {
-        const bat = new Bat(x, y-50, this.monster.player)
+        const bat = new Bat(x, y - 50, this.monster.player)
         Node.get(objLayerId).add(bat)
       }
       bloodAnim.pos.x = x
@@ -75,14 +74,14 @@ class IdleRight {
     this.monster = monster;
     this.name = 'idleRight';
   }
-  
-  onEnter(transition="") {
+
+  onEnter(transition = "") {
     this.monster.play("idle", "root state");
     this.timer = 0;
-    this.transition=transition
+    this.transition = transition
     this.monster.syncroNode.scale.x = 1
   }
-  
+
   update(dt) {
     this.timer += dt;
     if (this.transition) {
@@ -90,8 +89,8 @@ class IdleRight {
       if (this.timer > .25) {
         if (this.transition === "runLeft") {
           this.monster.xOffset += 16
-         }
-       this.monster.switchState(this.transition);
+        }
+        this.monster.switchState(this.transition);
       }
       return
     }
@@ -107,14 +106,15 @@ class RunLeft {
     this.monster = monster;
     this.name = 'runLeft';
   }
-  
+
   onEnter() {
     this.monster.play("run2", "run1");
     this.monster.syncroNode.scale.x = -1;
   }
-  
+
   update(dt) {
-    if (this.monster.syncroNode.pos.x < -50) {
+    const sw = this.monster.ogDir === 1 ? this.monster.syncroNode.pos.x < -50: this.monster.syncroNode.pos.x < this.monster.span
+    if (sw) {
       if (this.monster.ogDir === 1) {
         this.monster.switchState('idleLeft', "idleRight");
       } else {
@@ -122,7 +122,7 @@ class RunLeft {
       }
     }
   }
-  
+
   onExit() {
     // Optional cleanup
   }
@@ -133,23 +133,23 @@ class IdleLeft {
     this.monster = monster;
     this.name = 'idleLeft';
   }
-  
-  onEnter(transition="") {
+
+  onEnter(transition = "") {
     this.monster.play("idle", "root state");
     this.timer = 0;
-    this.transition=transition
+    this.transition = transition
     this.monster.syncroNode.scale.x = -1;
   }
-  
+
   update(dt) {
     this.timer += dt;
     if (this.transition) {
       this.monster.syncroNode.scale.x += dt * 8
       if (this.timer > 0.25) {
         if (this.transition === "idleRight") {
-         this.monster.xOffset -= 16
+          this.monster.xOffset -= 16
         }
-       this.monster.switchState(this.transition);
+        this.monster.switchState(this.transition);
       }
       return
     }
@@ -190,18 +190,18 @@ class Monster extends BoneAnimNode {
       idleLeft: new IdleLeft(this),
       glitch: new Glitch(this)
     };
-    
+
     // Apply the state machine mixin
     stateMachineMixin(this, states);
     // this.switchState(this.ogDir === 1 ? 'idleRight': "idleLeft");
     this.switchState("runLeft")
 
-    this.syncroNode.hitCirc= {
+    this.syncroNode.hitCirc = {
       x: -60, y: 0, radius: 100
     }
     this.testCol = getTestFn(this.syncroNode, this.player)
   }
-  
+
   update(dt, t) {
     // Update the current state
     const state = this.getState()
