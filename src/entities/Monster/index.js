@@ -233,7 +233,7 @@ class Monster extends BoneAnimNode {
     // Object.assign(this.player.pos, getGlobalPos(this.syncroNode))
     if (this.testCol(this.syncroNode, this.player)) {
       // glitch
-      // this.switchState('glitch');
+      this.switchState('glitch');
     }
     this.mspikeCol.update()
     super.update(dt, t);

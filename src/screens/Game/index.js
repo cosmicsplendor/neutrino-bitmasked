@@ -107,10 +107,7 @@ class GameScreen extends Node { // can only have cameras as children
         }
         this.ambiences = {
             ambience1: new Ambience(ambience1Graph, this.soundMap),
-            ambience2: new Ambience(ambience2Graph, this.soundMap),
-            ambience3: new Ambience(ambience3Graph, this.soundMap),
-            ambience4: new Ambience(ambience4Graph, this.soundMap),
-            ambience5: new Ambience(ambience5Graph, this.soundMap),
+            ambience2: new Ambience(ambience2Graph, this.soundMap)
         }
         this.player = new Player({ width: 64, height: 64, fill: "brown", speed: 350, fricX: 3, pos: { x: 0, y: 0 }, shard, cinder, sounds: playerSounds, state: this.state })
         this.factories = makeFactories({ soundSprite, assetsCache, storage, player: this.player, state: this.state })
