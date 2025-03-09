@@ -7,9 +7,10 @@ import bloodAnimDat from "./blood.json"
 import getTestFn from "@lib/components/Collision/helpers/getTestFn";
 import ParticleEmitter from "@lib/utils/ParticleEmitter";
 import { Node } from "@lib/index";
-import { getGlobalPos } from "@lib/utils/entity";
+import { circBounds, getGlobalPos } from "@lib/utils/entity";
 import Bat from "./Bat"
 import Collision from "@lib/components/Collision";
+import { aabbCirc } from "@lib/utils/math";
 
 // Define state classes
 class RunRight {
@@ -181,6 +182,7 @@ class IdleLeft {
 
 class Monster extends BoneAnimNode {
   noOverlay = true
+  bounds={ width: 80, height: 80 }
   static getDeathAnim() {
     if (this.deathAnim instanceof ParticleEmitter) return this.deathAnim
     this.deathAnim = new ParticleEmitter(deathAnimDat)
@@ -216,14 +218,21 @@ class Monster extends BoneAnimNode {
     this.switchState(this.ogDir === 1 ? 'idleRight': "idleLeft");
 
     this.syncroNode.hitCirc = {
-      x: -60, y: -30, radius: 40
+      x: -60, y: -30, radius: 45
     }
     this.testCol = getTestFn(this.syncroNode, this.player)
     this.mspikeCol = new Collision({ entity: this.syncroNode, blocks: "fspikes", rigid: false, movable: false, onHit: () => {
       this.switchState("glitch", true)
     } })
   }
-
+  checkPlayerCol() {
+    const { x, y } = getGlobalPos(this.syncroNode)
+    this.bounds.x = x - 40
+    this.bounds.y = y - 40
+    if (aabbCirc(this.bounds, circBounds(this.player))) {
+      this.switchState('glitch');
+    }
+  }
   update(dt, t) {
     // Update the current state
     const state = this.getState()
@@ -231,10 +240,7 @@ class Monster extends BoneAnimNode {
     // Call the parent update method
     // this.player.pos.x = Math.round(getGlobalPos(this.syncroNode).x)
     // Object.assign(this.player.pos, getGlobalPos(this.syncroNode))
-    if (this.testCol(this.syncroNode, this.player)) {
-      // glitch
-      this.switchState('glitch');
-    }
+    this.checkPlayerCol()
     this.mspikeCol.update()
     super.update(dt, t);
   }
