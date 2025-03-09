@@ -91,17 +91,17 @@ class FireBall extends TexRegion {
         this.testCol = getTestFn(this, player)
     }
     update(dt) {
-        if (this.testCol(this, this.player)) {
-            this.remove()
-            this.player.explode()
-            return
-        }
         if (this.dormant) {
             this.deadIn -= dt
             this.alpha = this.deadIn * 0.5
             if (this.deadIn < 0) {
                 this.remove()
             }
+            return
+        }
+        if (this.testCol(this, this.player)) {
+            this.remove()
+            this.player.explode()
             return
         }
         Movement.update(this, dt)
