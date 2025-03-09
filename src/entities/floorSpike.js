@@ -15,7 +15,7 @@ class FloorSpike extends TexRegion {
         this.uSound = uSound
         this.dSound = dSound
         this.player = player
-        this.hitbox = { x: 6, y: 0, width: 68, height: 40 }
+        this.hitbox = { x: 6, y: 20, width: 68, height: 40 }
         this.testCol = getTestFn(this, player)
     }
     updatePos(dt) {

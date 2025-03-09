@@ -1,7 +1,7 @@
 import BoneAnimNode from "@lib/entities/BoneAnimNode";
 import { stateMachineMixin } from "@lib/utils/FSM";
 import animData from "./anim.json"
-import { objLayerId } from "@lib/constants"
+import { fgLayerId, objLayerId } from "@lib/constants"
 import deathAnimDat from "./death.json"
 import bloodAnimDat from "./blood.json"
 import getTestFn from "@lib/components/Collision/helpers/getTestFn";
@@ -9,6 +9,7 @@ import ParticleEmitter from "@lib/utils/ParticleEmitter";
 import { Node } from "@lib/index";
 import { getGlobalPos } from "@lib/utils/entity";
 import Bat from "./Bat"
+import Collision from "@lib/components/Collision";
 
 // Define state classes
 class RunRight {
@@ -40,9 +41,10 @@ class Glitch {
     this.name = 'glitch';
   }
 
-  onEnter() {
+  onEnter(bySpike) {
     this.monster.play("idle", "root state");
-    this.timer = 0;
+    this.timer = bySpike ? 1: 0;
+    this.bySpike = bySpike
   }
 
   update(dt) {
@@ -57,9 +59,16 @@ class Glitch {
       const bloodAnim = Monster.getBloodAnim()
       Node.get(objLayerId).add(bloodAnim)
       Node.get(objLayerId).add(deathAnim)
-      for (let i = 0; i < 8; i++) {
-        const bat = new Bat(x, y - 50, this.monster.player)
-        Node.get(objLayerId).add(bat)
+      if (!this.bySpike) {
+        for (let i = 0; i < 8; i++) {
+          const bat = new Bat(x, y - 50, this.monster.player)
+          Node.get(objLayerId).add(bat)
+        }
+      } else {
+        const { orbPool, player } = this.monster
+        Node.get(fgLayerId).add(orbPool.create(x-24, y, null,  player ))
+        Node.get(fgLayerId).add(orbPool.create(x+24, y, null,  player ))
+        Node.get(fgLayerId).add(orbPool.create(x, y - 24, null,  player ))
       }
       bloodAnim.pos.x = x
       bloodAnim.pos.y = y - 60
@@ -99,10 +108,11 @@ class IdleRight {
       }
       return
     }
-    // if (this.timer >= 3) {
-    //   // this.monster.xOffset -= 56
-    //   this.monster.switchState('runRight');
-    // }
+    const { x, y } = getGlobalPos(this.monster.syncroNode)
+    const player = getGlobalPos(this.monster.player)
+    if (player.x >  x && player.x < x + 320 && player.y < y + 48 && player.y > y - 140) {
+        this.monster.switchState('runRight');
+    }
   }
 }
 
@@ -158,9 +168,13 @@ class IdleLeft {
       }
       return
     }
+    const { x, y } = getGlobalPos(this.monster.syncroNode)
+    const player = getGlobalPos(this.monster.player)
+    if (player.x < x && player.x > x - 320 && player.y < y + 48&& player.y > y - 160) {
+        this.monster.switchState('runLeft');
+    }
     // if (this.timer >= 3) {
     //   // this.monster.xOffset += 72
-    //   this.monster.switchState('runLeft');
     // }
   }
 }
@@ -180,9 +194,10 @@ class Monster extends BoneAnimNode {
     this.bloodAnim.noOverlay = true
     return this.bloodAnim
   }
-  constructor({ x, y, player, span = 200 }) {
+  constructor({ x, y, player, span = 200, orbPool }) {
     super({ data: animData, pos: { x: x + 136 * Math.sign(span), y } });
     this.player = player
+    this.orbPool = orbPool
     this.syncroNode.scale.x = 1
     this.span = span
     this.syncroNode.pos.x = 0
@@ -201,9 +216,12 @@ class Monster extends BoneAnimNode {
     this.switchState(this.ogDir === 1 ? 'idleRight': "idleLeft");
 
     this.syncroNode.hitCirc = {
-      x: -60, y: 0, radius: 100
+      x: -60, y: -30, radius: 40
     }
     this.testCol = getTestFn(this.syncroNode, this.player)
+    this.mspikeCol = new Collision({ entity: this.syncroNode, blocks: "fspikes", rigid: false, movable: false, onHit: () => {
+      this.switchState("glitch", true)
+    } })
   }
 
   update(dt, t) {
@@ -215,9 +233,9 @@ class Monster extends BoneAnimNode {
     // Object.assign(this.player.pos, getGlobalPos(this.syncroNode))
     if (this.testCol(this.syncroNode, this.player)) {
       // glitch
-      this.switchState('glitch');
+      // this.switchState('glitch');
     }
-
+    this.mspikeCol.update()
     super.update(dt, t);
   }
 }

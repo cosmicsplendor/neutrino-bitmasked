@@ -63,13 +63,13 @@ const factories = {
         }
     },
     floorSpike: {
-        fields: [ "delay" ],
+        fields: [ "delay", "dx" ],
         dims: () => {
             return { width: 80, height: 40 }
         },
         create: params => {
-            const { delay=0, x, y, name } = params
-            return { delay: +delay, x, y, name }
+            const { delay=0, x, dx=0, y, name } = params
+            return { delay: +delay, x: x + +dx * TILE_SIZE, y, name, groupId: "fspikes" }
         }
     },
     vlhd: lasers("vertical"),

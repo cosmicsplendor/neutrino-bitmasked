@@ -156,7 +156,7 @@ export default ({ soundSprite, assetsCache, storage, player, state }) => { // us
             return new Hearth({ x, y, dir: props.dir, player})
         },
         monster: (x, y, props={}, player) => {
-            return new Monster({x, y, player, span: props.span })
+            return new Monster({x, y, player, span: props.span, orbPool: tempOrbPool })
         },
         floorSpike: (x, y, props, player) => {
             const fs = new FloorSpike({

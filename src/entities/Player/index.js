@@ -90,6 +90,7 @@ class Player extends TexRegion {
         }, this.state)
         this.wallCollision = new Collision({ entity: this, blocks: colRectsId, rigid: true, movable: false, onHit: this.onWallCol.bind(this) })
         this.spikeCollision = new Collision({ entity: this, blocks: "spikes", rigid: false, movable: false, onHit: this.explode.bind(this) })
+        this.fspikeCol = new Collision({ entity: this, blocks: "fspikes", rigid: false, movable: false, onHit: this.explode.bind(this)})
         this.magnetCollision = new Collision({ entity: this, blocks: "magnets", rigid: true, movable: false, onHit: this.onMagnetCol.bind(this) })
         this.crateCollision = new Collision({ entity: this, blocks: "crates", rigid: true, movable: false, onHit: this.onCrateCol.bind(this) })
         // this.gateCollision = new Collision({ entity: this, blocks: "gates", rigid: false, movable: false, onHit: this.explode.bind(this) })
@@ -228,6 +229,7 @@ class Player extends TexRegion {
         this.wallCollision.update()
         this.crateCollision.update()
         this.magnetCollision.update()
+        this.fspikeCol.update()
         if (config.testMode) return
         this.spikeCollision.update()
     }
