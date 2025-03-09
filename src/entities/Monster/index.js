@@ -10,7 +10,8 @@ import { Node } from "@lib/index";
 import { getGlobalPos } from "@lib/utils/entity";
 import Bat from "./Bat"
 
-
+const IDLE_RIGHT = "idleRight"
+const IDLE_LEFT = "idleLeft"
 // Define state classes
 class RunRight {
   constructor(monster) {
@@ -25,7 +26,11 @@ class RunRight {
   
   update(dt) {
     if (this.monster.syncroNode.pos.x > this.monster.span) {
-      this.monster.switchState('idleRight');
+      if (this.monster.ogDir === 1) {
+        this.monster.switchState('idleRight', "runLeft");
+      } else {
+        this.monster.switchState('idleRight', 'idleLeft');
+      }
     }
   }
 }
@@ -71,16 +76,28 @@ class IdleRight {
     this.name = 'idleRight';
   }
   
-  onEnter() {
+  onEnter(transition="") {
     this.monster.play("idle", "root state");
     this.timer = 0;
+    this.transition=transition
+    this.monster.syncroNode.scale.x = 1
   }
   
   update(dt) {
     this.timer += dt;
+    if (this.transition) {
+      this.monster.syncroNode.scale.x -= dt * 8
+      if (this.timer > .25) {
+        if (this.transition === "runLeft") {
+          this.monster.xOffset += 16
+         }
+       this.monster.switchState(this.transition);
+      }
+      return
+    }
     if (this.timer >= 3) {
-      this.monster.xOffset -= 72
-      this.monster.switchState('runLeft');
+      // this.monster.xOffset -= 56
+      this.monster.switchState('runRight');
     }
   }
 }
@@ -97,8 +114,12 @@ class RunLeft {
   }
   
   update(dt) {
-    if (this.monster.syncroNode.pos.x < 0) {
-      this.monster.switchState('idleLeft');
+    if (this.monster.syncroNode.pos.x < -50) {
+      if (this.monster.ogDir === 1) {
+        this.monster.switchState('idleLeft', "idleRight");
+      } else {
+        this.monster.switchState('idleLeft', 'runRight')
+      }
     }
   }
   
@@ -113,16 +134,28 @@ class IdleLeft {
     this.name = 'idleLeft';
   }
   
-  onEnter() {
+  onEnter(transition="") {
     this.monster.play("idle", "root state");
     this.timer = 0;
+    this.transition=transition
+    this.monster.syncroNode.scale.x = -1;
   }
   
   update(dt) {
     this.timer += dt;
+    if (this.transition) {
+      this.monster.syncroNode.scale.x += dt * 8
+      if (this.timer > 0.25) {
+        if (this.transition === "idleRight") {
+         this.monster.xOffset -= 16
+        }
+       this.monster.switchState(this.transition);
+      }
+      return
+    }
     if (this.timer >= 3) {
-      this.monster.xOffset += 72
-      this.monster.switchState('runRight');
+      // this.monster.xOffset += 72
+      this.monster.switchState('runLeft');
     }
   }
 }
@@ -143,12 +176,12 @@ class Monster extends BoneAnimNode {
     return this.bloodAnim
   }
   constructor({ x, y, player, span = 200 }) {
-    super({ data: animData, pos: { x: x, y } });
+    super({ data: animData, pos: { x: x + 136 * Math.sign(span), y } });
     this.player = player
     this.syncroNode.scale.x = 1
     this.span = span
     this.syncroNode.pos.x = 0
-    
+    this.ogDir = Math.sign(span)
     // Create state instances
     const states = {
       runRight: new RunRight(this),
@@ -160,7 +193,9 @@ class Monster extends BoneAnimNode {
     
     // Apply the state machine mixin
     stateMachineMixin(this, states);
-    this.switchState('runRight');
+    // this.switchState(this.ogDir === 1 ? 'idleRight': "idleLeft");
+    this.switchState("runLeft")
+
     this.syncroNode.hitCirc= {
       x: -60, y: 0, radius: 100
     }
@@ -177,7 +212,7 @@ class Monster extends BoneAnimNode {
     if (this.testCol(this.syncroNode, this.player)) {
       // glitch
       // this.noOverlay = Math.random() < 0.5
-      this.switchState('glitch');
+      // this.switchState('glitch');
     }
 
     super.update(dt, t);
