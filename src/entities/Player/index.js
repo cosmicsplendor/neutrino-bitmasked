@@ -220,7 +220,6 @@ class Player extends TexRegion {
         }
     }
     update(dt) {
-        console.log(this.pos.x)
         if (this.state.is("game-over") || this.state.is("paused")) return
         if (this.suspended) {
             return this.updateSuspended(dt)

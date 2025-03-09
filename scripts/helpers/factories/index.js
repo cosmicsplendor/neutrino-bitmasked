@@ -1,13 +1,11 @@
-const { pickOne, rand, CompositeBlock, Block, decomposeBlocks } = require("../../utils")
+const { CompositeBlock, Block, decomposeBlocks } = require("../../utils")
 const lasers = require("./lasers")
 const groupMap = require("../../utils/groupMap.json")
-const { generateTileSpawnPoints } = require("../generateTiles")
 const saws = require("./saws")
 const endTiles = require("./endTiles.json")
 const sawBlades = require("./sawBlades")
 const stackables = require("./stackables")
 const TILE_SIZE = 48
-const STACK_TOP = ["top-start", "top-end", "top"]
 const factories = {
     player: {
         fields: [], // No specific props inferred from the original code
