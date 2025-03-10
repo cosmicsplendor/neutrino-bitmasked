@@ -25,7 +25,7 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.(png|jpe?g|mp3|ogg|wav|cson|bson)$/,
+                test: /\.(png|jpe?g|mp3|aac|ogg|wav|cson|bson)$/,
                 use: {
                     loader: "file-loader",
                     options: {

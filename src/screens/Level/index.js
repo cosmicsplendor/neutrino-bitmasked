@@ -3,7 +3,7 @@ import { GAME } from "@screens/names"
 import resumeImgId from "@assets/images/ui/resume.png"
 import arrowImgId from "@assets/images/ui/arrow.png"
 import SoundSprite from "@utils/Sound/SoundSprite"
-import soundSpriteId from "@assets/audio/sprite.mp3"
+import soundSpriteId from "@assets/audio/sprite.aac"
 import soundMetaId from "@assets/audio/sprite.cson"
 import config from "@config"
 

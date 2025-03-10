@@ -16,7 +16,7 @@ import MainMenuScreen from "@screens/MainMenu"
 import GameScreen from "@screens/Game"
 import LevelScreen from "@screens/Level"
 
-import soundSprite from "@assets/audio/sprite.mp3"
+import soundSprite from "@assets/audio/sprite.aac"
 import soundMeta from "@assets/audio/sprite.cson"
 import texatlasId from "@assets/images/texatlas.png"
 import atlasmetaId from "@assets/images/atlasmeta.cson"
