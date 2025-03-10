@@ -1,7 +1,7 @@
 import { Node, TexRegion } from "@lib"
 import config from "@config"
 import getTestFn from "@lib/components/Collision/helpers/getTestFn"
-import { randf, rand, easingFns, sqLen } from "@utils/math"
+import { randf, rand, easingFns, sqDist } from "@utils/math"
 
 const PI = Math.PI
 const period = [ 3, 4 ]
@@ -40,7 +40,7 @@ class WindParticle extends TexRegion {
 
 class Wind extends Node {
     overlay=[1, 1, 1]
-    constructor(data, x, y, player) {
+    constructor(data, x, y, sound, player) {
         super(data)
         this.pos.x = x - 6
         this.pos.y = y - 9
@@ -54,6 +54,7 @@ class Wind extends Node {
         for (let i = 0; i < 140; i++) {
             this.add(new WindParticle())
         }
+        this.sound = sound
         this.feed(500, 1 / 60)
     }
     
@@ -85,6 +86,15 @@ class Wind extends Node {
             if (Math.abs(dPosX) > 5) { // Only apply if player is off-center
                 this.player.velX -= (dPosX / Math.abs(dPosX)) * hInf * dt
             }
+        }
+        const dist = sqDist(this.pos, this.player.pos)
+        if (dist < 172000) {
+            if (!this.sound.playing) {
+                this.sound.play()
+            }
+            this.sound.volume = 1 - dist/172000
+        } else {
+            this.sound.pause()
         }
     }
     

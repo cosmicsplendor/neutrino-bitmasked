@@ -29,6 +29,7 @@ export default ({ soundSprite, assetsCache, storage, player, state }) => { // us
     const endSound = soundSprite.create("end")
     const spikeSound = soundSprite.createPool("spike", { size: 2 })
     const emberSound = soundSprite.createPool("scatter", { size: 3 })
+    const steamSound = soundSprite.create("steam")
     const lasSounds = {
         on: soundSprite.createPool("las_on"),
         off: soundSprite.createPool("las_off")
@@ -64,7 +65,7 @@ export default ({ soundSprite, assetsCache, storage, player, state }) => { // us
         factory: (x, y, props, player) => {
             return new Wind(
                 particles.wind,
-                x, y, player
+                x, y, steamSound, player
             )
         },
         size: 3,
