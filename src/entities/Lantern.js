@@ -1,4 +1,5 @@
 import { TexRegion } from "@lib/index";
+import { fadeSound } from "@lib/utils";
 import { rand, randf } from "@lib/utils/math";
 class Fly extends TexRegion {
     constructor() {
@@ -103,8 +104,10 @@ class Lantern extends TexRegion {
     get on() {
         return this._on
     }
-    constructor(x, y) {
+    constructor(x, y, sounds, player) {
         super({ frame: "lantern", pos: { x, y: y-4 } })
+        this.sounds = sounds
+        this.player = player
         this.anchor = {
             x: this.width / 2, y: 0
         }
@@ -149,12 +152,15 @@ class Lantern extends TexRegion {
             // Time to start a new flicker
             if (this.nextFlickerTime <= 0) {
                 this.isFlickering = true;
-                this.flickerDuration = randf(1.5, 0.75);
+                this.flickerDuration = randf(2, 1);
+            }
+            if (this.sounds.flicker.playing) {
+                this.sounds.flicker.pause()
             }
         } else {
             // Currently in flickering state
             this.flickerDuration -= dt;
-            
+            fadeSound(this.sounds.flicker, 144000, this)
             // Randomly flicker while in this state
             if (Math.random() < 0.4) { // Adjust this probability to control flicker frequency
                 this.on = !this.on;
@@ -194,6 +200,7 @@ class Lantern extends TexRegion {
             const correction = overshoot * 0.03 * Math.sign(this.rotation);
             this.angVel -= correction;
         }
+        fadeSound(this.sounds.buzz, 96000, this)
     }
 }
 

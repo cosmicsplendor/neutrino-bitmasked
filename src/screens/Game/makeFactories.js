@@ -28,8 +28,10 @@ export default ({ soundSprite, assetsCache, storage, player, state }) => { // us
     const orbSound = soundSprite.createPool("orb")
     const endSound = soundSprite.create("end")
     const spikeSound = soundSprite.createPool("spike", { size: 2 })
-    const emberSound = soundSprite.createPool("scatter", { size: 3 })
+    const emberSound = soundSprite.createPool("scatter", { size: 2 })
     const steamSound = soundSprite.create("steam")
+    const buzzSound = soundSprite.create("buzz")
+    const flickerSound = soundSprite.create("flicker3")
     const lasSounds = {
         on: soundSprite.createPool("las_on"),
         off: soundSprite.createPool("las_off")
@@ -152,7 +154,7 @@ export default ({ soundSprite, assetsCache, storage, player, state }) => { // us
             return new Cobweb(x, y)
         },
         lantern: (x, y) => {
-            return new Lantern(x, y)
+            return new Lantern(x, y, { flicker: flickerSound, buzz: buzzSound }, player)
         },
         hearth: (x, y, props, player) => {
             return new Hearth({ x, y, dir: props.dir, player, sound: emberSound })
@@ -189,19 +191,19 @@ export default ({ soundSprite, assetsCache, storage, player, state }) => { // us
             return new SawBlade(x, y,  "sb1", props.toX, props.toY, props.speed, player)
         },
         sb2: (x, y, props, player) => {
-            return new SawBlade(x, y,  "sb2", props.toX, props.toY, props.speed, player)
+            return new SawBlade(x, y,  "sb2", props.toX, props.toY, props.speed, player, soundSprite)
         },
         sb3: (x, y, props, player) => {
-            return new SawBlade(x, y,  "sb3", props.toX, props.toY, props.speed, player)
+            return new SawBlade(x, y,  "sb3", props.toX, props.toY, props.speed, player, soundSprite)
         },
         sb4: (x, y, props, player) => {
-            return new SawBlade(x, y,  "sb4", props.toX, props.toY, props.speed, player)
+            return new SawBlade(x, y,  "sb4", props.toX, props.toY, props.speed, player, soundSprite)
         },
         sb5: (x, y, props, player) => {
-            return new SawBlade(x, y,  "sb5", props.toX, props.toY, props.speed, player)
+            return new SawBlade(x, y,  "sb5", props.toX, props.toY, props.speed, player, soundSprite)
         },
         sb6: (x, y, props, player) => {
-            return new SawBlade(x, y,  "sb6", props.toX, props.toY, props.speed, player)
+            return new SawBlade(x, y,  "sb6", props.toX, props.toY, props.speed, player, soundSprite)
         },
         lcr1: (x, y, props, player) => {
             return new Crate(x, y, crateDmgFacs, tempOrbPool, wSounds, props.luck, props.dmg, props.temp, player)

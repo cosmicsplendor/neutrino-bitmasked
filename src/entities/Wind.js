@@ -91,7 +91,9 @@ class Wind extends Node {
         fadeSound(this.sound, 172000, this)
     }
 
-    reset() { }
+    reset() { 
+        this.sound.pause
+    }
 
     onRemove() {
         this.parent = null
