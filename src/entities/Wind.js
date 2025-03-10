@@ -2,14 +2,15 @@ import { Node, TexRegion } from "@lib"
 import config from "@config"
 import getTestFn from "@lib/components/Collision/helpers/getTestFn"
 import { randf, rand, easingFns, sqDist } from "@utils/math"
+import { fadeSound } from "@lib/utils"
 
 const PI = Math.PI
-const period = [ 3, 4 ]
-const amp = [ 16, 36 ]
-const height = [ 180, 180 ] 
-const swirlOffset = [ 0, PI]
+const period = [3, 4]
+const amp = [16, 36]
+const height = [180, 180]
+const swirlOffset = [0, PI]
 class WindParticle extends TexRegion {
-    noOverlay=true
+    noOverlay = true
     forceUpd = true
     constructor() {
         super({ frame: "wind" })
@@ -39,14 +40,14 @@ class WindParticle extends TexRegion {
 }
 
 class Wind extends Node {
-    overlay=[1, 1, 1]
+    overlay = [1, 1, 1]
     constructor(data, x, y, sound, player) {
         super(data)
         this.pos.x = x - 6
         this.pos.y = y - 9
         this.player = player
         // Define wind tunnel boundaries
-        this.hitbox = { x: -20, y: -224, width: 40, height: 200}
+        this.hitbox = { x: -20, y: -224, width: 40, height: 200 }
         this.testCol = getTestFn(this, player)
         this.windStrength = 0.8 // Multiplier for wind force - adjust as needed
 
@@ -57,7 +58,7 @@ class Wind extends Node {
         this.sound = sound
         this.feed(500, 1 / 60)
     }
-    
+
     feed(iterations, dt) {
         for (let i = iterations - 1; i > -1; i--) {
             for (let j = this.children.length - 1; j > -1; j--) {
@@ -65,21 +66,21 @@ class Wind extends Node {
             }
         }
     }
-    
+
     update(dt) {
         // Check if player is within the wind hitbox and visible
-        const windStrength = this.windStrength * (this.player.velY > 0 ? 0.6: 1)
+        const windStrength = this.windStrength * (this.player.velY > 0 ? 0.6 : 1)
         if (this.testCol(this, this.player) && this.player.visible) {
             // Get player's center position relative to wind origin
             const dPosX = this.player.pos.x + 32 - this.pos.x
-            
+
             // Switch player to jumping state
             this.player.controls.switchState("jumping", this.player, true, false)
-            
+
             // Apply constant upward force while in the wind tunnel
             // This creates a reliable liftidng effect similar to Ballance game
             this.player.velY -= config.gravity * windStrength * dt
-            
+
             // Optional: add a small horizontal push based on position relative to center
             // This creates a more natural "centering" effect in the wind tunnel
             const hInf = 0.1 // Strength of horizontal centering (very subtle)
@@ -87,19 +88,11 @@ class Wind extends Node {
                 this.player.velX -= (dPosX / Math.abs(dPosX)) * hInf * dt
             }
         }
-        const dist = sqDist(this.pos, this.player.pos)
-        if (dist < 172000) {
-            if (!this.sound.playing) {
-                this.sound.play()
-            }
-            this.sound.volume = 1 - dist/172000
-        } else {
-            this.sound.pause()
-        }
+        fadeSound(this.sound, 172000, this)
     }
-    
+
     reset() { }
-    
+
     onRemove() {
         this.parent = null
     }
