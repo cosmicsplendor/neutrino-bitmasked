@@ -27,7 +27,6 @@ export default ({ soundSprite, assetsCache, storage, player, state }) => { // us
     const gateDSound = soundSprite.create("gate_d")
     const orbSound = soundSprite.createPool("orb")
     const endSound = soundSprite.create("end")
-    const spikeSound = soundSprite.createPool("spike", { size: 2 })
     const emberSound = soundSprite.createPool("scatter", { size: 2 })
     const steamSound = soundSprite.create("steam")
     const buzzSound = soundSprite.create("buzz")
@@ -166,8 +165,7 @@ export default ({ soundSprite, assetsCache, storage, player, state }) => { // us
             const fs = new FloorSpike({
                 pos: { x, y },
                 player,
-                uSound: spikeSound,
-                dSound: spikeSound,
+                soundSprite,
                 ...props
             })
             return fs
@@ -188,7 +186,7 @@ export default ({ soundSprite, assetsCache, storage, player, state }) => { // us
             return new Ball(x, y, props.seq, player)
         },
         sb1: (x, y, props, player) => {
-            return new SawBlade(x, y,  "sb1", props.toX, props.toY, props.speed, player)
+            return new SawBlade(x, y,  "sb1", props.toX, props.toY, props.speed, player, soundSprite)
         },
         sb2: (x, y, props, player) => {
             return new SawBlade(x, y,  "sb2", props.toX, props.toY, props.speed, player, soundSprite)

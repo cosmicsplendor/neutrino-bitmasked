@@ -140,7 +140,9 @@ class Lantern extends TexRegion {
         // Initialize flicker timing
         this.nextFlickerTime = rand(8, 5);
     }
-    
+    reset() {
+        this.sounds.buzz.pause()
+    }
     update(dt, time) {
         // Handle flickering logic
         if (!this.isFlickering) {

@@ -60,7 +60,7 @@ class FireBall extends TexRegion {
             anim.pos.x = this.pos.x + 64
             anim.pos.y = this.pos.y + 32
         }
-        this.hearth.sound.play(Math.min(1, (velX + velY )/ 550))
+        this.hearth.sound.play(1)
         this.hits++
         if (this.hits > 9) {
             this.hearth.emit()

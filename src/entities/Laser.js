@@ -1,6 +1,7 @@
 import { TexRegion } from "@lib/entities"
 import getTestFn from "@lib/components/Collision/helpers/getTestFn"
 import MovableEnt from "./MovableEnt"
+import { sqDist } from "@lib/utils/math"
 
 const offset = 8
 const hheight = 24 // laser head height
@@ -72,14 +73,14 @@ class Laser extends MovableEnt {
         for (let child of this.children) {
             child.alpha = this.on ? 1 : 0
         }
-        const dPX = this.pos.x - this.player.pos.x
-        const dPY = this.pos.y - this.player.pos.y
-        if (dPX * dPX + dPY * dPY > 90000) return // if the player is farther than 300px return
+        const dist = sqDist(this.pos, this.player.pos)
+        if (dist > 144000) return // if the player is farther than 300px return
+        const volume = 1 - dist / 144000
         if (this.on) {
-            this.sounds.on.play()
+            this.sounds.on.play(volume)
             return
         }
-        this.sounds.off.play()
+        this.sounds.off.play(volume)
     }
     reset() {
         this.pos.x = this.startX
