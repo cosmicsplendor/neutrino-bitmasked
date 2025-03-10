@@ -41,7 +41,7 @@ class FireBall extends TexRegion {
     onWallCol(_, velX, velY,) {
         const colDir = this.colDir
         this.velY = colDir === "top" ? 50:
-            colDir === "bottom" ? -500: velY
+            colDir === "bottom" ? -500 * (1 - this.hits / 30): velY
         this.velX = colDir === "left" ? 75:
             colDir === "right" ? -75: velX
         const anim = FireBall.getAnims()[colDir]
@@ -60,7 +60,7 @@ class FireBall extends TexRegion {
             anim.pos.x = this.pos.x + 64
             anim.pos.y = this.pos.y + 32
         }
-
+        this.hearth.sound.play(Math.min(1, (velX + velY )/ 550))
         this.hits++
         if (this.hits > 9) {
             this.hearth.emit()
@@ -116,7 +116,7 @@ class FireBall extends TexRegion {
 
 class Hearth extends Node {
     active=false
-    constructor({ x, y, player, dir=1 }) {
+    constructor({ x, y, player, dir=1, sound }) {
         super({ pos: { x, y }})
         const hearth1 = new TexRegion({ frame: "hearth1", overlay: "none" })
         const hearth2 = new TexRegion({ frame: "hearth2", overlay: "none", pos: { x: 66, y: 0 } })
@@ -128,6 +128,7 @@ class Hearth extends Node {
         Node.get(mgLayerId).add(hearthBg)
         this.player = player
         this.dir=dir
+        this.sound = sound
     }
     reset() {
         this.active = false

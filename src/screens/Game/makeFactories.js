@@ -28,6 +28,7 @@ export default ({ soundSprite, assetsCache, storage, player, state }) => { // us
     const orbSound = soundSprite.createPool("orb")
     const endSound = soundSprite.create("end")
     const spikeSound = soundSprite.createPool("spike", { size: 2 })
+    const emberSound = soundSprite.createPool("scatter", { size: 3 })
     const lasSounds = {
         on: soundSprite.createPool("las_on"),
         off: soundSprite.createPool("las_off")
@@ -153,7 +154,7 @@ export default ({ soundSprite, assetsCache, storage, player, state }) => { // us
             return new Lantern(x, y)
         },
         hearth: (x, y, props, player) => {
-            return new Hearth({ x, y, dir: props.dir, player})
+            return new Hearth({ x, y, dir: props.dir, player, sound: emberSound })
         },
         monster: (x, y, props={}, player) => {
             return new Monster({x, y, player, span: props.span, orbPool: tempOrbPool })
