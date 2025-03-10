@@ -18,21 +18,31 @@ class Crate extends TexRegion { // breakable crate class
         this.sounds = sounds
         this.luck = luck
         this.temp = temp
+        this.lastDamageTime = 0 // Track the last time damage was taken
         this.setDamage(dmg)
         this.reset = () => {
             this.alpha = 1
             this.setDamage(dmg)
+            this.lastDamageTime = 0
         }
     }
     setDamage(dmg) {
         this.damage = clamp(0, dmgToFrame.length, dmg)
         if (this.damage > 0) {
-            return  this.frame = dmgToFrame[this.damage - 1]
+            return this.frame = dmgToFrame[this.damage - 1]
         } 
         this.frame = initFrame
     }
     takeDamage(vy) {
         if (Math.abs(vy) < 300) { return }
+        
+        // Check if enough time has passed since the last damage
+        const currentTime = Date.now()
+        const timeSinceLastDamage = currentTime - this.lastDamageTime
+        
+        if (timeSinceLastDamage < 250) { return } // Exit if less than 250ms has passed
+        
+        this.lastDamageTime = currentTime // Update the last damage time
         
         this.damage++
         this.sounds.crack.play()
@@ -54,7 +64,7 @@ class Crate extends TexRegion { // breakable crate class
         particle.pos.y = this.pos.y
         this.sounds.snap.play()
         if (Math.random() < this.luck / 100) { // chance of spawning is determined by luck factor
-            const orb = this.orbPool.create(this.pos.x - 6 + this.width / 2, this.pos.y -6 + this.height / 2, null,  this.player )
+            const orb = this.orbPool.create(this.pos.x - 6 + this.width / 2, this.pos.y -6 + this.height / 2, null, this.player)
             orb.active = false
             orb.add(new Timer(0.6, null, () => {
                 orb.active = true

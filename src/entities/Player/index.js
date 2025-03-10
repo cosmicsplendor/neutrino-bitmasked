@@ -177,7 +177,7 @@ class Player extends TexRegion {
     } 
     onCrateCol(block, velX, velY, moved) {
         if (velY) {
-            block.takeDamage(velY)
+            block.takeDamage(velY, velX)
             if (velY > 0) {
                 this.fricX = this.fricX0
                 return this.controls.switchState("rolling")
