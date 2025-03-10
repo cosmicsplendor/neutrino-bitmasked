@@ -92,7 +92,7 @@ class Wind extends Node {
     }
 
     reset() { 
-        this.sound.pause
+        this.sound.pause()
     }
 
     onRemove() {

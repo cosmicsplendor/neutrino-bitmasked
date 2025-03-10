@@ -31,7 +31,7 @@ export default ({ soundSprite, assetsCache, storage, player, state }) => { // us
     const emberSound = soundSprite.createPool("scatter", { size: 2 })
     const steamSound = soundSprite.create("steam")
     const buzzSound = soundSprite.create("buzz")
-    const flickerSound = soundSprite.create("flicker3")
+    const flickerSound = soundSprite.create("flicker")
     const lasSounds = {
         on: soundSprite.createPool("las_on"),
         off: soundSprite.createPool("las_off")

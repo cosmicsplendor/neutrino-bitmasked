@@ -152,7 +152,7 @@ class Lantern extends TexRegion {
             // Time to start a new flicker
             if (this.nextFlickerTime <= 0) {
                 this.isFlickering = true;
-                this.flickerDuration = randf(2, 1);
+                this.flickerDuration = 2;
             }
             if (this.sounds.flicker.playing) {
                 this.sounds.flicker.pause()
@@ -160,7 +160,7 @@ class Lantern extends TexRegion {
         } else {
             // Currently in flickering state
             this.flickerDuration -= dt;
-            fadeSound(this.sounds.flicker, 144000, this)
+            fadeSound(this.sounds.flicker, 200000, this)
             // Randomly flicker while in this state
             if (Math.random() < 0.4) { // Adjust this probability to control flicker frequency
                 this.on = !this.on;
@@ -200,7 +200,7 @@ class Lantern extends TexRegion {
             const correction = overshoot * 0.03 * Math.sign(this.rotation);
             this.angVel -= correction;
         }
-        fadeSound(this.sounds.buzz, 96000, this)
+        fadeSound(this.sounds.buzz, 64000, this)
     }
 }
 
