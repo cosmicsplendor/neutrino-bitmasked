@@ -41,7 +41,7 @@ class FireBall extends TexRegion {
     onWallCol(_, velX, velY,) {
         const colDir = this.colDir
         this.velY = colDir === "top" ? 50:
-            colDir === "bottom" ? -500 * (1 - this.hits / 30): velY
+            colDir === "bottom" ? -500 * (1 - this.hits / 50): velY
         this.velX = colDir === "left" ? 75:
             colDir === "right" ? -75: velX
         const anim = FireBall.getAnims()[colDir]
@@ -65,7 +65,7 @@ class FireBall extends TexRegion {
         if (this.hits > 9) {
             this.hearth.emit()
             if (colDir !== "bottom") {
-                return this.remove()
+                return this.reset()
             }
             this.dormant = true
             return
