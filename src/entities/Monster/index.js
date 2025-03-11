@@ -44,10 +44,14 @@ class Glitch {
 
   onEnter(bySpike) {
     this.monster.play("idle", "root state");
-    this.timer = bySpike ? 1: 0;
+    this.timer = bySpike ? 1.25: 0;
     this.bySpike = bySpike
+    if (bySpike) {
+      this.monster.impalesfx.play()
+    } else {
+      this.monster.growl.play()
+    }
   }
-
   update(dt) {
     this.monster.noOverlay = Math.random() < 0.5 ? true : false
     this.timer += dt;
@@ -55,6 +59,7 @@ class Glitch {
     // this.monster.player.pos.x += delPosX * 0.05
     if (this.timer >= 1) {
       this.monster.remove()
+      this.monster.deathsfx.play()
       const { x, y } = getGlobalPos(this.monster.syncroNode)
       const deathAnim = Monster.getDeathAnim()
       const bloodAnim = Monster.getBloodAnim()
@@ -196,10 +201,14 @@ class Monster extends BoneAnimNode {
     this.bloodAnim.noOverlay = true
     return this.bloodAnim
   }
-  constructor({ x, y, player, span = 200, orbPool }) {
+  constructor({ x, y, player, span = 200, orbPool, soundSprite }) {
     super({ data: animData, pos: { x: x + 136 * Math.sign(span), y } });
     this.player = player
     this.orbPool = orbPool
+    this.soundSprite = soundSprite
+    this.growl = soundSprite.create("growl")
+    this.impalesfx = soundSprite.create("impale")
+    this.deathsfx = soundSprite.create("mons_death")
     this.syncroNode.scale.x = 1
     this.span = span
     this.syncroNode.pos.x = 0

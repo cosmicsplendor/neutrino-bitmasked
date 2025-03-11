@@ -189,7 +189,7 @@ class Player extends TexRegion {
         }
     } 
     explode() {
-        if (config.testMode) return
+        // if (config.testMode) return
         if (this.state.is("completed")) return
         this.deadAnim.pos.x = this.pos.x + this.width / 2
         this.deadAnim.pos.y = this.pos.y + this.height / 2

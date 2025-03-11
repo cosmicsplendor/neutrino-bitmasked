@@ -120,14 +120,14 @@ const soundPlayer = (path, period, soundSprite, player, lever) => {
   const sliceSFX = soundSprite.create("slice1")
   const sliceDur = 0.75
   sliceSFX.speed = sliceDur * 2 / (period - 0.1)
-  const squeaks = ["squeak2", "squeak1"].map(name => soundSprite.create(name))
+  const squeaks = soundSprite.createGroup(["squeak2", "squeak1"])
   return () => {
     const dist = sqDist(player.pos, lever.pos)
     if (dist > 120000) {
       return
     }
     const volume = 1 - dist / 120000
-    pickOne(squeaks).play(0.5 * volume)
+    squeaks.play(0.5 * volume)
     sliceSFX.play(0.25 * volume)
   }
 }
