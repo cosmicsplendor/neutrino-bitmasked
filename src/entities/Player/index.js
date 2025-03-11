@@ -58,6 +58,7 @@ class Player extends TexRegion {
     invWeight=1
     suspended=false
     susTimer=0
+    forceUpd = true
     constructor({ speed = 48, width = 64, height = 64, fricX=4,  controls, sounds, state, ...rest }) {
         super({ frame: "ball", ...rest })
         this.width = width
@@ -197,8 +198,9 @@ class Player extends TexRegion {
         this.alpha = 0  // forces off the visibility (ensuring no update or rendering)
         Node.get(objLayerId).add(this.deadAnim) // particle emitters have to be manually inserted into the scene graph, since it doesn't implicitly know where it should be located
         // Node.get(objLayerId).add(this.shard)
-        
-        this.deadAnim.onDead = () => this.state.over(this.pos.x)
+        this.dying = true
+        this.dyingTimer = 1
+        this.forceUpd = true
         // this.sounds.player_exp.play()
         // this.sounds.player_din.play()
         this.velX = this.velY = 0
@@ -220,10 +222,22 @@ class Player extends TexRegion {
             this.velX = this.velY = 0
         }
     }
+    updateDying(dt) {
+        this.dyingTimer -= dt * 2
+        if (this.dyingTimer < 0) {
+            this.state.over(this.pos.x)
+            this.dying = false
+            this.forceUpd = false
+        }
+    }
     update(dt) {
         if (this.state.is("game-over") || this.state.is("paused")) return
         if (this.suspended) {
             return this.updateSuspended(dt)
+        }
+        if (this.dying) {
+            this.updateDying(dt)
+            return
         }
         this.controls.update(this, dt)
         Boolean(this.offEdge) ? Movement.updateOffEdge(this, dt): Movement.update(this, dt)
