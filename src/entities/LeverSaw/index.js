@@ -17,6 +17,7 @@ class Lever extends TexRegion {
         // Circular path: complete one full revolution in the given period.
         this.update = dt => {
           this.rotation = (this.rotation + dt * (2 * Math.PI / this.period)) % (2 * Math.PI)
+          playSound()
         }
       } else if (this.path.startsWith("pend")) {
         // Pendulum variants.
@@ -99,21 +100,44 @@ class Blade extends TexRegion {
         
     }
 }
+const soundPlayer = (path, period, soundSprite, player, lever) => {
+  if (path === "circ") {
+    const sawSFX = soundSprite.create("saw1")
+    const tickSFX = soundSprite.create("tick")
+    tickSFX.speed = 2 / period
+    return () => {
+      const dist = sqDist(player.pos, lever.pos)
+      if (dist > 120000) {
+        sawSFX.pause()
+        tickSFX.pause()
+        return
+      }
+      const volume = 1 - dist / 120000
+      sawSFX.play(0.75 * volume)
+      tickSFX.play(volume)
+    }
+  }
+  const sliceSFX = soundSprite.create("slice1")
+  const sliceDur = 0.75
+  sliceSFX.speed = sliceDur * 2 / (period - 0.1)
+  const squeaks = ["squeak2", "squeak1"].map(name => soundSprite.create(name))
+  return () => {
+    const dist = sqDist(player.pos, lever.pos)
+    if (dist > 120000) {
+      return
+    }
+    const volume = 1 - dist / 120000
+    pickOne(squeaks).play(0.5 * volume)
+    sliceSFX.play(0.25 * volume)
+  }
+}
 class LeverSaw extends TexRegion {
     noOverlay = true
     forceRen = true
     constructor({ x, y, length = 36, player, path, period, soundSprite }) {
         super({ frame: "plug", pos: { x, y } })
-        const sliceSFX = soundSprite.create("slice1")
-        const squeaks = ["squeak2", "squeak1"].map(name => soundSprite.create(name))
-        const playSound = () => {
-          const dist = sqDist(player.pos, this.pos)
-          if (dist > 120000) return
-          const volume = 1 - dist / 120000
-          pickOne(squeaks).play(0.5 * volume)
-          sliceSFX.play(0.25 * volume)
-        }
-        const lever = new Lever(28, 16, path === "circ" ? null: playSound, path, period)
+        const playSound = soundPlayer(path, period, soundSprite, player, this)
+        const lever = new Lever(28, 16, playSound, path, period)
         const blade = new Blade(lever, length, player)
         this.add(lever)
         this.add(blade)
