@@ -187,7 +187,7 @@ class Player extends TexRegion {
                 this.controls.state.onHalt()
             }
         }
-    } 
+    }
     explode() {
         // if (config.testMode) return
         if (this.state.is("completed")) return
@@ -197,7 +197,8 @@ class Player extends TexRegion {
         this.alpha = 0  // forces off the visibility (ensuring no update or rendering)
         Node.get(objLayerId).add(this.deadAnim) // particle emitters have to be manually inserted into the scene graph, since it doesn't implicitly know where it should be located
         // Node.get(objLayerId).add(this.shard)
-        this.state.over(this.pos.x)
+        
+        this.deadAnim.onDead = () => this.state.over(this.pos.x)
         // this.sounds.player_exp.play()
         // this.sounds.player_din.play()
         this.velX = this.velY = 0
