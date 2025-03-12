@@ -12,6 +12,7 @@ import resumeImgId from "@assets/images/ui/resume.png"
 import styles from "./style.css"
 import ParticleEmitter from "@lib/utils/ParticleEmitter"
 import deadAnimDat from "./dead.json"
+import featherAnimDat from "./feathers.json"
 
 const getTouchMappings = () => {
     const data = [
@@ -75,7 +76,9 @@ class Player extends TexRegion {
         this.fricX0 = fricX
         this.state = state
         this.deadAnim = new ParticleEmitter(deadAnimDat)
+        this.featherAnim = new ParticleEmitter(featherAnimDat)
         this.deadAnim.noOverlay = true
+        // this.featherAnim.overlay = [0,0.75,0]
         // this.shard.onDead = () => { // what should happen upon player explosion
         //     /**
         //      * implicit assumptions: 
@@ -190,12 +193,14 @@ class Player extends TexRegion {
         }
     }
     explode() {
+        if (this.state.is("game-over") || this.state.is("paused")) return
         // if (config.testMode) return
         if (this.state.is("completed")) return
-        this.deadAnim.pos.x = this.pos.x + this.width / 2
-        this.deadAnim.pos.y = this.pos.y + this.height / 2
+        this.featherAnim.pos.x = this.deadAnim.pos.x = this.pos.x + this.width / 2
+        this.featherAnim.pos.y = this.deadAnim.pos.y = this.pos.y + this.height / 2
         
         this.alpha = 0  // forces off the visibility (ensuring no update or rendering)
+        Node.get(objLayerId).add(this.featherAnim) // particle emitters have to be manually inserted into the scene graph, since it doesn't implicitly know where it should be located
         Node.get(objLayerId).add(this.deadAnim) // particle emitters have to be manually inserted into the scene graph, since it doesn't implicitly know where it should be located
         // Node.get(objLayerId).add(this.shard)
         this.dying = true

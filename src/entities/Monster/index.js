@@ -3,7 +3,7 @@ import { stateMachineMixin } from "@lib/utils/FSM";
 import animData from "./anim.json"
 import { fgLayerId, objLayerId } from "@lib/constants"
 import deathAnimDat from "./death.json"
-import bloodAnimDat from "./blood.json"
+import bloodAnimDat from "../animDat/blood.json"
 import getTestFn from "@lib/components/Collision/helpers/getTestFn";
 import ParticleEmitter from "@lib/utils/ParticleEmitter";
 import { Node } from "@lib/index";

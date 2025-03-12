@@ -1,0 +1,190 @@
+{
+    "blendMode": "source-over",
+    "loop": false,
+    "params": [
+        {
+            "alphaDecayFn": "quadIn",
+            "scaleDecayFn": "bounceOut",
+            "weight": 1,
+            "frame": "shard6",
+            "width": 48,
+            "height": 42,
+            "offsetX": [
+                0,
+                0
+            ],
+            "offsetY": [
+                0,
+                0
+            ],
+            "lifetime": [
+                0.8,
+                0.8
+            ],
+            "velX": [
+                -240,
+                -120
+            ],
+            "velY": [
+                -350,
+                -280
+            ],
+            "accX": [
+                30,
+                50
+            ],
+            "accY": [
+                650,
+                750
+            ],
+            "rotVel": [
+                -12,
+                15
+            ],
+            "alpha": [
+                0.5,
+                0.75
+            ]
+        },
+        {
+            "alphaDecayFn": "quadIn",
+            "scaleDecayFn": "bounceOut",
+            "weight": 1,
+            "frame": "shard5",
+            "width": 41,
+            "height": 30,
+            "offsetX": [
+                0,
+                0
+            ],
+            "offsetY": [
+                0,
+                0
+            ],
+            "lifetime": [
+                0.8,
+                0.8
+            ],
+            "velX": [
+                40,
+                190
+            ],
+            "velY": [
+                -380,
+                -220
+            ],
+            "accX": [
+                -40,
+                40
+            ],
+            "accY": [
+                600,
+                780
+            ],
+            "rotVel": [
+                5,
+                20
+            ],
+            "alpha": [
+                0.5,
+                0.75
+            ]
+        },
+        {
+            "alphaDecayFn": "quadIn",
+            "scaleDecayFn": "bounceOut",
+            "weight": 1,
+            "frame": "shard2",
+            "width": 50,
+            "height": 44,
+            "offsetX": [
+                0,
+                0
+            ],
+            "offsetY": [
+                0,
+                0
+            ],
+            "lifetime": [
+                0.8,
+                0.8
+            ],
+            "velX": [
+                -80,
+                180
+            ],
+            "velY": [
+                -250,
+                -120
+            ],
+            "accX": [
+                -60,
+                80
+            ],
+            "accY": [
+                580,
+                720
+            ],
+            "rotVel": [
+                -8,
+                18
+            ],
+            "alpha": [
+                0.5,
+                0.75
+            ]
+        },
+        {
+            "alphaDecayFn": "quadIn",
+            "scaleDecayFn": "bounceOut",
+            "weight": 1,
+            "frame": "shard1",
+            "width": 36,
+            "height": 32,
+            "offsetX": [
+                0,
+                0
+            ],
+            "offsetY": [
+                0,
+                0
+            ],
+            "lifetime": [
+                0.8,
+                0.8
+            ],
+            "velX": [
+                -180,
+                -52
+            ],
+            "velY": [
+                -240,
+                -160
+            ],
+            "accX": [
+                -40,
+                40
+            ],
+            "accY": [
+                620,
+                700
+            ],
+            "rotVel": [
+                -15,
+                15
+            ],
+            "alpha": [
+                0.5,
+                0.75
+            ]
+        }
+    ],
+    "hitbox": {
+        "x": -118,
+        "y": -75.78125,
+        "width": 262.5,
+        "height": 315.28125
+    },
+    "randomDistribution": true,
+    "size": 60
+}
