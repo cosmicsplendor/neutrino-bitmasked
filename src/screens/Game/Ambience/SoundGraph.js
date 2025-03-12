@@ -29,6 +29,9 @@ class SoundGraph {
     }
     getNext(lastNode) {
         const node = this.nodes.get(typeof lastNode === "string" ? lastNode: lastNode.name);
+        console.log(typeof lastNode === "string" ? lastNode: lastNode.name)
+        console.log(this.nodes)
+        console.log({ node })
         if (!node || node.edges.length === 0) return null;
 
         const totalWeight = node.totalWeight;

@@ -90,24 +90,12 @@ class GameScreen extends Node { // can only have cameras as children
         this.btnSound = soundSprite.create("btn")
         this.errSound = soundSprite.createPool("err_alt")
         this.contSound = soundSprite.create("continue")
-        this.soundMap = {
-            // "flute_amb_1": soundSprite.create("flute_amb_1"),
-            // "flute_amb_2": soundSprite.create("flute_amb_2"),
-            // "g_solo_1": soundSprite.create("g_solo_1"),
-            // "g_solo_2": soundSprite.create("g_solo_2"),
-            // "g_solo_3": soundSprite.create("g_solo_3"),
-            // "jingl_1": soundSprite.create("jingl_1"),
-            // "mel1": soundSprite.create("mel1"),
-            // "mel2": soundSprite.create("mel2"),
-            // "mel3": soundSprite.create("mel3"),
-            // "mel4": soundSprite.create("mel4"),
-            // "wind_1": soundSprite.create("wind_1"),
-            // "wind_2": soundSprite.create("wind_2"),
-            // "wind_3": soundSprite.create("wind_3"),
-            // "creepy": soundSprite.create("creepy")
-        }
+        this.soundMap = ["chill"].reduce((map, key) => {
+            map[key] = soundSprite.create(key)
+            return map
+        }, [])
         this.ambiences = {
-            // ambience2: new Ambience(ambience2Graph, this.soundMap)
+            ambience1: new Ambience(ambience1Graph, this.soundMap)
         }
         this.player = new Player({ width: 64, height: 64, fill: "brown", speed: 350, fricX: 3, pos: { x: 0, y: 0 }, shard, cinder, sounds: playerSounds, state: this.state })
         this.factories = makeFactories({ soundSprite, assetsCache, storage, player: this.player, state: this.state })
