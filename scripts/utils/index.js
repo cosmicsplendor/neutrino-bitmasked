@@ -409,13 +409,6 @@ class Map extends Block {
     }
 
     addPlainBlock({ block }) {
-        // const x = Math.round(block.x)
-        // const y = Math.round(block.y)
-        // for (let i = 0; i < block.h; i++) {
-        //     for (let j = 0; j < block.w; j++) {
-        //         this.setTile(x + j, y + i, "wt_1", layer)
-        //     }
-        // }
         this.collisionRects.push({ x: block.x, y: block.y, w: block.w, h: block.h, reconstr: true })
     }
     setTile(x, y, name, layer = "fg", force=false) {
@@ -477,7 +470,7 @@ class Map extends Block {
     async commitTempSpawnPoint() {
         this.tempSpawnPoints.forEach(p => {
             if (p.name === "checkpoint") {
-                this.checkpoints.push(p)
+                this.checkpoints.push({ x: p.x, y: p.y })
                 return
             }
             this.spawnPoints.push(p)
