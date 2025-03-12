@@ -2,12 +2,13 @@ import { Camera } from "@lib"
 import TiledLevel from "@utils/TiledLevel"
 
 class Level extends Camera {
-    constructor({ player, uiRoot, data, overlayMap, bg, fbg, factories, levelDataId, uiImages, onStateChange, gameState, ambience, ...cameraProps }) {
+    constructor({ player, uiRoot, data, overlayMap, hitboxMap, bg, fbg, factories, levelDataId, uiImages, onStateChange, gameState, ambience, ...cameraProps }) {
         const arena = new TiledLevel({ 
             data,
             bg, fbg, player,
             factories,
-            overlayMap
+            overlayMap,
+            hitboxMap
         })
         super({ ...cameraProps, world: { width: arena.width, height: arena.height } })
         this.gameState = gameState

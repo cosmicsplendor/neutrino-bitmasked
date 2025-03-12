@@ -34,6 +34,7 @@ import ambience3Graph from "./Ambience/graphs/ambience3"
 import ambience4Graph from "./Ambience/graphs/ambience4"
 import ambience5Graph from "./Ambience/graphs/ambience5"
 import overlayMap from "./overlayMap.json"
+import hitboxMap from "./hitboxMap.json"
 import BGen from "../../utils/BGen"
 import Rain from "../../entities/Rain"
 import backgrounds from "./backgrounds"
@@ -132,7 +133,7 @@ class GameScreen extends Node { // can only have cameras as children
         }
     }
     setLevel(data) {
-        const level = new Level({ player: this.player, data, viewport: config.viewport, subject: this.player, factories: this.factories, ambience: this.ambiences[data.ambience], gameState: this.state, overlayMap })
+        const level = new Level({ player: this.player, data, viewport: config.viewport, subject: this.player, factories: this.factories, ambience: this.ambiences[data.ambience], gameState: this.state, overlayMap, hitboxMap })
         if (data.rain) {
             this.add(new Rain(level))
         }
