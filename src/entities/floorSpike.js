@@ -50,7 +50,7 @@ class FloorSpike extends TexRegion {
     update(dt) {
         this.updatePos(dt)
         if (this.testCol(this, this.player)) {
-            this.player.visible && this.player.explode()
+            this.player.visible && this.player.explode("impale")
         }
     }
 }

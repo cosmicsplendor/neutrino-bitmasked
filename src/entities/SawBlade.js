@@ -30,7 +30,7 @@ class SawBlade extends MovableEnt {
         fadeSound(this.sound, 144000, this)
         this.rotation += dRot || ANG_VEL * dt
         if (this.testCol(this, this.player)) {
-            this.player.visible && this.player.explode()
+            this.player.visible && this.player.explode("slice1")
         }
     }
     reset() {

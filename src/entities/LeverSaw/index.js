@@ -95,7 +95,7 @@ class Blade extends TexRegion {
     update() {
         this.syncPos()
         if (this.testCol(this, this.player)) {
-            this.player.explode()
+            this.player.explode("slice2")
         }
         
     }

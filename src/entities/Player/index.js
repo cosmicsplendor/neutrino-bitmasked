@@ -51,7 +51,7 @@ const getControlsMapping = config.isMobile ? getTouchMappings: getKeyMappings
 const BOTTOM = "bottom"
 class Player extends TexRegion {
     noOverlay=true
-    static sounds = [ "player_din", "concrete", "wood", "metal", "jump", "player_exp" ]
+    static sounds = [ "plop", "flap", "impale", "concrete", "wood", "metal", "jump" ]
     remDt = 0 // remnant dt
     smooth = true
     onBus=false
@@ -192,7 +192,7 @@ class Player extends TexRegion {
             }
         }
     }
-    explode() {
+    explode(sound) {
         if (this.state.is("game-over") || this.state.is("paused")) return
         // if (config.testMode) return
         if (this.state.is("completed")) return
@@ -206,7 +206,9 @@ class Player extends TexRegion {
         this.dying = true
         this.dyingTimer = 1
         this.forceUpd = true
-        // this.sounds.player_exp.play()
+        this.sounds.plop.play()
+        this.sounds.speed = 1.4
+        this.sounds.flap.play(1)
         // this.sounds.player_din.play()
         this.velX = this.velY = 0
     }
