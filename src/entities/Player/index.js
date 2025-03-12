@@ -202,14 +202,12 @@ class Player extends TexRegion {
         this.alpha = 0  // forces off the visibility (ensuring no update or rendering)
         Node.get(objLayerId).add(this.featherAnim) // particle emitters have to be manually inserted into the scene graph, since it doesn't implicitly know where it should be located
         Node.get(objLayerId).add(this.deadAnim) // particle emitters have to be manually inserted into the scene graph, since it doesn't implicitly know where it should be located
-        // Node.get(objLayerId).add(this.shard)
         this.dying = true
         this.dyingTimer = 1
         this.forceUpd = true
         this.sounds.plop.play()
         this.sounds.speed = 1.4
         this.sounds.flap.play(1)
-        // this.sounds.player_din.play()
         this.velX = this.velY = 0
     }
     focusX() {

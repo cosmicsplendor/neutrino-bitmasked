@@ -408,15 +408,15 @@ class Map extends Block {
         })
     }
 
-    addPlainBlock({ block, layer = "og", skipCollisionTest = false }) {
-       const x = Math.round(block.x)
-        const y = Math.round(block.y)
-        for (let i = 0; i < block.h; i++) {
-            for (let j = 0; j < block.w; j++) {
-                this.setTile(x + j, y + i, "wt_1", layer)
-            }
-        }
-        this.collisionRects.push({ x: block.x, y: block.y, w: block.w, h: block.h })
+    addPlainBlock({ block }) {
+        // const x = Math.round(block.x)
+        // const y = Math.round(block.y)
+        // for (let i = 0; i < block.h; i++) {
+        //     for (let j = 0; j < block.w; j++) {
+        //         this.setTile(x + j, y + i, "wt_1", layer)
+        //     }
+        // }
+        this.collisionRects.push({ x: block.x, y: block.y, w: block.w, h: block.h, reconstr: true })
     }
     setTile(x, y, name, layer = "fg", force=false) {
         // console.log({layer, name})
@@ -533,8 +533,12 @@ class Map extends Block {
         const mgTiles = flattenLayer(this.layers.mg)
 
         const collisionRects = this.collisionRects.map(rect => {
-            const { x, y, w, h, mat } = rect
-            return { x: x * tileW, y: y * tileW, width: w * tileW, height: h * tileW, mat }
+            const { x, y, w, h, mat, reconstr } = rect
+            const returnVal =  { x: x * tileW, y: y * tileW, width: w * tileW, height: h * tileW, mat }
+            if (reconstr) {
+                returnVal.reconstr = true
+            }
+            return returnVal
         })
 
         this.objCollisionRects.concat(this.tempCollisionRects).forEach(r => {
