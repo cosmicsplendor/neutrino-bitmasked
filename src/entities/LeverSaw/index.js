@@ -95,7 +95,7 @@ class Blade extends TexRegion {
     update() {
         this.syncPos()
         if (this.testCol(this, this.player)) {
-            this.player.explode("slice2")
+            this.player.explode()
         }
         
     }
@@ -127,8 +127,8 @@ const soundPlayer = (path, period, soundSprite, player, lever) => {
       return
     }
     const volume = 1 - dist / 120000
-    squeaks.play(0.5 * volume)
-    sliceSFX.play(0.25 * volume)
+    squeaks.play(volume)
+    sliceSFX.play(0.3 * volume)
   }
 }
 class LeverSaw extends TexRegion {

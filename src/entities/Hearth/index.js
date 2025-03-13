@@ -77,7 +77,6 @@ class FireBall extends TexRegion {
     }
     emit() {
         if (this.emitted) {
-            alert("Already emitted cannot emit multiple times")
             return
         }
         this.hearth.emit()
