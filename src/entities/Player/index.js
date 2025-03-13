@@ -194,10 +194,10 @@ class Player extends TexRegion {
             }
         }
     }
-    explode(sound) {
-        if (this.state.is("game-over") || this.state.is("paused")) return
-        // if (config.testMode) return
-        if (this.state.is("completed")) return
+    explode() {
+        if (this.state.is("over") || this.suspended || this.dying) {
+            return
+        }
         this.featherAnim.pos.x = this.deadAnim.pos.x = this.pos.x + this.width / 2
         this.featherAnim.pos.y = this.deadAnim.pos.y = this.pos.y + this.height / 2
         
@@ -238,7 +238,7 @@ class Player extends TexRegion {
         }
     }
     update(dt) {
-        if (this.state.is("game-over") || this.state.is("paused")) return
+        if (this.state.is("over") || this.state.is("paused")) return
         if (this.suspended) {
             return this.updateSuspended(dt)
         }
