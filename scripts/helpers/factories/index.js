@@ -215,6 +215,7 @@ const factories = {
     topSaw: saws({ name: "saw1", field: "width" }),
     bottomSaw: saws({ name: "saw2", field: "width" }),
     spike: saws({ name: "spike", field: "width", dims: { width: 80, height: 40 }, xOffset: 8 }),
+    flags: saws({ name: "em3", field: "width", dims: { width: 96, height: 16 } }),
     leftSaw: saws({ name: "saw4", field: "height" }),
     rightSaw: saws({ name: "saw3", field: "height" }),
     bridge: {
