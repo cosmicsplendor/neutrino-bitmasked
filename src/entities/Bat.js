@@ -77,7 +77,7 @@ class Bat extends TexRegion {
     }
 }
 class BatGroup extends Node {
-    constructor(x, y, player, speed) {
+    constructor({x, y, player, speed}) {
         super({ pos: { x: 0, y: 0}})
         for (let i = 0; i < 8; i++) {
             const bat = new Bat(x, y, player, speed)
