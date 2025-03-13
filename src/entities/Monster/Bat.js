@@ -1,17 +1,17 @@
-import { TexRegion } from "@lib/index";
+import { Node, TexRegion } from "@lib/index";
 import { randf } from "@lib/utils/math";
 
 class Bat extends TexRegion {
     noOverlay = true;
-    forceUpd=true
-    constructor(x, y, player) {
+    forceUpd = true
+    constructor(x, y, player, interp=1) {
         const scale = randf(0.5, 0.25);
-        super({ frame: "bat1", pos: { x, y }, scale: { x: scale * (Math.random < 0.5 ? -1: 1), y: scale } });
+        super({ frame: "bat1", pos: { x, y }, scale: { x: scale * (Math.random < 0.5 ? -1 : 1), y: scale } });
         this.player = player;
         const offsetAngle = 2 * Math.PI * Math.random();
         this.targetDx = -6 + 32 * Math.cos(offsetAngle);
         this.targetDy = 4 + 24 * Math.sin(offsetAngle);
-        this.interp = randf(0.05, 0.0025);
+        this.interp = randf(0.05, 0.0025) * interp;
         this.alpha = 0.1;
         this.timer = 0;
 
@@ -19,7 +19,7 @@ class Bat extends TexRegion {
         this.noiseOffset = Math.random() * Math.PI * 2; // Random starting phase
         this.noiseSpeed = randf(3, 2);                  // How fast the sine wave cycles
         this.noiseAmount = randf(1.2, 0.6);          // Very small amplitude
-        
+
         // New property to track if bat is attached
         this.isAttached = false;
         this.duration = randf(0.2, 0.1)
@@ -45,7 +45,7 @@ class Bat extends TexRegion {
     update(dt) {
         this.fadeIn(dt);
         this.updateAnim(dt)
-       
+
         // Update noise offset
         this.noiseOffset += dt * this.noiseSpeed;
 
@@ -63,7 +63,7 @@ class Bat extends TexRegion {
         // Calculate distance to target position
         const dx = this.player.pos.x + this.targetDx - this.pos.x;
         const dy = this.player.pos.y + this.targetDy - this.pos.y;
-     
+
         // Check if close enough to attach
         if (Math.abs(dx) < 20 && Math.abs(dy) < 20) {
             // Snap to exact position and mark as attached
@@ -76,5 +76,13 @@ class Bat extends TexRegion {
         }
     }
 }
-
-export default Bat
+class BatGroup extends Node {
+    constructor(x, y, player, speed) {
+        super({ pos: { x: 0, y: 0}})
+        for (let i = 0; i < 8; i++) {
+            const bat = new Bat(x, y, player, speed)
+            this.add(bat)
+        }
+    }
+}
+export default BatGroup

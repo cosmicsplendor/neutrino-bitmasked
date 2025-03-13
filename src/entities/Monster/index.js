@@ -66,10 +66,7 @@ class Glitch {
       Node.get(objLayerId).add(bloodAnim)
       Node.get(objLayerId).add(deathAnim)
       if (!this.bySpike) {
-        for (let i = 0; i < 8; i++) {
-          const bat = new Bat(x, y - 50, this.monster.player)
-          Node.get(objLayerId).add(bat)
-        }
+        Node.get(objLayerId).add(new Bat(x, y - 50, this.monster.player))
       } else {
         const { orbPool, player } = this.monster
         Node.get(fgLayerId).add(orbPool.create(x-24, y, null,  player ))
@@ -246,9 +243,6 @@ class Monster extends BoneAnimNode {
     // Update the current state
     const state = this.getState()
     if (state) state.update(dt);
-    // Call the parent update method
-    // this.player.pos.x = Math.round(getGlobalPos(this.syncroNode).x)
-    // Object.assign(this.player.pos, getGlobalPos(this.syncroNode))
     this.checkPlayerCol()
     this.mspikeCol.update()
     super.update(dt, t);
