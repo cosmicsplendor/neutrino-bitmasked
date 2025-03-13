@@ -13,8 +13,8 @@ import { rand, sqDist } from "@lib/utils/math"
 
 class FireBall extends TexRegion {
     forceUpd = true
-    hits=0
-    deadIn=2
+    hits = 0
+    deadIn = 2
     reset() {
         this.remove()
         this.parent = null
@@ -32,20 +32,20 @@ class FireBall extends TexRegion {
         this.anims.right.noOverlay = true
         this.anims.top.noOverlay = true
         return this.anims
-      }
-    hitCirc={
+    }
+    hitCirc = {
         x: 4,
         y: 4,
         radius: 26
     }
     onWallCol(_, velX, velY,) {
         const colDir = this.colDir
-        this.velY = colDir === "top" ? 50:
-            colDir === "bottom" ? -500 * (1 - this.hits / 50): velY
-        this.velX = colDir === "left" ? 75:
-            colDir === "right" ? -75: velX
+        this.velY = colDir === "top" ? 50 :
+            colDir === "bottom" ? -500 * (1 - this.hits / 50) : velY
+        this.velX = colDir === "left" ? 75 :
+            colDir === "right" ? -75 : velX
         const anim = FireBall.getAnims()[colDir]
-        
+
         Node.get(objLayerId).add(anim)
         if (colDir === "bottom") {
             anim.pos.x = this.pos.x + 32
@@ -56,14 +56,14 @@ class FireBall extends TexRegion {
         } else if (colDir === "left") {
             anim.pos.x = this.pos.x
             anim.pos.y = this.pos.y + 32
-        } else if (colDir === "right") {    
+        } else if (colDir === "right") {
             anim.pos.x = this.pos.x + 64
             anim.pos.y = this.pos.y + 32
         }
         this.hearth.sound.play(1)
         this.hits++
         if (this.hits > 9) {
-            this.hearth.emit()
+            this.emit()
             if (colDir !== "bottom") {
                 return this.reset()
             }
@@ -75,11 +75,19 @@ class FireBall extends TexRegion {
             x: 4, y: 4, radius: 26 - this.hits
         }
     }
+    emit() {
+        if (this.emitted) {
+            alert("Already emitted cannot emit multiple times")
+            return
+        }
+        this.hearth.emit()
+        this.emitted = true
+    }
     constructor(x, y, hearth, player) {
         super({ frame: "fireball", overlay: "none", pos: { x, y } })
         this.hearth = hearth
         this.wallCollision = new Collision({ entity: this, blocks: colRectsId, rigid: true, movable: false, onHit: this.onWallCol.bind(this), roll: false })
-        Movement.makeMovable(this, { velX: 75 * hearth.dir, velY: 0, accX: 0, accY: config.gravity * 0.75})   
+        Movement.makeMovable(this, { velX: 75 * hearth.dir, velY: 0, accX: 0, accY: config.gravity * 0.75 })
         this.scale = { x: 1, y: 1 }
         this.timeout = 0.75
         this.decayF = 1
@@ -95,17 +103,17 @@ class FireBall extends TexRegion {
             this.deadIn -= dt
             this.alpha = this.deadIn * 0.5
             if (this.deadIn < 0) {
-                this.remove()
+                this.reset()
             }
             return
         }
         if (this.testCol(this, this.player)) {
-            this.remove()
+            this.reset()
             this.player.explode()
             return
         }
         Movement.update(this, dt)
-        if (this.timeout > 0){
+        if (this.timeout > 0) {
             this.timeout -= dt
             return
         }
@@ -115,9 +123,9 @@ class FireBall extends TexRegion {
 }
 
 class Hearth extends Node {
-    active=false
-    constructor({ x, y, player, dir=1, sound }) {
-        super({ pos: { x, y }})
+    active = false
+    constructor({ x, y, player, dir = 1, sound }) {
+        super({ pos: { x, y } })
         const hearth1 = new TexRegion({ frame: "hearth1", overlay: "none" })
         const hearth2 = new TexRegion({ frame: "hearth2", overlay: "none", pos: { x: 66, y: 0 } })
         const hearth3 = new TexRegion({ frame: "hearth3", overlay: "none", pos: { x: 134, y: 0 } })
@@ -127,7 +135,7 @@ class Hearth extends Node {
         this.add(hearth3)
         Node.get(mgLayerId).add(hearthBg)
         this.player = player
-        this.dir=dir
+        this.dir = dir
         this.sound = sound
     }
     reset() {
