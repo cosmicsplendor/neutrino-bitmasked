@@ -66,7 +66,7 @@ class Glitch {
       Node.get(objLayerId).add(bloodAnim)
       Node.get(objLayerId).add(deathAnim)
       if (!this.bySpike) {
-        Node.get(objLayerId).add(new Bat({ x: x, y: y - 50, player: this.monster.player}))
+        Node.get(objLayerId).add(new Bat({ x: x, y: y - 50, player: this.monster.player, soundSprite: this.monster.soundSprite }))
       } else {
         const { orbPool, player } = this.monster
         Node.get(fgLayerId).add(orbPool.create(x-24, y, null,  player ))

@@ -163,7 +163,7 @@ export default ({ soundSprite, assetsCache, storage, player, state }) => { // us
             return new Monster({x, y, player, span: props.span, orbPool: tempOrbPool, soundSprite })
         },
         bat: (x, y, props={}, player) => {
-            return new Bat({x, y, player, speed: props.speed })
+            return new Bat({x, y, player, speed: props.speed, soundSprite })
         },
         floorSpike: (x, y, props, player) => {
             const fs = new FloorSpike({

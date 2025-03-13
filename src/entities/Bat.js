@@ -1,5 +1,6 @@
 import { Node, TexRegion } from "@lib/index";
-import { randf } from "@lib/utils/math";
+import { fadeSound } from "@lib/utils";
+import { randf, sqDist } from "@lib/utils/math";
 
 class Bat extends TexRegion {
     noOverlay = true;
@@ -11,7 +12,7 @@ class Bat extends TexRegion {
         const offsetAngle = 2 * Math.PI * Math.random();
         this.targetDx = -6 + 32 * Math.cos(offsetAngle);
         this.targetDy = 4 + 24 * Math.sin(offsetAngle);
-        this.interp = randf(0.05, 0.0025) * interp;
+        this.interp = randf(0.05, 0.005) * interp;
         this.alpha = 0.1;
         this.timer = 0;
 
@@ -77,11 +78,37 @@ class Bat extends TexRegion {
     }
 }
 class BatGroup extends Node {
-    constructor({x, y, player, speed}) {
+    constructor({x, y, player, speed, soundSprite }) {
         super({ pos: { x: 0, y: 0}})
         for (let i = 0; i < 8; i++) {
             const bat = new Bat(x, y, player, speed)
             this.add(bat)
+        }
+        this.cm = { x: 0, y: 0}
+        this.sound = soundSprite.create("bat")
+        this.player = player
+    }
+    update() {
+        let sumX = 0;
+        let sumY = 0;
+        const n = this.children.length;
+        
+        for (const child of this.children) {
+            sumX += child.pos.x;
+            sumY += child.pos.y;
+        }
+
+        this.cm.x = sumX / n;
+        this.cm.y = sumY / n;
+
+        const dist = sqDist(this.cm, this.player.pos);
+        if (dist < 200000) {
+            if (!this.sound.playing) {
+                this.sound.play()
+            }
+            this.sound.volume = 1 - dist/200000
+        } else {
+            this.sound.pause()
         }
     }
 }
