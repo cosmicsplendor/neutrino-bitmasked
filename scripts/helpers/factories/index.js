@@ -151,7 +151,7 @@ const factories = {
         }
     },
     fire: {
-        fields: [],
+        fields: ["decor"],
         dims: () => {
             return { width: 48, height: 32 }
         },
@@ -161,24 +161,26 @@ const factories = {
             return true
         },
         create: (params) => {
-            const { x, y } = params
+            const { x, y, decor } = params
             const roundedX = x % 48 === 0 ? x: x + 24 * (Math.random() < 0.5 ? 1: -1)
             const tilesX = (roundedX + 24) - endTiles.width * 48 / 2
             const tilesY = (y + 32) - endTiles.height * 48
-            const wallTiles = endTiles.fg.tiles.map((row, i) => {
-                return row.map((cell, j) => {
-                    return { name: cell, x: tilesX + j * 48, y: tilesY + i * 48 }
-                }).filter(cell => cell.name !== "empty")
-            }).flat()
-         
+          
             const results = [
                 { x: roundedX - 16, y, name: "em1", collapsed: [{ y: y + 32, x: roundedX, tile: "wt_1" }] },
                 { x: roundedX + 24, y, name: "fire" },
-                ...wallTiles
             ]
-            results.colRects = endTiles.colRects.map(({ x, y, width, height }) => {
-                return { x: tilesX + x * 48, y: tilesY + y * 48, w: width * 48, h: height * 48 }
-            })
+            if (decor === "yes") {
+                const wallTiles = endTiles.fg.tiles.map((row, i) => {
+                    return row.map((cell, j) => {
+                        return { name: cell, x: tilesX + j * 48, y: tilesY + i * 48 }
+                    }).filter(cell => cell.name !== "empty")
+                }).flat()
+                results.push(...wallTiles)
+                results.colRects = endTiles.colRects.map(({ x, y, width, height }) => {
+                    return { x: tilesX + x * 48, y: tilesY + y * 48, w: width * 48, h: height * 48 }
+                })
+            }
             return results
         }
     },
