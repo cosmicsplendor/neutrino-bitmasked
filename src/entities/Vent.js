@@ -5,6 +5,9 @@ class Vent extends Node {
         super({
             pos: { x, y }
         })
+        this.hitbox = {
+            x: 2, y: 3, width: 135, height: 140
+        }
         this.fan = new TexRegion({ frame: "fan", pos: { x: 24, y: 24, }})
         this.vent = new TexRegion({ frame: "vent", pos: { x: 0, y: 0 }})
         this.pipe1 = new TexRegion({ frame: "piping", pos: { x: 43, y: 144 }, scale: { x: -1, y: 1 }})

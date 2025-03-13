@@ -90,10 +90,7 @@ class GameScreen extends Node { // can only have cameras as children
         this.btnSound = soundSprite.create("btn")
         this.errSound = soundSprite.createPool("err_alt")
         this.contSound = soundSprite.create("continue")
-        this.soundMap = ["chill"].reduce((map, key) => {
-            map[key] = soundSprite.create(key)
-            return map
-        }, [])
+        this.soundMap = ["chill"].reduce((map, key) => (map[key] = soundSprite.create(key), map), [])
         this.ambiences = {
             ambience1: new Ambience(ambience1Graph, this.soundMap)
         }
