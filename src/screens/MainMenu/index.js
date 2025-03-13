@@ -5,8 +5,6 @@ import { LEVEL } from "@screens/names"
 import Ball from "./Ball"
 import initUI from "./initUI"
 import { placeBg } from "../utils"
-import mainmenuData from "../../assets/levels/mainmenu.cson"
-import { clamp } from "@lib/utils/math"
 import moonImg from "@assets/images/background.png"
 import atlasMeta from "@assets/images/atlasmeta.cson"
 import BGen from "../../utils/BGen"
@@ -64,7 +62,6 @@ class MainMenuScreen extends Node {
         this.teardownUI()
         config.viewport.off("change", this.realign)
         // // if (typeof this.teardownBg === "function") this.teardownBg()
-        this.game.assetsCache.unload(mainmenuData)
         this.game.disposeScreen(this)
     }
 }

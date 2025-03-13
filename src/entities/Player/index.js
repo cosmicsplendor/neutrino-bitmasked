@@ -92,7 +92,7 @@ class Player extends TexRegion {
   
         this.controls = controls || new PlayerControlsClass(speed, getControlsMapping(), () => {
             sounds.jump.pitch = randf(2, -2)
-            sounds.jump.play()
+            sounds.jump.play(randf(0.9, 0.4))
         }, this.state)
         this.wallCollision = new Collision({ entity: this, blocks: colRectsId, rigid: true, movable: false, onHit: this.onWallCol.bind(this) })
         this.spikeCollision = new Collision({ entity: this, blocks: "spikes", rigid: false, movable: false, onHit: this.explode.bind(this) })

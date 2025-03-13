@@ -6,7 +6,6 @@ import TexRegion from "@lib/entities/TexRegion"
 import Storage from "./helpers/Storage"
 import SDK from "./helpers/SDK"
 import testLevelData from "./assets/levels/testlevel.cson"
-import mainmenuData from "./assets/levels/mainmenu.cson"
 
 import config from "@config"
 import levels from "./screens/Level/levels"
@@ -47,7 +46,6 @@ const assets = [
     soundOnImgId,
     soundOffImgId,
     rvaImgId,
-    mainmenuData,
     { url: arrowImgId, msg: "loading ui assets" },
     { url: soundSprite, msg: "loading audio sprite" },
     { url: soundMeta, msg: "loading audio sprite metadata"},

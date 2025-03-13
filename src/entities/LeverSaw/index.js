@@ -127,7 +127,7 @@ const soundPlayer = (path, period, soundSprite, player, lever) => {
       return
     }
     const volume = 1 - dist / 120000
-    squeaks.play(volume)
+    squeaks.play(volume * 0.8)
     sliceSFX.play(0.3 * volume)
   }
 }
