@@ -13,6 +13,7 @@ import styles from "./style.css"
 import ParticleEmitter from "@lib/utils/ParticleEmitter"
 import deadAnimDat from "./dead.json"
 import featherAnimDat from "./feathers.json"
+import { randf } from "@lib/utils/math"
 
 const getTouchMappings = () => {
     const data = [
@@ -90,6 +91,7 @@ class Player extends TexRegion {
         // }
   
         this.controls = controls || new PlayerControlsClass(speed, getControlsMapping(), () => {
+            sounds.jump.pitch = randf(2, -2)
             sounds.jump.play()
         }, this.state)
         this.wallCollision = new Collision({ entity: this, blocks: colRectsId, rigid: true, movable: false, onHit: this.onWallCol.bind(this) })
