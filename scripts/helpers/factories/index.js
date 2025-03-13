@@ -150,6 +150,16 @@ const factories = {
             return result
         }
     },
+    bat: {
+        fields: ["speed", "dx", "dy"],
+        dims: () => {
+            return { width: 96, height: 96 }
+        },
+        create: params => {
+            const { x, y, speed, dx=0, dy=0 } = params
+            return { x: x + dx * TILE_SIZE, y: y + dy * TILE_SIZE, name: "bat", speed: +speed }
+        }
+    },
     fire: {
         fields: ["decor"],
         dims: () => {
