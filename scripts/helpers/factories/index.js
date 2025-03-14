@@ -229,7 +229,7 @@ const factories = {
     winh: saws({ name: "window", field: "width", dims: { width: 48, height: 48 } }),
     winv: saws({ name: "mesh", field: "height", dims: { width: 48, height: 48 } }),
     patch: saws({ name: ["patch1", "patch2"], field: "width", dims: { width: 48, height: 4 } }),
-    patchup: saws({ name: ["patch3"], field: "width", dims: { width: 48, height: 4 } }),
+    patchup: saws({ name: "patch3", field: "width", dims: { width: 48, height: 4 } }),
     leftSaw: saws({ name: "saw4", field: "height" }),
     rightSaw: saws({ name: "saw3", field: "height" }),
     bridge: {
