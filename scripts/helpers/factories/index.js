@@ -226,7 +226,7 @@ const factories = {
     bottomSaw: saws({ name: "saw2", field: "width" }),
     spike: saws({ name: "spike", field: "width", dims: { width: 80, height: 40 }, xOffset: 8 }),
     flags: saws({ name: "em3", field: "width", dims: { width: 96, height: 16 } }),
-    winh: saws({ name: "window", field: "width", dims: { width: 48, height: 48 } }),
+    winh: saws({ name: "mesh", field: "width", dims: { width: 48, height: 48 } }),
     winv: saws({ name: "mesh", field: "height", dims: { width: 48, height: 48 } }),
     patch: saws({ name: ["patch1", "patch2"], field: "width", dims: { width: 48, height: 4 } }),
     patchup: saws({ name: "patch3", field: "width", dims: { width: 48, height: 4 } }),
