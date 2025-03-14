@@ -9,5 +9,7 @@
     "spike": [0.9, 0.9, 0.9],
     "pillar": "none",
     "track": "none",
-    "crate": "none"
+    "crate": "none",
+    "patch1": "none",
+    "patch2": "none"
 }

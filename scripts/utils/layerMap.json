@@ -20,5 +20,6 @@
     "orb": "fg",
     "cobweb": "fg",
     "lantern": "fg",
-    "bat": "fg"
+    "bat": "fg",
+    "patch": "fg"
 }
