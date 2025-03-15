@@ -51,6 +51,8 @@ const PlayerControlsClass = config.isMobile ? PlayerTouchControls: PlayerKeyCont
 const getControlsMapping = config.isMobile ? getTouchMappings: getKeyMappings
 const BOTTOM = "bottom"
 const CONCRETE = "concrete"
+const OFFEDGE = "offEdge"
+const JUMPING = "jumping"
 class Player extends TexRegion {
     noOverlay=true
     static sounds = [ "plop", "flap", "impale", "concrete", "wood", "metal", "jump" ]
@@ -114,7 +116,7 @@ class Player extends TexRegion {
         return this.alpha !== 0 && this._visible
     }
     set offEdge(which) {
-        this.controls.switchState("offEdge", which)
+        this.controls.switchState(OFFEDGE, which)
         this._offEdge = which
     }
     get offEdge() {

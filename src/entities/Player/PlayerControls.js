@@ -81,22 +81,50 @@ class Jumping {
         if (entity.velY < 0 && playJumpSound) { // if the jump is actually possible (there's nothing above blocking the player) and the player isn't falling down
             this.onJump()
         }
+        this.blocked
     }
     onHalt() { // obstruct jump prematurely (mostly by collision with bottom edge of a rect)
         this.limitReached = true
     }
     update(entity, dt) {
-        if (this.controls.get("left")) {
+        if (this.controls.get("left") && this.blocked !== 1) {
             entity.velX -= (entity.velX > 0 ? 3 : 1) * this.controls.speed * dt * entity.invWeight
         }
-        if (this.controls.get("right")) {
-            entity.velX += (entity.velX < 0 ? 3 : 1) * this.controls.speed * dt  * entity.invWeight
+        if (this.controls.get("right") && this.blocked !== -1) {
+            entity.velX += (entity.velX < 0 ? 3 : 1) * this.controls.speed * dt * entity.invWeight
         }
+        this.blocked = 0
         if (this.controls.get("axn")) {
-            if (entity.velY < this.minJmpVel || entity.velY > this.mxJmpVel * entity.invWeight) { this.limitReached = true }
-            if (this.limitReached) { return }
-            entity.velY += this.jmpVel * entity.invWeight * ( Math.min(this.maxJvelInc, (entity.velY * entity.velY) / 100)) * dt 
-        } else { this.limitReached = true } // if the player has stopped pressing "axn" key, player won't gain anymore velocity in this jump
+            // First, check if we've already exceeded limits
+            if (entity.velY < this.minJmpVel) {
+                entity.velY = this.minJmpVel; // Cap at minimum
+                this.limitReached = true;
+                return; // Exit early!
+            }
+            
+            if (entity.velY > this.mxJmpVel * entity.invWeight) {
+                this.limitReached = true;
+                return; // Exit early!
+            }
+            
+            if (this.limitReached) {
+                return; // Exit if limit was reached in previous frames
+            }
+            
+            // Calculate force using absolute value to prevent quadratic growth
+            const velocityFactor = Math.min(this.maxJvelInc, Math.abs(entity.velY) / 10);
+            const jmpForce = this.jmpVel * entity.invWeight * velocityFactor * dt;
+            
+            const newVelY = entity.velY + jmpForce;
+            if (newVelY >= this.minJmpVel) {
+                entity.velY = newVelY;
+            } else {
+                entity.velY = this.minJmpVel;
+                this.limitReached = true;
+            }
+        } else { 
+            this.limitReached = true;
+        }
     }
 }
 
@@ -112,10 +140,10 @@ class OffEdge {
         if (this.controls.get("right")) { // off the left edge 
             entity.velX += this.controls.speed * dt
         }
-        if (this.controls.get("axn")) {
-            this.controls.switchState("jumping", entity)
-            entity._offEdge = 0
-        }
+        // if (this.controls.get("axn")) {
+        //     this.controls.switchState("jumping", entity)
+        //     entity._offEdge = 0
+        // }
         entity.velX = clamp(-100, 100, entity.velX) 
     }
 }
