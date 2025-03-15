@@ -18,6 +18,7 @@ import Vent from "../../entities/Vent"
 import Cobweb from "../../entities/Cobweb"
 import Hearth from "../../entities/Hearth"
 import Lantern from "../../entities/Lantern"
+import WindMill from "../../entities/WindMill"
 import config from "@config"
 
 import particlesId from "@assets/particles/all.cson"
@@ -143,6 +144,9 @@ export default ({ soundSprite, assetsCache, storage, player, state }) => { // us
                 player,
                 ...props
             })
+        },
+        windmill: (x, y) => {
+            return new WindMill({ frame: "sb_mill", pos: { x, y }})
         },
         leverSaw: (x, y, props, player)  => {
             return new LeverSaw({x, y, length: props.length, period: props.period, path: props.path, player, soundSprite })

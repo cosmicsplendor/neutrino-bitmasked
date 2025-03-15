@@ -566,25 +566,48 @@ const factories = {
             };
         },
         makeVines(maxWidth, x, y) {
-            const vines = []
-            let width = 0
-            let lastMaxX = 0
-            while (width < maxWidth) {
-                const results = rand(1) === 1 ? this.makeClump(): this.makeVine()
-                lastMaxX += results.maxX
-                width += results.maxX
+            const vines = [];
+            let currentX = 0;
+            
+            while (currentX < maxWidth) {
+                // Decide whether to add a vine or clump
+                const results = rand(1) === 1 ? this.makeClump() : this.makeVine();
+                
+                // Check if adding this element would exceed maxWidth
+                if (currentX + (results.maxX - results.minX) > maxWidth) {
+                    break; // Stop adding elements if we would exceed maxWidth
+                }
+                
+                // Adjust position for all vines in the result
                 results.vines.forEach(vine => {
-                    console.log(vine.name)
-                    vines.push({ x: vine.x + x + lastMaxX, y: vine.y + y, name: vine.name, layer: "fg" })
-                })
+                    vines.push({
+                        x: vine.x + x + currentX - results.minX,
+                        y: vine.y + y,
+                        name: vine.name,
+                        layer: "fg"
+                    });
+                });
+                
+                // Move currentX to the end of the element we just added
+                currentX += (results.maxX - results.minX);
             }
-            return vines
+            
+            return vines;
         },
         create(params) {
             const { x, y } = params
             const width = params.width * TILE_SIZE
             const vines = this.makeVines(width, x, y)
             return vines
+        }
+    },
+    windmill: {
+        dims() {
+            return { width: 64, height: 114 }
+        },
+        create(params) {
+            const { x, y } = params
+            return  { name: "windmill", x, y }
         }
     },
     crate: stackables({ name: "crate", dims: { width: 88, height: 88 } }),
