@@ -225,11 +225,9 @@ const factories = {
     topSaw: saws({ name: "saw1", field: "width" }),
     bottomSaw: saws({ name: "saw2", field: "width" }),
     spike: saws({ name: "spike", field: "width", dims: { width: 80, height: 40 }, xOffset: 8 }),
-    flags: saws({ name: "em3", field: "width", dims: { width: 96, height: 16 } }),
-    winh: saws({ name: "mesh", field: "width", dims: { width: 48, height: 48 } }),
-    winv: saws({ name: "mesh", field: "height", dims: { width: 48, height: 48 } }),
-    patch: saws({ name: ["patch1", "patch2"], field: "width", dims: { width: 48, height: 4 } }),
-    patchup: saws({ name: "patch3", field: "width", dims: { width: 48, height: 4 } }),
+    flags: saws({ name: "em3", field: "width", dims: { width: 96, height: 16 }, groupId: false }),
+    patch: saws({ name: ["patch1", "patch2"], field: "width", dims: { width: 48, height: 4 }, groupId: false }),
+    patchup: saws({ name: "patch3", field: "width", dims: { width: 48, height: 4, groupId: false } }),
     leftSaw: saws({ name: "saw4", field: "height" }),
     rightSaw: saws({ name: "saw3", field: "height" }),
     bridge: {
@@ -345,7 +343,9 @@ const factories = {
     },
     crate: stackables({ name: "crate", dims: { width: 88, height: 88 }}),
     tyre: stackables({ name: "tyre", dims: { width: 104, height: 32 } }),
-    sc: stackables({ name: "sc", dims: { width: 120, height: 120 }})
+    sc: stackables({ name: "sc", dims: { width: 120, height: 120 }}),
+    bar: stackables({ name: "bar", dims: { width: 48, height: 48 }}),
+    mesh: stackables({ name: "mesh", dims: { width: 48, height: 48 }})
 }
 
 module.exports = factories

@@ -22,5 +22,6 @@
     "lantern": "fg",
     "bat": "fg",
     "patch": "fg",
-    "mesh": "fg"
+    "mesh": "fg",
+    "bar": "fg"
 }
