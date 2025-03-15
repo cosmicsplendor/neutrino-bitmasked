@@ -11,7 +11,7 @@ import BGen from "../../utils/BGen"
 
 
 class MainMenuScreen extends Node {
-    background="rgb(11 45 82)"
+    background="#2b2b2b"
     constructor({ game, uiRoot, sdk }) {
         super()
         this.game = game

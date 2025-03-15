@@ -112,6 +112,10 @@ class OffEdge {
         if (this.controls.get("right")) { // off the left edge 
             entity.velX += this.controls.speed * dt
         }
+        if (this.controls.get("axn")) {
+            this.controls.switchState("jumping", entity)
+            entity._offEdge = 0
+        }
         entity.velX = clamp(-100, 100, entity.velX) 
     }
 }
