@@ -23,5 +23,9 @@
     "bat": "fg",
     "patch": "fg",
     "mesh": "fg",
-    "bar": "fg"
+    "bar": "fg",
+    "vine1": "fg",
+    "vine2": "fg",
+    "vine3": "fg",
+    "vine4": "fg"
 }

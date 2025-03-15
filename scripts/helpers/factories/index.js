@@ -1,4 +1,4 @@
-const { CompositeBlock, Block, decomposeBlocks } = require("../../utils")
+const { CompositeBlock, Block, decomposeBlocks, pickOne, rand } = require("../../utils")
 const lasers = require("./lasers")
 const groupMap = require("../../utils/groupMap.json")
 const saws = require("./saws")
@@ -26,12 +26,12 @@ const factories = {
             return { width: 64, height: 64 }
         },
         create: params => {
-            const { x, y, name } =params
+            const { x, y, name } = params
             return { x, y, name }
         }
     },
     monster: {
-        fields: [ "span" ],
+        fields: ["span"],
         dims: () => {
             return { width: 0, height: 0 }
         },
@@ -62,12 +62,12 @@ const factories = {
         }
     },
     floorSpike: {
-        fields: [ "delay", "dx" ],
+        fields: ["delay", "dx"],
         dims: () => {
             return { width: 80, height: 40 }
         },
         create: params => {
-            const { delay=0, x, dx=0, y, name } = params
+            const { delay = 0, x, dx = 0, y, name } = params
             return { delay: +delay, x: x + +dx * TILE_SIZE, y, name, groupId: "fspikes" }
         }
     },
@@ -86,22 +86,24 @@ const factories = {
         create: (params) => {
             const { x, y, name, toY, period, alignment, projection } = params
             const results = []
-            
+
             // Always create the track since we're only using vertical movement
-            const trackX = projection.normal === "left" ? 
-                (projection.x + projection.w) * TILE_SIZE : 
+            const trackX = projection.normal === "left" ?
+                (projection.x + projection.w) * TILE_SIZE :
                 projection.x * TILE_SIZE - 20
-                
+
             for (let y = 0; y < projection.h; y++) {
-                results.push({  x: trackX,  y: (projection.y + y) * TILE_SIZE,  name: "track",  flipX: projection.normal === "right" 
+                results.push({
+                    x: trackX, y: (projection.y + y) * TILE_SIZE, name: "track", flipX: projection.normal === "right"
                 })
             }
-            
+
             // Add the bus with only vertical movement
             const delX = projection.normal === "right" ? -2 : 2
-            results.push({  groupId: "col-rects",  x: x + delX,  y: y + (alignment.startsWith("top") ? 32 : 0),  name,  toX: x, toY: y + (toY ? Number(toY) * TILE_SIZE : 0),  period: +period,  flip: projection.normal === "right" 
+            results.push({
+                groupId: "col-rects", x: x + delX, y: y + (alignment.startsWith("top") ? 32 : 0), name, toX: x, toY: y + (toY ? Number(toY) * TILE_SIZE : 0), period: +period, flip: projection.normal === "right"
             })
-            
+
             return results
         }
     },
@@ -121,7 +123,7 @@ const factories = {
         create: params => {
             const { x, y } = params
             const result = [
-                { x: x, y: y, name: "vent"},
+                { x: x, y: y, name: "vent" },
                 { x: x + 64, y: y - 4, name: "wind" }
             ]
             for (let i = 0; i < 2; i++) {
@@ -156,7 +158,7 @@ const factories = {
             return { width: 96, height: 96 }
         },
         create: params => {
-            const { x, y, speed, dx=0, dy=0 } = params
+            const { x, y, speed, dx = 0, dy = 0 } = params
             return { x: x + dx * TILE_SIZE, y: y + dy * TILE_SIZE, name: "bat", speed: +speed }
         }
     },
@@ -172,10 +174,10 @@ const factories = {
         },
         create: (params) => {
             const { x, y, decor } = params
-            const roundedX = x % 48 === 0 ? x: x + 24 * (Math.random() < 0.5 ? 1: -1)
+            const roundedX = x % 48 === 0 ? x : x + 24 * (Math.random() < 0.5 ? 1 : -1)
             const tilesX = (roundedX + 24) - endTiles.width * 48 / 2
             const tilesY = (y + 32) - endTiles.height * 48
-          
+
             const results = [
                 { x: roundedX - 16, y, name: "em1", collapsed: [{ y: y + 32, x: roundedX, tile: "wt_1" }] },
                 { x: roundedX + 24, y, name: "fire" },
@@ -216,9 +218,9 @@ const factories = {
         create(params) {
             const { x, y, length, period, path } = params
             const results = [{ x, y, length: +length, name: "leverSaw", period: +period, path }]
-            results.colRects = [ {
+            results.colRects = [{
                 x: x, y: y, h: 58, mat: "metal", w: 79
-            }] 
+            }]
             return results
         }
     },
@@ -258,8 +260,8 @@ const factories = {
         }
     },
     magnet: {
-        fields: [ "width" ],
-        dims: ({ width=1 }) => {
+        fields: ["width"],
+        dims: ({ width = 1 }) => {
             return {
                 width: 128 * width + 16 * 2, // magnet width + twice stud width
                 height: 32
@@ -279,7 +281,7 @@ const factories = {
         fields: ["speed", "toY"],
         create: params => {
             const { name, x, y, speed, toY } = params
-            return { name, x, y, speed: +speed, endY: y + (toY * TILE_SIZE)}
+            return { name, x, y, speed: +speed, endY: y + (toY * TILE_SIZE) }
         }
     },
     gateArch: {
@@ -291,7 +293,7 @@ const factories = {
             this.block = block
             return { width: block.w * TILE_SIZE, height: (block.h + 3) * TILE_SIZE }
         },
-        create: function(params) {
+        create: function (params) {
             const { x: originX, y: originY, speed } = params
             const { block } = this
             const dx = 0
@@ -303,7 +305,7 @@ const factories = {
             const maxY = Math.max(...blocks.map(b => b.y)) + 1
             const maxX = Math.max(...blocks.map(b => b.x)) + 1
             const grid = Array(maxY).fill().map(() => Array(maxX).fill(null))
-            
+
             blocks.forEach(b => {
                 if (b.y >= 0 && b.y < maxY && b.x >= 0 && b.x < maxX) {
                     grid[b.y][b.x] = "wt_1"
@@ -321,8 +323,8 @@ const factories = {
                     let tileName = "wt_1"
                     if (row === archY && col === archX) {
                         tileName = "garch"
-                    } else if ((row === archY && (col === archX + 1 || col === archX + 2)) || 
-                              (row === archY + 1 && col >= archX && col < archX + 3)) {
+                    } else if ((row === archY && (col === archX + 1 || col === archX + 2)) ||
+                        (row === archY + 1 && col >= archX && col < archX + 3)) {
                         continue // Skip these positions (empty)
                     }
 
@@ -334,18 +336,262 @@ const factories = {
                 }
             }
 
-            const results = [ gate, ...resultBlocks ]
+            const results = [gate, ...resultBlocks]
             results.colRects = block.collisionRects.map(({ x, y, w, h }) => {
-                return { x: (x + dx) * TILE_SIZE + originX, y: (y + dy) * TILE_SIZE + originY, w: w * TILE_SIZE, h: h * TILE_SIZE}
+                return { x: (x + dx) * TILE_SIZE + originX, y: (y + dy) * TILE_SIZE + originY, w: w * TILE_SIZE, h: h * TILE_SIZE }
             })
             return results
         }
     },
-    crate: stackables({ name: "crate", dims: { width: 88, height: 88 }}),
+    vines: {
+        randomize: true,
+        fields: ["width"],
+        dims({ width }) {
+            return { width: width * TILE_SIZE, height: 0 }
+        },
+        configurations: [
+            [1],
+            [1, 3],
+            [4, 4],
+            [1, 4],
+            [1, 4, 1],
+            [4, 3],
+            [3],
+            [4],
+            [4, 1]
+        ],
+        anchors: {
+            1: {
+                start: { x: 17, y: 0 },
+                end: { x: 13, y: 53 }
+            },
+            3: {
+                start: { x: 18, y: 0 },
+                end: { x: 22, y: 152 }
+            },
+            4: {
+                start: { x: 15, y: 1 },
+                end: { x: 2, y: 102 }
+            }
+        },
+        dimensions: {
+            1: { width: 25, height: 54 },
+            3: { width: 31, height: 152 },
+            4: { width: 31, height: 104 },
+            clump: { width: 68, height: 41 }
+        },
+        clumpAnchors: {
+            top: [
+                { x: 13, y: 12 },
+                { x: 32, y: 12 },
+                { x: 56, y: 12 },
+            ],
+            bottom: [
+                { x: 15, y: 32 },
+                { x: 37, y: 32 },
+                { x: 51, y: 32 }
+            ]
+        },
+        makeVine() {
+            const { configurations, dimensions, anchors } = this
+
+            // Randomly select a configuration
+            const selectedConfig = configurations[Math.floor(Math.random() * configurations.length)];
+
+            // Initialize the vines array
+            const vines = [];
+
+            // Initialize position
+            let currentX = 0;
+            let currentY = 0;
+
+            // Keep track of min/max coordinates to calculate overall dimensions
+            let minX = 0;
+            let maxX = 0;
+            let minY = 0;
+            let maxY = 0;
+
+            // Process each vine in the configuration
+            for (let i = 0; i < selectedConfig.length; i++) {
+                const vineType = selectedConfig[i];
+                const vineAnchors = anchors[vineType];
+                const vineDimensions = dimensions[vineType];
+
+                // Calculate position so that the start anchor is at the current position
+                const vineX = currentX - vineAnchors.start.x;
+                const vineY = currentY - vineAnchors.start.y;
+
+                // Add vine to array
+                vines.push({
+                    x: vineX,
+                    y: vineY,
+                    name: `vine${vineType}`
+                });
+
+                // Update boundary coordinates
+                minX = Math.min(minX, vineX);
+                maxX = Math.max(maxX, vineX + vineDimensions.width);
+                minY = Math.min(minY, vineY);
+                maxY = Math.max(maxY, vineY + vineDimensions.height);
+
+                // Update current position to end anchor of current vine
+                currentX = vineX + vineAnchors.end.x;
+                currentY = vineY + vineAnchors.end.y;
+            }
+            return {
+                vines,
+                maxX,
+                minX
+            };
+        },
+        makeClump() {
+            const { dimensions, anchors, clumpAnchors } = this;
+
+            // Initialize the vines array
+            const vines = [];
+
+            // Pick a random vine type for the top vines (1, 3, or 4)
+            const topVineType = pickOne([1, 3, 4]);
+
+            // Decide how many top vines (1-3)
+            const numTopVines = rand(3, 1); // Corrected order: rand(to, from)
+
+            // Randomly select which top anchors to use
+            const topAnchorIndices = [];
+            while (topAnchorIndices.length < numTopVines) {
+                const idx = rand(2); // Simplified since from is 0
+                if (!topAnchorIndices.includes(idx)) {
+                    topAnchorIndices.push(idx);
+                }
+            }
+
+            // Position the clump at origin initially
+            const clumpX = 0;
+            const clumpY = 0;
+
+            // Add clump to vines array
+            vines.push({
+                x: clumpX,
+                y: clumpY,
+                name: "vine2"
+            });
+
+            // Track min/max coordinates
+            let minX = clumpX;
+            let maxX = clumpX + dimensions.clump.width;
+
+            // Add top vines - important fix: align the start anchor of the vine with the clump's top anchor
+            for (const anchorIdx of topAnchorIndices) {
+                const topAnchor = clumpAnchors.top[anchorIdx];
+                const vineStartAnchor = anchors[topVineType].start;
+
+                // Calculate position so the end anchor of the vine aligns with the clump's top anchor
+                const vineX = clumpX + topAnchor.x - vineStartAnchor.x;
+                const vineY = clumpY + topAnchor.y - dimensions[topVineType].height;
+
+                vines.push({
+                    x: vineX,
+                    y: vineY,
+                    name: `vine${topVineType}`
+                });
+
+                // Update min/max
+                minX = Math.min(minX, vineX);
+                maxX = Math.max(maxX, vineX + dimensions[topVineType].width);
+            }
+
+            // Decide how many bottom vines (0-3)
+            const numBottomVines = rand(3); // Simplified since from is 0
+
+            // Randomly select which bottom anchors to use
+            const bottomAnchorIndices = [];
+            while (bottomAnchorIndices.length < numBottomVines) {
+                const idx = rand(2); // Simplified since from is 0
+                if (!bottomAnchorIndices.includes(idx)) {
+                    bottomAnchorIndices.push(idx);
+                }
+            }
+
+            // Add bottom vines
+            for (const anchorIdx of bottomAnchorIndices) {
+                // Randomly select a vine type for each bottom vine
+                const bottomVineType = pickOne([1, 3, 4]);
+                const bottomAnchor = clumpAnchors.bottom[anchorIdx];
+                const vineStartAnchor = anchors[bottomVineType].start;
+
+                // Calculate position so the start anchor of the vine aligns with the clump's bottom anchor
+                const vineX = clumpX + bottomAnchor.x - vineStartAnchor.x;
+                const vineY = clumpY + bottomAnchor.y;
+
+                vines.push({
+                    x: vineX,
+                    y: vineY,
+                    name: `vine${bottomVineType}`
+                });
+
+                // Update min/max
+                minX = Math.min(minX, vineX);
+                maxX = Math.max(maxX, vineX + dimensions[bottomVineType].width);
+            }
+
+            // Now we need to shift everything so the left-most top anchor is at x=0
+            // and the top anchored vines are at y=0
+
+            // Find the leftmost top anchor that is being used
+            const leftmostAnchorX = Math.min(...topAnchorIndices.map(idx => clumpAnchors.top[idx].x));
+            const xOffset = clumpX + leftmostAnchorX;
+
+            // Find the topmost y-coordinate among the top vines
+            let topVineMinY = 0;
+            for (const vine of vines) {
+                if (vine.name === `vine${topVineType}`) {
+                    topVineMinY = Math.min(topVineMinY, vine.y);
+                }
+            }
+
+            // Shift all vines
+            for (const vine of vines) {
+                vine.x -= xOffset;
+                vine.y -= topVineMinY;
+            }
+
+            // Adjust min/max
+            minX -= xOffset;
+            maxX -= xOffset;
+
+            return {
+                vines,
+                minX,
+                maxX
+            };
+        },
+        makeVines(maxWidth, x, y) {
+            const vines = []
+            let width = 0
+            let lastMaxX = 0
+            while (width < maxWidth) {
+                const results = rand(1) === 1 ? this.makeClump(): this.makeVine()
+                lastMaxX += results.maxX
+                width += results.maxX
+                results.vines.forEach(vine => {
+                    console.log(vine.name)
+                    vines.push({ x: vine.x + x + lastMaxX, y: vine.y + y, name: vine.name, layer: "fg" })
+                })
+            }
+            return vines
+        },
+        create(params) {
+            const { x, y } = params
+            const width = params.width * TILE_SIZE
+            const vines = this.makeVines(width, x, y)
+            return vines
+        }
+    },
+    crate: stackables({ name: "crate", dims: { width: 88, height: 88 } }),
     tyre: stackables({ name: "tyre", dims: { width: 104, height: 32 } }),
-    sc: stackables({ name: "sc", dims: { width: 120, height: 120 }}),
-    bar: stackables({ name: "bar", dims: { width: 48, height: 48 }}),
-    mesh: stackables({ name: "mesh", dims: { width: 48, height: 48 }})
+    sc: stackables({ name: "sc", dims: { width: 120, height: 120 } }),
+    bar: stackables({ name: "bar", dims: { width: 48, height: 48 } }),
+    mesh: stackables({ name: "mesh", dims: { width: 48, height: 48 } })
 }
 
 module.exports = factories
