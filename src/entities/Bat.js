@@ -1,11 +1,10 @@
 import { Node, TexRegion } from "@lib/index";
-import { fadeSound } from "@lib/utils";
 import { randf, sqDist } from "@lib/utils/math";
 
 class Bat extends TexRegion {
     noOverlay = true;
     forceUpd = true
-    constructor(x, y, player, interp=1) {
+    constructor(x, y, player, interp=1, temp=true) {
         const scale = randf(0.5, 0.25);
         super({ frame: "bat1", pos: { x, y }, scale: { x: scale * (Math.random < 0.5 ? -1 : 1), y: scale } });
         this.player = player;
@@ -15,7 +14,9 @@ class Bat extends TexRegion {
         this.interp = randf(0.05, 0.005) * interp;
         this.alpha = 0.1;
         this.timer = 0;
-
+        this.temp = temp
+        this.originX = x
+        this.originY = y
         // Minimal sine wave properties
         this.noiseOffset = Math.random() * Math.PI * 2; // Random starting phase
         this.noiseSpeed = randf(3, 2);                  // How fast the sine wave cycles
@@ -40,8 +41,14 @@ class Bat extends TexRegion {
         }
     }
     reset() {
-        this.remove()
-        this.parent = null
+        if (this.temp) {
+            this.remove()
+            this.parent = null
+        } else {
+            this.pos.x = this.originX
+            this.pos.y = this.originY
+            this.isAttached = false
+        }
     }
     update(dt) {
         this.fadeIn(dt);
@@ -78,10 +85,10 @@ class Bat extends TexRegion {
     }
 }
 class BatGroup extends Node {
-    constructor({x, y, player, speed, soundSprite }) {
+    constructor({x, y, player, speed, soundSprite, temp=true}) {
         super({ pos: { x: 0, y: 0}})
         for (let i = 0; i < 8; i++) {
-            const bat = new Bat(x, y, player, speed)
+            const bat = new Bat(x, y, player, speed, temp)
             this.add(bat)
         }
         this.cm = { x: 0, y: 0}
