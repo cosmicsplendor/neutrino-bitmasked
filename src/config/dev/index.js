@@ -6,6 +6,6 @@ export default createConfig({
     StorageStrat: LocStorage,
     showAdOnRestart: 0,
     showAdOnResume: 0,
-    testMode: true,
+    testMode: false,
     debug: true
 })

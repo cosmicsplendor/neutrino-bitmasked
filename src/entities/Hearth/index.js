@@ -142,13 +142,13 @@ class Hearth extends Node {
     }
     emit() {
         const fireBall = new FireBall(this.pos.x + 80 + rand(-32, 32), this.pos.y, this, this.player)
-        Node.get(mgLayerId).add(fireBall)
+        Node.get(objLayerId).add(fireBall)
     }
     update() {
         if (this.active) {
             return
         }
-        if (sqDist(this.pos, this.player.pos) < 90000) {
+        if (sqDist(this.pos, this.player.pos) < 120000) {
             this.active = true
             this.emit()
         }
