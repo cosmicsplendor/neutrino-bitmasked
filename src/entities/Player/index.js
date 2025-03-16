@@ -262,6 +262,11 @@ class Player extends TexRegion {
     onRemove() {
         this.parent = null // free-up the reference for garbage collector
     }
+    cleanup() {
+        this.suspended = false
+        this.setWeight(1)
+        this.susTimer=0
+    }
 }
 
 export default Player

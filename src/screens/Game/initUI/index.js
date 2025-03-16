@@ -293,6 +293,7 @@ export default (uiRoot, player, images, storage, gameState, onClose, resetLevel,
             const dist = sqDist(point, posAtReset)
             player.pos.x = point.x
             player.pos.y = point.y
+            player.cleanup()
             if (dist > 250000) focusInst() // if the player is not near enough to it's reset spawn point, focus the camera to player position instantly to avoid jarring focus
         }
         const restart = () => {
@@ -303,6 +304,7 @@ export default (uiRoot, player, images, storage, gameState, onClose, resetLevel,
             gameState.elapsed = 0
             gameState.play()
             btnSound.play()
+            player.cleanup()
             // post restart hook (synchronize ad playing state)
             playingAd.setVal(false)
         }

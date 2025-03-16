@@ -99,6 +99,7 @@ class GameScreen extends Node { // can only have cameras as children
             ambience5: new Ambience(ambience5Graph, this.soundMap),
         }
         this.player = new Player({ width: 64, height: 64, fill: "brown", speed: 350, fricX: 3, pos: { x: 0, y: 0 }, shard, cinder, sounds: playerSounds, state: this.state })
+        console.log(this.player.reset)
         this.factories = makeFactories({ soundSprite, assetsCache, storage, player: this.player, state: this.state })
         if (game.renderer.api === rendApis.WEBGL) {
             const z = 2.5
