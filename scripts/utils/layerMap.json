@@ -17,6 +17,7 @@
     "vent": "fg",
     "track": "fg",
     "hearthBg": "mg",
+    "hearth": "fg",
     "orb": "fg",
     "cobweb": "fg",
     "lantern": "fg",
@@ -27,5 +28,6 @@
     "vine1": "fg",
     "vine2": "fg",
     "vine3": "fg",
-    "vine4": "fg"
+    "vine4": "fg",
+    "patchup": "fg"
 }
