@@ -161,7 +161,7 @@ export default ({ soundSprite, assetsCache, storage, player, state }) => { // us
             return new Lantern(x, y, { flicker: flickerSound, buzz: buzzSound }, player)
         },
         hearth: (x, y, props, player) => {
-            return new Hearth({ x, y, dir: props.dir, player, sound: emberSound })
+            return new Hearth({ x, y, dir: props.dir, player, sound: emberSound, det: props.det })
         },
         monster: (x, y, props={}, player) => {
             return new Monster({x, y, player, span: props.span, orbPool: tempOrbPool, soundSprite })

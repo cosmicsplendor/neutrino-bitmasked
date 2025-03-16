@@ -123,12 +123,13 @@ class FireBall extends TexRegion {
 
 class Hearth extends Node {
     active = false
-    constructor({ x, y, player, dir = 1, sound }) {
+    constructor({ x, y, player, dir = 1, sound, det=false }) {
         super({ pos: { x, y } })
         const hearth1 = new TexRegion({ frame: "hearth1", overlay: "none" })
         const hearth2 = new TexRegion({ frame: "hearth2", overlay: "none", pos: { x: 66, y: 0 } })
         const hearth3 = new TexRegion({ frame: "hearth3", overlay: "none", pos: { x: 134, y: 0 } })
         const hearthBg = new TexRegion({ frame: "hearthbg", overlay: "none", pos: { x: x + 44, y: y + 55 } })
+        this.det = det
         this.add(hearth1)
         this.add(hearth2)
         this.add(hearth3)
@@ -141,7 +142,9 @@ class Hearth extends Node {
         this.active = false
     }
     emit() {
-        const fireBall = new FireBall(this.pos.x + 80 + rand(-32, 32), this.pos.y, this, this.player)
+        const offset = this.det ? 0: rand(-32, 32)
+        console.log({ offset })
+        const fireBall = new FireBall(this.pos.x + 80 + offset, this.pos.y, this, this.player)
         Node.get(objLayerId).add(fireBall)
     }
     update() {
