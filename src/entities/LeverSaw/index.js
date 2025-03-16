@@ -5,6 +5,7 @@ const { TexRegion } = require("@lib/index");
 
 class Lever extends TexRegion {
     forceUpd = true
+    forceRen=true
     constructor(x, y, playSound, path="pend", period=1) {
       super({ frame: "lever", pos: { x, y } })
       this.anchor = { x: 12, y: 14 }
