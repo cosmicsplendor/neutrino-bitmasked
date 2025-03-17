@@ -7,5 +7,5 @@ export default createConfig({
     showAdOnRestart: 0,
     showAdOnResume: 0,
     testMode: false,
-    debug: true
+    debug: false
 })

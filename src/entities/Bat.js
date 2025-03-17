@@ -8,6 +8,7 @@ class Bat extends TexRegion {
         const scale = randf(0.5, 0.25);
         super({ frame: "bat1", pos: { x, y }, scale: { x: scale * (Math.random < 0.5 ? -1 : 1), y: scale } });
         this.player = player;
+        console.log(this.player.pos)
         const offsetAngle = 2 * Math.PI * Math.random();
         this.targetDx = -6 + 32 * Math.cos(offsetAngle);
         this.targetDy = 4 + 24 * Math.sin(offsetAngle);

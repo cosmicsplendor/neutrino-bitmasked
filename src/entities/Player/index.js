@@ -145,8 +145,7 @@ class Player extends TexRegion {
     onWallCol(block, velX, velY, moved) {
         if (moved) { // hardcoding palyer collision audio threshold speed to 100
             const colSpeed = Math.abs(velY || velX) || 0
-            const colThres = 200
-            if (colSpeed > colThres) {
+            if (colSpeed > 400) {
                 this.sounds[block.mat || CONCRETE].play(Math.min(1, colSpeed / 800)) // hardcoding palyer collision audio cutoff speed to 600
             }
         }
