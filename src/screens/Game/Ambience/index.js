@@ -36,7 +36,11 @@ class Ambience { // StateMachine
         this.state.onEnter(...props)
     }
     init() {
-        this.switchState("silence", { nextNode: this.graph.getRandom(), silence: rand(6, 3) })
+        if (this.graph.initialSilence) {
+            this.switchState("silence", { nextNode: this.graph.getRandom(), silence: rand(6, 3) })
+        } else {
+            this.switchState("playing", this.graph.getRandom())
+        }
     }
     terminate() {
         if (this.state === this.states.playing) {

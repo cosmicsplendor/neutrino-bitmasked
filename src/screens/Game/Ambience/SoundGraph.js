@@ -1,7 +1,8 @@
 import { pickOne } from "@lib/utils/math";
 
 class SoundGraph {
-    constructor() {
+    constructor({ initialSilence=true}={}) {
+        this.initialSilence = initialSilence
         this.nodes = new Map();
     }
     randomExclusion = []

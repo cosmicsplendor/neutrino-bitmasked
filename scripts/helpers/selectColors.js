@@ -24,7 +24,7 @@ const balancedOriginalColors = [
     { "bg": "#2a2a75", "pxbg": "#1d1d55" },
     { "bg": "#295652", "pxbg": "#1c3d3a" },
     { "bg": "#3a3a3a", "pxbg": "#252525" },
-    { "bg": "#1a3c5c", "pxbg": "#0b243d" }
+    { "bg": "#1a3c5c", "pxbg": "#0b243d" },
 ]
 
 // AI suggested colors with balanced adjustments
@@ -38,11 +38,13 @@ const balancedAiSuggested = [
     { "bg": "#3a3a70", "pxbg": "#2d2d58", },
     { "bg": "#35357f", "pxbg": "#282865", },
     { "bg": "#345555", "pxbg": "#254040", },
-    { "bg": "#474747", "pxbg": "#353535", }
+    { "bg": "#474747", "pxbg": "#353535", },
+    {"bg":"#212121","pxbg":"#121212"},
+    {"bg":"#0f5856","pxbg":"#024847"}
 ]
 
 const selectColors = () => {
-    const handcrafted = Math.random() < 0.65
+    const handcrafted = Math.random() < 0.5
     if (handcrafted) {
         return pickOne(balancedOriginalColors)
     }

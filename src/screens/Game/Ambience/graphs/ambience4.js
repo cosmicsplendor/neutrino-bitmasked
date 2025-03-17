@@ -1,6 +1,6 @@
 import SoundGraph from "../SoundGraph";
 
-const graph = new SoundGraph()
+const graph = new SoundGraph({ initialSilence: false })
 
 graph.addNode("rain")
 
