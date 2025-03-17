@@ -1,4 +1,5 @@
 import { Node, TexRegion } from "@lib/index";
+import { getGlobalPos } from "@lib/utils/entity";
 import { randf, sqDist } from "@lib/utils/math";
 
 class Bat extends TexRegion {
@@ -8,7 +9,6 @@ class Bat extends TexRegion {
         const scale = randf(0.5, 0.25);
         super({ frame: "bat1", pos: { x, y }, scale: { x: scale * (Math.random < 0.5 ? -1 : 1), y: scale } });
         this.player = player;
-        console.log(this.player.pos)
         const offsetAngle = 2 * Math.PI * Math.random();
         this.targetDx = -6 + 32 * Math.cos(offsetAngle);
         this.targetDy = 4 + 24 * Math.sin(offsetAngle);
@@ -17,8 +17,10 @@ class Bat extends TexRegion {
         this.alpha = 0.1;
         this.timer = 0;
         this.temp = temp
-        this.originX = x
-        this.originY = y
+        this.vecP2this = {
+            x: x - player.pos.x,
+            y: y - player.pos.y
+        } 
         // Minimal sine wave properties
         this.noiseOffset = Math.random() * Math.PI * 2; // Random starting phase
         this.noiseSpeed = randf(3, 2);                  // How fast the sine wave cycles
@@ -47,8 +49,8 @@ class Bat extends TexRegion {
             this.remove()
             this.parent = null
         } else {
-            this.pos.x = this.originX
-            this.pos.y = this.originY
+            this.pos.x = this.player.pos.x + this.vecP2this.x
+            this.pos.y = this.player.pos.y + this.vecP2this.y
             this.isAttached = false
             this.interp = randf(0.05, 0.005) * this._interp;
         }
