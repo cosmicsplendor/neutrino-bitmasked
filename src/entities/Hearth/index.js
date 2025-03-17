@@ -143,7 +143,6 @@ class Hearth extends Node {
     }
     emit() {
         const offset = this.det ? 0: rand(-32, 32)
-        console.log({ offset })
         const fireBall = new FireBall(this.pos.x + 80 + offset, this.pos.y, this, this.player)
         Node.get(objLayerId).add(fireBall)
     }

@@ -122,15 +122,10 @@ export default ({ soundSprite, assetsCache, storage, player, state }) => { // us
         crack: soundSprite.createPool("w_crack")
     }
     const playerFac = (x, y, props) => {
-        player.reset = () => {
-            player.pos.x = x
-            player.pos.y = y
-            player.alpha = 1
-            player.velY = player.velX = 0
-            player.controls.switchState("jumping", player, true) // revert to jumping state
-        }
         player.rotation = props.slide === true ? NaN: 0
-        player.reset()
+        player.setOrigin(x, y)
+        player.pos.x = x
+        player.pos.y = y
         return player
     }
     return ({

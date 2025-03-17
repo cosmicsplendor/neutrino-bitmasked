@@ -261,10 +261,26 @@ class Player extends TexRegion {
     onRemove() {
         this.parent = null // free-up the reference for garbage collector
     }
-    cleanup() {
+    setOrigin(x, y) {
+        this.originX = x
+        this.originY = y
+    }
+    restore(checkpoint) {
+        if (checkpoint) {
+            this.pos.x = checkpoint.x
+            this.pos.y = checkpoint.y
+        } else {
+            this.pos.x = this.originX
+            this.pos.y = this.originY
+        }
+
         this.suspended = false
         this.setWeight(1)
         this.susTimer=0
+        this.rotation = 0
+        this.alpha = 1
+        this.velY = this.velX = 0
+        this.controls.switchState("jumping", this, true) // revert to jumping state
     }
 }
 
