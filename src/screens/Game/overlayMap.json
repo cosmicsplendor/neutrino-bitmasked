@@ -17,6 +17,6 @@
     "vine2": "none",
     "vine3": "none",
     "vine4": "none",
-    "br1": "none",
+    "br1": [0.1,0.1,0.1],
     "br2": "none"
 }
