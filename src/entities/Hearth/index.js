@@ -10,6 +10,7 @@ import sparkT from "./sparkT.json"
 import ParticleEmitter from "@lib/utils/ParticleEmitter"
 import getTestFn from "@lib/components/Collision/helpers/getTestFn"
 import { rand, sqDist } from "@lib/utils/math"
+import Pool from "@lib/utils/Pool"
 
 class FireBall extends TexRegion {
     forceUpd = true
@@ -21,11 +22,40 @@ class FireBall extends TexRegion {
     }
     static getAnims() {
         if (this.anims) return this.anims
+
         this.anims = {
-            bottom: new ParticleEmitter(sparkB),
-            left: new ParticleEmitter(sparkL),
-            right: new ParticleEmitter(sparkR),
-            top: new ParticleEmitter(sparkT)
+            bottom: new Pool({
+                factory: () => {
+                    const particle = new ParticleEmitter(sparkB)
+                    particle.noOverlay = true
+                    return particle
+                },
+                size: 2
+            }),
+            left: new Pool({
+                factory: () => {
+                    const particle = new ParticleEmitter(sparkL)
+                    particle.noOverlay = true
+                    return particle
+                },
+                size: 2
+            }),
+            right: new Pool({
+                factory: () => {
+                    const particle = new ParticleEmitter(sparkR)
+                    particle.noOverlay = true
+                    return particle
+                },
+                size: 2
+            }),
+            top: new Pool({
+                factory: () => {
+                    const particle = new ParticleEmitter(sparkT)
+                    particle.noOverlay = true
+                    return particle
+                },
+                size: 2
+            })
         }
         this.anims.bottom.noOverlay = true
         this.anims.left.noOverlay = true
@@ -44,7 +74,7 @@ class FireBall extends TexRegion {
             colDir === "bottom" ? -500 * (1 - this.hits / 50) : velY
         this.velX = colDir === "left" ? 75 :
             colDir === "right" ? -75 : velX
-        const anim = FireBall.getAnims()[colDir]
+        const anim = FireBall.getAnims()[colDir].create()
 
         Node.get(objLayerId).add(anim)
         if (colDir === "bottom") {
@@ -124,9 +154,10 @@ class FireBall extends TexRegion {
     }
 }
 
+
 class Hearth extends Node {
     active = false
-    constructor({ x, y, player, dir = 1, sound, det=false }) {
+    constructor({ x, y, player, dir = 1, sound, det = false }) {
         super({ pos: { x, y } })
         const hearth1 = new TexRegion({ frame: "hearth1", overlay: "none" })
         const hearth2 = new TexRegion({ frame: "hearth2", overlay: "none", pos: { x: 66, y: 0 } })
@@ -145,7 +176,7 @@ class Hearth extends Node {
         this.active = false
     }
     emit() {
-        const offset = this.det ? 0: rand(-32, 32)
+        const offset = this.det ? 0 : rand(-32, 32)
         const fireBall = new FireBall(this.pos.x + 80 + offset, this.pos.y, this, this.player)
         Node.get(objLayerId).add(fireBall)
     }
