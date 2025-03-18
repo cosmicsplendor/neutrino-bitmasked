@@ -167,11 +167,6 @@ const factories = {
         dims: () => {
             return { width: 48, height: 32 }
         },
-        possible(projection, alignment) {
-            if (alignment !== "bottom") return false // only possible alignments
-            if (projection.w < 3) return false // only possible for odd tile count greater than 1
-            return true
-        },
         create: (params) => {
             const { x, y, decor } = params
             const roundedX = x % 48 === 0 ? x : x + 24 * (Math.random() < 0.5 ? 1 : -1)
@@ -179,7 +174,7 @@ const factories = {
             const tilesY = (y + 32) - endTiles.height * 48
 
             const results = [
-                { x: roundedX - 16, y, name: "em1", collapsed: [{ y: y + 32, x: roundedX, tile: "wt_1" }] },
+                { x: roundedX - 16, y, name: "em1"},
                 { x: roundedX + 24, y, name: "fire" },
             ]
             if (decor === "yes") {
@@ -614,7 +609,62 @@ const factories = {
     tyre: stackables({ name: "tyre", dims: { width: 104, height: 32 } }),
     sc: stackables({ name: "sc", dims: { width: 120, height: 120 } }),
     bar: stackables({ name: "bar", dims: { width: 48, height: 48 } }),
-    mesh: stackables({ name: "mesh", dims: { width: 48, height: 48 } })
+    mesh: stackables({ name: "mesh", dims: { width: 48, height: 48 } }),
+    block: {
+        fields: ["type","width","height"],
+        validTypes: ["hollow", "lattice"],
+        dims({ width, height }) {
+            return { width: width * TILE_SIZE, height: height * TILE_SIZE }
+        },
+        create(params) {
+            const { x, y, width, height } = params
+            const type = this.validTypes.includes(params.type) ? params.type : "hollow"
+            const results = []
+            
+            // Place tiles based on the type
+            if (type === "hollow") {
+                // For hollow blocks, only place tiles on the boundary
+                for (let i = 0; i < height; i++) {
+                    for (let j = 0; j < width; j++) {
+                        // Special case for width=2 hollow - fill everything since hollow isn't possible
+                        if (width === 2 || i === 0 || j === 0 || i === height - 1 || j === width - 1) {
+                            results.push({ x: x + j * TILE_SIZE, y: y + i * TILE_SIZE, name: "wt_1" })
+                        }
+                    }
+                }
+            } else if (type === "lattice") {
+                // For lattice/lattice blocks
+                for (let i = 0; i < height; i++) {
+                    for (let j = 0; j < width; j++) {
+                        // Always place boundary tiles
+                        if (i === 0 || j === 0 || i === height - 1 || j === width - 1) {
+                            results.push({ x: x + j * TILE_SIZE, y: y + i * TILE_SIZE, name: "wt_1" })
+                        } 
+                        // For width=2, handle the special case
+                        else if (width === 2 && i % 2 === 0) {
+                            results.push({ x: x + j * TILE_SIZE, y: y + i * TILE_SIZE, name: "wt_1" })
+                        }
+                        // For inner tiles, create a proper lattice/mesh pattern:
+                        // Place tiles on even indices for both rows and columns to create a grid
+                        else if (i % 2 === 0 || j % 2 === 0) {
+                            results.push({ x: x + j * TILE_SIZE, y: y + i * TILE_SIZE, name: "wt_1" })
+                        }
+                    }
+                }
+            }
+            
+            // Set the collision rectangle
+            results.colRects = [{ 
+                x, 
+                y, 
+                w: width * TILE_SIZE, 
+                h: height * TILE_SIZE, 
+                mat: type === "hollow" ? "wood" : "metal" 
+            }]
+            
+            return results
+        }
+    }
 }
 
 module.exports = factories
