@@ -178,7 +178,7 @@ class Player extends TexRegion {
         if (velY && velY < 0) {
             this.velY = -100
             if (this.controls.state.name === "jumping") {
-                this.fricX = this.fricX0 * 2
+                this.fricX = this.fricX0 * 1.5
                 this.controls.state.onHalt()
             }
         }
@@ -242,6 +242,7 @@ class Player extends TexRegion {
     }
     update(dt) {
         if (this.state.is("over") || this.state.is("paused")) return
+        // console.log(this.pos)
         if (this.suspended) {
             return this.updateSuspended(dt)
         }
