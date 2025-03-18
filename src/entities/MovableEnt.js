@@ -24,6 +24,11 @@ class MovableEnt extends TexRegion {
         ;(this.pos.x !== newPosX) && (this.velX *= -1) // in case the entity moved beyond it's x bounds, reverse it's x-velocity
         ;(this.pos.y !== newPosY) && (this.velY *= -1) // same with the y-velocity
     }
+    reset() {
+        this.pos.x = this.fromX
+        this.pos.y = this.fromY
+        this.velX = (this.toX - this.fromX) === 0 ? 0 : sign(this.toX - this.fromX) * Math.abs(this.velX)
+        this.velY = (this.toY - this.fromY) === 0 ? 0 : sign(this.toY - this.fromY) * Math.abs(this.velY)
+    }
 }
-
 export default MovableEnt

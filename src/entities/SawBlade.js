@@ -35,6 +35,7 @@ class SawBlade extends MovableEnt {
     }
     reset() {
         this.sound.pause()
+        super.reset()
     }
 }
 
