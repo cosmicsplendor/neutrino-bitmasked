@@ -153,7 +153,7 @@ class Hearth extends Node {
         if (this.active) {
             return
         }
-        if (sqDist(this.pos, this.player.pos) < 169000) {
+        if (sqDist(this.pos, this.player.pos) < 120000) {
             this.active = true
             this.emit()
         }
