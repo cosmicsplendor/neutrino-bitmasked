@@ -6,7 +6,7 @@ import { sqDist } from "@lib/utils/math"
 const offset = 8
 const hheight = 24 // laser head height
 const bLen = 48 // laser body length
-const bWidth = 12 // laser body width
+const bWidth = 4 // laser body width
 class Laser extends MovableEnt {
     startX
     startY
