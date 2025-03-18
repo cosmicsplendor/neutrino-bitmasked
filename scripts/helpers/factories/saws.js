@@ -15,12 +15,14 @@ const saws = (data = { name: "saw2", field: "width", dims: { width: 0, height: 0
         create(params) {
             const { x, y, width, height } = params
             if (data.field === "height") {
-                return Array(+height).fill(0).map((_, i) => {
+                const len = +height || 1
+                return Array(len).fill(0).map((_, i) => {
                     const name = Array.isArray(data.name) ? pickOne(data.name) : data.name
                     return { x: x, y: y + (i * dims.height), name, groupId: groupId }
                 })
             }
-            return Array(+width).fill(0).map((_, i) => {
+            const len = +width || 1
+            return Array(len).fill(0).map((_, i) => {
                 const name = Array.isArray(data.name) ? pickOne(data.name) : data.name
                 return { x: x + (i + 1) * xOffset + i * dims.width, y: y, name, groupId: groupId }
             })

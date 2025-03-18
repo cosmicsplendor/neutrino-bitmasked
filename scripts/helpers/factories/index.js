@@ -610,71 +610,55 @@ const factories = {
     sc: stackables({ name: "sc", dims: { width: 120, height: 120 } }),
     bar: stackables({ name: "bar", dims: { width: 48, height: 48 } }),
     mesh: stackables({ name: "mesh", dims: { width: 48, height: 48 } }),
-    block: {
-        fields: ["type", "width", "height"],
-        validTypes: ["hollow", "lattice"],
+    lattice: {
+        fields: ["width", "height"],
         dims({ width, height }) {
             return { width: width * TILE_SIZE, height: height * TILE_SIZE }
         },
         create(params) {
             const { x, y, width, height } = params
-            const type = this.validTypes.includes(params.type) ? params.type : "hollow"
             const results = []
-            console.log("Creating block with type", type)
-            // Place tiles based on the type
-            if (type === "hollow") {
-                // For hollow blocks, only place tiles on the boundary
+            // Special case for width=2: treat left column as non-boundary with lattice pattern
+            if (+width === 2) {
                 for (let i = 0; i < height; i++) {
                     for (let j = 0; j < width; j++) {
-                        // Special case for width=2 hollow - fill everything since hollow isn't possible
-                        if (width === 2 || i === 0 || j === 0 || i === height - 1 || j === width - 1) {
-                            results.push({ x: x + j * TILE_SIZE, y: y + i * TILE_SIZE, name: "wt_1" })
+                        // Top, bottom, and right edges are boundaries
+                        if (i === 0 || j === width - 1) {
+                            results.push({ x: x + j * TILE_SIZE, y: y + i * TILE_SIZE, name: "wt_1" });
+                        }
+                        // Left column (j=0) gets lattice pattern: place tiles on alternate rows
+                        else if (j === 0 && i % 2 === 0) { // Changed from i % 2 === 0 to i % 2 === 1
+                            results.push({ x: x + j * TILE_SIZE, y: y + i * TILE_SIZE, name: "wt_1" });
                         }
                     }
                 }
-            } else if (type === "lattice") {
-                // Special case for width=2: treat left column as non-boundary with lattice pattern
-                if (+width === 2) {
-                    for (let i = 0; i < height; i++) {
-                        for (let j = 0; j < width; j++) {
-                            // Top, bottom, and right edges are boundaries
-                            if (i === 0 || j === width - 1) {
-                                results.push({ x: x + j * TILE_SIZE, y: y + i * TILE_SIZE, name: "wt_1" });
-                            }
-                            // Left column (j=0) gets lattice pattern: place tiles on alternate rows
-                            else if (j === 0 && i % 2 === 0) { // Changed from i % 2 === 0 to i % 2 === 1
-                                results.push({ x: x + j * TILE_SIZE, y: y + i * TILE_SIZE, name: "wt_1" });
-                            }
+            }
+            // Special case for height=2: treat top row as non-boundary with lattice pattern
+            else if (+height === 2) {
+                for (let i = 0; i < height; i++) {
+                    for (let j = 0; j < width; j++) {
+                        // Left, right, and bottom edges are boundaries
+                        if (j === 0 || i == 0) {
+                            results.push({ x: x + j * TILE_SIZE, y: y + i * TILE_SIZE, name: "wt_1" });
+                        }
+                        // Top row (i=0) gets lattice pattern: place tiles on alternate columns
+                        else if (i === 1 && j % 2 === 0) { // Changed from j % 2 === 0 to j % 2 === 1
+                            results.push({ x: x + j * TILE_SIZE, y: y + i * TILE_SIZE, name: "wt_1" });
                         }
                     }
                 }
-                // Special case for height=2: treat top row as non-boundary with lattice pattern
-                else if (+height === 2) {
-                    for (let i = 0; i < height; i++) {
-                        for (let j = 0; j < width; j++) {
-                            // Left, right, and bottom edges are boundaries
-                            if (j === 0 || i == 0) {
-                                results.push({ x: x + j * TILE_SIZE, y: y + i * TILE_SIZE, name: "wt_1" });
-                            }
-                            // Top row (i=0) gets lattice pattern: place tiles on alternate columns
-                            else if (i === 1 && j % 2 === 0) { // Changed from j % 2 === 0 to j % 2 === 1
-                                results.push({ x: x + j * TILE_SIZE, y: y + i * TILE_SIZE, name: "wt_1" });
-                            }
+            }
+            // Standard case for larger dimensions
+            else {
+                for (let i = 0; i < height; i++) {
+                    for (let j = 0; j < width; j++) {
+                        // Place boundary tiles
+                        if (i === 0 || j === 0 || i === height - 1 || j === width - 1) {
+                            results.push({ x: x + j * TILE_SIZE, y: y + i * TILE_SIZE, name: "wt_1" });
                         }
-                    }
-                }
-                // Standard case for larger dimensions
-                else {
-                    for (let i = 0; i < height; i++) {
-                        for (let j = 0; j < width; j++) {
-                            // Place boundary tiles
-                            if (i === 0 || j === 0 || i === height - 1 || j === width - 1) {
-                                results.push({ x: x + j * TILE_SIZE, y: y + i * TILE_SIZE, name: "wt_1" });
-                            }
-                            // For inner tiles, create a lattice/mesh pattern
-                            else if (i % 2 === 0 || j % 2 === 0) {
-                                results.push({ x: x + j * TILE_SIZE, y: y + i * TILE_SIZE, name: "wt_1" });
-                            }
+                        // For inner tiles, create a lattice/mesh pattern
+                        else if (i % 2 === 0 || j % 2 === 0) {
+                            results.push({ x: x + j * TILE_SIZE, y: y + i * TILE_SIZE, name: "wt_1" });
                         }
                     }
                 }
@@ -686,7 +670,7 @@ const factories = {
                 y,
                 w: width * TILE_SIZE,
                 h: height * TILE_SIZE,
-                mat: type === "hollow" ? "wood" : "metal"
+                mat: "metal"
             }]
 
             return results
