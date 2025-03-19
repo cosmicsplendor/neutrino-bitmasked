@@ -9,6 +9,7 @@ import SawBlade from "@entities/SawBlade"
 import Laser from "@entities/Laser"
 import Fire from "@entities/Fire"
 import Monster from "@entities/Monster"
+import Boar from "@entities/Boar"
 import Bat from "@entities/Bat"
 import Crate from "@entities/Crate"
 import Pool from "@utils/Pool"
@@ -160,6 +161,9 @@ export default ({ soundSprite, assetsCache, storage, player, state }) => { // us
         },
         monster: (x, y, props={}, player) => {
             return new Monster({x, y, player, span: props.span, orbPool: tempOrbPool, soundSprite })
+        },
+        boar: (x, y, props={}, player) => {
+            return new Boar({x, y, dir: props.dir, player, orbPool: tempOrbPool, soundSprite })
         },
         bat: (x, y, props={}, player) => {
             return new Bat({x, y, player, speed: props.speed, soundSprite, temp: false })
