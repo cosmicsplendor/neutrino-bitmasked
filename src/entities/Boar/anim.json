@@ -1,1 +1,624 @@
-{"bones":[{"name":"bone1","startingPoint":{"x":23.895,"y":1.3312500000000007},"endPoint":{"x":3.375,"y":1.3312500000000007},"parentName":"spark4_d12","zIndex":0},{"name":"hogl_d13","startingPoint":{"x":5.489999999999998,"y":3.6408333333333336},"endPoint":{"x":4.583333333333332,"y":31.97416666666667},"parentName":"hgfem_d11","zIndex":0},{"name":"hgfem_d11","startingPoint":{"x":8.738333333333333,"y":8.895416666666666},"endPoint":{"x":11.205000000000002,"y":30.84875},"parentName":"spark4_d11","zIndex":0},{"name":"hogl_d12","startingPoint":{"x":6.396666666666668,"y":9.534166666666666},"endPoint":{"x":4.130000000000001,"y":33.1075},"parentName":"hoghp_d11","zIndex":0},{"name":"hoghp_d11","startingPoint":{"x":16.145,"y":14.46375},"endPoint":{"x":6.645000000000003,"y":52.46375},"parentName":"spark4_d12","zIndex":0},{"name":"hogl_d11","startingPoint":{"x":5.489999999999998,"y":3.6408333333333336},"endPoint":{"x":4.583333333333332,"y":31.97416666666667},"parentName":"hgfem","zIndex":0},{"name":"bone","startingPoint":{"x":3.64,"y":1.8966666666666683},"endPoint":{"x":48.06666666666666,"y":1.1500000000000021},"parentName":"hogb","zIndex":0},{"name":"spark4_d12","startingPoint":{"x":2.6916666666666664,"y":2.9020833333333336},"endPoint":{"x":2.725,"y":2.9354166666666663},"parentName":"hoghb","zIndex":"1"},{"name":"spark4_d11","startingPoint":{"x":2.3583333333333334,"y":2.6687499999999997},"endPoint":{"x":2.3916666666666666,"y":2.7020833333333334},"parentName":"hogb","zIndex":"1"},{"name":"spark4","startingPoint":{"x":2.125,"y":2.76875},"endPoint":{"x":2.158333333333333,"y":2.8020833333333335},"zIndex":0},{"name":"hoghb","startingPoint":{"x":38.005,"y":30.84875},"endPoint":{"x":18.685,"y":43.26875},"parentName":"spark4","zIndex":0},{"name":"hogt","startingPoint":{"x":10.57,"y":32.200833333333335},"endPoint":{"x":-0.08333333333333215,"y":12.707500000000001},"parentName":"bone1","zIndex":0},{"name":"hogb","startingPoint":{"x":6.129999999999999,"y":47.04916666666667},"endPoint":{"x":33.07666666666667,"y":64.8225},"parentName":"spark4","zIndex":0},{"name":"hogh","startingPoint":{"x":20.361666666666668,"y":26.062916666666666},"endPoint":{"x":20.835,"y":26.536250000000003},"parentName":"bone","zIndex":"2"},{"name":"hogl","startingPoint":{"x":7.756666666666664,"y":5.680833333333333},"endPoint":{"x":8.436666666666667,"y":5.680833333333333},"parentName":"hoghp","zIndex":0},{"name":"hoghp","startingPoint":{"x":13.865000000000002,"y":12.94375},"endPoint":{"x":7.785,"y":45.62375},"parentName":"spark4_d12","zIndex":0},{"name":"hgfem","startingPoint":{"x":10.218333333333334,"y":4.94875},"endPoint":{"x":13.918333333333333,"y":31.58875},"parentName":"spark4_d11","zIndex":0}],"animStates":[{"id":"425e42ab-7fb8-4b99-b0a6-487b09a4df21","parentId":null,"name":"root state","imports":{"hgfem":{"delAngularPos":0.5585053606381855,"easingFn":"smoothstep","delay":0,"period":1,"angleMultiplier":"-1","id":"425e42ab-7fb8-4b99-b0a6-487b09a4df21","importName":"hgfem"},"hoghp":{"delAngularPos":0.19198621771937624,"easingFn":"smoothstep","delay":0,"period":1,"angleMultiplier":1,"id":"425e42ab-7fb8-4b99-b0a6-487b09a4df21","importName":"hoghp"},"hogl":{"delAngularPos":0.4363323129985824,"easingFn":"smoothstep","delay":0,"period":1,"angleMultiplier":"-1","id":"425e42ab-7fb8-4b99-b0a6-487b09a4df21","importName":"hogl"},"hogh":{"delAngularPos":0.7504915783575618,"easingFn":"smoothstep","delay":0,"period":1,"angleMultiplier":1,"id":"425e42ab-7fb8-4b99-b0a6-487b09a4df21","importName":"hogh"},"hogb":{"delAngularPos":0,"easingFn":"smoothstep","delay":0,"period":1,"angleMultiplier":1},"hogt":{"delAngularPos":5.550147021341968,"easingFn":"smoothstep","delay":0,"period":1,"angleMultiplier":1,"id":"425e42ab-7fb8-4b99-b0a6-487b09a4df21","importName":"hogt"},"hoghb":{"delAngularPos":0,"easingFn":"smoothstep","delay":0,"period":1,"angleMultiplier":1},"spark4":{"delAngularPos":0,"easingFn":"smoothstep","delay":0,"period":1,"angleMultiplier":1},"spark4_d11":{"delAngularPos":0,"easingFn":"smoothstep","delay":0,"period":1,"angleMultiplier":1},"spark4_d12":{"delAngularPos":0,"easingFn":"smoothstep","delay":0,"period":1,"angleMultiplier":1},"bone":{"delAngularPos":0.7853981633974483,"easingFn":"smoothstep","delay":0,"period":1,"angleMultiplier":"-1","id":"425e42ab-7fb8-4b99-b0a6-487b09a4df21","importName":"bone"},"hogl_d11":{"delAngularPos":0.2792526803190927,"easingFn":"smoothstep","delay":0,"period":1,"angleMultiplier":1,"id":"425e42ab-7fb8-4b99-b0a6-487b09a4df21","importName":"hogl_d11"},"hoghp_d11":{"delAngularPos":0.5235987755982988,"easingFn":"smoothstep","delay":0,"period":1,"angleMultiplier":"-1","id":"425e42ab-7fb8-4b99-b0a6-487b09a4df21","importName":"hoghp_d11"},"hogl_d12":{"delAngularPos":0.03490658503988659,"easingFn":"smoothstep","delay":0,"period":1,"angleMultiplier":1,"id":"425e42ab-7fb8-4b99-b0a6-487b09a4df21","importName":"hogl_d12","isAnchor":false},"hgfem_d11":{"delAngularPos":0.3141592653589793,"easingFn":"smoothstep","delay":0,"period":1,"angleMultiplier":1,"id":"425e42ab-7fb8-4b99-b0a6-487b09a4df21","importName":"hgfem_d11"},"hogl_d13":{"delAngularPos":0,"easingFn":"smoothstep","delay":0,"period":1,"angleMultiplier":1,"id":"425e42ab-7fb8-4b99-b0a6-487b09a4df21","importName":"hogl_d13","isAnchor":true},"bone1":{"delAngularPos":0.7155849933176751,"easingFn":"smoothstep","delay":0,"period":1,"angleMultiplier":1,"id":"425e42ab-7fb8-4b99-b0a6-487b09a4df21","importName":"bone1"}}},{"id":"3f64a03a-ff2b-4772-97d1-3b0ee7061f39","parentId":"425e42ab-7fb8-4b99-b0a6-487b09a4df21","name":"idle","imports":{"hgfem":{"delAngularPos":0.12217304763960307,"easingFn":"smoothstep","delay":0,"period":1,"angleMultiplier":"-1","id":"3f64a03a-ff2b-4772-97d1-3b0ee7061f39","importName":"hgfem"},"hoghp":{"delAngularPos":0,"easingFn":"smoothstep","delay":0,"period":1,"angleMultiplier":"-1","id":"3f64a03a-ff2b-4772-97d1-3b0ee7061f39","importName":"hoghp"},"hogl":{"delAngularPos":0,"easingFn":"smoothstep","delay":0,"period":1,"angleMultiplier":"-1","id":"3f64a03a-ff2b-4772-97d1-3b0ee7061f39","importName":"hogl"},"hogh":{"delAngularPos":0.4014257279586958,"easingFn":"sineInOut","delay":0,"period":1,"angleMultiplier":"1","id":"3f64a03a-ff2b-4772-97d1-3b0ee7061f39","importName":"hogh"},"hogb":{"delAngularPos":0.03490658503988659,"easingFn":"smoothstep","delay":0,"period":1,"angleMultiplier":"1","id":"3f64a03a-ff2b-4772-97d1-3b0ee7061f39","importName":"hogb"},"hogt":{"delAngularPos":1.1519173063162575,"easingFn":"backOut","delay":0,"period":1,"angleMultiplier":"-1","id":"3f64a03a-ff2b-4772-97d1-3b0ee7061f39","importName":"hogt"},"hoghb":{"delAngularPos":0.15707963267948966,"easingFn":"smoothstep","delay":0,"period":1,"angleMultiplier":"1","id":"3f64a03a-ff2b-4772-97d1-3b0ee7061f39","importName":"hoghb"},"spark4":{"delAngularPos":0,"easingFn":"smoothstep","delay":0,"period":1,"angleMultiplier":1},"spark4_d11":{"delAngularPos":0,"easingFn":"smoothstep","delay":0,"period":1,"angleMultiplier":1},"spark4_d12":{"delAngularPos":0,"easingFn":"smoothstep","delay":0,"period":1,"angleMultiplier":1},"bone":{"delAngularPos":0,"easingFn":"smoothstep","delay":0,"period":1,"angleMultiplier":"-1","id":"3f64a03a-ff2b-4772-97d1-3b0ee7061f39","importName":"bone"},"hogl_d11":{"delAngularPos":0.22689280275926285,"easingFn":"smoothstep","delay":0,"period":1,"angleMultiplier":1,"id":"3f64a03a-ff2b-4772-97d1-3b0ee7061f39","importName":"hogl_d11"},"hoghp_d11":{"delAngularPos":0.5235987755982988,"easingFn":"smoothstep","delay":0,"period":1,"angleMultiplier":"-1","id":"3f64a03a-ff2b-4772-97d1-3b0ee7061f39","importName":"hoghp_d11"},"hogl_d12":{"delAngularPos":0.8726646259971648,"easingFn":"smoothstep","delay":0,"period":1,"angleMultiplier":1,"id":"3f64a03a-ff2b-4772-97d1-3b0ee7061f39","importName":"hogl_d12","isAnchor":false},"hgfem_d11":{"delAngularPos":0,"easingFn":"smoothstep","delay":0,"period":1,"angleMultiplier":1,"id":"3f64a03a-ff2b-4772-97d1-3b0ee7061f39","importName":"hgfem_d11"},"hogl_d13":{"delAngularPos":0.5410520681182421,"easingFn":"smoothstep","delay":0,"period":1,"angleMultiplier":1,"id":"3f64a03a-ff2b-4772-97d1-3b0ee7061f39","importName":"hogl_d13","isAnchor":true},"bone1":{"delAngularPos":0,"easingFn":"smoothstep","delay":0,"period":1,"angleMultiplier":1,"id":"3f64a03a-ff2b-4772-97d1-3b0ee7061f39","importName":"bone1"}}}]}
+{
+    "bones": [
+        {
+            "name": "bone1_d11",
+            "startingPoint": {
+                "x": 26.595,
+                "y": 1.1512499999999992
+            },
+            "endPoint": {
+                "x": 0.135,
+                "y": 1.6912500000000001
+            },
+            "parentName": "hg_bk",
+            "zIndex": 0
+        },
+        {
+            "name": "hg_l_d11",
+            "startingPoint": {
+                "x": 5.263333333333332,
+                "y": 1.8275
+            },
+            "endPoint": {
+                "x": 4.8100000000000005,
+                "y": 28.12083333333333
+            },
+            "parentName": "hg_hp",
+            "zIndex": 0
+        },
+        {
+            "name": "bone1",
+            "startingPoint": {
+                "x": 26.595,
+                "y": 1.1512499999999992
+            },
+            "endPoint": {
+                "x": 0.135,
+                "y": 1.6912500000000001
+            },
+            "parentName": "hg_n",
+            "zIndex": 0
+        },
+        {
+            "name": "spark4",
+            "startingPoint": {
+                "x": 2.591666666666667,
+                "y": 2.302083333333333
+            },
+            "endPoint": {
+                "x": 2.591666666666667,
+                "y": 2.3354166666666667
+            },
+            "zIndex": 0
+        },
+        {
+            "name": "hg_t",
+            "startingPoint": {
+                "x": 13.290000000000003,
+                "y": 33.33416666666667
+            },
+            "endPoint": {
+                "x": 13.516666666666666,
+                "y": 33.560833333333335
+            },
+            "parentName": "bone1_d11",
+            "zIndex": 0
+        },
+        {
+            "name": "hg_n",
+            "startingPoint": {
+                "x": 11.915,
+                "y": 40.34625
+            },
+            "endPoint": {
+                "x": 24.095,
+                "y": 35.72625
+            },
+            "parentName": "hg_bd",
+            "zIndex": 0
+        },
+        {
+            "name": "hg_l",
+            "startingPoint": {
+                "x": 6.170000000000002,
+                "y": 4.5475
+            },
+            "endPoint": {
+                "x": 5.263333333333332,
+                "y": 28.3475
+            },
+            "parentName": "hg_fm",
+            "zIndex": 0
+        },
+        {
+            "name": "hg_hp",
+            "startingPoint": {
+                "x": 19.185,
+                "y": 24.34375
+            },
+            "endPoint": {
+                "x": 9.684999999999999,
+                "y": 51.32375
+            },
+            "parentName": "hg_bk",
+            "zIndex": 0
+        },
+        {
+            "name": "hg_hd",
+            "startingPoint": {
+                "x": 16.101666666666667,
+                "y": 40.73625
+            },
+            "endPoint": {
+                "x": 16.101666666666667,
+                "y": 41.209583333333335
+            },
+            "parentName": "hg_n",
+            "zIndex": "1"
+        },
+        {
+            "name": "hg_fm",
+            "startingPoint": {
+                "x": 13.671666666666663,
+                "y": 3.7154166666666666
+            },
+            "endPoint": {
+                "x": 11.945,
+                "y": 32.08208333333333
+            },
+            "parentName": "bone1",
+            "zIndex": 0
+        },
+        {
+            "name": "hg_bk",
+            "startingPoint": {
+                "x": 44.44499999999999,
+                "y": 24.40875
+            },
+            "endPoint": {
+                "x": 31.105000000000004,
+                "y": 48.32875
+            },
+            "parentName": "spark4",
+            "zIndex": 0
+        },
+        {
+            "name": "hg_bd",
+            "startingPoint": {
+                "x": 7.543333333333333,
+                "y": 45.329166666666666
+            },
+            "endPoint": {
+                "x": 66.59666666666666,
+                "y": 57.942499999999995
+            },
+            "parentName": "spark4",
+            "zIndex": 0
+        }
+    ],
+    "animStates": [
+        {
+            "id": "9853bd68-b0a4-4240-9a85-5ef5495ecb04",
+            "parentId": null,
+            "name": "root state",
+            "imports": {
+                "hg_bd": {
+                    "delAngularPos": 0,
+                    "easingFn": "smoothstep",
+                    "delay": 0,
+                    "period": 0.5,
+                    "angleMultiplier": 1
+                },
+                "hg_bk": {
+                    "delAngularPos": 0,
+                    "easingFn": "smoothstep",
+                    "delay": 0,
+                    "period": 0.5,
+                    "angleMultiplier": 1
+                },
+                "hg_fm": {
+                    "delAngularPos": 0,
+                    "easingFn": "smoothstep",
+                    "delay": 0,
+                    "period": 0.5,
+                    "angleMultiplier": "1",
+                    "id": "9853bd68-b0a4-4240-9a85-5ef5495ecb04",
+                    "importName": "hg_fm",
+                    "isAnchor": false
+                },
+                "hg_hd": {
+                    "delAngularPos": 0,
+                    "easingFn": "smoothstep",
+                    "delay": 0,
+                    "period": 0.5,
+                    "angleMultiplier": 1,
+                    "id": "9853bd68-b0a4-4240-9a85-5ef5495ecb04",
+                    "importName": "hg_hd"
+                },
+                "hg_hp": {
+                    "delAngularPos": 0.9075712110370514,
+                    "easingFn": "smoothstep",
+                    "delay": 0,
+                    "period": 0.5,
+                    "angleMultiplier": "-1",
+                    "id": "9853bd68-b0a4-4240-9a85-5ef5495ecb04",
+                    "importName": "hg_hp"
+                },
+                "hg_l": {
+                    "delAngularPos": 0.7853981633974483,
+                    "easingFn": "smoothstep",
+                    "delay": 0,
+                    "period": 0.5,
+                    "angleMultiplier": 1,
+                    "id": "9853bd68-b0a4-4240-9a85-5ef5495ecb04",
+                    "importName": "hg_l",
+                    "isAnchor": false
+                },
+                "hg_n": {
+                    "delAngularPos": 0.03490658503988659,
+                    "easingFn": "smoothstep",
+                    "delay": 0,
+                    "period": 0.5,
+                    "angleMultiplier": 1,
+                    "id": "9853bd68-b0a4-4240-9a85-5ef5495ecb04",
+                    "importName": "hg_n"
+                },
+                "hg_t": {
+                    "delAngularPos": 4.363323129985824,
+                    "easingFn": "smoothstep",
+                    "delay": 0,
+                    "period": 0.5,
+                    "angleMultiplier": 1,
+                    "id": "9853bd68-b0a4-4240-9a85-5ef5495ecb04",
+                    "importName": "hg_t"
+                },
+                "spark4": {
+                    "delAngularPos": 0,
+                    "easingFn": "smoothstep",
+                    "delay": 0,
+                    "period": 0.5,
+                    "angleMultiplier": 1
+                },
+                "bone1": {
+                    "delAngularPos": 5.742133239061344,
+                    "easingFn": "smoothstep",
+                    "delay": 0,
+                    "period": 0.5,
+                    "angleMultiplier": 1,
+                    "id": "9853bd68-b0a4-4240-9a85-5ef5495ecb04",
+                    "importName": "bone1"
+                },
+                "hg_l_d11": {
+                    "delAngularPos": 1.4486232791552935,
+                    "easingFn": "smoothstep",
+                    "delay": 0,
+                    "period": 0.5,
+                    "angleMultiplier": 1,
+                    "id": "9853bd68-b0a4-4240-9a85-5ef5495ecb04",
+                    "importName": "hg_l_d11",
+                    "isAnchor": true
+                },
+                "bone1_d11": {
+                    "delAngularPos": 0.5061454830783556,
+                    "easingFn": "smoothstep",
+                    "delay": 0,
+                    "period": 0.5,
+                    "angleMultiplier": 1,
+                    "id": "9853bd68-b0a4-4240-9a85-5ef5495ecb04",
+                    "importName": "bone1_d11"
+                }
+            }
+        },
+        {
+            "id": "2e27fde2-bf7a-4b9b-8952-85423716761f",
+            "parentId": "9853bd68-b0a4-4240-9a85-5ef5495ecb04",
+            "name": "idle",
+            "imports": {
+                "hg_bd": {
+                    "delAngularPos": 0,
+                    "easingFn": "smoothstep",
+                    "delay": 0,
+                    "period": 0.5,
+                    "angleMultiplier": "-1",
+                    "id": "2e27fde2-bf7a-4b9b-8952-85423716761f",
+                    "importName": "hg_bd"
+                },
+                "hg_bk": {
+                    "delAngularPos": 0.24434609527920614,
+                    "easingFn": "smoothstep",
+                    "delay": 0,
+                    "period": 0.5,
+                    "angleMultiplier": "-1",
+                    "id": "2e27fde2-bf7a-4b9b-8952-85423716761f",
+                    "importName": "hg_bk"
+                },
+                "hg_fm": {
+                    "delAngularPos": 0.3141592653589793,
+                    "easingFn": "smoothstep",
+                    "delay": 0,
+                    "period": 0.5,
+                    "angleMultiplier": "1",
+                    "id": "2e27fde2-bf7a-4b9b-8952-85423716761f",
+                    "importName": "hg_fm"
+                },
+                "hg_hd": {
+                    "delAngularPos": 0.3141592653589793,
+                    "easingFn": "cubicOut",
+                    "delay": 0,
+                    "period": 0.5,
+                    "angleMultiplier": 1,
+                    "id": "2e27fde2-bf7a-4b9b-8952-85423716761f",
+                    "importName": "hg_hd"
+                },
+                "hg_hp": {
+                    "delAngularPos": 0.3141592653589793,
+                    "easingFn": "smoothstep",
+                    "delay": 0,
+                    "period": 0.5,
+                    "angleMultiplier": "1",
+                    "id": "2e27fde2-bf7a-4b9b-8952-85423716761f",
+                    "importName": "hg_hp"
+                },
+                "hg_l": {
+                    "delAngularPos": 0.5934119456780721,
+                    "easingFn": "smoothstep",
+                    "delay": 0,
+                    "period": 0.5,
+                    "angleMultiplier": "-1",
+                    "id": "2e27fde2-bf7a-4b9b-8952-85423716761f",
+                    "importName": "hg_l",
+                    "isAnchor": false
+                },
+                "hg_n": {
+                    "delAngularPos": 0,
+                    "easingFn": "smoothstep",
+                    "delay": 0,
+                    "period": 0.5,
+                    "angleMultiplier": 1,
+                    "id": "2e27fde2-bf7a-4b9b-8952-85423716761f",
+                    "importName": "hg_n"
+                },
+                "hg_t": {
+                    "delAngularPos": 0.5061454830783556,
+                    "easingFn": "backOut",
+                    "delay": 0,
+                    "period": 0.5,
+                    "angleMultiplier": "-1",
+                    "id": "2e27fde2-bf7a-4b9b-8952-85423716761f",
+                    "importName": "hg_t"
+                },
+                "spark4": {
+                    "delAngularPos": 0,
+                    "easingFn": "smoothstep",
+                    "delay": 0,
+                    "period": 0.5,
+                    "angleMultiplier": 1,
+                    "id": "2e27fde2-bf7a-4b9b-8952-85423716761f",
+                    "importName": "spark4"
+                },
+                "bone1": {
+                    "delAngularPos": 0,
+                    "easingFn": "smoothstep",
+                    "delay": 0,
+                    "period": 0.5,
+                    "angleMultiplier": 1,
+                    "id": "2e27fde2-bf7a-4b9b-8952-85423716761f",
+                    "importName": "bone1"
+                },
+                "hg_l_d11": {
+                    "delAngularPos": 0,
+                    "easingFn": "smoothstep",
+                    "delay": 0,
+                    "period": 0.5,
+                    "angleMultiplier": "-1",
+                    "id": "2e27fde2-bf7a-4b9b-8952-85423716761f",
+                    "importName": "hg_l_d11",
+                    "isAnchor": true
+                },
+                "bone1_d11": {
+                    "delAngularPos": 0,
+                    "easingFn": "smoothstep",
+                    "delay": 0,
+                    "period": 0.5,
+                    "angleMultiplier": 1,
+                    "id": "2e27fde2-bf7a-4b9b-8952-85423716761f",
+                    "importName": "bone1_d11"
+                }
+            }
+        },
+        {
+            "id": "3b67b16e-7445-4d1b-8676-61caf62f93d9",
+            "parentId": "2e27fde2-bf7a-4b9b-8952-85423716761f",
+            "name": "run",
+            "imports": {
+                "hg_bd": {
+                    "delAngularPos": 0,
+                    "easingFn": "smoothstep",
+                    "delay": 0,
+                    "period": 0.1,
+                    "angleMultiplier": "-1",
+                    "id": "2e27fde2-bf7a-4b9b-8952-85423716761f",
+                    "importName": "hg_bd"
+                },
+                "hg_bk": {
+                    "delAngularPos": 0,
+                    "easingFn": "smoothstep",
+                    "delay": 0,
+                    "period": 0.1,
+                    "angleMultiplier": "-1",
+                    "id": "3b67b16e-7445-4d1b-8676-61caf62f93d9",
+                    "importName": "hg_bk"
+                },
+                "hg_fm": {
+                    "delAngularPos": 0.3141592653589793,
+                    "easingFn": "smoothstep",
+                    "delay": 0,
+                    "period": 0.1,
+                    "angleMultiplier": "-1",
+                    "id": "3b67b16e-7445-4d1b-8676-61caf62f93d9",
+                    "importName": "hg_fm"
+                },
+                "hg_hd": {
+                    "delAngularPos": 0.2792526803190927,
+                    "easingFn": "cubicOut",
+                    "delay": 0,
+                    "period": 0.1,
+                    "angleMultiplier": "-1",
+                    "id": "3b67b16e-7445-4d1b-8676-61caf62f93d9",
+                    "importName": "hg_hd"
+                },
+                "hg_hp": {
+                    "delAngularPos": 0.8552113334772214,
+                    "easingFn": "smoothstep",
+                    "delay": 0,
+                    "period": 0.1,
+                    "angleMultiplier": "1",
+                    "id": "3b67b16e-7445-4d1b-8676-61caf62f93d9",
+                    "importName": "hg_hp"
+                },
+                "hg_l": {
+                    "delAngularPos": 0.7853981633974483,
+                    "easingFn": "smoothstep",
+                    "delay": 0,
+                    "period": 0.1,
+                    "angleMultiplier": "1",
+                    "id": "3b67b16e-7445-4d1b-8676-61caf62f93d9",
+                    "importName": "hg_l",
+                    "isAnchor": true
+                },
+                "hg_n": {
+                    "delAngularPos": 0,
+                    "easingFn": "smoothstep",
+                    "delay": 0,
+                    "period": 0.1,
+                    "angleMultiplier": 1,
+                    "id": "2e27fde2-bf7a-4b9b-8952-85423716761f",
+                    "importName": "hg_n"
+                },
+                "hg_t": {
+                    "delAngularPos": 0.8726646259971648,
+                    "easingFn": "backOut",
+                    "delay": 0,
+                    "period": 0.1,
+                    "angleMultiplier": "1",
+                    "id": "3b67b16e-7445-4d1b-8676-61caf62f93d9",
+                    "importName": "hg_t"
+                },
+                "spark4": {
+                    "delAngularPos": 0,
+                    "easingFn": "smoothstep",
+                    "delay": 0,
+                    "period": 0.1,
+                    "angleMultiplier": 1,
+                    "id": "2e27fde2-bf7a-4b9b-8952-85423716761f",
+                    "importName": "spark4"
+                },
+                "bone1": {
+                    "delAngularPos": 0,
+                    "easingFn": "smoothstep",
+                    "delay": 0,
+                    "period": 0.1,
+                    "angleMultiplier": 1,
+                    "id": "2e27fde2-bf7a-4b9b-8952-85423716761f",
+                    "importName": "bone1"
+                },
+                "hg_l_d11": {
+                    "delAngularPos": 0.3665191429188092,
+                    "easingFn": "smoothstep",
+                    "delay": 0,
+                    "period": 0.1,
+                    "angleMultiplier": "-1",
+                    "id": "3b67b16e-7445-4d1b-8676-61caf62f93d9",
+                    "importName": "hg_l_d11",
+                    "isAnchor": false
+                },
+                "bone1_d11": {
+                    "delAngularPos": 0,
+                    "easingFn": "smoothstep",
+                    "delay": 0,
+                    "period": 0.1,
+                    "angleMultiplier": 1,
+                    "id": "2e27fde2-bf7a-4b9b-8952-85423716761f",
+                    "importName": "bone1_d11"
+                }
+            }
+        },
+        {
+            "id": "5bbe7bc0-89bd-4f61-9e2e-d10962f3d364",
+            "parentId": "3b67b16e-7445-4d1b-8676-61caf62f93d9",
+            "name": "run2",
+            "imports": {
+                "hg_bd": {
+                    "delAngularPos": 0,
+                    "easingFn": "smoothstep",
+                    "delay": 0,
+                    "period": 0.1,
+                    "angleMultiplier": "-1",
+                    "id": "2e27fde2-bf7a-4b9b-8952-85423716761f",
+                    "importName": "hg_bd"
+                },
+                "hg_bk": {
+                    "delAngularPos": 0,
+                    "easingFn": "smoothstep",
+                    "delay": 0,
+                    "period": 0.1,
+                    "angleMultiplier": "-1",
+                    "id": "3b67b16e-7445-4d1b-8676-61caf62f93d9",
+                    "importName": "hg_bk"
+                },
+                "hg_fm": {
+                    "delAngularPos": 0.8726646259971648,
+                    "easingFn": "smoothstep",
+                    "delay": 0,
+                    "period": 0.1,
+                    "angleMultiplier": "1",
+                    "id": "5bbe7bc0-89bd-4f61-9e2e-d10962f3d364",
+                    "importName": "hg_fm"
+                },
+                "hg_hd": {
+                    "delAngularPos": 0.2792526803190927,
+                    "easingFn": "cubicOut",
+                    "delay": 0,
+                    "period": 0.1,
+                    "angleMultiplier": "1",
+                    "id": "5bbe7bc0-89bd-4f61-9e2e-d10962f3d364",
+                    "importName": "hg_hd"
+                },
+                "hg_hp": {
+                    "delAngularPos": 1.1344640137963142,
+                    "easingFn": "smoothstep",
+                    "delay": 0,
+                    "period": 0.1,
+                    "angleMultiplier": "-1",
+                    "id": "5bbe7bc0-89bd-4f61-9e2e-d10962f3d364",
+                    "importName": "hg_hp"
+                },
+                "hg_l": {
+                    "delAngularPos": 0,
+                    "easingFn": "smoothstep",
+                    "delay": 0,
+                    "period": 0.1,
+                    "angleMultiplier": "1",
+                    "id": "5bbe7bc0-89bd-4f61-9e2e-d10962f3d364",
+                    "importName": "hg_l",
+                    "isAnchor": false
+                },
+                "hg_n": {
+                    "delAngularPos": 0,
+                    "easingFn": "smoothstep",
+                    "delay": 0,
+                    "period": 0.1,
+                    "angleMultiplier": 1,
+                    "id": "2e27fde2-bf7a-4b9b-8952-85423716761f",
+                    "importName": "hg_n"
+                },
+                "hg_t": {
+                    "delAngularPos": 0.8726646259971648,
+                    "easingFn": "backOut",
+                    "delay": 0,
+                    "period": 0.1,
+                    "angleMultiplier": "1",
+                    "id": "3b67b16e-7445-4d1b-8676-61caf62f93d9",
+                    "importName": "hg_t"
+                },
+                "spark4": {
+                    "delAngularPos": 0,
+                    "easingFn": "smoothstep",
+                    "delay": 0,
+                    "period": 0.1,
+                    "angleMultiplier": 1,
+                    "id": "2e27fde2-bf7a-4b9b-8952-85423716761f",
+                    "importName": "spark4"
+                },
+                "bone1": {
+                    "delAngularPos": 0,
+                    "easingFn": "smoothstep",
+                    "delay": 0,
+                    "period": 0.1,
+                    "angleMultiplier": 1,
+                    "id": "2e27fde2-bf7a-4b9b-8952-85423716761f",
+                    "importName": "bone1"
+                },
+                "hg_l_d11": {
+                    "delAngularPos": 0.4886921905584123,
+                    "easingFn": "smoothstep",
+                    "delay": 0,
+                    "period": 0.1,
+                    "angleMultiplier": "1",
+                    "id": "5bbe7bc0-89bd-4f61-9e2e-d10962f3d364",
+                    "importName": "hg_l_d11",
+                    "isAnchor": true
+                },
+                "bone1_d11": {
+                    "delAngularPos": 0,
+                    "easingFn": "smoothstep",
+                    "delay": 0,
+                    "period": 0.1,
+                    "angleMultiplier": 1,
+                    "id": "2e27fde2-bf7a-4b9b-8952-85423716761f",
+                    "importName": "bone1_d11"
+                }
+            }
+        }
+    ]
+}

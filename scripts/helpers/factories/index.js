@@ -40,6 +40,16 @@ const factories = {
             return { x, y, name, span: +span }
         }
     },
+    boar: {
+        fields: ["dir"],
+        dims: () => {
+            return { width: 0, height: 0 }
+        },
+        create: params => {
+            const { x, y, name, dir } = params
+            return { x, y, name, dir: +dir }
+        }
+    },
     ball: {
         fields: ['seq'], // Inferred from Ball constructor and props.seq
         create: (params) => {
