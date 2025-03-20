@@ -1,7 +1,7 @@
 import BoneAnimNode from "@lib/entities/BoneAnimNode";
 import { stateMachineMixin } from "@lib/utils/FSM";
 import animData from "./anim.json"
-import { fgLayerId, objLayerId } from "@lib/constants"
+import { cameraId, fgLayerId, objLayerId } from "@lib/constants"
 import ParticleEmitter from "@lib/utils/ParticleEmitter";
 import { Node } from "@lib/index";
 import { circBounds, getGlobalPos } from "@lib/utils/entity";
@@ -31,9 +31,10 @@ class Run {
   die() {
     const { x } = getGlobalPos(this.boar.syncroNode)
     const bloodAnim = Boar.getBloodAnim()
-    bloodAnim.pos.x = x + this.boar.dir * 80
+    bloodAnim.pos.x = x + (this.boar.dir === -1 ? -80: 60)
     bloodAnim.pos.y = this.boar.pos.y - 64
     Node.get(fgLayerId).add(bloodAnim)
+    Node.get(cameraId).shake(0.5)
     this.boar.remove()
     this.boar.impalesfx.play()
     this.boar.deathsfx.play(0.5)

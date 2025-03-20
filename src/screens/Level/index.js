@@ -9,12 +9,13 @@ import config from "@config"
 
 import initUI from "./initUI"
 import { placeBg } from "../utils"
+import { cameraId } from "@lib/constants"
 
 class LevelScreen extends Node {
     background = "#000000"
     curLevel = 0
     constructor({ game, uiRoot, storage }) {
-        super()
+        super({ id: cameraId })
         this.game = game
         this.storage = storage
         this.uiRoot = uiRoot

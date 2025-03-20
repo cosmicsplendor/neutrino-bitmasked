@@ -1,4 +1,5 @@
 import { Camera } from "@lib"
+import { cameraId } from "@lib/constants"
 import TiledLevel from "@utils/TiledLevel"
 
 class Level extends Camera {
@@ -10,7 +11,7 @@ class Level extends Camera {
             overlayMap,
             hitboxMap
         })
-        super({ ...cameraProps, world: { width: arena.width, height: arena.height } })
+        super({ ...cameraProps, id: cameraId, world: { width: arena.width, height: arena.height } })
         this.gameState = gameState
         this.player = player
         this.ambience = ambience                                                                                                                                                                                                                                                                                                                                           
