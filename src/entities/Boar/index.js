@@ -11,6 +11,7 @@ import { aabbCirc } from "@lib/utils/math";
 
 // Define state classes
 class Run {
+  bounds = { width: 140, height: 96 }
   constructor(monster) {
     this.monster = monster;
     this.name = 'run';
@@ -23,39 +24,43 @@ class Run {
   onEnter() {
     this.monster.play("run", "run2");
     this.monster.syncroNode.scale.x = 1;
+    this.player = this.monster.player
   }
   die() {
-
   }
   checkPlayerCol() {
     const { x, y } = getGlobalPos(this.monster.syncroNode)
-    this.bounds.x = x - 40
-    this.bounds.y = y - 40
-    if (aabbCirc(this.monster.bounds, circBounds(this.monster.player))) {
-      this.die()
-      this.monster.player.explode()
+    this.bounds.x = x - 48
+    this.bounds.y = y - 48
+    if (aabbCirc(this.bounds, circBounds(this.player))) {
+      this.monster.switchState('idle', true);
+      this.player.explode()
     }
   }
   update() {
+    this.checkPlayerCol()
     this.spikeCol.update()
   }
 }
 
 class Idle {
-  lookAhead=400
+  lookAhead=300
   constructor(monster) {
     this.monster = monster;
     this.name = 'idle';
   }
-  onEnter() {
+  onEnter(playerDead) {
+    this.playerDead = playerDead
     this.monster.play("idle", "root state");
     this.dir = this.monster.dir
+    this.player = this.monster.player
     this.monster.syncroNode.scale.x = this.dir
   }
   update() {
+    if (this.playerDead) return
     const { x, y } = getGlobalPos(this.monster.syncroNode)
-    const player = getGlobalPos(this.monster.player)
-    if (player.x > x && player.x < x + this.lookAhead * this.dir && player.y < y + 48 && player.y > y - 140) {
+    const player = getGlobalPos(this.player)
+    if (player.x > x - this.dir * 56 && player.x < x + this.lookAhead * this.dir && player.y < y + 48 && player.y > y - 100) {
       this.monster.switchState('run');
     }
   }
@@ -64,7 +69,6 @@ class Idle {
 
 class Boar extends BoneAnimNode {
   noOverlay = true
-  bounds = { width: 80, height: 80 }
   //   static getDeathAnim() {
   //     if (this.deathAnim instanceof ParticleEmitter) return this.deathAnim
   //     this.deathAnim = new ParticleEmitter(deathAnimDat)

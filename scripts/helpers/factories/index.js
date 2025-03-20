@@ -147,14 +147,14 @@ const factories = {
         }
     },
     hearth: {
-        fields: ["dir"],
+        fields: ["dir","det"],
         dims: () => {
             return { width: 204, height: 98 }
         },
         create: params => {
             const { x, y, dir } = params
             const result = [
-                { x: x, y: y, name: "hearth", dir: Number(dir) },
+                { x: x, y: y, name: "hearth", dir: Number(dir), det: +det },
             ]
             result.colRects = [
                 { x, y, w: 204, h: 98 }
