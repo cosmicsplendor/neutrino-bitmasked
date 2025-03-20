@@ -8,32 +8,37 @@ import { Node } from "@lib/index";
 import { circBounds, getGlobalPos } from "@lib/utils/entity";
 import Collision from "@lib/components/Collision";
 import { aabbCirc } from "@lib/utils/math";
+import bloodAnimDat from "../animDat/blood.json"
+
 
 // Define state classes
 class Run {
   bounds = { width: 140, height: 96 }
-  constructor(monster) {
-    this.monster = monster;
+  constructor(boar) {
+    this.boar = boar;
     this.name = 'run';
     this.spikeCol = new Collision({
-      entity: this.monster.syncroNode, blocks: "spikes", rigid: false, movable: false, onHit: () => {
+      entity: this.boar.syncroNode, blocks: "spikes", rigid: false, movable: false, onHit: () => {
         this.die()
       }
     })
   }
   onEnter() {
-    this.monster.play("run", "run2");
-    this.monster.syncroNode.scale.x = 1;
-    this.player = this.monster.player
+    this.boar.noOverlay = true
+    this.boar.play("run", "run2");
+    this.boar.syncroNode.scale.x = 1;
+    this.player = this.boar.player
   }
   die() {
+    const bloodAnim = Boar.getBloodAnim()
+    Node.get(objLayerId).add(bloodAnim)
   }
   checkPlayerCol() {
-    const { x, y } = getGlobalPos(this.monster.syncroNode)
+    const { x, y } = getGlobalPos(this.boar.syncroNode)
     this.bounds.x = x - 48
-    this.bounds.y = y - 48
+    this.bounds.y = y - 28
     if (aabbCirc(this.bounds, circBounds(this.player))) {
-      this.monster.switchState('idle', true);
+      this.boar.switchState('idle', true);
       this.player.explode()
     }
   }
@@ -44,31 +49,30 @@ class Run {
 }
 
 class Idle {
-  lookAhead=300
-  constructor(monster) {
-    this.monster = monster;
+  lookAhead = 320
+  constructor(boar) {
+    this.boar = boar;
     this.name = 'idle';
   }
   onEnter(playerDead) {
     this.playerDead = playerDead
-    this.monster.play("idle", "root state");
-    this.dir = this.monster.dir
-    this.player = this.monster.player
-    this.monster.syncroNode.scale.x = this.dir
+    this.boar.play("idle", "root state");
+    this.dir = this.boar.dir
+    this.player = this.boar.player
+    this.boar.syncroNode.scale.x = this.dir
   }
   update() {
     if (this.playerDead) return
-    const { x, y } = getGlobalPos(this.monster.syncroNode)
+    const { x, y } = getGlobalPos(this.boar.syncroNode)
     const player = getGlobalPos(this.player)
     if (player.x > x - this.dir * 56 && player.x < x + this.lookAhead * this.dir && player.y < y + 48 && player.y > y - 100) {
-      this.monster.switchState('run');
+      this.boar.switchState('run');
     }
   }
 }
 
 
 class Boar extends BoneAnimNode {
-  noOverlay = true
   //   static getDeathAnim() {
   //     if (this.deathAnim instanceof ParticleEmitter) return this.deathAnim
   //     this.deathAnim = new ParticleEmitter(deathAnimDat)
@@ -76,12 +80,12 @@ class Boar extends BoneAnimNode {
   //     // this.deathAnim.overlay = [1,0,0]
   //     return this.deathAnim
   //   }
-  //   static getBloodAnim() {
-  //     if (this.bloodAnim instanceof ParticleEmitter) return this.bloodAnim
-  //     this.bloodAnim = new ParticleEmitter(bloodAnimDat)
-  //     this.bloodAnim.noOverlay = true
-  //     return this.bloodAnim
-  //   }
+  static getBloodAnim() {
+    if (this.bloodAnim instanceof ParticleEmitter) return this.bloodAnim
+    this.bloodAnim = new ParticleEmitter(bloodAnimDat)
+    this.bloodAnim.noOverlay = true
+    return this.bloodAnim
+  }
   constructor({ x, y, player, dir = 1, orbPool, soundSprite }) {
     super({ data: animData, pos: { x: x + 136 * Math.sign(dir), y } });
     this.player = player
