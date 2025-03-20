@@ -8,6 +8,7 @@ import { circBounds, getGlobalPos } from "@lib/utils/entity";
 import Collision from "@lib/components/Collision";
 import { aabbCirc } from "@lib/utils/math";
 import bloodAnimDat from "../animDat/blood.json"
+import deathAnimDat from "./death.json"
 
 
 // Define state classes
@@ -31,9 +32,13 @@ class Run {
   die() {
     const { x } = getGlobalPos(this.boar.syncroNode)
     const bloodAnim = Boar.getBloodAnim()
-    bloodAnim.pos.x = x + (this.boar.dir === -1 ? -80: 60)
+    const deathAnim = Boar.getDeathAnim()
+    deathAnim.pos.x = x - 12
+    deathAnim.pos.y = this.boar.pos.y - 64
+    bloodAnim.pos.x = x + (this.boar.dir === -1 ? -80: 20)
     bloodAnim.pos.y = this.boar.pos.y - 64
     Node.get(fgLayerId).add(bloodAnim)
+    Node.get(fgLayerId).add(deathAnim)
     Node.get(cameraId).shake(0.5)
     this.boar.remove()
     this.boar.impalesfx.play()
@@ -82,13 +87,12 @@ class Idle {
 
 
 class Boar extends BoneAnimNode {
-  //   static getDeathAnim() {
-  //     if (this.deathAnim instanceof ParticleEmitter) return this.deathAnim
-  //     this.deathAnim = new ParticleEmitter(deathAnimDat)
-  //     this.deathAnim.noOverlay = true
-  //     // this.deathAnim.overlay = [1,0,0]
-  //     return this.deathAnim
-  //   }
+    static getDeathAnim() {
+      if (this.deathAnim instanceof ParticleEmitter) return this.deathAnim
+      this.deathAnim = new ParticleEmitter(deathAnimDat)
+      this.deathAnim.noOverlay = true
+      return this.deathAnim
+    }
   static getBloodAnim() {
     if (this.bloodAnim instanceof ParticleEmitter) return this.bloodAnim
     this.bloodAnim = new ParticleEmitter(bloodAnimDat)

@@ -1,0 +1,322 @@
+{
+    "blendMode": "source-over",
+    "loop": false,
+    "params": [
+        {
+            "alphaDecayFn": "quadOut",
+            "scaleDecayFn": "none",
+            "weight": 1,
+            "frame": "hg_t",
+            "width": 14,
+            "height": 34,
+            "offsetX": [
+                -60,
+                -60
+            ],
+            "offsetY": [
+                -30,
+                -20
+            ],
+            "lifetime": [
+                1,
+                1
+            ],
+            "velX": [
+                -100,
+                -100
+            ],
+            "velY": [
+                0,
+                0
+            ],
+            "accX": [
+                0,
+                0
+            ],
+            "accY": [
+                500,
+                500
+            ],
+            "rotVel": [
+                -13,
+                -13
+            ],
+            "alpha": [
+                1,
+                1
+            ]
+        },
+        {
+            "alphaDecayFn": "quadOut",
+            "scaleDecayFn": "none",
+            "weight": 1,
+            "frame": "hg_l",
+            "width": 12,
+            "height": 34,
+            "offsetX": [
+                40,
+                40
+            ],
+            "offsetY": [
+                30,
+                30
+            ],
+            "lifetime": [
+                1,
+                1
+            ],
+            "velX": [
+                -74,
+                -74
+            ],
+            "velY": [
+                -65,
+                -65
+            ],
+            "accX": [
+                0,
+                0
+            ],
+            "accY": [
+                500,
+                500
+            ],
+            "rotVel": [
+                -3,
+                -3
+            ],
+            "alpha": [
+                1,
+                1
+            ]
+        },
+        {
+            "alphaDecayFn": "quadOut",
+            "scaleDecayFn": "none",
+            "weight": 1,
+            "frame": "hg_hp",
+            "width": 34,
+            "height": 57,
+            "offsetX": [
+                -20,
+                -20
+            ],
+            "offsetY": [
+                10,
+                20
+            ],
+            "lifetime": [
+                1,
+                1
+            ],
+            "velX": [
+                100,
+                100
+            ],
+            "velY": [
+                -400,
+                -400
+            ],
+            "accX": [
+                0,
+                0
+            ],
+            "accY": [
+                330,
+                330
+            ],
+            "rotVel": [
+                5,
+                5
+            ],
+            "alpha": [
+                1,
+                1
+            ]
+        },
+        {
+            "alphaDecayFn": "quartIn",
+            "scaleDecayFn": "none",
+            "weight": 1,
+            "frame": "hg_hd",
+            "width": 58,
+            "height": 71,
+            "offsetX": [
+                70,
+                70
+            ],
+            "offsetY": [
+                -40,
+                -40
+            ],
+            "lifetime": [
+                1.5,
+                1.5
+            ],
+            "velX": [
+                0,
+                0
+            ],
+            "velY": [
+                0,
+                0
+            ],
+            "accX": [
+                0,
+                0
+            ],
+            "accY": [
+                0,
+                0
+            ],
+            "rotVel": [
+                0,
+                0
+            ],
+            "alpha": [
+                1,
+                1
+            ]
+        },
+        {
+            "alphaDecayFn": "quadOut",
+            "scaleDecayFn": "none",
+            "weight": 1,
+            "frame": "hg_fm",
+            "width": 25,
+            "height": 37,
+            "offsetX": [
+                50,
+                50
+            ],
+            "offsetY": [
+                10,
+                10
+            ],
+            "lifetime": [
+                1,
+                1
+            ],
+            "velX": [
+                100,
+                100
+            ],
+            "velY": [
+                -250,
+                -245
+            ],
+            "accX": [
+                0,
+                0
+            ],
+            "accY": [
+                500,
+                500
+            ],
+            "rotVel": [
+                -1,
+                -1
+            ],
+            "alpha": [
+                1,
+                1
+            ]
+        },
+        {
+            "alphaDecayFn": "quadOut",
+            "scaleDecayFn": "smoothstep",
+            "weight": 1,
+            "frame": "hg_bd",
+            "width": 75,
+            "height": 86,
+            "offsetX": [
+                0,
+                0
+            ],
+            "offsetY": [
+                -50,
+                -50
+            ],
+            "lifetime": [
+                1,
+                1
+            ],
+            "velX": [
+                48,
+                48
+            ],
+            "velY": [
+                50,
+                50
+            ],
+            "accX": [
+                0,
+                0
+            ],
+            "accY": [
+                500,
+                500
+            ],
+            "rotVel": [
+                -1,
+                -1
+            ],
+            "alpha": [
+                1,
+                1
+            ]
+        },
+        {
+            "alphaDecayFn": "quadOut",
+            "scaleDecayFn": "cubicIn",
+            "weight": 1,
+            "frame": "hg_bk",
+            "width": 56,
+            "height": 69,
+            "offsetX": [
+                -50,
+                -50
+            ],
+            "offsetY": [
+                -30,
+                -30
+            ],
+            "lifetime": [
+                1,
+                1
+            ],
+            "velX": [
+                200,
+                200
+            ],
+            "velY": [
+                -250,
+                -245
+            ],
+            "accX": [
+                180,
+                190
+            ],
+            "accY": [
+                330,
+                330
+            ],
+            "rotVel": [
+                4,
+                4
+            ],
+            "alpha": [
+                1,
+                1
+            ]
+        }
+    ],
+    "hitbox": {
+        "x": -177,
+        "y": -75.5,
+        "width": 356.5,
+        "height": 368.5
+    },
+    "randomDistribution": false,
+    "size": 7
+}
