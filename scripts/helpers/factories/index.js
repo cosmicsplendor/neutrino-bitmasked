@@ -235,6 +235,8 @@ const factories = {
     flags: saws({ name: "em3", field: "width", dims: { width: 96, height: 16 }, groupId: false }),
     patch: saws({ name: ["patch1", "patch2"], field: "width", dims: { width: 48, height: 4 }, groupId: false }),
     patchup: saws({ name: "patch3", field: "width", dims: { width: 48, height: 4 }, groupId: false }),
+    patchleft: saws({ name: "patch4", field: "height", dims: { width: 4, height: 48 }, groupId: false }),
+    patchRight: saws({ name: "patch5", field: "height", dims: { width: 4, height: 48 }, groupId: false }),
     leftSaw: saws({ name: "saw4", field: "height" }),
     rightSaw: saws({ name: "saw3", field: "height" }),
     bridge: {
