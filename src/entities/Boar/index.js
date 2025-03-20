@@ -25,13 +25,18 @@ class Run {
   onEnter() {
     this.boar.noOverlay = true
     this.boar.play("run", "run2");
-    this.boar.syncroNode.scale.x = 1;
     this.player = this.boar.player
+    this.boar.growl.play()
   }
   die() {
+    const { x } = getGlobalPos(this.boar.syncroNode)
     const bloodAnim = Boar.getBloodAnim()
-    Node.get(objLayerId).add(bloodAnim)
+    bloodAnim.pos.x = x + this.boar.dir * 80
+    bloodAnim.pos.y = this.boar.pos.y - 64
+    Node.get(fgLayerId).add(bloodAnim)
     this.boar.remove()
+    this.boar.impalesfx.play()
+    this.boar.deathsfx.play(0.5)
   }
   checkPlayerCol() {
     const { x, y } = getGlobalPos(this.boar.syncroNode)
@@ -42,7 +47,8 @@ class Run {
       this.player.explode()
     }
   }
-  update() {
+  update(dt) {
+    this.boar.pos.x += this.boar.dir * dt * 100
     this.checkPlayerCol()
     this.spikeCol.update()
   }
@@ -93,9 +99,9 @@ class Boar extends BoneAnimNode {
     this.player = player
     this.orbPool = orbPool
     this.soundSprite = soundSprite
-    // this.growl = soundSprite.create("growl")
-    // this.impalesfx = soundSprite.create("impale")
-    // this.deathsfx = soundSprite.create("mons_death")
+    this.growl = soundSprite.create("boar")
+    this.impalesfx = soundSprite.create("impale")
+    this.deathsfx = soundSprite.create("mons_death")
     this.syncroNode.scale.x = 1
     this.span = Math.sign(dir)
     this.syncroNode.pos.x = 0
@@ -109,9 +115,9 @@ class Boar extends BoneAnimNode {
     stateMachineMixin(this, states);
     this.switchState('idle');
 
-    // this.syncroNode.hitCirc = {
-    //   x: -60, y: -30, radius: 45
-    // }
+    this.syncroNode.hitCirc = dir === -1 ? {
+      x: -100, y: -30, radius: 72
+    }: { x: -58, y: -36, radius: 72 }
     // this.testCol = getTestFn(this.syncroNode, this.player)
   }
   update(dt, t) {
