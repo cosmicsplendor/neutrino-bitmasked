@@ -10,58 +10,53 @@ import Collision from "@lib/components/Collision";
 import { aabbCirc } from "@lib/utils/math";
 
 // Define state classes
-class RunRight {
+class Run {
   constructor(monster) {
     this.monster = monster;
-    this.name = 'runRight';
+    this.name = 'run';
+    this.spikeCol = new Collision({
+      entity: this.monster.syncroNode, blocks: "spikes", rigid: false, movable: false, onHit: () => {
+        this.die()
+      }
+    })
   }
-
   onEnter() {
     this.monster.play("run", "run2");
     this.monster.syncroNode.scale.x = 1;
   }
+  die() {
 
-  update(dt) {
-    // const sw = this.monster.dir === 1 ? this.monster.syncroNode.pos.x > this.monster.span : this.monster.syncroNode.pos.x >75
-    // if (sw) {
-    //   if (this.monster.dir === 1) {
-    //     this.monster.switchState('idleRight', "runLeft");
-    //   } else {
-    //     this.monster.switchState('idleRight', 'idleLeft');
-    //   }
-    // }
+  }
+  checkPlayerCol() {
+    const { x, y } = getGlobalPos(this.monster.syncroNode)
+    this.bounds.x = x - 40
+    this.bounds.y = y - 40
+    if (aabbCirc(this.monster.bounds, circBounds(this.monster.player))) {
+      this.die()
+      this.monster.player.explode()
+    }
+  }
+  update() {
+    this.spikeCol.update()
   }
 }
 
-class IdleRight {
+class Idle {
+  lookAhead=400
   constructor(monster) {
     this.monster = monster;
-    this.name = 'idleRight';
+    this.name = 'idle';
   }
-
-  onEnter(transition = "") {
+  onEnter() {
     this.monster.play("idle", "root state");
-    this.timer = 0;
-    this.transition = transition
-    this.monster.syncroNode.scale.x = 1
+    this.dir = this.monster.dir
+    this.monster.syncroNode.scale.x = this.dir
   }
-
-  update(dt) {
-    this.timer += dt;
-    if (this.transition) {
-      this.monster.syncroNode.scale.x -= dt * 8
-      if (this.timer > .25) {
-        if (this.transition === "runLeft") {
-          this.monster.xOffset += 16
-        }
-        this.monster.switchState(this.transition);
-      }
-      return
-    }
+  update() {
     const { x, y } = getGlobalPos(this.monster.syncroNode)
     const player = getGlobalPos(this.monster.player)
-    if (player.x > x && player.x < x + 320 && player.y < y + 48 && player.y > y - 140) {
-      this.monster.switchState('runRight');
+    if (player.x > x && player.x < x + this.lookAhead * this.dir && player.y < y + 48 && player.y > y - 140) {
+      this.monster.switchState('run');
     }
   }
 }
@@ -97,38 +92,21 @@ class Boar extends BoneAnimNode {
     this.dir = dir
     // Create state instances
     const states = {
-      runRight: new RunRight(this),
-      idleRight: new IdleRight(this),
+      run: new Run(this),
+      idle: new Idle(this),
     };
 
-    // Apply the state machine mixin
     stateMachineMixin(this, states);
-    this.switchState('runRight');
+    this.switchState('idle');
 
-    this.syncroNode.hitCirc = {
-      x: -60, y: -30, radius: 45
-    }
-    this.testCol = getTestFn(this.syncroNode, this.player)
-    this.mspikeCol = new Collision({
-      entity: this.syncroNode, blocks: "fspikes", rigid: false, movable: false, onHit: () => {
-        this.switchState("glitch", true)
-      }
-    })
-  }
-  checkPlayerCol() {
-    const { x, y } = getGlobalPos(this.syncroNode)
-    this.bounds.x = x - 40
-    this.bounds.y = y - 40
-    if (aabbCirc(this.bounds, circBounds(this.player))) {
-      this.switchState('glitch');
-    }
+    // this.syncroNode.hitCirc = {
+    //   x: -60, y: -30, radius: 45
+    // }
+    // this.testCol = getTestFn(this.syncroNode, this.player)
   }
   update(dt, t) {
-    // Update the current state
     const state = this.getState()
     if (state) state.update(dt);
-    // this.checkPlayerCol()
-    // this.mspikeCol.update()
     super.update(dt, t);
   }
 }
