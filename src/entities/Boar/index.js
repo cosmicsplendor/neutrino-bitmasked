@@ -2,7 +2,6 @@ import BoneAnimNode from "@lib/entities/BoneAnimNode";
 import { stateMachineMixin } from "@lib/utils/FSM";
 import animData from "./anim.json"
 import { fgLayerId, objLayerId } from "@lib/constants"
-import getTestFn from "@lib/components/Collision/helpers/getTestFn";
 import ParticleEmitter from "@lib/utils/ParticleEmitter";
 import { Node } from "@lib/index";
 import { circBounds, getGlobalPos } from "@lib/utils/entity";
@@ -32,6 +31,7 @@ class Run {
   die() {
     const bloodAnim = Boar.getBloodAnim()
     Node.get(objLayerId).add(bloodAnim)
+    this.boar.remove()
   }
   checkPlayerCol() {
     const { x, y } = getGlobalPos(this.boar.syncroNode)
@@ -65,7 +65,9 @@ class Idle {
     if (this.playerDead) return
     const { x, y } = getGlobalPos(this.boar.syncroNode)
     const player = getGlobalPos(this.player)
-    if (player.x > x - this.dir * 56 && player.x < x + this.lookAhead * this.dir && player.y < y + 48 && player.y > y - 100) {
+    if (this.dir === 1 && player.x > x - 56 && player.x < x + this.lookAhead && player.y < y + 48 && player.y > y - 100) {
+      this.boar.switchState('run');
+    } else if (this.dir === -1 && player.x < x + 56 && player.x > x - this.lookAhead && player.y < y + 48 && player.y > y - 100) {
       this.boar.switchState('run');
     }
   }
@@ -87,7 +89,7 @@ class Boar extends BoneAnimNode {
     return this.bloodAnim
   }
   constructor({ x, y, player, dir = 1, orbPool, soundSprite }) {
-    super({ data: animData, pos: { x: x + 136 * Math.sign(dir), y } });
+    super({ data: animData, pos: { x: x + 72 * dir, y } });
     this.player = player
     this.orbPool = orbPool
     this.soundSprite = soundSprite
