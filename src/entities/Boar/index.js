@@ -34,10 +34,10 @@ class Run {
     const deathAnim = Boar.getDeathAnim()
     const x = this.boar.pos.x + this.boar.syncroNode.pos.x
     const y = this.boar.pos.y
-    deathAnim.pos.x = x - (this.boar.dir === -1 ? 0: 12)
-    deathAnim.pos.y = y- 64
-    bloodAnim.pos.x = x + (this.boar.dir === -1 ? -80: 20)
-    bloodAnim.pos.y = y- 64
+    deathAnim.pos.x = x - (this.boar.dir === -1 ? 0 : 12)
+    deathAnim.pos.y = y - 64
+    bloodAnim.pos.x = x + (this.boar.dir === -1 ? -80 : 20)
+    bloodAnim.pos.y = y - 64
     deathAnim.scale = { x: this.boar.dir, y: 1 }
     Node.get(fgLayerId).add(bloodAnim)
     Node.get(fgLayerId).add(deathAnim)
@@ -46,10 +46,10 @@ class Run {
     this.boar.impalesfx.play()
     this.boar.deathsfx.play(0.5)
 
-    deathAnim.onDead = () => {
-      const { orbPool, player } = this.boar
-      Node.get(fgLayerId).add(orbPool.create(x, y - 64, null,  player ))
-    }
+    const { orbPool, player } = this.boar
+    const orb = orbPool.create(x, y - 64, null, player)
+    orb.active = false
+    Node.get(fgLayerId).add(orb)
   }
   checkPlayerCol() {
     const { x, y } = getGlobalPos(this.boar.syncroNode)
@@ -94,12 +94,12 @@ class Idle {
 
 
 class Boar extends BoneAnimNode {
-    static getDeathAnim() {
-      if (this.deathAnim instanceof ParticleEmitter) return this.deathAnim
-      this.deathAnim = new ParticleEmitter(deathAnimDat)
-      this.deathAnim.noOverlay = true
-      return this.deathAnim
-    }
+  static getDeathAnim() {
+    if (this.deathAnim instanceof ParticleEmitter) return this.deathAnim
+    this.deathAnim = new ParticleEmitter(deathAnimDat)
+    this.deathAnim.noOverlay = true
+    return this.deathAnim
+  }
   static getBloodAnim() {
     if (this.bloodAnim instanceof ParticleEmitter) return this.bloodAnim
     this.bloodAnim = new ParticleEmitter(bloodAnimDat)
@@ -129,7 +129,7 @@ class Boar extends BoneAnimNode {
 
     this.syncroNode.hitCirc = dir === -1 ? {
       x: -100, y: -30, radius: 72
-    }: { x: -58, y: -36, radius: 72 }
+    } : { x: -58, y: -36, radius: 72 }
     // this.testCol = getTestFn(this.syncroNode, this.player)
   }
   update(dt, t) {
