@@ -55,8 +55,6 @@ class Glitch {
   update(dt) {
     this.monster.noOverlay = Math.random() < 0.5 ? true : false
     this.timer += dt;
-    // const delPosX = getGlobalPos( this.monster.syncroNode).x + 50 * this.monster.syncroNode.scale.x - this.monster.player.pos.x
-    // this.monster.player.pos.x += delPosX * 0.05
     if (this.timer >= 1) {
       this.monster.remove()
       this.monster.deathsfx.play()

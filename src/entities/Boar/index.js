@@ -30,13 +30,13 @@ class Run {
     this.boar.growl.play()
   }
   die() {
-    const { x } = getGlobalPos(this.boar.syncroNode)
     const bloodAnim = Boar.getBloodAnim()
     const deathAnim = Boar.getDeathAnim()
-    deathAnim.pos.x = x - 12
+    deathAnim.pos.x = this.boar.pos.x + this.boar.syncroNode.pos.x - (this.boar.dir === -1 ? 0: 12)
     deathAnim.pos.y = this.boar.pos.y - 64
-    bloodAnim.pos.x = x + (this.boar.dir === -1 ? -80: 20)
+    bloodAnim.pos.x = this.boar.pos.x + this.boar.syncroNode.pos.x + (this.boar.dir === -1 ? -80: 20)
     bloodAnim.pos.y = this.boar.pos.y - 64
+    deathAnim.scale = { x: this.boar.dir, y: 1 }
     Node.get(fgLayerId).add(bloodAnim)
     Node.get(fgLayerId).add(deathAnim)
     Node.get(cameraId).shake(0.5)
