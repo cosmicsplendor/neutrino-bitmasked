@@ -32,10 +32,12 @@ class Run {
   die() {
     const bloodAnim = Boar.getBloodAnim()
     const deathAnim = Boar.getDeathAnim()
-    deathAnim.pos.x = this.boar.pos.x + this.boar.syncroNode.pos.x - (this.boar.dir === -1 ? 0: 12)
-    deathAnim.pos.y = this.boar.pos.y - 64
-    bloodAnim.pos.x = this.boar.pos.x + this.boar.syncroNode.pos.x + (this.boar.dir === -1 ? -80: 20)
-    bloodAnim.pos.y = this.boar.pos.y - 64
+    const x = this.boar.pos.x + this.boar.syncroNode.pos.x
+    const y = this.boar.pos.y
+    deathAnim.pos.x = x - (this.boar.dir === -1 ? 0: 12)
+    deathAnim.pos.y = y- 64
+    bloodAnim.pos.x = x + (this.boar.dir === -1 ? -80: 20)
+    bloodAnim.pos.y = y- 64
     deathAnim.scale = { x: this.boar.dir, y: 1 }
     Node.get(fgLayerId).add(bloodAnim)
     Node.get(fgLayerId).add(deathAnim)
@@ -43,6 +45,11 @@ class Run {
     this.boar.remove()
     this.boar.impalesfx.play()
     this.boar.deathsfx.play(0.5)
+
+    deathAnim.onDead = () => {
+      const { orbPool, player } = this.boar
+      Node.get(fgLayerId).add(orbPool.create(x, y - 64, null,  player ))
+    }
   }
   checkPlayerCol() {
     const { x, y } = getGlobalPos(this.boar.syncroNode)
