@@ -9,7 +9,6 @@ class Orb extends ParticleEmitter {
     noOverlay = true
     set active(val) {
         if (!val) this.alpha = 0.01
-        console.log(val)
         this._active = val
     }
     constructor({ player, sound, storage, temp = false, ...rest }) {
