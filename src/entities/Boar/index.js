@@ -47,7 +47,7 @@ class Run {
     this.boar.deathsfx.play(0.5)
 
     const { orbPool, player } = this.boar
-    const orb = orbPool.create(x, y - 64, null, player)
+    const orb = orbPool.create(x + (this.boar.dir === 1 ? 0: -48), y - 64, null, player)
     orb.active = false
     Node.get(fgLayerId).add(orb)
   }

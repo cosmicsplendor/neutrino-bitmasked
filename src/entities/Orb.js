@@ -24,7 +24,7 @@ class Orb extends ParticleEmitter {
     }
     update(dt) {
         if (!this._active) {
-            this.alpha += dt * 0.6
+            this.alpha += dt * 0.7
             if (this.alpha > 1) {
                 this.alpha = 1
                 this.active = true
