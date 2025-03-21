@@ -11,7 +11,7 @@ class Level extends Camera {
             overlayMap,
             hitboxMap
         })
-        super({ ...cameraProps, id: cameraId, world: { width: arena.width, height: arena.height } })
+        super({ ...cameraProps, id: cameraId, world: { width: arena.width - 30, height: arena.height - 30 } })
         this.gameState = gameState
         this.player = player
         this.ambience = ambience                                                                                                                                                                                                                                                                                                                                           
